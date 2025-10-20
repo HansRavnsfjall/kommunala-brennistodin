@@ -1,0 +1,65 @@
+@using Umbraco.Cms.Core.Models
+@using Umbraco.Cms.Core.Models.Blocks
+@using Umbraco.Cms.Core.Strings
+@using Umbraco.Extensions
+@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<BlockListItem>
+
+@{
+    var c = Model.Content;
+
+    // Fields
+    var heading = c.Value<string>("yvirskrift");
+    var bodyRte = c.Value<IHtmlEncodedString>("tekstur");
+    var link    = c.Value<Link>("leinki");
+    var img     = c.Value<MediaWithCrops>("mynd");
+
+    // Position info (passed from helper)
+    var isFirst  = ViewData["BlockIsFirst"] as bool? ?? false;
+    var isLast   = ViewData["BlockIsLast"]  as bool? ?? false;
+    var posClass = (ViewData["BlockPosClass"] as string) ?? string.Empty;
+
+    // Combine section classes
+    var sectionClasses = $"py-3 py-lg-5 theme-alternative {posClass}" +
+                         (isFirst ? " is-first" : "") +
+                         (isLast ? " is-last" : "");
+
+    // Link details
+    var href   = link?.Url ?? string.Empty;
+    var text   = !string.IsNullOrWhiteSpace(link?.Name) ? link!.Name! : "Les meira";
+    var target = link?.Target;
+    var rel    = target == "_blank" ? "noopener noreferrer" : null;
+}
+
+<section class="@sectionClasses">
+  <div class="container">
+    <div class="news-band row g-0">
+      <div class="col-md-6 copy">
+        @if (!string.IsNullOrWhiteSpace(heading))
+        {
+            <h3>@heading</h3>
+        }
+
+        @if (bodyRte is not null)
+        {
+            <div class="fw-700 text-muted-600">
+                @bodyRte
+            </div>
+        }
+
+        @if (!string.IsNullOrWhiteSpace(href))
+        {
+            <a href="@href" class="link-more btn" target="@target" rel="@rel">
+                @text
+            </a>
+        }
+      </div>
+
+      @if (img is not null)
+      {
+          <div class="col-md-6 news-img">
+              <img src="@img.Url()" alt="@img.Name" class="img-fluid w-100" />
+          </div>
+      }
+    </div>
+  </div>
+</section>

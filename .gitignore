@@ -1,0 +1,34 @@
+# Build artifacts
+bin/
+obj/
+.vs/
+.vscode/
+*.user
+*.suo
+
+# Umbraco runtime data
+umbraco/Data/
+umbraco/Logs/
+wwwroot/umbraco/Data/
+wwwroot/umbraco/Logs/
+
+# App_Data (legacy Umbraco)
+App_Data/
+
+# Publish output (add back static assets if needed)
+publish/
+wwwroot/*
+!wwwroot/css/
+!wwwroot/js/
+!wwwroot/images/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# IDE configs
+.idea/
+.vscode/
+
+# Environment / secrets
+.env

@@ -1,0 +1,5 @@
+const t = '<svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.75" class="lucide lucide-battery-full" viewBox="0 0 24 24"><rect width="16" height="10" x="2" y="7" rx="2" ry="2"/><path d="M22 11v2M6 11v2M10 11v2M14 11v2"/></svg>';
+export {
+  t as default
+};
+//# sourceMappingURL=icon-battery-full-CUzhuRAo.js.map

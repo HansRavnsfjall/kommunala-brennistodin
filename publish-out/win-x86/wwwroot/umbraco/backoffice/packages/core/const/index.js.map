@@ -1,0 +1,1 @@
+{"version":3,"file":"index.js","sources":["../../../../src/packages/core/const/index.ts"],"sourcesContent":["export const UMB_MARK_ATTRIBUTE_NAME = 'data-mark';\r\n"],"names":["UMB_MARK_ATTRIBUTE_NAME"],"mappings":"AAAO,MAAMA,IAA0B;"}

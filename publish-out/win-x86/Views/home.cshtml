@@ -1,0 +1,178 @@
+@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage
+@{
+  Layout = "master.cshtml";
+  ViewBag.Title = Model?.Name;
+}
+<!-- ===== Hero ===== -->
+<section class="hero">
+  <div class="hero-img"></div>
+  <div class="hero-wrap">
+    <div class="container">
+      <span class="badge-yellow">Endurnýtsla</span>
+      <h1 class="lh-tight">Skilir tú?</h1>
+      <p class="lead">
+        Málið er altíð at endurnýta og endurnýta so stóran part av burturkastinum sum gjørligt.
+        Tí er umráðandi, at vit gil gera okkara fyri at skilja rætt.
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- ===== Intro / Hours / Accordion ===== -->
+<section class="py-4 py-lg-5 front-skilji-upplating">
+  <div class="container">
+    <div class="row gx-lg-5 g-4 align-items-start">
+      <div class="col-lg-6">
+        <div class="intro-card">
+          <h2>Soleiðis skilur tú <br/> títt burturkast</h2>
+          <p class="fw-700 text-muted-600 mb-3">
+            Tað er eisini tín ábyrgd, at títt burturkast endar á røttum stað. Soleiðis
+            so tú við til at verja um okkara umhvørvi.
+          </p>
+          <button class="btn btn-cta">Royn skiljiskjáttuna</button>
+        </div>
+      </div>
+      <div class="col-lg-6">
+        <div class="hours-card mb-3">
+          <h5>Endurnýtslan á Hjalla</h5>
+          <div class="hours-row">Mánadag – Hósdag <span class="time">08:00 – 17:00</span></div>
+          <div class="hours-row">Fríggjadag – Leygardag <span class="time">10:00 – 17:00</span></div>
+          <div class="hours-row">Sunnudag <span class="time">Stongt</span></div>
+        </div>
+        <a href="#" class="link-more">Meira um endurnýtsluna á Hjalla
+          <svg class="arr" viewBox="0 0 24 24"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+        </a>
+        <div class="accordion district-acc" id="distAcc">
+          <div class="accordion-item">
+            <h2 class="accordion-header" id="h1">
+              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#c1">
+                Endurnýtslan í Kollafirði
+              </button>
+            </h2>
+            <div id="c1" class="accordion-collapse collapse" data-bs-parent="#distAcc">
+              <div class="accordion-body pt-0">Upplýsingar um upplatingartíðir, leiðbeining o.s.fr.</div>
+            </div>
+          </div>
+          <div class="accordion-item">
+            <h2 class="accordion-header" id="h2">
+              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#c2">
+                Endurnýtslan í Norðoy
+              </button>
+            </h2>
+            <div id="c2" class="accordion-collapse collapse" data-bs-parent="#distAcc">
+              <div class="accordion-body pt-0">Upplýsingar …</div>
+            </div>
+          </div>
+          <div class="accordion-item">
+            <h2 class="accordion-header" id="h3">
+              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#c3">
+                Endurnýtslan í Hesti
+              </button>
+            </h2>
+            <div id="c3" class="accordion-collapse collapse" data-bs-parent="#distAcc">
+              <div class="accordion-body pt-0">Upplýsingar …</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== Stats ===== -->
+<section class="py-2 py-lg-4 front-hagtol">
+  <div class="container stats">
+    <div class="row"><div class="col-12"><h5>Hagtøl</h5></div></div>
+    <div class="row text-center gy-4 gy-md-0">
+      <div class="col-6 col-md stat">
+        <img src="~/assets/stat-heat.svg" alt="" />
+        <p>39 Tons av pappíri send til endurnýtsning</p>
+      </div>
+      <div class="col-6 col-md stat">
+        <img src="~/assets/stat-heat.svg" alt="" />
+        <p>32 GWh til fjarhitaskipanina</p>
+      </div>
+      <div class="col-6 col-md stat">
+        <img src="~/assets/stat-heat.svg" alt="" />
+        <p>398 tons av glasi send til endurnýtsning</p>
+      </div>
+      <div class="col-6 col-md stat">
+        <img src="~/assets/stat-heat.svg" alt="" />
+        <p>32 GWh til fjarhitaskipanina</p>
+      </div>
+      <div class="col-6 col-md stat">
+        <img src="~/assets/stat-heat.svg" alt="" />
+        <p>398 tons av glasi send til endurnýtsning</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== Theme block ===== -->
+<section class="py-4 py-lg-5">
+  <div class="container">
+    <div class="theme-wrap row g-0">
+      <div class="col-md-6 theme-img">
+        <img src="~/images/batteries.webp" alt="" />
+      </div>
+      <div class="col-md-6 theme-panel">
+        <small>TEMA</small>
+        <h3>Snildar loysnir til at skilja heima</h3>
+        <p class="fw-700 text-muted-600">
+          Tað kann vera ein avbjóðing at skilja og goyma burturkast heima.
+          Her á síðuni kanst tú lesa um snildar loysnir, sum onnur hava brúkt.
+        </p>
+        <a class="link-more" href="#">Les meira <svg class="arr" viewBox="0 0 24 24"><path d="M5 12h14M13 5l7 7-7 7"/></svg></a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== Tips cards ===== -->
+<section class="py-2 py-lg-4 tips">
+  <div class="container">
+    <h3 class="mb-3">Góð ráð um at skilja</h3>
+    <div class="row g-4">
+      <div class="col-md-4">
+        <div class="tip-card">
+          <div class="img"><img src="~/images/dummy-bilur.jpg" alt="" /></div>
+          <h5>Hvussu pakki eg bilin rætt?</h5>
+          <p>Her eru nøkur ráð til tín, so tað er skjótari og lættari at sleppa av við burturkasti…</p>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="tip-card">
+          <div class="img"><img src="~/images/dummy-plantur.jpg" alt="" /></div>
+          <h5>Plantur og lívrunnið burturkast</h5>
+          <p>Ráð, sum gera tað lættari at sleppa av við burturkastið á Endurnýtsluni.</p>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="tip-card">
+          <div class="img"><img src="~/images/dummy-papp-pappir.jpg" alt="" /></div>
+          <h5>Papp og pappír</h5>
+          <p>Ráð um at skilja og goyma papp og pappír heima.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== News band ===== -->
+<section class="py-3 py-lg-5">
+  <div class="container">
+    <div class="news-band row g-0">
+      <div class="col-md-6 copy">
+        <small>TÍÐINDI</small>
+        <h3>Ruskinnsavningin boðin út</h3>
+        <p class="fw-700 text-muted-600">
+          Sáttmálin um ruskinnsavning í Tórshavnar kommunu gongur út 30. september 2026, og tí verður arbeiðið nú boðið út av nýggjum.
+        </p>
+        <a class="link-more" href="#">Les meira <svg class="arr" viewBox="0 0 24 24"><path d="M5 12h14M13 5l7 7-7 7"/></svg></a>
+      </div>
+      <div class="col-md-6 news-img">
+        <img src="~/images/dummy-news.jpg" alt="" />
+      </div>
+    </div>
+  </div>
+</section>

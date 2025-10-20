@@ -1,0 +1,57 @@
+@using System.Globalization
+@using Umbraco.Cms.Core.Models.Blocks
+@using Umbraco.Cms.Core.Models.PublishedContent
+@using Umbraco.Extensions
+@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<Kob.ViewModels.BlockListRenderModel>
+
+@{
+    var culture = CultureInfo.CurrentUICulture?.Name;
+    var items = Model.Blocks ?? Enumerable.Empty<BlockListItem>();
+
+    BlockListItem? FindBlockByKey(IPublishedContent repo, Guid key)
+    {
+        var list = repo.Value<BlockListModel>("modul", culture: culture, fallback: Fallback.ToLanguage);
+        return list?.FirstOrDefault(b => b.Udi.Guid == key);
+    }
+}
+
+@foreach (var item in items)
+{
+    var alias = item.Content.ContentType.Alias;
+
+    // Regular inline blocks → render as usual
+    if (!alias.InvariantEquals("globalBlockReference"))
+    {
+        @await Html.GetBlockListItemHtmlAsync(item)
+        continue;
+    }
+
+    // Handle global reference
+    var repo = item.Content.Value<IPublishedContent>("repository", culture: culture, fallback: Fallback.ToLanguage);
+    var blockKeyStr = item.Content.Value<string>("globalBlock"); // GUID string pasted by editor
+
+    if (repo == null || string.IsNullOrWhiteSpace(blockKeyStr) || !Guid.TryParse(blockKeyStr, out var key))
+    {
+        if (UmbracoContext?.InPreviewMode == true)
+        {
+            <div class="alert alert-warning my-3">
+                Global block reference is not configured correctly (missing repository or GUID).
+            </div>
+        }
+        continue;
+    }
+
+    var refBlock = FindBlockByKey(repo, key);
+
+    if (refBlock != null)
+    {
+        // Reuse your existing block partials & conventions
+        @await Html.GetBlockListItemHtmlAsync(refBlock)
+    }
+    else if (UmbracoContext?.InPreviewMode == true)
+    {
+        <div class="alert alert-danger my-3">
+            Referenced global block not found in repository.
+        </div>
+    }
+}

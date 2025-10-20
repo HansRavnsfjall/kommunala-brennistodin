@@ -1,0 +1,122 @@
+@model Kob.ViewModels.BlockListRenderModel
+@using System
+@using System.Globalization
+@using System.Threading.Tasks
+@using Microsoft.AspNetCore.Html
+@using Umbraco.Cms.Core.Models.Blocks
+@using Umbraco.Cms.Core.Models.PublishedContent
+@using Umbraco.Extensions
+@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<Kob.ViewModels.BlockListRenderModel>
+
+@{
+    var culture = CultureInfo.CurrentUICulture?.Name;
+    var items = Model?.Blocks ?? Enumerable.Empty<BlockListItem>();
+
+    const string GlobalContainerDocTypeAlias = "globalBlocksContainer";
+    const string GlobalBlockListAlias       = "modul";
+
+    IPublishedContent? currentPage = Umbraco.AssignedContentItem;
+
+    IPublishedContent? ResolveContainer()
+        => currentPage?.Root().DescendantOrSelfOfType(GlobalContainerDocTypeAlias);
+
+    BlockListModel? GlobalBlocks(IPublishedContent c)
+        => c.Value<BlockListModel>(GlobalBlockListAlias, culture: culture, fallback: Fallback.ToLanguage);
+
+    BlockListItem? FindByKey(BlockListModel list, Guid key)
+        => list.FirstOrDefault(b => b.Content?.Key == key);
+
+    async Task<IHtmlContent> RenderBlockAsync(BlockListItem it)
+    {
+        var alias = it.Content.ContentType.Alias;
+
+        // Try components/{alias} first, then blocklist/{alias}, then components/default, then default
+        var candidates = new[]
+        {
+            $"blocklist/components/{alias}",
+            $"blocklist/{alias}",
+            "blocklist/components/default",
+            "blocklist/default"
+        };
+
+        foreach (var view in candidates)
+        {
+            try
+            {
+                return await Html.PartialAsync(view, it);
+            }
+            catch (InvalidOperationException)
+            {
+                // view not found -> try next candidate
+            }
+        }
+
+        // If everything failed, at least emit a small marker
+        return new HtmlString($"<!-- No view found for block alias '{alias}' -->");
+    }
+}
+
+@if (!items.Any())
+{
+    if (UmbracoContext?.InPreviewMode == true)
+    {
+        <div class="alert alert-info my-3">No blocks to render.</div>
+    }
+}
+else
+{
+    foreach (var item in items)
+    {
+        var alias = item.Content.ContentType.Alias;
+
+        // Normal block
+        if (!alias.InvariantEquals("globalBlockReference"))
+        {
+            @await RenderBlockAsync(item)
+            continue;
+        }
+
+        // ----- Global reference path -----
+        var raw = item.Content.Value<IEnumerable<string>>("globalItems", culture: culture, fallback: Fallback.ToLanguage)
+                  ?? Enumerable.Empty<string>();
+
+        var keys = new List<Guid>();
+        foreach (var v in raw) { if (Guid.TryParse(v, out var g)) keys.Add(g); }
+
+        if (keys.Count == 0)
+        {
+            if (UmbracoContext?.InPreviewMode == true)
+            {
+                <div class="alert alert-warning my-3">Global Block Reference: no items selected.</div>
+            }
+            continue;
+        }
+
+        var container = ResolveContainer();
+        var list = container != null ? GlobalBlocks(container) : null;
+
+        if (list == null || list.Count == 0)
+        {
+            if (UmbracoContext?.InPreviewMode == true)
+            {
+                <div class="alert alert-danger my-3">
+                    Global container not found or has no blocks in <code>@GlobalBlockListAlias</code>.
+                </div>
+            }
+            continue;
+        }
+
+        foreach (var key in keys)
+        {
+            var refBlock = FindByKey(list, key);
+            if (refBlock != null)
+            {
+                @await RenderBlockAsync(refBlock)
+            }
+            else if (UmbracoContext?.InPreviewMode == true)
+            {
+                <div class="alert alert-info my-2">Picked global block not found in container.</div>
+            }
+        }
+    }
+}

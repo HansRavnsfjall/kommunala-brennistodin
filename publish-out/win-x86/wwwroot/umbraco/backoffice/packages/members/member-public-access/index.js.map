@@ -1,0 +1,1 @@
+{"version":3,"file":"index.js","sources":["../../../../src/packages/members/member-public-access/repository/constants.ts"],"sourcesContent":["export const UMB_DOCUMENT_PUBLIC_ACCESS_REPOSITORY_ALIAS = 'Umb.Repository.Document.PublicAccess';\r\n"],"names":["UMB_DOCUMENT_PUBLIC_ACCESS_REPOSITORY_ALIAS"],"mappings":";AAAO,MAAMA,IAA8C;"}

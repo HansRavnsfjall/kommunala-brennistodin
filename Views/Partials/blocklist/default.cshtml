@@ -1,0 +1,34 @@
+@using System.Linq
+@using Microsoft.AspNetCore.Html
+@using Umbraco.Extensions
+@using Umbraco.Cms.Core.Models.Blocks
+@using Umbraco.Cms.Core.Models.PublishedContent
+@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<BlockListItem>
+
+@{
+    IPublishedElement content = Model.Content; // strongly typed to IPublishedElement
+    var alias = content.ContentType.Alias;
+}
+
+<div class="block block--@alias">
+  <div class="container py-4">
+    <h3 class="h5 mb-2">@alias</h3>
+    <p class="text-muted">Rendering fallback <code>blocklist/default.cshtml</code>.</p>
+
+    @if (content.Properties?.Any() == true)
+    {
+        <ul class="mb-0">
+            @foreach (var p in content.Properties)
+            {
+                // IMPORTANT: content is IPublishedElement, so extension method Value(...) resolves
+                var val = content.Value<object>(p.Alias);
+                <li><strong>@p.Alias:</strong> @val</li>
+            }
+        </ul>
+    }
+    else
+    {
+        <p class="text-muted mb-0">No properties on this block.</p>
+    }
+  </div>
+</div>

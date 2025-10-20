@@ -1,0 +1,16 @@
+@using Umbraco.Cms.Core.Models
+@using Umbraco.Cms.Core.Models.Blocks
+@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<BlockListItem>
+
+@{
+    var c = Model.Content;
+    var img = c.Value<MediaWithCrops>("mynd");
+    var posClass = (ViewData["BlockPosClass"] as string) ?? "";
+}
+
+<section class="full-w-image @posClass">
+  @if (img is not null)
+  {
+      <img src="@img.GetCropUrl()" alt="@img.Name" class="img-fluid" />
+  }
+</section>

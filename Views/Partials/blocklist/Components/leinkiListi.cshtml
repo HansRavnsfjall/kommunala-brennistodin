@@ -1,0 +1,61 @@
+@using System
+@using System.Linq
+@using Umbraco.Cms.Core.Models
+@using Umbraco.Cms.Core.Models.Blocks
+@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<BlockListItem>
+
+@{
+    var c = Model.Content;
+
+    // Fields
+    var heading = c.Value<string>("yvirskrift");
+    var linksBlocks = c.Value<BlockListModel>("listiViLeinkjum");
+
+    // Position info from helper
+    var isFirst  = ViewData["BlockIsFirst"] as bool? ?? false;
+    var isLast   = ViewData["BlockIsLast"]  as bool? ?? false;
+    var posClass = (ViewData["BlockPosClass"] as string) ?? string.Empty;
+
+    // Compose section classes
+    var sectionClasses = $"linklist {posClass}" +
+                         (isFirst ? " is-first" : "") +
+                         (isLast ? " is-last" : "");
+}
+
+<section class="@sectionClasses">
+  <div class="container my-5">
+    <div class="row">
+      <div class="col-lg-8">
+        @if (!string.IsNullOrWhiteSpace(heading))
+        {
+            <h2 class="fw-bold text-success mb-4">@heading</h2>
+        }
+
+        <ul class="list-group list-links">
+          @if (linksBlocks != null && linksBlocks.Any())
+          {
+              foreach (var b in linksBlocks)
+              {
+                  var link = b.Content.Value<Link>("leinkiElement");
+                  var href = link?.Url ?? string.Empty;
+                  if (string.IsNullOrWhiteSpace(href)) { continue; }
+
+                  var text   = !string.IsNullOrWhiteSpace(link?.Name) ? link!.Name! : href;
+                  var target = link?.Target;
+                  var rel    = target == "_blank" ? "noopener noreferrer" : null;
+
+                  <li class="list-group-item d-flex justify-content-between align-items-center">
+                      <a href="@href" class="link-text" target="@target" rel="@rel">@text</a>
+                      <span class="arrow">&rarr;</span>
+                  </li>
+              }
+          }
+          else
+          {
+              <li class="list-group-item text-muted">Eingi leinki eru sett á enn.</li>
+          }
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,226 @@
+@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage
+@using System.Linq
+@using System.Collections.Generic
+@using Umbraco.Cms.Core.Models.PublishedContent
+@using Umbraco.Cms.Core.Routing
+@using Umbraco.Extensions
+
+@{
+    // ----- Aliases / property keys -----
+    const string AliasMegaFolder   = "megamenuFolder";   // top-level mega root (hoverable, not clickable)
+    const string AliasMegaHeading  = "megamenuHeading";  // group header under mega root (not clickable)
+    const string AliasSubpage      = "subpage";          // final clickable pages
+    const string PropHideInMenu    = "hideInMenu";       // true/false composition
+
+    // Only the first two top-level mega folders become true megamenus
+    const int MegaVisibleCount = 2;
+
+    // Culture to generate URLs for (Faroese). Use UI culture (robust, avoids nullable issues)
+    string currentCulture = "fo-FO"; 
+
+    // ---------- Helpers ----------
+    bool IsHiddenInMenu(IPublishedContent c)
+        => c != null && c.HasProperty(PropHideInMenu) && c.Value<bool>(PropHideInMenu);
+
+    // An item we expect to be a page (clickable) must NOT be an element type
+    bool IsRoutablePage(IPublishedContent c)
+        => c != null && !c.ContentType.IsElement;
+
+    bool ShouldInclude(IPublishedContent c)
+        => c != null
+           && c.IsVisible()
+           && c.IsPublished(currentCulture)   // ensure published in current culture
+           && !IsHiddenInMenu(c);
+
+    // Manual culture-aware path builder (fallback if Umbraco returns "/")
+    string BuildPathFromSegments(IPublishedContent c, string culture)
+    {
+        // Build /ancestor/child/page using culture-specific UrlSegment
+        var ancestors = c.Ancestors()
+                         .Where(a => a.Level > 1)     // skip root itself
+                         .OrderBy(a => a.Level)
+                         .ToList();
+
+        var parts = new List<string>();
+        foreach (var a in ancestors)
+        {
+            var seg = a.UrlSegment(culture);
+            if (!string.IsNullOrWhiteSpace(seg)) parts.Add(seg);
+        }
+        var mySeg = c.UrlSegment(culture);
+        if (!string.IsNullOrWhiteSpace(mySeg)) parts.Add(mySeg);
+
+        return "/" + string.Join("/", parts);
+    }
+
+    // Get a culture-aware URL with robust fallback
+    string GetUrl(IPublishedContent c)
+    {
+        if (c == null) return "#";
+
+        // For clickable pages, ensure they’re not element types
+        if (!IsRoutablePage(c)) return "#";
+
+        // Primary: ask Umbraco
+        var url = c.Url(culture: currentCulture, mode: UrlMode.Auto);
+
+        if (string.IsNullOrWhiteSpace(url) || url == "/")
+        {
+            // Fallback: manually build a path from culture-specific segments
+            var built = BuildPathFromSegments(c, currentCulture);
+            return string.IsNullOrWhiteSpace(built) ? "#" : built;
+        }
+
+        return url;
+    }
+
+    // ---------- Fetch content ----------
+    var root = Model?.AncestorOrSelf(1);
+    var topAll = root?.Children ?? Enumerable.Empty<IPublishedContent>();
+    var top = topAll.Where(ShouldInclude).ToList();
+
+    // Separate mega roots and everything else
+    var megaRoots = top.Where(x => x.ContentType.Alias == AliasMegaFolder).ToList();
+    var regularTop = top.Where(x => x.ContentType.Alias != AliasMegaFolder).ToList();
+
+    // ---------- Rendering helpers ----------
+    void RenderMega(IPublishedContent megaRoot)
+    {
+        if (!ShouldInclude(megaRoot)) return;
+
+        // Heading groups
+        var headings = megaRoot.Children?
+            .Where(ShouldInclude)
+            .Where(h => h.ContentType.Alias == AliasMegaHeading)
+            .ToList() ?? new List<IPublishedContent>();
+
+        // Direct subpages under mega root (no heading parent)
+        var directSubpages = megaRoot.Children?
+            .Where(ShouldInclude)
+            .Where(c => c.ContentType.Alias == AliasSubpage && IsRoutablePage(c))
+            .ToList() ?? new List<IPublishedContent>();
+
+        // Build groups: (Title, Links)
+        var groups = new List<(string Title, List<IPublishedContent> Links)>();
+
+        foreach (var heading in headings)
+        {
+            var links = heading.Children?
+                .Where(ShouldInclude)
+                .Where(p => p.ContentType.Alias == AliasSubpage && IsRoutablePage(p))
+                .ToList() ?? new List<IPublishedContent>();
+
+            if (links.Any())
+                groups.Add((heading.Name, links));
+        }
+
+        if (directSubpages.Any())
+            groups.Add((megaRoot.Name, directSubpages));
+
+        if (!groups.Any()) return;
+
+        <div class="mega">
+          <div class="container">
+            <div class="row g-4">
+              @foreach (var group in groups)
+              {
+                  var links = group.Links;
+                  var lotsOfLinks = links.Count > 6; // tweak if you prefer fixed columns
+                  var colClass = lotsOfLinks ? "col-12 col-lg-6" : "col-6 col-lg-3";
+
+                  <div class="@colClass">
+                    <h6>@group.Title</h6>
+
+                    @if (lotsOfLinks)
+                    {
+                        var half = (int)System.Math.Ceiling(links.Count / 2.0);
+                        var left = links.Take(half).ToList();
+                        var right = links.Skip(half).ToList();
+
+                        <div class="row">
+                          <div class="col-12 col-md-6">
+                            @foreach (var l in left) { <a href="@GetUrl(l)">@l.Name</a> }
+                          </div>
+                          <div class="col-12 col-md-6">
+                            @foreach (var l in right) { <a href="@GetUrl(l)">@l.Name</a> }
+                          </div>
+                        </div>
+                    }
+                    else
+                    {
+                        foreach (var l in links) { <a href="@GetUrl(l)">@l.Name</a> }
+                    }
+                  </div>
+              }
+            </div><!--/row-->
+          </div><!--/container-->
+        </div><!--/mega-->
+    }
+
+    void RenderTopItem(IPublishedContent node, bool isMega)
+    {
+        if (!ShouldInclude(node)) return;
+
+        if (isMega)
+        {
+            <li class="nav-item dropdown mega-parent position-static">
+              <a class="nav-link is-mega" href="#" role="button" data-title="@node.Name" aria-expanded="false">
+                @node.Name
+              </a>
+              @{ RenderMega(node); }  <!-- call void helper inside code block -->
+            </li>
+        }
+        else
+        {
+            // For regular top-level items, only render as link if routable (not element type)
+            if (IsRoutablePage(node))
+            {
+                <li class="nav-item">
+                  <a class="nav-link" href="@GetUrl(node)">@node.Name</a>
+                </li>
+            }
+            // If it isn't routable (element type accidentally at top level), skip it.
+        }
+    }
+}
+
+<!-- ===== Main navbar (single green row) ===== -->
+<nav class="navbar navbar-expand-lg navbar-main sticky-top">
+  <div class="container">
+    <a class="navbar-brand d-flex align-items-center gap-2 fw-700 text-white" href="@Url.Content("~")">
+      <img src="~/assets/logo-main.svg" alt="Ringrás" height="28" class="me-2">
+    </a>
+
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNav"
+            aria-controls="mainNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="mainNav">
+      <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+        @* 1) First two mega roots as megamenus *@
+        @{
+            for (int i = 0; i < megaRoots.Count && i < MegaVisibleCount; i++)
+            {
+                RenderTopItem(megaRoots[i], isMega: true);
+            }
+        }
+
+        @* 2) Everything else as regular links (including extra mega roots) *@
+        @{
+            foreach (var node in regularTop)
+            {
+                RenderTopItem(node, isMega: false);
+            }
+            if (megaRoots.Count > MegaVisibleCount)
+            {
+                foreach (var node in megaRoots.Skip(MegaVisibleCount))
+                {
+                    RenderTopItem(node, isMega: false);
+                }
+            }
+        }
+      </ul>
+    </div>
+  </div>
+</nav>

@@ -1,64 +1,81 @@
-import { U as N, a as I, b as g } from "../menu-item-layout.element-j-U3XX9c.js";
-import { UmbContextToken as m } from "@umbraco-cms/backoffice/context-api";
-import { createExtensionApiByAlias as T } from "@umbraco-cms/backoffice/extension-registry";
-import { UmbContextBase as l } from "@umbraco-cms/backoffice/class-api";
-import { UMB_SUBMITTABLE_TREE_ENTITY_WORKSPACE_CONTEXT as U } from "@umbraco-cms/backoffice/workspace";
-import { UmbArrayState as b, UmbObjectState as q } from "@umbraco-cms/backoffice/observable-api";
-import { UmbParentEntityContext as E, UmbAncestorsEntityContext as w } from "@umbraco-cms/backoffice/entity";
-const C = new m(
+import { a as V, c as K, U as L, b as F, d as j } from "../menu-item-layout.element-DPT7Hbjy.js";
+import { UmbActionMenuItemApi as Y, UmbMenuItemActionApiBase as z } from "../action-menu-item.api-DxPTl7SU.js";
+import { UmbContextToken as T } from "@umbraco-cms/backoffice/context-api";
+import "../section-sidebar-menu.element-BXQpqNZq.js";
+import { U as J } from "../section-sidebar-menu.global-context.token-DWVyWMEs.js";
+import { U as l } from "../section-sidebar-menu.section-context.token-BQxJAXea.js";
+import { createExtensionApiByAlias as E } from "@umbraco-cms/backoffice/extension-registry";
+import { UmbContextBase as U } from "@umbraco-cms/backoffice/class-api";
+import { UMB_SUBMITTABLE_TREE_ENTITY_WORKSPACE_CONTEXT as b } from "@umbraco-cms/backoffice/workspace";
+import { UmbArrayState as d, UmbObjectState as C } from "@umbraco-cms/backoffice/observable-api";
+import { UmbParentEntityContext as q, UmbAncestorsEntityContext as _ } from "@umbraco-cms/backoffice/entity";
+import { linkEntityExpansionEntries as x } from "@umbraco-cms/backoffice/utils";
+import { UMB_MODAL_CONTEXT as M } from "@umbraco-cms/backoffice/modal";
+const f = new T(
   "UmbWorkspaceContext",
   "UmbMenuStructure"
 );
-class d extends l {
-  constructor(n, e) {
-    super(n, C), this.#e = new b([], (t) => t.unique), this.structure = this.#e.asObservable(), this.#n = new q(void 0), this.parent = this.#n.asObservable(), this.#i = new E(this), this.#r = new w(this), this.provideContext("UmbMenuStructureWorkspaceContext", this), this.#s = e, this.consumeContext(U, (t) => {
+class g extends U {
+  constructor(i, e) {
+    super(i, f), this.#e = new d([], (t) => t.unique), this.structure = this.#e.asObservable(), this.#s = new C(void 0), this.parent = this.#s.asObservable(), this.#i = new q(this), this.#n = new _(this), this.#r = !1, this.provideContext("UmbMenuStructureWorkspaceContext", this), this.#o = e, this.consumeContext(M, (t) => {
+      this.#r = t !== void 0;
+    }), this.consumeContext(l, (t) => {
+      this.#a = t;
+    }), this.consumeContext(b, (t) => {
       this.#t = t, this.observe(this.#t?.unique, (s) => {
-        s && this.#a();
+        s && this.#u();
+      }), this.observe(this.#t?.isNew, (s) => {
+        s !== void 0 && this.#u();
       });
     });
   }
   #t;
-  #s;
+  #o;
   #e;
-  #n;
+  #s;
   #i;
+  #n;
+  #a;
   #r;
-  async #a() {
-    let n = [];
-    const e = await T(
-      this,
-      this.#s.treeRepositoryAlias
-    ), { data: t } = await e.requestTreeRoot();
-    t && (n = [
-      {
-        unique: t.unique,
-        entityType: t.entityType,
-        name: t.name,
-        isFolder: t.isFolder
-      }
-    ]);
-    const s = this.#t?.getIsNew(), u = s ? this.#t?._internal_createUnderParentEntityType : this.#t?.entityType, o = await this.observe(u, () => {
+  async #u() {
+    const i = this.#t?.getIsNew(), e = i ? this.#t?._internal_createUnderParentEntityUnique : this.#t?.unique, t = i ? this.#t?._internal_createUnderParentEntityType : this.#t?.entityType;
+    let s = [];
+    const o = await this.observe(e, () => {
     })?.asPromise();
-    if (!o) throw new Error("Entity type is not available");
-    if (o !== t?.entityType) {
-      const c = s ? this.#t?._internal_createUnderParentEntityUnique : this.#t?.unique, r = await this.observe(c, () => {
-      })?.asPromise();
-      if (!r) throw new Error("Unique is not available");
-      const { data: a } = await e.requestTreeItemAncestors({ treeItem: { unique: r, entityType: o } });
-      if (a) {
-        const p = a.map((i) => ({
-          unique: i.unique,
-          entityType: i.entityType,
-          name: i.name,
-          isFolder: i.isFolder
+    if (o === void 0) throw new Error("Unique is not available");
+    const n = await this.observe(t, () => {
+    })?.asPromise();
+    if (!n) throw new Error("Entity type is not available");
+    const h = await E(
+      this,
+      this.#o.treeRepositoryAlias
+    ), { data: r } = await h.requestTreeRoot();
+    if (r && (s = [
+      {
+        unique: r.unique,
+        entityType: r.entityType,
+        name: r.name,
+        isFolder: r.isFolder
+      }
+    ]), !(n === r?.entityType)) {
+      const { data: u } = await h.requestTreeItemAncestors({ treeItem: { unique: o, entityType: n } });
+      if (u) {
+        const c = u.map((a) => ({
+          unique: a.unique,
+          entityType: a.entityType,
+          name: a.name,
+          isFolder: a.isFolder
         }));
-        n.push(...p), this.#e.setValue(n), this.#o(n), this.#u(a);
+        this.#c(u), s.push(...c);
       }
     }
+    this.#e.setValue(s), this.#h(s);
+    const p = this.manifest?.meta?.menuItemAlias;
+    p && !this.#r && this.#m(s, p);
   }
-  #o(n) {
-    const e = n.filter((s) => s.unique !== this.#t?.getUnique()).pop();
-    this.#n.setValue(e);
+  #h(i) {
+    const e = i.filter((s) => s.unique !== this.#t?.getUnique()).pop();
+    this.#s.setValue(e);
     const t = e ? {
       unique: e.unique,
       entityType: e.entityType
@@ -68,51 +85,66 @@ class d extends l {
   /* Notice: ancestors are based on the server "data" ancestors and are not based on the full Menu (UI) structure.
   	This will mean that any item placed in the data root will not have any ancestors. But will have a parent based on the UI structure.
   */
-  #u(n) {
-    const e = n.map((t) => ({
+  #c(i) {
+    const e = i.map((t) => ({
       unique: t.unique,
       entityType: t.entityType
     })).filter((t) => t.unique !== this.#t?.getUnique());
-    this.#r.setAncestors(e);
+    this.#n.setAncestors(e);
+  }
+  #m(i, e) {
+    const o = x(i).filter((n) => n.unique !== this.#t?.getUnique()).map((n) => ({
+      ...n,
+      menuItemAlias: e
+    }));
+    this.#a?.expansion.expandItems(o);
+  }
+  destroy() {
+    super.destroy(), this.#e.destroy(), this.#s.destroy(), this.#i.destroy(), this.#n.destroy();
   }
 }
-const _ = new m(
+const A = new T(
   "UmbWorkspaceContext",
   "UmbMenuStructure",
-  (h) => "IS_MENU_VARIANT_STRUCTURE_WORKSPACE_CONTEXT" in h
+  (y) => "IS_MENU_VARIANT_STRUCTURE_WORKSPACE_CONTEXT" in y
 );
-class O extends l {
-  constructor(n, e) {
-    super(n, _), this.#e = new b([], (t) => t.unique), this.structure = this.#e.asObservable(), this.#n = new q(void 0), this.parent = this.#n.asObservable(), this.#i = new E(this), this.#r = new w(this), this.IS_MENU_VARIANT_STRUCTURE_WORKSPACE_CONTEXT = !0, this.provideContext("UmbMenuStructureWorkspaceContext", this), this.#s = e, this.consumeContext(U, (t) => {
+class W extends U {
+  constructor(i, e) {
+    super(i, A), this.#e = new d([], (t) => t.unique), this.structure = this.#e.asObservable(), this.#s = new C(void 0), this.parent = this.#s.asObservable(), this.#i = new q(this), this.#n = new _(this), this.#r = !1, this.IS_MENU_VARIANT_STRUCTURE_WORKSPACE_CONTEXT = !0, this.provideContext("UmbMenuStructureWorkspaceContext", this), this.#o = e, this.consumeContext(M, (t) => {
+      this.#r = t !== void 0;
+    }), this.consumeContext(l, (t) => {
+      this.#a = t;
+    }), this.consumeContext(b, (t) => {
       this.#t = t, this.observe(
         this.#t?.unique,
         (s) => {
-          s && this.#a();
+          s && this.#u();
         },
         "observeUnique"
       );
     });
   }
-  //
   #t;
-  #s;
+  #o;
   #e;
-  #n;
+  #s;
   #i;
+  #n;
+  #a;
   #r;
-  async #a() {
-    const n = this.#t?.getIsNew(), e = n ? this.#t?._internal_createUnderParentEntityUnique : this.#t?.unique, t = n ? this.#t?._internal_createUnderParentEntityType : this.#t?.entityType;
+  async #u() {
+    const i = this.#t?.getIsNew(), e = i ? this.#t?._internal_createUnderParentEntityUnique : this.#t?.unique, t = i ? this.#t?._internal_createUnderParentEntityType : this.#t?.entityType;
     let s = [];
-    const u = await this.observe(e, () => {
+    const o = await this.observe(e, () => {
     })?.asPromise();
-    if (u === void 0) throw new Error("Unique is not available");
-    const o = await this.observe(t, () => {
+    if (o === void 0) throw new Error("Unique is not available");
+    const n = await this.observe(t, () => {
     })?.asPromise();
-    if (!o) throw new Error("Entity type is not available");
-    const c = await T(
+    if (!n) throw new Error("Entity type is not available");
+    const h = await E(
       this,
-      this.#s.treeRepositoryAlias
-    ), { data: r } = await c.requestTreeRoot();
+      this.#o.treeRepositoryAlias
+    ), { data: r } = await h.requestTreeRoot();
     r && (s = [
       {
         unique: r.unique,
@@ -120,23 +152,25 @@ class O extends l {
         variants: [{ name: r.name, culture: null, segment: null }]
       }
     ]);
-    const { data: a } = await c.requestTreeItemAncestors({ treeItem: { unique: u, entityType: o } });
-    if (a) {
-      const p = a.map((i) => ({
-        unique: i.unique,
-        entityType: i.entityType,
-        variants: i.variants.map((y) => ({
-          name: y.name,
-          culture: y.culture,
-          segment: y.segment
+    const { data: m } = await h.requestTreeItemAncestors({ treeItem: { unique: o, entityType: n } });
+    if (m) {
+      const p = m.map((c) => ({
+        unique: c.unique,
+        entityType: c.entityType,
+        variants: c.variants.map((a) => ({
+          name: a.name,
+          culture: a.culture,
+          segment: a.segment
         }))
       }));
-      s.push(...p), this.#e.setValue(s), this.#o(s), this.#u(a);
+      s.push(...p), this.#e.setValue(s), this.#h(s), this.#c(m);
+      const u = this.manifest?.meta?.menuItemAlias;
+      u && !this.#r && this.#m(s, u);
     }
   }
-  #o(n) {
-    const e = n.filter((s) => s.unique !== this.#t?.getUnique()).pop();
-    this.#n.setValue(e);
+  #h(i) {
+    const e = i.filter((s) => s.unique !== this.#t?.getUnique()).pop();
+    this.#s.setValue(e);
     const t = e ? {
       unique: e.unique,
       entityType: e.entityType
@@ -146,21 +180,37 @@ class O extends l {
   /* Notice: ancestors are based on the server "data" ancestors and are not based on the full Menu (UI) structure.
   	This will mean that any item placed in the data root will not have any ancestors. But will have a parent based on the UI structure.
   */
-  #u(n) {
-    const e = n.map((t) => ({
+  #c(i) {
+    const e = i.map((t) => ({
       unique: t.unique,
       entityType: t.entityType
     })).filter((t) => t.unique !== this.#t?.getUnique());
-    this.#r.setAncestors(e);
+    this.#n.setAncestors(e);
+  }
+  #m(i, e) {
+    const o = x(i).filter((n) => n.unique !== this.#t?.getUnique()).map((n) => ({
+      ...n,
+      menuItemAlias: e
+    }));
+    this.#a?.expansion.expandItems(o);
+  }
+  destroy() {
+    super.destroy(), this.#e.destroy(), this.#s.destroy(), this.#i.destroy(), this.#n.destroy();
   }
 }
 export {
-  C as UMB_MENU_STRUCTURE_WORKSPACE_CONTEXT,
-  _ as UMB_MENU_VARIANT_STRUCTURE_WORKSPACE_CONTEXT,
-  N as UmbMenuElement,
-  I as UmbMenuItemDefaultElement,
-  g as UmbMenuItemLayoutElement,
-  d as UmbMenuTreeStructureWorkspaceContextBase,
-  O as UmbMenuVariantTreeStructureWorkspaceContextBase
+  V as UMB_MENU_CONTEXT,
+  K as UMB_MENU_ITEM_CONTEXT,
+  f as UMB_MENU_STRUCTURE_WORKSPACE_CONTEXT,
+  A as UMB_MENU_VARIANT_STRUCTURE_WORKSPACE_CONTEXT,
+  J as UMB_SECTION_SIDEBAR_MENU_GLOBAL_CONTEXT,
+  l as UMB_SECTION_SIDEBAR_MENU_SECTION_CONTEXT,
+  Y as UmbActionMenuItemApi,
+  L as UmbMenuElement,
+  z as UmbMenuItemActionApiBase,
+  F as UmbMenuItemDefaultElement,
+  j as UmbMenuItemLayoutElement,
+  g as UmbMenuTreeStructureWorkspaceContextBase,
+  W as UmbMenuVariantTreeStructureWorkspaceContextBase
 };
 //# sourceMappingURL=index.js.map

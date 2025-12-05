@@ -1,0 +1,1 @@
+{"version":3,"file":"constants-C0Snq3yb.js","sources":["../../../src/packages/multi-url-picker/link-picker-modal/constants.ts"],"sourcesContent":["export const UMB_MULTI_URL_PICKER_MODAL_ALIAS = 'Umb.Modal.MultiUrlLinkPicker';\r\n"],"names":["UMB_MULTI_URL_PICKER_MODAL_ALIAS"],"mappings":"AAAO,MAAMA,IAAmC;"}

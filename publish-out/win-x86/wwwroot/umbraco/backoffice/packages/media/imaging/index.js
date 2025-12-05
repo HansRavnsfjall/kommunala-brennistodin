@@ -1,63 +1,72 @@
 import { ImageCropModeModel as D } from "@umbraco-cms/backoffice/external/backend-api";
-import { UmbImagingRepository as B } from "../imaging.repository-Cr_RO0yc.js";
-import { css as k, property as n, state as w, customElement as x, when as U, html as l, nothing as S } from "@umbraco-cms/backoffice/external/lit";
-import { UmbLitElement as z } from "@umbraco-cms/backoffice/lit-element";
-import { UmbTextStyles as q } from "@umbraco-cms/backoffice/style";
-import { a as H } from "../media-url.repository-B5RzlWhD.js";
-import { a as st, b as nt, U as ot } from "../constants-C418HnkF.js";
-var X = Object.defineProperty, Y = Object.getOwnPropertyDescriptor, A = (t) => {
+import { UmbImagingRepository as H } from "../imaging.repository-oDvp8QYt.js";
+import { css as q, property as a, state as U, customElement as z, when as E, html as u, nothing as X } from "@umbraco-cms/backoffice/external/lit";
+import { UmbLitElement as S } from "@umbraco-cms/backoffice/lit-element";
+import { UmbTextStyles as A } from "@umbraco-cms/backoffice/style";
+import { UMB_ACTION_EVENT_CONTEXT as Y } from "@umbraco-cms/backoffice/action";
+import { UmbEntityUpdatedEvent as x } from "@umbraco-cms/backoffice/entity-action";
+import { a as V } from "../media-url.repository-B5RzlWhD.js";
+import { a as ct, b as dt, U as pt } from "../constants-C418HnkF.js";
+var j = Object.defineProperty, F = Object.getOwnPropertyDescriptor, N = (t) => {
   throw TypeError(t);
-}, o = (t, e, i, s) => {
-  for (var a = s > 1 ? void 0 : s ? Y(e, i) : e, c = t.length - 1, d; c >= 0; c--)
-    (d = t[c]) && (a = (s ? d(e, i, a) : d(a)) || a);
-  return s && a && X(e, i, a), a;
-}, O = (t, e, i) => e.has(t) || A("Cannot " + i), y = (t, e, i) => (O(t, e, "read from private field"), e.get(t)), $ = (t, e, i) => e.has(t) ? A("Cannot add the same private member more than once") : e instanceof WeakSet ? e.add(t) : e.set(t, i), j = (t, e, i, s) => (O(t, e, "write to private field"), e.set(t, i), i), f = (t, e, i) => (O(t, e, "access private method"), i), E, u, g, P, G, M;
-let r = class extends z {
+}, o = (t, e, i, r) => {
+  for (var s = r > 1 ? void 0 : r ? F(e, i) : e, c = t.length - 1, d; c >= 0; c--)
+    (d = t[c]) && (s = (r ? d(e, i, s) : d(s)) || s);
+  return r && s && j(e, i, s), s;
+}, O = (t, e, i) => e.has(t) || N("Cannot " + i), y = (t, e, i) => (O(t, e, "read from private field"), e.get(t)), I = (t, e, i) => e.has(t) ? N("Cannot add the same private member more than once") : e instanceof WeakSet ? e.add(t) : e.set(t, i), J = (t, e, i, r) => (O(t, e, "write to private field"), e.set(t, i), i), p = (t, e, i) => (O(t, e, "access private method"), i), T, m, h, C, P, R, w;
+let n = class extends S {
   constructor() {
-    super(...arguments), $(this, g), this.unique = "", this.width = 300, this.height = 300, this.mode = D.MIN, this.alt = "", this.icon = "icon-picture", this.loading = "lazy", this._isLoading = !0, this._thumbnailUrl = "", $(this, E, new B(this)), $(this, u);
+    super(...arguments), I(this, h), this.unique = "", this.width = 300, this.height = 300, this.mode = D.MIN, this.alt = "", this.icon = "icon-picture", this.loading = "lazy", this._isLoading = !0, this._thumbnailUrl = "", I(this, T, new H(this)), I(this, m);
   }
   render() {
-    return l` ${f(this, g, G).call(this)} ${U(this._isLoading, () => f(this, g, P).call(this))} `;
+    return E(
+      this._isLoading,
+      () => p(this, h, P).call(this),
+      () => p(this, h, R).call(this)
+    );
   }
   connectedCallback() {
-    super.connectedCallback(), this.loading === "lazy" ? (j(this, u, new IntersectionObserver((t) => {
-      t[0].isIntersecting && (f(this, g, M).call(this), y(this, u)?.disconnect());
-    })), y(this, u).observe(this)) : f(this, g, M).call(this);
+    super.connectedCallback(), this.loading === "lazy" ? (J(this, m, new IntersectionObserver((t) => {
+      t[0].isIntersecting && (p(this, h, w).call(this), y(this, m)?.disconnect(), p(this, h, C).call(this));
+    })), y(this, m).observe(this)) : (p(this, h, w).call(this), p(this, h, C).call(this));
   }
   disconnectedCallback() {
-    super.disconnectedCallback(), y(this, u)?.disconnect();
+    super.disconnectedCallback(), y(this, m)?.disconnect();
   }
 };
-E = /* @__PURE__ */ new WeakMap();
-u = /* @__PURE__ */ new WeakMap();
-g = /* @__PURE__ */ new WeakSet();
+T = /* @__PURE__ */ new WeakMap();
+m = /* @__PURE__ */ new WeakMap();
+h = /* @__PURE__ */ new WeakSet();
+C = function() {
+  this.consumeContext(Y, (t) => {
+    t?.addEventListener(x.TYPE, (e) => {
+      e instanceof x && e.getUnique() === this.unique && p(this, h, w).call(this);
+    });
+  });
+};
 P = function() {
-  return l`<div id="loader"><uui-loader></uui-loader></div>`;
+  return u`<div id="loader"><uui-loader></uui-loader></div>`;
 };
-G = function() {
-  return this._isLoading ? S : U(
+R = function() {
+  return E(
     this._thumbnailUrl,
-    () => l`<img
-					id="figure"
-					src="${this._thumbnailUrl}"
-					alt="${this.alt}"
-					loading="${this.loading}"
-					draggable="false" />`,
-    () => l`<umb-icon id="icon" name="${this.icon}"></umb-icon>`
+    (t) => u`<img id="figure" src=${t} alt=${this.alt} loading=${this.loading} draggable="false" />`,
+    () => u`<umb-icon id="icon" name=${this.icon}></umb-icon>`
   );
 };
-M = async function() {
-  const { data: t } = await y(this, E).requestThumbnailUrls(
-    [this.unique],
-    this.height,
-    this.width,
-    this.mode
-  );
+w = async function() {
+  if (!this.unique) return;
+  this._isLoading = !0;
+  const { data: t } = await y(this, T).requestResizedItems([this.unique], {
+    height: this.height,
+    width: this.width,
+    mode: this.mode
+  });
   this._thumbnailUrl = t?.[0]?.url ?? "", this._isLoading = !1;
 };
-r.styles = [
-  q,
-  k`
+n.styles = [
+  A,
+  q`
 			:host {
 				display: block;
 				position: relative;
@@ -96,84 +105,84 @@ r.styles = [
 		`
 ];
 o([
-  n()
-], r.prototype, "unique", 2);
+  a()
+], n.prototype, "unique", 2);
 o([
-  n({ type: Number })
-], r.prototype, "width", 2);
+  a({ type: Number })
+], n.prototype, "width", 2);
 o([
-  n({ type: Number })
-], r.prototype, "height", 2);
+  a({ type: Number })
+], n.prototype, "height", 2);
 o([
-  n()
-], r.prototype, "mode", 2);
+  a()
+], n.prototype, "mode", 2);
 o([
-  n()
-], r.prototype, "alt", 2);
+  a()
+], n.prototype, "alt", 2);
 o([
-  n()
-], r.prototype, "icon", 2);
+  a()
+], n.prototype, "icon", 2);
 o([
-  n()
-], r.prototype, "loading", 2);
+  a()
+], n.prototype, "loading", 2);
 o([
-  w()
-], r.prototype, "_isLoading", 2);
+  U()
+], n.prototype, "_isLoading", 2);
 o([
-  w()
-], r.prototype, "_thumbnailUrl", 2);
-r = o([
-  x("umb-imaging-thumbnail")
-], r);
-var F = Object.defineProperty, J = Object.getOwnPropertyDescriptor, R = (t) => {
+  U()
+], n.prototype, "_thumbnailUrl", 2);
+n = o([
+  z("umb-imaging-thumbnail")
+], n);
+var K = Object.defineProperty, Q = Object.getOwnPropertyDescriptor, G = (t) => {
   throw TypeError(t);
-}, p = (t, e, i, s) => {
-  for (var a = s > 1 ? void 0 : s ? J(e, i) : e, c = t.length - 1, d; c >= 0; c--)
-    (d = t[c]) && (a = (s ? d(e, i, a) : d(a)) || a);
-  return s && a && F(e, i, a), a;
-}, L = (t, e, i) => e.has(t) || R("Cannot " + i), b = (t, e, i) => (L(t, e, "read from private field"), e.get(t)), I = (t, e, i) => e.has(t) ? R("Cannot add the same private member more than once") : e instanceof WeakSet ? e.add(t) : e.set(t, i), K = (t, e, i, s) => (L(t, e, "write to private field"), e.set(t, i), i), v = (t, e, i) => (L(t, e, "access private method"), i), T, _, m, C, W, N;
-let h = class extends z {
+}, g = (t, e, i, r) => {
+  for (var s = r > 1 ? void 0 : r ? Q(e, i) : e, c = t.length - 1, d; c >= 0; c--)
+    (d = t[c]) && (s = (r ? d(e, i, s) : d(s)) || s);
+  return r && s && K(e, i, s), s;
+}, L = (t, e, i) => e.has(t) || G("Cannot " + i), b = (t, e, i) => (L(t, e, "read from private field"), e.get(t)), $ = (t, e, i) => e.has(t) ? G("Cannot add the same private member more than once") : e instanceof WeakSet ? e.add(t) : e.set(t, i), Z = (t, e, i, r) => (L(t, e, "write to private field"), e.set(t, i), i), v = (t, e, i) => (L(t, e, "access private method"), i), k, _, f, M, W, B;
+let l = class extends S {
   constructor() {
-    super(...arguments), I(this, m), this.icon = "icon-picture", this.loading = "lazy", this._isLoading = !0, this._imageUrl = "", I(this, T, new H(this)), I(this, _);
+    super(...arguments), $(this, f), this.icon = "icon-picture", this.loading = "lazy", this._isLoading = !0, this._imageUrl = "", $(this, k, new V(this)), $(this, _);
   }
   connectedCallback() {
-    super.connectedCallback(), this.loading === "lazy" ? (K(this, _, new IntersectionObserver((t) => {
-      t[0].isIntersecting && (v(this, m, C).call(this), b(this, _)?.disconnect());
-    })), b(this, _).observe(this)) : v(this, m, C).call(this);
+    super.connectedCallback(), this.loading === "lazy" ? (Z(this, _, new IntersectionObserver((t) => {
+      t[0].isIntersecting && (v(this, f, M).call(this), b(this, _)?.disconnect());
+    })), b(this, _).observe(this)) : v(this, f, M).call(this);
   }
   disconnectedCallback() {
     super.disconnectedCallback(), b(this, _)?.disconnect();
   }
   render() {
-    return l` ${v(this, m, N).call(this)} ${U(this._isLoading, () => v(this, m, W).call(this))} `;
+    return u` ${v(this, f, B).call(this)} ${E(this._isLoading, () => v(this, f, W).call(this))} `;
   }
 };
-T = /* @__PURE__ */ new WeakMap();
+k = /* @__PURE__ */ new WeakMap();
 _ = /* @__PURE__ */ new WeakMap();
-m = /* @__PURE__ */ new WeakSet();
-C = async function() {
+f = /* @__PURE__ */ new WeakSet();
+M = async function() {
   if (!this.unique) throw new Error("Unique is missing");
-  const { data: t } = await b(this, T).requestItems([this.unique]);
+  const { data: t } = await b(this, k).requestItems([this.unique]);
   this._imageUrl = t?.[0]?.url ?? "", this._isLoading = !1;
 };
 W = function() {
-  return l`<div id="loader"><uui-loader></uui-loader></div>`;
+  return u`<div id="loader"><uui-loader></uui-loader></div>`;
 };
-N = function() {
-  return this._isLoading ? S : U(
+B = function() {
+  return this._isLoading ? X : E(
     this._imageUrl,
-    () => l`<img
+    () => u`<img
 					part="img"
 					src="${this._imageUrl}"
 					alt="${this.alt ?? ""}"
 					loading="${this.loading}"
 					draggable="false" />`,
-    () => l`<umb-icon id="icon" name="${this.icon}"></umb-icon>`
+    () => u`<umb-icon id="icon" name="${this.icon}"></umb-icon>`
   );
 };
-h.styles = [
-  q,
-  k`
+l.styles = [
+  A,
+  q`
 			:host {
 				display: contents;
 			}
@@ -193,33 +202,33 @@ h.styles = [
 			}
 		`
 ];
-p([
-  n()
-], h.prototype, "unique", 2);
-p([
-  n()
-], h.prototype, "alt", 2);
-p([
-  n()
-], h.prototype, "icon", 2);
-p([
-  n()
-], h.prototype, "loading", 2);
-p([
-  w()
-], h.prototype, "_isLoading", 2);
-p([
-  w()
-], h.prototype, "_imageUrl", 2);
-h = p([
-  x("umb-media-image")
-], h);
+g([
+  a()
+], l.prototype, "unique", 2);
+g([
+  a()
+], l.prototype, "alt", 2);
+g([
+  a()
+], l.prototype, "icon", 2);
+g([
+  a()
+], l.prototype, "loading", 2);
+g([
+  U()
+], l.prototype, "_isLoading", 2);
+g([
+  U()
+], l.prototype, "_imageUrl", 2);
+l = g([
+  z("umb-media-image")
+], l);
 export {
-  st as UMB_IMAGING_REPOSITORY_ALIAS,
-  nt as UMB_IMAGING_STORE_ALIAS,
-  ot as UMB_IMAGING_STORE_CONTEXT,
-  B as UmbImagingRepository,
-  r as UmbImagingThumbnailElement,
-  h as UmbMediaImageElement
+  ct as UMB_IMAGING_REPOSITORY_ALIAS,
+  dt as UMB_IMAGING_STORE_ALIAS,
+  pt as UMB_IMAGING_STORE_CONTEXT,
+  H as UmbImagingRepository,
+  n as UmbImagingThumbnailElement,
+  l as UmbMediaImageElement
 };
 //# sourceMappingURL=index.js.map

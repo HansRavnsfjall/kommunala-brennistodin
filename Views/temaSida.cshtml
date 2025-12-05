@@ -1,0 +1,123 @@
+﻿@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage
+@using Umbraco.Cms.Core.Models.Blocks
+@using Umbraco.Cms.Core.Models.PublishedContent
+@using Umbraco.Cms.Core.Models
+@using Umbraco.Cms.Core.Strings
+@using Umbraco.Extensions
+@using Kob.ViewModels
+
+@{
+    Layout = "master.cshtml";
+    ViewBag.Title = Model?.Name;
+
+    // ---- INGRESS: alias "inngangstekstur"
+    IHtmlEncodedString? ingress = Model.Value<IHtmlEncodedString?>(
+        "inngangstekstur",
+        fallback: Fallback.ToDefaultValue
+    );
+
+    // ---- IMAGE: alias "mynd"
+    MediaWithCrops? heroImage = Model.Value<MediaWithCrops?>(
+        "mynd",
+        fallback: Fallback.ToDefaultValue
+    );
+
+    // Target display size
+    const int heroWidth = 737;
+    const int heroHeight = 491;
+
+    string? heroUrl1x = null;
+    string? heroUrl2x = null;
+
+    if (heroImage != null)
+    {
+        // 1x version (737x491) - WebP, crop to ratio
+        heroUrl1x = heroImage.GetCropUrl(
+            width: heroWidth,
+            height: heroHeight,
+            imageCropMode: ImageCropMode.Crop,
+            imageCropAnchor: ImageCropAnchor.Center,
+            quality: 85,
+            furtherOptions: "&format=webp&upscale=false"
+        );
+
+        // 2x version (retina) (1474x982)
+        heroUrl2x = heroImage.GetCropUrl(
+            width: heroWidth * 2,
+            height: heroHeight * 2,
+            imageCropMode: ImageCropMode.Crop,
+            imageCropAnchor: ImageCropAnchor.Center,
+            quality: 85,
+            furtherOptions: "&format=webp&upscale=false"
+        );
+
+        // Fallback if crop fails for some reason
+        if (string.IsNullOrWhiteSpace(heroUrl1x))
+        {
+            heroUrl1x = heroImage.MediaUrl();
+        }
+    }
+
+    var heroAlt =
+        heroImage?.Value<string>("altText") ??
+        heroImage?.Value<string>("umbracoAltText") ??
+        Model?.Name;
+}
+
+<!-- THEME HERO -->
+<section class="kb-theme-hero temaHead bg-blush overflow-visible">
+    <div class="container tema-container">
+        <div class="row align-items-center gy-4">
+
+            <!-- Text -->
+            <div class="col-lg-6 tema-text-col">
+                <span class="kb-eyebrow">TEMA</span>
+                <h1 class="kb-title mt-2">@Model?.Name</h1>
+
+                @if (ingress is not null)
+                {
+                    <div class="kb-lead mt-4 mb-0">
+                        @ingress
+                    </div>
+                }
+            </div>
+
+            <!-- Image -->
+            <div class="col-lg-6">
+                @if (!string.IsNullOrWhiteSpace(heroUrl1x))
+                {
+                    <div class="kb-img-lift">
+                        <img
+                            class="img-fluid w-100 tema-top-img"
+                            src="@heroUrl1x"
+                            srcset="@(heroUrl1x) 1x@(heroUrl2x != null ? ", " + heroUrl2x + " 2x" : "")"
+                            width="@heroWidth"
+                            height="@heroHeight"
+                            alt="@heroAlt" />
+                    </div>
+                }
+            </div>
+
+        </div>
+    </div>
+</section>
+
+<section class="temapage">
+@{
+    // Block list with NO FALLBACK
+    var blocks = Model.Value<BlockListModel>("modul", fallback: Fallback.ToDefaultValue);
+}
+
+@if (blocks != null && blocks.Any())
+{
+    @await Html.PartialAsync(
+        "~/Views/Partials/Helpers/RenderBlockList.cshtml",
+        new BlockListRenderModel
+        {
+            Blocks = blocks,
+            Scope = Model.ContentType.Alias,
+            FallbackView = "~/Views/Partials/blocklist/_Default.cshtml"
+        }
+    )
+}
+</section>

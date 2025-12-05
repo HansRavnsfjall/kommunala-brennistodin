@@ -1,6 +1,6 @@
-import { c as i, b as a, r as e, w as m, f as s, e as n, x as r, j as p, n as b, t as l, y as k, z as W, u as O, d as t } from "./paths-CYf6P2Vl.js";
+import { c as i, b as a, r as e, w as m, f as s, e as n, x as r, j as p, n as b, t as l, y as k, z as W, u as h, d as t } from "./paths-CliQ1DWc.js";
 import { UMB_COLLECTION_ALIAS_CONDITION as c } from "@umbraco-cms/backoffice/collection";
-import { UMB_WORKSPACE_CONDITION_ALIAS as o, UmbSubmitWorkspaceAction as h } from "@umbraco-cms/backoffice/workspace";
+import { UMB_WORKSPACE_CONDITION_ALIAS as o, UmbSubmitWorkspaceAction as O } from "@umbraco-cms/backoffice/workspace";
 import "@umbraco-cms/backoffice/id";
 import "@umbraco-cms/backoffice/external/backend-api";
 import "@umbraco-cms/backoffice/resources";
@@ -12,7 +12,7 @@ const _ = [
     type: "repository",
     alias: i,
     name: "Webhook Delivery Collection Repository",
-    api: () => import("./webhook-delivery-collection.repository-ChspdiFd.js")
+    api: () => import("./webhook-delivery-collection.repository-BUHuASAL.js")
   }
 ], y = [
   {
@@ -50,7 +50,7 @@ const _ = [
     kind: "collection",
     alias: "Umb.WorkspaceView.WebhookDelivery.Collection",
     name: "Webhook Delivery Workspace View",
-    element: () => import("./webhook-delivery-collection-workspace-view.element-DZN_PXjQ.js"),
+    element: () => import("./webhook-delivery-collection-workspace-view.element-DMT2i-qx.js"),
     meta: {
       label: "Deliveries",
       pathname: "deliveries",
@@ -64,19 +64,19 @@ const _ = [
       }
     ]
   }
-], d = [...A, ...E], f = [
+], f = [...A, ...E], d = [
   {
     type: "modal",
     alias: "Umb.Modal.Webhook.Events",
     name: "Webhook Events Modal",
     js: () => import("./webhook-events-modal.element-qIZSAFpL.js")
   }
-], I = [...f, ...m], C = [
+], I = [...d, ...m], C = [
   {
     type: "repository",
     alias: s,
     name: "Webhook Collection Repository",
-    api: () => import("./webhook-collection.repository-KcTwXdUa.js")
+    api: () => import("./webhook-collection.repository-Cj5zqNVm.js")
   }
 ], w = [
   {
@@ -109,7 +109,7 @@ const _ = [
   ...C,
   ...r,
   ...w
-], R = [
+], U = [
   {
     type: "entityAction",
     kind: "delete",
@@ -121,13 +121,13 @@ const _ = [
       itemRepositoryAlias: p
     }
   }
-], U = [...k, ...W], L = [
+], R = [...k, ...W], B = [
   {
     type: "workspace",
     kind: "routable",
     alias: e,
-    name: "Webhook Root Workspace",
-    api: () => import("./webhook-workspace.context-BsEt0g8m.js"),
+    name: "Webhook Workspace",
+    api: () => import("./webhook-workspace.context-BjbGiokw.js"),
     meta: {
       entityType: l
     }
@@ -136,7 +136,7 @@ const _ = [
     type: "workspaceView",
     alias: "Umb.WorkspaceView.Webhook.Details",
     name: "Webhook Root Workspace Details View",
-    js: () => import("./webhook-details-workspace-view.element-C9xP2dw6.js"),
+    js: () => import("./webhook-details-workspace-view.element-ttrNnGNl.js"),
     weight: 300,
     meta: {
       label: "Details",
@@ -155,7 +155,7 @@ const _ = [
     kind: "default",
     alias: "Umb.WorkspaceAction.Webhook.Save",
     name: "Save Webhook Workspace Action",
-    api: h,
+    api: O,
     meta: {
       look: "primary",
       color: "positive",
@@ -168,11 +168,11 @@ const _ = [
       }
     ]
   }
-], B = [
+], L = [
   ...T,
-  ...R,
   ...U,
-  ...L
+  ...R,
+  ...B
 ], S = [
   {
     type: "menuItem",
@@ -193,7 +193,7 @@ const _ = [
     alias: t,
     name: "Webhook Root Workspace",
     meta: {
-      entityType: O,
+      entityType: h,
       headline: "#treeHeaders_webhooks"
     }
   },
@@ -216,10 +216,16 @@ const _ = [
     ]
   }
 ], D = [...S, ...$], g = [
-  ...d,
+  ...f,
   ...I,
-  ...B,
-  ...D
+  ...L,
+  ...D,
+  {
+    name: "Webhook Backoffice Entry Point",
+    alias: "Umb.EntryPoint.Webhook",
+    type: "backofficeEntryPoint",
+    js: () => import("./entry-point-BNRcUFyr.js")
+  }
 ];
 export {
   g as manifests

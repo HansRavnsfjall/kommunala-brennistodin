@@ -1,0 +1,13 @@
+{
+  "id": "Umbraco.Licenses",
+  "name": "Umbraco Licenses",
+  "version": "16.0.0",
+  "extensions": [
+    {
+      "name": "Umbraco Licenses EntryPoint",
+      "alias": "Umb.Licenses.EntryPoint",
+      "type": "backofficeEntryPoint",
+      "js": "/App_Plugins/Umbraco.Licenses/umbraco-licenses.js"
+    }
+  ]
+}

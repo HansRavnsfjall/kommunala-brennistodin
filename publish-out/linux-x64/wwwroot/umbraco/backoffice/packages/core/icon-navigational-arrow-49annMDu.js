@@ -1,0 +1,5 @@
+const o = '<svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.75" class="lucide lucide-navigation-2" viewBox="0 0 24 24"><path d="m12 2 7 19-7-4-7 4z"/></svg>';
+export {
+  o as default
+};
+//# sourceMappingURL=icon-navigational-arrow-49annMDu.js.map

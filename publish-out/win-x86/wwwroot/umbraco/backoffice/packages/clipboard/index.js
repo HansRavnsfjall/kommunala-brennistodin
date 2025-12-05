@@ -1,13 +1,13 @@
-import { U as r } from "./clipboard-entry-picker-modal.token-BY5g5-fO.js";
-import { UmbClipboardEntryDetailRepository as T } from "./clipboard-entry-detail.repository-Be0QsLx1.js";
-import { UmbClipboardEntryDetailStore as I } from "./clipboard-entry-detail.store-BOXR5opj.js";
-import { e as E, k as a, U as C, f as L, g as e, b as B, a as P, h as t, i as U, j as s, d as p, c as D, l as M, m } from "./manifests-D6Yzql_a.js";
-import { UmbClipboardEntryItemRepository as N } from "./clipboard-entry-item.repository-CIuifbrD.js";
+import { U as r } from "./clipboard-entry-picker-modal.token-BGyy-GGP.js";
+import { UmbClipboardEntryDetailRepository as T } from "./clipboard-entry-detail.repository-B4ollNpJ.js";
+import { UmbClipboardEntryDetailStore as I } from "./clipboard-entry-detail.store-CmFGWToX.js";
+import { e as E, k as a, U as C, f as L, g as e, b as B, a as P, h as t, i as U, j as s, d as p, c as D, l as M, m } from "./manifests-BtMo_QOj.js";
+import { UmbClipboardEntryItemRepository as N } from "./clipboard-entry-item.repository-CcIsaRWM.js";
 import { UmbClipboardCollectionRepository as b } from "./clipboard-collection.repository-DNaeH0Ix.js";
 import { U as Y } from "./clipboard.property-context-token-DMlYzAUk.js";
 import { U as f } from "./clipboard.context-token-DOwOWTSv.js";
-import { UmbClipboardContext as y, UmbClipboardContext as n } from "./clipboard.context-D3d_lkgA.js";
-import { UmbPasteFromClipboardPropertyAction as u } from "./paste-from-clipboard.property-action-BPQNO_f2.js";
+import { UmbClipboardContext as y, UmbClipboardContext as n } from "./clipboard.context-1aFOGS3J.js";
+import { UmbPasteFromClipboardPropertyAction as u } from "./paste-from-clipboard.property-action-Dxq8xHWO.js";
 import { U as X, a as c } from "./clipboard-paste-translator-value-resolver-CvUcR1Sa.js";
 export {
   E as UMB_CLIPBOARD_COLLECTION_ALIAS,

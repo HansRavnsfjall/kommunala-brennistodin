@@ -17,8 +17,8 @@ const i = [
     type: "workspace",
     alias: e,
     name: "LogViewer Root Workspace",
-    element: () => import("./logviewer-workspace.element-BReZdNbK.js"),
-    api: () => import("./logviewer-workspace.context-BJe3efdM.js"),
+    element: () => import("./logviewer-workspace.element-BaCh4Sru.js"),
+    api: () => import("./logviewer-workspace.context-B0AVbsWh.js"),
     meta: {
       entityType: "logviewer"
     }
@@ -27,7 +27,7 @@ const i = [
     type: "workspaceView",
     alias: "Umb.WorkspaceView.LogViewer.Overview",
     name: "LogViewer Root Workspace Overview View",
-    element: () => import("./index-BXplpJww.js"),
+    element: () => import("./index-DZP4lHY2.js"),
     weight: 300,
     meta: {
       label: "Overview",
@@ -45,7 +45,7 @@ const i = [
     type: "workspaceView",
     alias: "Umb.WorkspaceView.LogViewer.Search",
     name: "LogViewer Root Workspace Search View",
-    element: () => import("./index-B03ZSqdw.js"),
+    element: () => import("./index-BNl_laT4.js"),
     weight: 200,
     meta: {
       label: "#general_search",

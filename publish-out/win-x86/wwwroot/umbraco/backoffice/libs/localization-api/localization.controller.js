@@ -64,7 +64,7 @@ export class UmbLocalizationController {
     lang() {
         return `${this.#hostEl?.lang || umbLocalizationManager.documentLanguage}`.toLowerCase();
     }
-    getLocalizationData(lang) {
+    #getLocalizationData(lang) {
         const locale = new Intl.Locale(lang);
         const language = locale?.language.toLowerCase();
         const region = locale?.region?.toLowerCase() ?? '';
@@ -79,12 +79,21 @@ export class UmbLocalizationController {
      * @param {string} key - the localization key, the indicator of what localization entry you want to retrieve.
      * @param {...any} args - the arguments to parse for this localization entry.
      * @returns {string} - the translated term as a string.
+     * @example
+     * Retrieving a term without any arguments:
+     * ```ts
+     * this.localize.term('area_term');
+     * ```
+     * Retrieving a term with arguments:
+     * ```ts
+     * this.localize.term('general_greeting', ['John']);
+     * ```
      */
     term(key, ...args) {
         if (!this.#usedKeys.includes(key)) {
             this.#usedKeys.push(key);
         }
-        const { primary, secondary } = this.getLocalizationData(this.lang());
+        const { primary, secondary } = this.#getLocalizationData(this.lang());
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
         let term;
         // Look for a matching term using regionCode, code, then the fallback

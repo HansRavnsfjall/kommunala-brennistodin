@@ -1,86 +1,87 @@
 import { U as _t, a as Ot } from "../block-catalogue-modal.token-CqYZWuQE.js";
 import { U as Ct } from "../block-entry.context-token-DG6_TzkT.js";
 import { UmbContextBase as T, UmbControllerBase as S } from "@umbraco-cms/backoffice/class-api";
-import { UmbBooleanState as f, UmbClassState as _, UmbNumberState as D, UmbStringState as b, UmbObjectState as g, mergeObservables as h, observeMultiple as p, UmbArrayState as m } from "@umbraco-cms/backoffice/observable-api";
+import { UmbBooleanState as b, UmbClassState as _, UmbNumberState as A, UmbStringState as p, UmbObjectState as g, mergeObservables as h, observeMultiple as f, UmbArrayState as m } from "@umbraco-cms/backoffice/observable-api";
 import { UmbReadOnlyVariantGuardManager as E, encodeFilePath as O, UmbDeprecation as V } from "@umbraco-cms/backoffice/utils";
-import { umbConfirmModal as x } from "@umbraco-cms/backoffice/modal";
-import { UmbLocalizationController as A } from "@umbraco-cms/backoffice/localization-api";
-import { UmbRoutePathAddendumContext as L } from "@umbraco-cms/backoffice/router";
+import { umbConfirmModal as D } from "@umbraco-cms/backoffice/modal";
+import { UmbLocalizationController as x } from "@umbraco-cms/backoffice/localization-api";
+import { UmbRoutePathAddendumContext as I } from "@umbraco-cms/backoffice/router";
 import { UmbVariantId as P } from "@umbraco-cms/backoffice/variant";
-import { UmbUfmVirtualRenderController as I } from "@umbraco-cms/backoffice/ufm";
-import { a as M } from "../block-manager.context-token-DnrQaIqt.js";
-import { U as Et } from "../block-manager.context-token-DnrQaIqt.js";
-import { U as Pt } from "../block-entries.context-CdnpL0k5.js";
+import { UmbUfmVirtualRenderController as L } from "@umbraco-cms/backoffice/ufm";
+import { b as M } from "../block-workspace.modal-token-DM3FsY2R.js";
+import { c as Et, U as Vt, a as Pt } from "../block-workspace.modal-token-DM3FsY2R.js";
+import { U as Bt } from "../block-entries.context-scfFicem.js";
 import { UmbDocumentTypeDetailRepository as R } from "@umbraco-cms/backoffice/document-type";
 import { UmbContentTypeStructureManager as N } from "@umbraco-cms/backoffice/content-type";
 import { UmbId as v } from "@umbraco-cms/backoffice/id";
 import { UmbPropertyValuePresetVariantBuilderController as q } from "@umbraco-cms/backoffice/property";
 import { UMB_APP_LANGUAGE_CONTEXT as w } from "@umbraco-cms/backoffice/language";
 import { UmbDataTypeDetailRepository as $ } from "@umbraco-cms/backoffice/data-type";
-import { UmbBlockCatalogueModalElement as Bt } from "../block-catalogue-modal.element-xu0WxKrN.js";
+import { UmbBlockCatalogueModalElement as Ut } from "../block-catalogue-modal.element-DgrfRSxG.js";
 import { UmbAbstractArrayValidationPathTranslator as k, UmbDataPathPropertyValueQuery as B, umbScopeMapperForJsonPaths as C, UmbValidationPropertyPathTranslationController as F, umbQueryMapperForJsonPaths as G } from "@umbraco-cms/backoffice/validation";
-import { c as Ut, b as St, U as Dt, a as xt } from "../index-jGJQ3LmE.js";
+import { U as At } from "../block-workspace.context-token-DTpZ56Fk.js";
+import { b as xt, U as It, a as Lt } from "../constants-Dj5jHHfK.js";
 const ut = "block";
 class ct extends T {
   constructor(t, e, n) {
-    super(t, "UmbBlockEntryContext"), this.#a = new f(void 0), this.unsupported = this.#a.asObservable(), this.#i = new A(this), this.#o = new L(this), this.#e = new _(void 0), this._variantId = this.#e.asObservable(), this.#l = new f(void 0), this.hasExpose = this.#l.asObservable(), this.readOnlyGuard = new E(this), this.#s = new D(void 0), this.index = this.#s.asObservable(), this.#n = new b(void 0), this.createBeforePath = this.#n.asObservable(), this.#r = new b(void 0), this.createAfterPath = this.#r.asObservable(), this.#h = new g(void 0), this.contentElementTypeName = this.#h.asObservablePart((s) => s?.name), this.contentElementTypeAlias = this.#h.asObservablePart((s) => s?.alias), this.contentElementTypeIcon = this.#h.asObservablePart((s) => s?.icon), this._blockType = new g(void 0), this.blockType = this._blockType.asObservable(), this.contentElementTypeKey = this._blockType.asObservablePart((s) => s?.contentElementTypeKey), this.settingsElementTypeKey = this._blockType.asObservablePart(
+    super(t, "UmbBlockEntryContext"), this.#a = new b(void 0), this.unsupported = this.#a.asObservable(), this.#i = new x(this), this.#o = new I(this), this.#e = new _(void 0), this._variantId = this.#e.asObservable(), this.#l = new b(void 0), this.hasExpose = this.#l.asObservable(), this.#s = new b(!0), this.actionsVisibility = this.#s.asObservable(), this.readOnlyGuard = new E(this), this.#n = new A(void 0), this.index = this.#n.asObservable(), this.#r = new p(void 0), this.createBeforePath = this.#r.asObservable(), this.#y = new p(void 0), this.createAfterPath = this.#y.asObservable(), this.#h = new g(void 0), this.contentElementTypeName = this.#h.asObservablePart((s) => s?.name), this.contentElementTypeAlias = this.#h.asObservablePart((s) => s?.alias), this.contentElementTypeIcon = this.#h.asObservablePart((s) => s?.icon), this._blockType = new g(void 0), this.blockType = this._blockType.asObservable(), this.contentElementTypeKey = this._blockType.asObservablePart((s) => s?.contentElementTypeKey), this.settingsElementTypeKey = this._blockType.asObservablePart(
       (s) => s ? s.settingsElementTypeKey ?? void 0 : null
-    ), this._layout = new g(void 0), this.layout = this._layout.asObservable(), this.contentKey = this._layout.asObservablePart((s) => s?.contentKey), this.settingsKey = this._layout.asObservablePart((s) => s ? s.settingsKey ?? null : void 0), this.unique = this._layout.asObservablePart((s) => s?.contentKey), this.#y = new b(""), this.label = this.#y.asObservable(), this.#m = new I(this), this.#v = (s, i) => s && i ? s + "edit/" + O(i) + "/view/content" : "", this.#p = (s, i) => s && i ? s + "edit/" + O(i) + "/view/settings" : "", this.#g = new b(void 0), this.workspacePath = this.#g.asObservable(), this.workspaceEditContentPath = h(
+    ), this._layout = new g(void 0), this.layout = this._layout.asObservable(), this.contentKey = this._layout.asObservablePart((s) => s?.contentKey), this.settingsKey = this._layout.asObservablePart((s) => s ? s.settingsKey ?? null : void 0), this.unique = this._layout.asObservablePart((s) => s?.contentKey), this.#g = new p(""), this.label = this.#g.asObservable(), this.#b = new L(this), this.#v = (s, i) => s && i ? s + "edit/" + O(i) + "/view/content" : "", this.#f = (s, i) => s && i ? s + "edit/" + O(i) + "/view/settings" : "", this.#m = new p(void 0), this.workspacePath = this.#m.asObservable(), this.workspaceEditContentPath = h(
       [this.contentKey, this.workspacePath],
       ([s, i]) => this.#v(i, s)
     ), this.workspaceEditSettingsPath = h(
       [this.contentKey, this.workspacePath],
-      ([s, i]) => this.#p(i, s)
-    ), this.#b = new Promise((s) => {
-      this.#f = () => {
-        s(void 0), this.#f = void 0;
+      ([s, i]) => this.#f(i, s)
+    ), this.#p = new Promise((s) => {
+      this.#_ = () => {
+        s(void 0), this.#_ = void 0;
       };
-    }), this.#_ = new f(void 0), this._contentStructureHasProperties = this.#_.asObservable(), this.#C = new Promise((s) => {
-      this.#w = () => {
-        s(void 0), this.#w = void 0;
+    }), this.#O = new b(void 0), this._contentStructureHasProperties = this.#O.asObservable(), this.#T = new Promise((s) => {
+      this.#C = () => {
+        s(void 0), this.#C = void 0;
       };
-    }), this.#c = new g(void 0), this._contentValueArray = this.#c.asObservablePart((s) => s?.values), this.contentTypeKey = this.#c.asObservablePart((s) => s?.contentTypeKey), this.#d = new g(void 0), this._settingsValueArray = this.#d.asObservablePart((s) => s?.values), this.settingsDataContentTypeKey = this.#d.asObservablePart(
+    }), this.#c = new g(void 0), this._contentValueArray = this.#c.asObservablePart((s) => s?.values), this.contentTypeKey = this.#c.asObservablePart((s) => s?.contentTypeKey), this.#d = new g(void 0), this._settingsValueArray = this.#d.asObservablePart((s) => s?.values), this._settingsDataContentTypeKey = this.#d.asObservablePart(
       (s) => s ? s.contentTypeKey ?? void 0 : null
-    ), this.#V = ([s, i, r]) => {
+    ), this.settingsDataContentTypeKey = this._settingsDataContentTypeKey, this.#P = ([s, i, r]) => {
       if (!(!s || !i || !r))
         return i.reduce((a, l) => {
-          const u = this.#P(l, r);
+          const u = this.#k(l, r);
           return a[l.alias] = s.find(
             (c) => c.alias === l.alias && u.compare(c)
           )?.value, a;
         }, {});
     }, this.observe(this.label, (s) => {
-      this.#m.markdown = s;
-    }), this.#U(), this.consumeContext(e, (s) => {
+      this.#b.markdown = s;
+    }), this.#S(), this.consumeContext(e, (s) => {
       this._manager = s, this._gotManager(), this.#D();
     }), this.consumeContext(n, (s) => {
       this._entries = s, this._gotEntries(), this.#x();
     }), this.observe(
       this.unique,
       (s) => {
-        this.#o.setAddendum(s), s && this.#B();
+        this.#o.setAddendum(s), s && this.#K();
       },
       null
     ), this.observe(
       this.contentTypeKey,
       (s) => {
-        s && (this.#M(), this.#K());
+        s && (this.#R(), this.#U());
       },
       null
     ), this.observe(
-      this.settingsDataContentTypeKey,
+      this._settingsDataContentTypeKey,
       (s) => {
-        s && this.#R(s);
+        s && this.#N(s);
       },
       null
     ), this.observe(
       this.blockType,
       (s) => {
-        s && this.#N();
+        s && this.#q();
       },
       null
     ), this.observe(
-      p([this.settingsElementTypeKey, this.settingsDataContentTypeKey]),
+      f([this.settingsElementTypeKey, this._settingsDataContentTypeKey]),
       ([s, i]) => {
         if (!(s === void 0 || i === void 0) && s !== i && s != null) {
           const r = this.#d.getValue();
@@ -89,7 +90,7 @@ class ct extends T {
       },
       null
     ), this.observe(
-      p([this.settingsKey, this.blockType]),
+      f([this.settingsKey, this.blockType]),
       async ([s, i]) => {
         if (!(!this.#t || s === void 0 || !i))
           if (s == null && i.settingsElementTypeKey) {
@@ -106,6 +107,13 @@ class ct extends T {
   #o;
   #e;
   #l;
+  #s;
+  hideActions() {
+    this.#s.setValue(!1);
+  }
+  showActions() {
+    this.#s.setValue(!0);
+  }
   // Workspace alike methods, to enables editing of data without the need of a workspace (Custom views and block grid inline editing mode for example).
   getEntityType() {
     return "block";
@@ -113,15 +121,15 @@ class ct extends T {
   getUnique() {
     return this.getContentKey();
   }
-  #s;
+  #n;
   getIndex() {
-    return this.#s.value;
+    return this.#n.value;
   }
   setIndex(t) {
-    this.#s.setValue(t);
+    this.#n.setValue(t);
   }
-  #n;
   #r;
+  #y;
   #h;
   /**
    * Get the name of the content element type.
@@ -151,22 +159,22 @@ class ct extends T {
   getLayout() {
     return this._layout.getValue();
   }
-  #y;
-  getLabel() {
-    return this.#y.getValue();
-  }
-  #m;
-  #v;
-  #p;
   #g;
-  #u;
-  #f;
+  getLabel() {
+    return this.#g.getValue();
+  }
   #b;
+  #v;
+  #f;
+  #m;
+  #u;
   #_;
+  #p;
   #O;
   #w;
   #C;
-  #P(t, e) {
+  #T;
+  #k(t, e) {
     return P.Create({
       culture: t.variesByCulture ? e.culture : null,
       segment: t.variesBySegment ? e.segment : null
@@ -175,7 +183,7 @@ class ct extends T {
   async propertyVariantId(t, e) {
     return h(
       [await t.propertyStructureByAlias(e), this._variantId],
-      ([n, s]) => n && s ? this.#P(n, s) : void 0
+      ([n, s]) => n && s ? this.#k(n, s) : void 0
     );
   }
   setContentPropertyValue(t, e) {
@@ -188,7 +196,7 @@ class ct extends T {
     this._manager?.setOneSettingsProperty(n, t, e);
   }
   async contentPropertyValueByAlias(t) {
-    return await this.#b, h(
+    return await this.#p, h(
       [
         this.#c.asObservablePart((e) => e?.values?.filter((n) => n?.alias === t)),
         await this.propertyVariantId(this.#u, t)
@@ -200,10 +208,10 @@ class ct extends T {
     );
   }
   async settingsPropertyValueByAlias(t) {
-    return await this.#C, h(
+    return await this.#T, h(
       [
         this.#c.asObservablePart((e) => e?.values?.filter((n) => n?.alias === t)),
-        await this.propertyVariantId(this.#O, t)
+        await this.propertyVariantId(this.#w, t)
       ],
       ([e, n]) => {
         if (!(!e || !n))
@@ -212,12 +220,12 @@ class ct extends T {
     );
   }
   #c;
-  #T;
+  #E;
   async contentValues() {
-    return await this.#b, this.#T || (this.#T = h(
+    return await this.#p, this.#E || (this.#E = h(
       [this._contentValueArray, this.#u.contentTypeProperties, this._variantId],
-      this.#V
-    )), this.#T;
+      this.#P
+    )), this.#E;
   }
   /**
    * Get the content of the block.
@@ -227,14 +235,14 @@ class ct extends T {
     return this.#c.getValue();
   }
   #d;
-  #E;
-  async settingsValues() {
-    return await this.#C, this.#E || (this.#E = h(
-      [this._settingsValueArray, this.#O.contentTypeProperties, this._variantId],
-      this.#V
-    )), this.#E;
-  }
   #V;
+  async settingsValues() {
+    return await this.#T, this.#V || (this.#V = h(
+      [this._settingsValueArray, this.#w.contentTypeProperties, this._variantId],
+      this.#P
+    )), this.#V;
+  }
+  #P;
   /**
    * Get the settings of the block.
    * @returns {UmbBlockDataModel | undefined} - the settings of the block.
@@ -242,9 +250,9 @@ class ct extends T {
   getSettings() {
     return this.#d.getValue();
   }
-  async #U() {
+  async #S() {
     this.observe(await this.contentValues(), (t) => {
-      this.#m.value = t;
+      this.#b.value = t;
     });
   }
   getContentKey() {
@@ -257,7 +265,7 @@ class ct extends T {
    * @returns {void}
    */
   setContentKey(t) {
-    this.#t = t, this.#k();
+    this.#t = t, this.#B();
   }
   /**
    * Get the current value of this Blocks label.
@@ -265,18 +273,18 @@ class ct extends T {
    * @returns {string} - the value of the label.
    */
   getName() {
-    return this.#m.toString();
+    return this.#b.toString();
   }
-  #S() {
+  #A() {
     this._entries && this.observe(
-      p([this.index, this._entries.catalogueRouteBuilder, this._entries.canCreate]),
+      f([this.index, this._entries.catalogueRouteBuilder, this._entries.canCreate]),
       ([t, e, n]) => {
-        t !== void 0 && (e && n ? (this.#n.setValue(this._entries.getPathForCreateBlock(t)), this.#r.setValue(this._entries.getPathForCreateBlock(t + 1))) : (this.#n.setValue(void 0), this.#r.setValue(void 0)));
+        t !== void 0 && (e && n ? (this.#r.setValue(this._entries.getPathForCreateBlock(t)), this.#y.setValue(this._entries.getPathForCreateBlock(t + 1))) : (this.#r.setValue(void 0), this.#y.setValue(void 0)));
       },
       "observeRouteBuilderCreate"
     );
   }
-  #k() {
+  #B() {
     !this._entries || !this.#t || (this.observe(
       this._entries.layoutOf(this.#t),
       (t) => {
@@ -292,18 +300,18 @@ class ct extends T {
     ));
   }
   #D() {
-    this.#L(), this.#K(), this.#B(), this.#A(), this.#I();
+    this.#L(), this.#U(), this.#K(), this.#I(), this.#M();
   }
   #x() {
-    this.#S(), this.#k(), this.observe(
+    this.#A(), this.#B(), this.observe(
       this._entries?.workspacePath,
       (t) => {
-        this.#g.setValue(t);
+        this.#m.setValue(t);
       },
       "observeWorkspacePath"
     );
   }
-  #B() {
+  #K() {
     !this._manager || !this.#t || this.observe(
       this._manager.contentOf(this.#t),
       (t) => {
@@ -312,7 +320,7 @@ class ct extends T {
       "observeContent"
     );
   }
-  #A() {
+  #I() {
     this.observe(
       this._manager ? this.settingsKey : void 0,
       (t) => {
@@ -332,25 +340,25 @@ class ct extends T {
       this.removeUmbControllerByAlias("observeVariantId");
       return;
     }
-    if (await this.#b, !this.#u)
+    if (await this.#p, !this.#u)
       throw new Error("No contentStructure found");
     if (!this._manager) {
       this.removeUmbControllerByAlias("observeVariantId");
       return;
     }
     this.observe(
-      p([
+      f([
         this._manager.variantId,
         this.#u.ownerContentTypeObservablePart((t) => t?.variesByCulture),
         this.#u.ownerContentTypeObservablePart((t) => t?.variesBySegment)
       ]),
       ([t, e, n]) => {
-        !t || e === void 0 || n === void 0 || (this.#e.setValue(t.toVariant(e, n)), this.#q());
+        !t || e === void 0 || n === void 0 || (this.#e.setValue(t.toVariant(e, n)), this.#$());
       },
       "observeVariantId"
     );
   }
-  #I() {
+  #M() {
     this._manager && this.observe(
       // TODO: Instead transfer all variant states.
       this._manager.readOnlyState.isPermittedForObservableVariant(this._variantId),
@@ -368,10 +376,10 @@ class ct extends T {
       "observeIsReadOnly"
     );
   }
-  #M() {
+  #R() {
     if (!this._manager) return;
     const t = this.#c.getValue()?.contentTypeKey;
-    t && (this.#u = this._manager.getStructure(t), this.#f?.(), this.#u || this.#a.setValue(!0), this.observe(
+    t && (this.#u = this._manager.getStructure(t), this.#_?.(), this.#u || this.#a.setValue(!0), this.observe(
       this.#u?.ownerContentType,
       (e) => {
         this.#h.setValue(e), this._gotContentType(e);
@@ -380,15 +388,15 @@ class ct extends T {
     ), this.observe(
       this.#u?.contentTypeHasProperties,
       (e) => {
-        this.#_.setValue(e);
+        this.#O.setValue(e);
       },
       "observeContentTypeHasProperties"
     ));
   }
-  #R(t) {
-    !this._manager || !t || (this.#O = this._manager.getStructure(t), this.#w?.());
+  #N(t) {
+    !this._manager || !t || (this.#w = this._manager.getStructure(t), this.#C?.());
   }
-  #K() {
+  #U() {
     if (!this._manager) return;
     const t = this.#c.getValue()?.contentTypeKey;
     t && this.observe(
@@ -399,23 +407,23 @@ class ct extends T {
       "observeBlockType"
     );
   }
-  #N() {
+  #q() {
     if (!this._manager) return;
     const t = this._blockType.getValue();
     if (t)
       if (t.label) {
-        this.removeUmbControllerByAlias("observeContentTypeName"), this.#y.setValue(t.label);
+        this.removeUmbControllerByAlias("observeContentTypeName"), this.#g.setValue(t.label);
         return;
       } else
         this.observe(
           this.contentElementTypeName,
           (e) => {
-            this.#y.setValue(this.#i.string(e) || "no name");
+            this.#g.setValue(this.#i.string(e) || "no name");
           },
           "observeContentTypeName"
         );
   }
-  #q() {
+  #$() {
     const t = this.#e.getValue();
     !t || !this.#t || this.observe(
       this._manager?.hasExposeOf(this.#t, t),
@@ -431,19 +439,19 @@ class ct extends T {
     window.history.pushState(
       {},
       "",
-      this.#v(this.#g.value, this.getContentKey())
+      this.#v(this.#m.value, this.getContentKey())
     );
   }
   editSettings() {
     window.history.pushState(
       {},
       "",
-      this.#p(this.#g.value, this.getContentKey())
+      this.#f(this.#m.value, this.getContentKey())
     );
   }
   async requestDelete() {
     const t = this.getName();
-    await x(this, {
+    await D(this, {
       headline: this.#i.term("blockEditor_confirmDeleteBlockTitle", t),
       content: this.#i.term("blockEditor_confirmDeleteBlockMessage", t),
       confirmLabel: this.#i.term("general_delete"),
@@ -469,14 +477,14 @@ class ct extends T {
 }
 class yt extends T {
   constructor(t) {
-    super(t, M), this.#t = [], this.#a = new R(this), this.#i = new b(void 0), this.propertyAlias = this.#i.asObservable(), this.#o = new _(void 0), this.variantId = this.#o.asObservable(), this.#e = [], this.#l = new m([], (e) => e.contentElementTypeKey), this.blockTypes = this.#l.asObservable(), this._editorConfiguration = new _(void 0), this.editorConfiguration = this._editorConfiguration.asObservable(), this._liveEditingMode = new f(void 0), this.liveEditingMode = this._liveEditingMode.asObservable(), this._layouts = new m([], (e) => e.contentKey), this.layouts = this._layouts.asObservable(), this.#s = new m([], (e) => e.key), this.contents = this.#s.asObservable(), this.#n = new m([], (e) => e.key), this.settings = this.#n.asObservable(), this.readOnlyState = new E(this), this.#r = new m(
+    super(t, M), this.#t = [], this.#a = new R(this), this.#i = new p(void 0), this.propertyAlias = this.#i.asObservable(), this.#o = new _(void 0), this.variantId = this.#o.asObservable(), this.#e = [], this.#l = new m([], (e) => e.contentElementTypeKey), this.blockTypes = this.#l.asObservable(), this._editorConfiguration = new _(void 0), this.editorConfiguration = this._editorConfiguration.asObservable(), this._liveEditingMode = new b(void 0), this.liveEditingMode = this._liveEditingMode.asObservable(), this._layouts = new m([], (e) => e.contentKey), this.layouts = this._layouts.asObservable(), this.#s = new m([], (e) => e.key), this.contents = this.#s.asObservable(), this.#n = new m([], (e) => e.key), this.settings = this.#n.asObservable(), this.readOnlyState = new E(this), this.#r = new m(
       [],
       (e) => e.contentKey + "_" + e.culture + "_" + e.segment
     ), this.exposes = this.#r.asObservable(), this.observe(
       this.blockTypes,
       (e) => {
         e.forEach((n) => {
-          this.#h(n.contentElementTypeKey), n.settingsElementTypeKey && this.#h(n.settingsElementTypeKey);
+          this.#y(n.contentElementTypeKey), n.settingsElementTypeKey && this.#y(n.settingsElementTypeKey);
         });
       },
       null
@@ -574,7 +582,7 @@ class yt extends T {
   getExposes() {
     return this.#r.value;
   }
-  async #h(t) {
+  async #y(t) {
     if (this.#e.find((s) => s.getOwnerContentTypeUnique() === t)) return;
     const e = new N(this, this.#a), n = e.loadType(t);
     this.#t.push(n), this.#e.push(e);
@@ -732,7 +740,11 @@ class yt extends T {
       })
     ), c = new q(this);
     c.setCultures(i), r && c.setSegments(r);
-    const U = await c.create(u);
+    const U = await c.create(u, {
+      entityType: "block",
+      entityUnique: t,
+      entityTypeUnique: e
+    });
     return {
       key: t,
       contentTypeKey: e,
@@ -759,9 +771,9 @@ class yt extends T {
       this.#s.appendOne(e);
     else
       throw new Error("Cannot create block, missing contentKey");
-    n && t.settingsKey && this.#n.appendOne(n), this.#y(e);
+    n && t.settingsKey && this.#n.appendOne(n), this.#h(e);
   }
-  async #y(t) {
+  async #h(t) {
     await this.contentTypesLoaded;
     const e = this.getStructure(t.contentTypeKey);
     if (!e)
@@ -783,7 +795,7 @@ class yt extends T {
     this.#s.removeOne(t);
   }
 }
-class X {
+class W {
   #t;
   #a;
   #i;
@@ -816,21 +828,21 @@ class X {
   destroy() {
   }
 }
-class dt extends X {
+class dt extends W {
   //
   _cloneLayout(t) {
     return t ? Promise.all(t.map((e) => this._cloneBlock(e))) : void 0;
   }
 }
-class H {
+class X {
   async _processValueBlockData(t, e) {
     const n = await Promise.all(
-      t.contentData?.map(async (i) => ({
+      (t.contentData ?? []).map(async (i) => ({
         ...i,
         values: await e(i.values) ?? []
       }))
     ), s = await Promise.all(
-      t.settingsData?.map(async (i) => ({
+      (t.settingsData ?? []).map(async (i) => ({
         ...i,
         values: await e(i.values) ?? []
       }))
@@ -847,7 +859,7 @@ class H {
   destroy() {
   }
 }
-class gt extends H {
+class gt extends X {
   async processValues(t, e) {
     return t.value ? {
       ...t,
@@ -861,10 +873,10 @@ class gt extends H {
     } : t;
   }
 }
-const W = Symbol();
+const H = Symbol();
 class mt extends k {
   constructor(t) {
-    super(t, "$.values[", B, W), new V({
+    super(t, "$.values[", B, H), new V({
       removeInVersion: "17",
       deprecated: "UmbBlockElementValuesDataValidationPathTranslator",
       solution: "UmbBlockElementValuesDataValidationPathTranslator is deprecated."
@@ -892,7 +904,7 @@ class bt extends k {
     return !n || !n.key ? (console.error("block did not have key", `${this.#t}[${t}]`, n), !1) : n;
   }
 }
-class vt extends S {
+class pt extends S {
   async _translateBlockData(t, e, n) {
     return await C(t, n, async (s) => {
       if (e.length === 0)
@@ -910,23 +922,25 @@ class vt extends S {
 export {
   _t as UMB_BLOCK_CATALOGUE_MODAL,
   ut as UMB_BLOCK_CLIPBOARD_ENTRY_VALUE_TYPE,
-  Ut as UMB_BLOCK_ELEMENT_PROPERTY_DATASET_CONTEXT,
-  Et as UMB_BLOCK_ENTRIES_CONTEXT,
+  Et as UMB_BLOCK_ELEMENT_PROPERTY_DATASET_CONTEXT,
+  Vt as UMB_BLOCK_ENTRIES_CONTEXT,
   Ct as UMB_BLOCK_ENTRY_CONTEXT,
   M as UMB_BLOCK_MANAGER_CONTEXT,
-  St as UMB_BLOCK_WORKSPACE_ALIAS,
-  Dt as UMB_BLOCK_WORKSPACE_CONTEXT,
-  xt as UMB_BLOCK_WORKSPACE_MODAL,
-  Bt as UmbBlockCatalogueModalElement,
-  vt as UmbBlockEditorValidationPropertyPathTranslatorBase,
+  xt as UMB_BLOCK_WORKSPACE_ALIAS,
+  At as UMB_BLOCK_WORKSPACE_CONTEXT,
+  Pt as UMB_BLOCK_WORKSPACE_MODAL,
+  It as UMB_BLOCK_WORKSPACE_VIEW_CONTENT,
+  Lt as UMB_BLOCK_WORKSPACE_VIEW_SETTINGS,
+  Ut as UmbBlockCatalogueModalElement,
+  pt as UmbBlockEditorValidationPropertyPathTranslatorBase,
   bt as UmbBlockElementDataValidationPathTranslator,
   mt as UmbBlockElementValuesDataValidationPathTranslator,
-  Pt as UmbBlockEntriesContext,
+  Bt as UmbBlockEntriesContext,
   ct as UmbBlockEntryContext,
   yt as UmbBlockManagerContext,
   Ot as UmbBlockOverlayExposeButtonElement,
-  X as UmbBlockPropertyValueCloner,
-  H as UmbBlockValueResolver,
+  W as UmbBlockPropertyValueCloner,
+  X as UmbBlockValueResolver,
   K as UmbDataPathBlockElementDataQuery,
   dt as UmbFlatLayoutBlockPropertyValueCloner,
   gt as UmbStandardBlockValueResolver

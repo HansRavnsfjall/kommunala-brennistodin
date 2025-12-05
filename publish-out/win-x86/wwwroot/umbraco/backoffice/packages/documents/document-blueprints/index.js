@@ -1,6 +1,6 @@
-import { I as T, x as U, i as O, j as R, k as N, a as I, b as M, p as B, q as P, r as L, s as A, t as C, f as D, h as S, d as s, c as a, U as t, g as e, n as o, l as r, m as Y, o as m, u as p, v as n, w as i, y as u, e as K } from "../paths-BF32ZUyU.js";
-import { UmbDocumentBlueprintDetailRepository as X } from "../document-blueprint-detail.repository-v6KhCqYg.js";
-import { UmbDocumentBlueprintItemRepository as l } from "../document-blueprint-item.repository-DnCe4qgh.js";
+import { I as T, x as U, i as O, j as R, k as N, a as I, b as M, p as B, q as P, r as L, s as A, t as C, f as D, h as S, d as s, c as a, z as t, U as e, g as o, n as Y, l as r, m, o as p, u as n, v as i, w as u, y as K, e as W } from "../document-blueprint-item.server.cache-DONXnfyi.js";
+import { UmbDocumentBlueprintDetailRepository as F } from "../document-blueprint-detail.repository-CueAI7vS.js";
+import { UmbDocumentBlueprintItemRepository as x } from "../document-blueprint-item.repository-cY1Pfesr.js";
 export {
   T as IsDocumentBlueprintPropertyDatasetContext,
   U as UMB_CREATE_DOCUMENT_BLUEPRINT_WORKSPACE_PATH_PATTERN,
@@ -18,18 +18,19 @@ export {
   S as UMB_DOCUMENT_BLUEPRINT_ITEM_STORE_CONTEXT,
   s as UMB_DOCUMENT_BLUEPRINT_OPTIONS_CREATE_MODAL,
   a as UMB_DOCUMENT_BLUEPRINT_PROPERTY_DATASET_CONTEXT,
-  t as UMB_DOCUMENT_BLUEPRINT_ROOT_ENTITY_TYPE,
-  e as UMB_DOCUMENT_BLUEPRINT_STORE_ALIAS,
-  o as UMB_DOCUMENT_BLUEPRINT_TREE_ALIAS,
+  t as UMB_DOCUMENT_BLUEPRINT_PROPERTY_VALUE_ENTITY_TYPE,
+  e as UMB_DOCUMENT_BLUEPRINT_ROOT_ENTITY_TYPE,
+  o as UMB_DOCUMENT_BLUEPRINT_STORE_ALIAS,
+  Y as UMB_DOCUMENT_BLUEPRINT_TREE_ALIAS,
   r as UMB_DOCUMENT_BLUEPRINT_TREE_REPOSITORY_ALIAS,
-  Y as UMB_DOCUMENT_BLUEPRINT_TREE_STORE_ALIAS,
-  m as UMB_DOCUMENT_BLUEPRINT_TREE_STORE_CONTEXT,
-  p as UMB_DOCUMENT_BLUEPRINT_WORKSPACE_ALIAS,
-  n as UMB_DOCUMENT_BLUEPRINT_WORKSPACE_CONTEXT,
-  i as UMB_DOCUMENT_BLUEPRINT_WORKSPACE_PATH,
-  u as UMB_EDIT_BLUEPRINT_DOCUMENT_WORKSPACE_PATH_PATTERN,
-  K as UMB_MOVE_DOCUMENT_BLUEPRINT_REPOSITORY_ALIAS,
-  X as UmbDocumentBlueprintDetailRepository,
-  l as UmbDocumentBlueprintItemRepository
+  m as UMB_DOCUMENT_BLUEPRINT_TREE_STORE_ALIAS,
+  p as UMB_DOCUMENT_BLUEPRINT_TREE_STORE_CONTEXT,
+  n as UMB_DOCUMENT_BLUEPRINT_WORKSPACE_ALIAS,
+  i as UMB_DOCUMENT_BLUEPRINT_WORKSPACE_CONTEXT,
+  u as UMB_DOCUMENT_BLUEPRINT_WORKSPACE_PATH,
+  K as UMB_EDIT_BLUEPRINT_DOCUMENT_WORKSPACE_PATH_PATTERN,
+  W as UMB_MOVE_DOCUMENT_BLUEPRINT_REPOSITORY_ALIAS,
+  F as UmbDocumentBlueprintDetailRepository,
+  x as UmbDocumentBlueprintItemRepository
 };
 //# sourceMappingURL=index.js.map

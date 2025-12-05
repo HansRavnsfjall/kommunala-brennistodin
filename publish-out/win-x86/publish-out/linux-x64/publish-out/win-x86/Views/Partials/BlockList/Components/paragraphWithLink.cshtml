@@ -1,0 +1,90 @@
+@using Umbraco.Cms.Core.Models
+@using Umbraco.Cms.Core.Models.Blocks
+@using Umbraco.Cms.Core.Strings
+@using Umbraco.Extensions
+@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<BlockListItem>
+
+@{
+    var c = Model.Content;
+
+    // Fields
+    var heading   = c.Value<string>("yvirskrift");
+    var introRte  = c.Value<IHtmlEncodedString>("tekstur");
+    var bodyRte   = c.Value<IHtmlEncodedString>("tekstur2");
+    var order     = c.Value<string>("contentOrder") ?? string.Empty; // radio button text value
+    var img       = c.Value<MediaWithCrops>("mynd");
+    var link      = c.Value<Link>("leinki");
+
+    // Order: if radio is "Mynd til vinstru" => image left, else image right
+    var imageLeft = order.Trim().Equals("Mynd til vinstru", System.StringComparison.InvariantCultureIgnoreCase);
+
+    // Position classes from your helper
+    var isFirst  = ViewData["BlockIsFirst"] as bool? ?? false;
+    var isLast   = ViewData["BlockIsLast"]  as bool? ?? false;
+    var posClass = (ViewData["BlockPosClass"] as string) ?? string.Empty;
+
+    var sectionClasses = $"kb-section img-txt-heading-btn container my-5 {posClass}" 
+                         + (isFirst ? " is-first" : "")
+                         + (isLast  ? " is-last"  : "");
+
+    // Row layout class to swap order on desktop
+    var rowOrderClass = imageLeft ? "" : "flex-lg-row-reverse";
+
+    // CTA link pieces
+    var href   = link?.Url ?? string.Empty;
+    var text   = !string.IsNullOrWhiteSpace(link?.Name) ? link!.Name! : "Les meira";
+    var target = link?.Target;
+    var rel    = (target == "_blank") ? "noopener noreferrer" : null;
+}
+
+<section class="@sectionClasses">
+  <!-- Row A: Title + intro (left) and bordered CTA box (right) -->
+  <div class="row gy-4 align-items-start mb-5">
+    <div class="col-lg-8">
+      @if (!string.IsNullOrWhiteSpace(heading))
+      {
+        <h2 class="kb-h2 mb-3">@heading</h2>
+      }
+
+      @if (introRte is not null)
+      {
+        <div class="kb-lead">
+          @introRte
+        </div>
+      }
+
+      @if (img is not null || bodyRte is not null)
+      {
+        <div class="row gy-4 gx-5 align-items-top kb-media-row @rowOrderClass">
+          <div class="col-lg-6">
+            @if (img is not null)
+            {
+              <figure class="kb-media">
+                <img src="@img.Url()" class="img-fluid w-100" alt="@img.Name" />
+              </figure>
+            }
+          </div>
+          <div class="col-lg-6">
+            @if (bodyRte is not null)
+            {
+              <div class="kb-lead mb-0">
+                @bodyRte
+              </div>
+            }
+          </div>
+        </div>
+      }
+    </div>
+
+    <div class="col-lg-4 d-flex justify-content-lg-end">
+      @if (!string.IsNullOrWhiteSpace(href))
+      {
+        <a href="@href" class="kb-cta-box" target="@target" rel="@rel">
+          @text
+        </a>
+      }
+    </div>
+  </div>
+
+  @* Row B placeholder from your template (no extra content needed here) *@
+</section>

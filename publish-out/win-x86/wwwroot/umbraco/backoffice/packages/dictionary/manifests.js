@@ -1,27 +1,27 @@
-import { d as r, e as I, w as _, a as i, c as D, f as s, r as n, p as o, b as t, g as c, U as m, h as T, l as d, k as E, j as R, n as p, o as O, q as S, s as a } from "./paths-pWW_vsmu.js";
+import { d as s, e as _, x as T, a as i, c as D, f as c, r as n, p as o, b as t, g as m, U as p, u as r, h as E, l as O, k as d, j as R, n as y, o as S, q as C, s as a } from "./paths-BPzgB6U7.js";
 import "@umbraco-cms/backoffice/external/backend-api";
 import "@umbraco-cms/backoffice/resources";
 import "@umbraco-cms/backoffice/repository";
 import { UMB_COLLECTION_ALIAS_CONDITION as l } from "@umbraco-cms/backoffice/collection";
-import { UMB_TRANSLATION_SECTION_ALIAS as y, UMB_TRANSLATION_MENU_ALIAS as C } from "@umbraco-cms/backoffice/translation";
+import { UMB_SECTION_ALIAS_CONDITION_ALIAS as b, UMB_SECTION_USER_PERMISSION_CONDITION_ALIAS as U } from "@umbraco-cms/backoffice/section";
+import { UMB_TRANSLATION_SECTION_ALIAS as A, UMB_TRANSLATION_MENU_ALIAS as f } from "@umbraco-cms/backoffice/translation";
 import "@umbraco-cms/backoffice/id";
-import "@umbraco-cms/backoffice/entity-item";
+import "@umbraco-cms/backoffice/management-api";
 import "@umbraco-cms/backoffice/tree";
-import { UMB_WORKSPACE_CONDITION_ALIAS as e, UmbSubmitWorkspaceAction as b } from "@umbraco-cms/backoffice/workspace";
-import { UMB_SECTION_USER_PERMISSION_CONDITION_ALIAS as U } from "@umbraco-cms/backoffice/section";
-const f = [
+import { UMB_WORKSPACE_CONDITION_ALIAS as e, UmbSubmitWorkspaceAction as N } from "@umbraco-cms/backoffice/workspace";
+const M = [
   {
     type: "repository",
-    alias: r,
+    alias: s,
     name: "Dictionary Collection Repository",
-    api: () => import("./dictionary-collection.repository-Bn7ad0EJ.js")
+    api: () => import("./dictionary-collection.repository-BCuU3rWm.js")
   }
-], M = [
+], h = [
   {
     type: "collectionView",
-    alias: I,
+    alias: _,
     name: "Dictionary Table Collection View",
-    element: () => import("./dictionary-table-collection-view.element-Jhyy_IqJ.js"),
+    element: () => import("./dictionary-table-collection-view.element-Dc9YAcEj.js"),
     meta: {
       label: "Table",
       icon: "icon-list",
@@ -34,10 +34,10 @@ const f = [
       }
     ]
   }
-], N = _.generateAbsolute({
+], u = T.generateAbsolute({
   parentEntityType: i,
   parentUnique: null
-}), h = [
+}), L = [
   {
     type: "collectionAction",
     kind: "button",
@@ -46,7 +46,7 @@ const f = [
     weight: 200,
     meta: {
       label: "#general_create",
-      href: N
+      href: u
     },
     conditions: [
       {
@@ -55,45 +55,45 @@ const f = [
       }
     ]
   }
-], u = {
+], k = {
   type: "collection",
   kind: "default",
   alias: D,
   element: () => import("./dictionary-collection.element-BBgY0loa.js"),
   name: "Dictionary Collection",
   meta: {
-    repositoryAlias: r
+    repositoryAlias: s
   }
-}, L = [
-  u,
-  ...f,
+}, B = [
+  k,
   ...M,
-  ...h
-], k = [
+  ...h,
+  ...L
+], Y = [
   {
     type: "dashboard",
     alias: "Umb.Dashboard.Dictionary.Overview",
     name: "Dictionary Overview Dashboard",
-    element: () => import("./dictionary-overview-dashboard.element-CsTGx_XD.js"),
+    element: () => import("./dictionary-overview-dashboard.element-CTVnUEf6.js"),
     meta: {
       label: "#dictionaryItem_overviewTitle",
       pathname: "dictionary-overview"
     },
     conditions: [
       {
-        alias: "Umb.Condition.SectionAlias",
-        match: y
+        alias: b,
+        match: A
       }
     ]
   }
-], Y = [
+], P = [
   {
     type: "repository",
-    alias: s,
+    alias: c,
     name: "Move Dictionary Repository",
     api: () => import("./dictionary-move.repository-C6ZDyIrv.js")
   }
-], B = [
+], w = [
   {
     type: "entityAction",
     kind: "moveTo",
@@ -102,23 +102,23 @@ const f = [
     forEntityTypes: [t],
     meta: {
       treeRepositoryAlias: o,
-      moveRepositoryAlias: s,
+      moveRepositoryAlias: c,
       treeAlias: n
     }
   },
-  ...Y
-], w = [
+  ...P
+], v = [
   {
     type: "entityAction",
     kind: "default",
     alias: "Umb.EntityAction.Dictionary.Create",
     name: "Create Dictionary Entity Action",
     weight: 1200,
-    api: () => import("./create.action-D8w2rtNi.js"),
+    api: () => import("./create.action-CPyVfan4.js"),
     forEntityTypes: [t, i],
     meta: {
       icon: "icon-add",
-      label: "#general_create",
+      label: "#actions_createFor",
       additionalOptions: !0
     }
   },
@@ -128,7 +128,7 @@ const f = [
     alias: "Umb.EntityAction.Dictionary.Export",
     name: "Export Dictionary Entity Action",
     weight: 400,
-    api: () => import("./export.action-d5d9hKMQ.js"),
+    api: () => import("./export.action-CM8bVHrE.js"),
     forEntityTypes: [t],
     meta: {
       icon: "icon-download-alt",
@@ -157,8 +157,8 @@ const f = [
     name: "Delete Dictionary Entity Action",
     forEntityTypes: [t],
     meta: {
-      itemRepositoryAlias: m,
-      detailRepositoryAlias: c
+      itemRepositoryAlias: p,
+      detailRepositoryAlias: m
     }
   },
   {
@@ -171,30 +171,34 @@ const f = [
     type: "modal",
     alias: "Umb.Modal.Dictionary.Import",
     name: "Import Dictionary Modal",
-    element: () => import("./import-dictionary-modal.element-Bp8wsEFh.js")
+    element: () => import("./import-dictionary-modal.element-CylxyDsr.js")
   },
-  ...B
-], P = [
+  ...w
+], $ = [
   {
     type: "menuItem",
     kind: "tree",
-    alias: "Umb.MenuItem.Dictionary",
+    alias: r,
     name: "Dictionary Menu Item",
     weight: 400,
     meta: {
       label: "Dictionary",
       icon: "icon-book-alt",
       entityType: t,
-      menus: [C],
+      menus: [f],
       treeAlias: n,
       hideTreeRoot: !0
     }
   },
   {
     type: "workspaceContext",
+    kind: "menuStructure",
     name: "Dictionary Menu Structure Workspace Context",
     alias: "Umb.Context.Dictionary.Menu.Structure",
-    api: () => import("./dictionary-menu-structure.context-Cp4Sutd2.js"),
+    api: () => import("./dictionary-menu-structure.context-Dv40CnqG.js"),
+    meta: {
+      menuItemAlias: r
+    },
     conditions: [
       {
         alias: e,
@@ -214,74 +218,74 @@ const f = [
       }
     ]
   }
-], v = [
-  {
-    type: "repository",
-    alias: c,
-    name: "Dictionary Detail Repository",
-    api: () => import("./dictionary-detail.repository-7CoO_NLT.js")
-  },
-  {
-    type: "store",
-    alias: T,
-    name: "Dictionary Detail Store",
-    api: () => import("./dictionary-detail.store-BihXIN3P.js")
-  }
-], $ = [
-  {
-    type: "repository",
-    alias: m,
-    name: "Dictionary Item Repository",
-    api: () => import("./dictionary-item.repository-CZ6voZbE.js")
-  },
-  {
-    type: "itemStore",
-    alias: d,
-    name: "Dictionary Item Store",
-    api: () => import("./dictionary-item.store-CnKJUebs.js")
-  }
 ], g = [
   {
     type: "repository",
+    alias: m,
+    name: "Dictionary Detail Repository",
+    api: () => import("./dictionary-detail.repository-D6IxwNd4.js")
+  },
+  {
+    type: "store",
     alias: E,
-    name: "Dictionary Import Repository",
-    api: () => import("./dictionary-import.repository-C2os32CU.js")
+    name: "Dictionary Detail Store",
+    api: () => import("./dictionary-detail.store-B7GShg0S.js")
   }
 ], W = [
+  {
+    type: "repository",
+    alias: p,
+    name: "Dictionary Item Repository",
+    api: () => import("./dictionary-item.repository-Rz6BZm4v.js")
+  },
+  {
+    type: "itemStore",
+    alias: O,
+    name: "Dictionary Item Store",
+    api: () => import("./dictionary-item.store-Bt_-6HwJ.js")
+  }
+], x = [
+  {
+    type: "repository",
+    alias: d,
+    name: "Dictionary Import Repository",
+    api: () => import("./dictionary-import.repository-Do7afCBB.js")
+  }
+], V = [
   {
     type: "repository",
     alias: R,
     name: "Dictionary Export Repository",
     api: () => import("./dictionary-export.repository-C3VvjbdC.js")
   }
-], x = [
-  ...v,
-  ...$,
+], F = [
   ...g,
-  ...W
-], V = [
+  ...W,
+  ...x,
+  ...V
+], j = [
   {
     name: "Dictionary Global Search",
-    alias: O,
+    alias: S,
     type: "globalSearch",
     weight: 600,
     meta: {
       label: "Dictionary",
-      searchProviderAlias: p
+      searchProviderAlias: y
     },
     conditions: [
       {
         alias: U,
-        match: y
+        match: A
       }
     ]
   }
-], F = [
+], H = [
   {
     name: "Dictionary Search Provider",
-    alias: p,
+    alias: y,
     type: "searchProvider",
-    api: () => import("./dictionary.search-provider-S2YJIQsO.js"),
+    api: () => import("./dictionary.search-provider-DjFWWJul.js"),
     weight: 600,
     meta: {
       label: "Dictionary"
@@ -293,8 +297,8 @@ const f = [
     type: "searchResultItem",
     forEntityTypes: [t]
   },
-  ...V
-], H = [
+  ...j
+], K = [
   {
     type: "entityAction",
     kind: "reloadTreeItemChildren",
@@ -302,18 +306,18 @@ const f = [
     name: "Reload Dictionary Tree Item Children Entity Action",
     forEntityTypes: [i, t]
   }
-], K = [
+], q = [
   {
     type: "repository",
     alias: o,
     name: "Dictionary Tree Repository",
-    api: () => import("./dictionary-tree.repository-QA-H50_c.js")
+    api: () => import("./dictionary-tree.repository-choXNVuM.js")
   },
   {
     type: "treeStore",
-    alias: S,
+    alias: C,
     name: "Dictionary Tree Store",
-    api: () => import("./paths-pWW_vsmu.js").then((A) => A.y)
+    api: () => import("./paths-BPzgB6U7.js").then((I) => I.A)
   },
   {
     type: "tree",
@@ -331,14 +335,14 @@ const f = [
     name: "Dictionary Tree Item",
     forEntityTypes: [i, t]
   },
-  ...H
-], j = [
+  ...K
+], G = [
   {
     type: "workspace",
     kind: "routable",
     alias: a,
     name: "Dictionary Workspace",
-    api: () => import("./dictionary-workspace.context-Cz8XzC-c.js"),
+    api: () => import("./dictionary-workspace.context-CivYXi8b.js"),
     meta: {
       entityType: t
     }
@@ -347,7 +351,7 @@ const f = [
     type: "workspaceView",
     alias: "Umb.WorkspaceView.Dictionary.Edit",
     name: "Dictionary Workspace Edit View",
-    element: () => import("./workspace-view-dictionary-editor.element-0I_payCh.js"),
+    element: () => import("./workspace-view-dictionary-editor.element-DgjLgYks.js"),
     weight: 100,
     meta: {
       label: "#general_edit",
@@ -367,7 +371,7 @@ const f = [
     alias: "Umb.WorkspaceAction.Dictionary.Save",
     name: "Save Dictionary Workspace Action",
     weight: 90,
-    api: b,
+    api: N,
     meta: {
       label: "#buttons_save",
       look: "primary",
@@ -380,17 +384,23 @@ const f = [
       }
     ]
   }
-], ot = [
-  ...L,
-  ...k,
-  ...w,
-  ...P,
-  ...x,
+], rt = [
+  ...B,
+  ...Y,
+  ...v,
+  ...$,
   ...F,
-  ...K,
-  ...j
+  ...H,
+  ...q,
+  ...G,
+  {
+    name: "Dictionary Backoffice Entry Point",
+    alias: "Umb.EntryPoint.Dictionary",
+    type: "backofficeEntryPoint",
+    js: () => import("./entry-point-C6IXp9Nd.js")
+  }
 ];
 export {
-  ot as manifests
+  rt as manifests
 };
 //# sourceMappingURL=manifests.js.map

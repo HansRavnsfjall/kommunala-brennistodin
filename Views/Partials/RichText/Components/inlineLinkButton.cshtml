@@ -1,0 +1,72 @@
+﻿@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<Umbraco.Cms.Core.Models.Blocks.RichTextBlockItem>
+
+@using System.Collections.Generic
+@using System.Linq
+@using Umbraco.Extensions
+@using Umbraco.Cms.Core.Models
+@using Umbraco.Cms.Core.Models.PublishedContent
+
+@{
+    // DEBUG: Make sure the view is being hit at all
+    // View source and search for "inlineLinkButton view reached"
+    <!-- inlineLinkButton view reached -->
+
+    var el = Model?.Content;
+    if (el is null)
+    {
+        <!-- inlineLinkButton: el is null -->
+        return;
+    }
+
+    Link? link = null;
+
+    // First, try as Multi URL Picker (IEnumerable<Link>)
+    try
+    {
+        var links = el.Value<IEnumerable<Link>>("knottur");
+        if (links != null)
+        {
+            <!-- inlineLinkButton: links count = @(links.Count()) -->
+            link = links.FirstOrDefault(l => l != null && !string.IsNullOrWhiteSpace(l.Url));
+        }
+    }
+    catch
+    {
+        <!-- inlineLinkButton: Multi URL Picker read failed -->
+    }
+
+    // If still no link, try as single URL Picker
+    if (link == null)
+    {
+        try
+        {
+            var single = el.Value<Link>("knottur");
+            if (single != null && !string.IsNullOrWhiteSpace(single.Url))
+            {
+                <!-- inlineLinkButton: single URL Picker used -->
+                link = single;
+            }
+        }
+        catch
+        {
+            <!-- inlineLinkButton: single URL Picker read failed -->
+        }
+    }
+
+    if (link == null || string.IsNullOrWhiteSpace(link.Url))
+    {
+        <!-- inlineLinkButton: no valid link found for property 'knottur' -->
+        return;
+    }
+
+    var linkText = !string.IsNullOrWhiteSpace(link.Name) ? link.Name : link.Url;
+}
+
+<div class="inline-button">
+    <a href="@link.Url"
+       target="@link.Target"
+       rel="@(link.Target == "_blank" ? "noopener noreferrer" : null)"
+       class="btn btn-primary">
+        @linkText
+    </a>
+</div>

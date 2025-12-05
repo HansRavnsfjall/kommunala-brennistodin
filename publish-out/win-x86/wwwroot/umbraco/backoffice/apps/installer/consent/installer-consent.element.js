@@ -7,7 +7,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 import { UMB_INSTALLER_CONTEXT } from '../installer.context.js';
 import { css, html, customElement, state, unsafeHTML } from '@umbraco-cms/backoffice/external/lit';
 import { TelemetryLevelModel } from '@umbraco-cms/backoffice/external/backend-api';
-import { UmbLitElement } from '@umbraco-cms/backoffice/lit-element';
+import { umbFocus, UmbLitElement } from '@umbraco-cms/backoffice/lit-element';
 let UmbInstallerConsentElement = class UmbInstallerConsentElement extends UmbLitElement {
     constructor() {
         super();
@@ -38,7 +38,8 @@ let UmbInstallerConsentElement = class UmbInstallerConsentElement extends UmbLit
         value[target.name] = this._telemetryLevels[parseInt(target.value) - 1].level ?? TelemetryLevelModel.DETAILED;
         this._installerContext?.appendData(value);
     }
-    _onNext() {
+    _onNext(evt) {
+        evt.preventDefault();
         this._installerContext?.nextStep();
     }
     _onBack() {
@@ -55,6 +56,7 @@ let UmbInstallerConsentElement = class UmbInstallerConsentElement extends UmbLit
             return;
         return html `
 			<uui-slider
+				${umbFocus()}
 				@input=${this._handleChange}
 				name="telemetryLevel"
 				label="telemetry-level"
@@ -70,11 +72,15 @@ let UmbInstallerConsentElement = class UmbInstallerConsentElement extends UmbLit
         return html `
 			<div id="container" class="uui-text" data-test="installer-telemetry">
 				<h1>Consent for telemetry data</h1>
-				${this._renderSlider()}
-				<div id="buttons">
-					<uui-button label="Back" @click=${this._onBack} look="secondary"></uui-button>
-					<uui-button id="button-install" @click=${this._onNext} label="Next" look="primary"></uui-button>
-				</div>
+				<uui-form>
+					<form id="consent-form" name="consent" @submit=${this._onNext}>
+						${this._renderSlider()}
+						<div id="buttons">
+							<uui-button label="Back" @click=${this._onBack} look="secondary"></uui-button>
+							<uui-button id="button-install" type="submit" label="Next" look="primary"></uui-button>
+						</div>
+					</form>
+				</uui-form>
 			</div>
 		`;
     }

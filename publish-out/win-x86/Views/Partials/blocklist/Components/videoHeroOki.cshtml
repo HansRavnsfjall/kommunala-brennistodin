@@ -1,0 +1,270 @@
+﻿@using System
+@using System.Linq
+@using System.Globalization
+@using Umbraco.Cms.Core.Models
+@using Umbraco.Cms.Core.Models.Blocks
+@using Umbraco.Cms.Core.Models.PublishedContent
+@using Umbraco.Cms.Core.Strings
+@using Umbraco.Extensions
+@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<BlockListItem>
+
+@{
+    var culture = CultureInfo.CurrentUICulture?.Name;
+
+    var content = Model.Content;
+    if (content == null) { return; }
+
+    // Text content
+    var preHeading  = content.Value<string>("temayvrskrift", culture: culture, fallback: Fallback.ToLanguage);
+    var heading     = content.Value<string>("yvirskrift",    culture: culture, fallback: Fallback.ToLanguage);
+    var body        = content.Value<IHtmlEncodedString>("inngangstekstur", culture: culture, fallback: Fallback.ToLanguage);
+
+    // Poster / fallback image
+    var poster      = content.Value<MediaWithCrops>("mynd", culture: culture, fallback: Fallback.ToLanguage);
+    string? posterUrl = null;
+
+    if (poster != null)
+    {
+        posterUrl = poster.GetCropUrl(
+            width: 2000,
+            quality: 85,
+            furtherOptions: "&format=webp&upscale=false"
+        );
+    }
+
+    // Vimeo link from editor
+    var vimeoUrlRaw = content.Value<string>("vimeoLeinki", culture: culture, fallback: Fallback.ToLanguage);
+    var vimeoUrl    = vimeoUrlRaw?.Trim();
+
+    string? vimeoId = null;
+    string? vimeoEmbedUrl = null;
+    string? vimeoHash = null;
+
+    if (!string.IsNullOrWhiteSpace(vimeoUrl))
+    {
+        try
+        {
+            // Parse URL safely
+            var uri = new Uri(vimeoUrl);
+
+            // /1129100418/586cafd983 -> [ "1129100418", "586cafd983" ]
+            var segments = uri.AbsolutePath
+                .Trim('/')
+                .Split('/', StringSplitOptions.RemoveEmptyEntries);
+
+            // For unlisted/private videos with hash
+            if (segments.Length >= 2)
+            {
+                vimeoId = segments[0];
+                vimeoHash = segments[1];
+            }
+            else if (segments.Length == 1)
+            {
+                vimeoId = segments[0];
+            }
+
+            if (!string.IsNullOrWhiteSpace(vimeoId))
+            {
+                // Build embed URL - try without background parameter first for unlisted videos
+                vimeoEmbedUrl = $"https://player.vimeo.com/video/{vimeoId}";
+                
+                if (!string.IsNullOrWhiteSpace(vimeoHash))
+                {
+                    // Add hash for unlisted videos
+                    vimeoEmbedUrl += $"?h={vimeoHash}";
+                    vimeoEmbedUrl += "&autoplay=1&muted=1&loop=1&autopause=0&byline=0&title=0&portrait=0";
+                }
+                else
+                {
+                    // Public video - can use background mode
+                    vimeoEmbedUrl += "?background=1&autoplay=1&muted=1&loop=1&byline=0&title=0&portrait=0";
+                }
+            }
+        }
+        catch
+        {
+            // Ignore bad URLs; we'll just fall back to poster image
+            vimeoId = null;
+            vimeoEmbedUrl = null;
+        }
+    }
+
+    var heroClasses     = "hero position-relative overflow-hidden";
+    var heroWrapClasses = "hero-wrap position-relative d-flex align-items-center";
+}
+
+<style>
+    .hero-video-wrapper {
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        overflow: hidden;
+        z-index: 1;
+        opacity: 0; /* start hidden */
+        transition: opacity 0.8s ease-in;
+    }
+
+    .hero-video-wrapper.is-loading {
+        opacity: 0;
+    }
+
+    .hero-video-wrapper.is-ready {
+        opacity: 1;
+    }
+
+    .hero-video-wrapper iframe {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        width: 100vw;
+        height: 56.25vw; /* 16:9 aspect ratio */
+        min-height: 100vh;
+        min-width: 177.77vh; /* 16:9 aspect ratio */
+        transform: translate(-50%, -50%);
+        border: 0;
+    }
+
+    .hero-fallback-img {
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        background-size: cover;
+        background-position: center;
+        z-index: 0;
+    }
+
+    .hero-loading-spinner {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        z-index: 2;
+        opacity: 1;
+        transition: opacity 0.5s ease-out;
+    }
+
+    .hero-loading-spinner.hidden {
+        opacity: 0;
+        pointer-events: none;
+    }
+
+    .spinner {
+        border: 4px solid rgba(255, 255, 255, 0.3);
+        border-top: 4px solid #fff;
+        border-radius: 50%;
+        width: 50px;
+        height: 50px;
+        animation: spin 1s linear infinite;
+    }
+
+    @@keyframes spin {
+        0% { transform: rotate(0deg); }
+        100% { transform: rotate(360deg); }
+    }
+
+    .hero-wrap {
+        position: relative;
+        z-index: 2;
+    }
+</style>
+
+<section class="@heroClasses" style="min-height:80vh">
+    <div class="hero-img position-absolute top-0 start-0 w-100 h-100">
+        @* Vimeo background if we have a valid ID *@
+        @if (!string.IsNullOrWhiteSpace(vimeoEmbedUrl))
+        {
+            @* Poster image - always shown first (from Umbraco media field) *@
+            if (!string.IsNullOrWhiteSpace(posterUrl))
+            {
+                <div class="hero-fallback-img" style="background-image:url('@posterUrl');"></div>
+            }
+
+            @* Loading spinner *@
+            <div class="hero-loading-spinner" id="heroLoadingSpinner">
+                <div class="spinner"></div>
+            </div>
+
+            <div class="hero-video-wrapper" id="heroVideoWrapper">
+                <iframe
+                    id="heroVideoIframe"
+                    data-src="@vimeoEmbedUrl"
+                    allow="autoplay; fullscreen; picture-in-picture"
+                    allowfullscreen
+                    loading="lazy">
+                </iframe>
+            </div>
+
+           <script>
+    (function () {
+        var iframe  = document.getElementById('heroVideoIframe');
+        var wrapper = document.getElementById('heroVideoWrapper');
+        var spinner = document.getElementById('heroLoadingSpinner');
+
+        if (!iframe || !wrapper) return;
+
+        function startLoad() {
+            if (iframe.dataset.src && !iframe.src) {
+                iframe.src = iframe.dataset.src;
+            }
+            wrapper.classList.add('is-loading');
+        }
+
+        function showVideo() {
+            wrapper.classList.remove('is-loading');
+            wrapper.classList.add('is-ready');
+            if (spinner) {
+                spinner.classList.add('hidden');
+            }
+        }
+
+        // Load the background video after the whole page is loaded
+        // on ALL screen sizes (desktop + mobile)
+        window.addEventListener('load', function () {
+            // Optional: respect "data saver" mode if you want
+            var connection = navigator.connection || navigator.mozConnection || navigator.webkitConnection;
+            var saveData = connection && connection.saveData;
+
+            if (!saveData) {
+                startLoad();
+            } else {
+                // User is on data saver: don't load video, just hide spinner
+                if (spinner) spinner.classList.add('hidden');
+            }
+        });
+
+        // When Vimeo iframe reports load, fade it in
+        iframe.addEventListener('load', function () {
+            showVideo();
+        });
+    })();
+</script>
+
+        }
+        else if (!string.IsNullOrWhiteSpace(posterUrl))
+        {
+            @* No valid Vimeo URL -> just show image *@
+            <div class="hero-fallback-img" style="background-image:url('@posterUrl');"></div>
+        }
+    </div>
+
+    <div class="@heroWrapClasses">
+        <div class="container py-5">
+            @if (!string.IsNullOrWhiteSpace(preHeading))
+            {
+                <span class="badge-yellow d-inline-block mb-2">@preHeading</span>
+            }
+
+            @if (!string.IsNullOrWhiteSpace(heading))
+            {
+                <h1 class="lh-tight display-4 fw-bold">@heading</h1>
+            }
+
+            @if (body != null && !string.IsNullOrWhiteSpace(body.ToString()))
+            {
+                <div class="lead mb-0">@body</div>
+            }
+        </div>
+    </div>
+</section>

@@ -1,1 +1,6 @@
-import{a as s,e}from"./index-Bitfnghs.js";export{s as monaco,e as styles};
+import { a as s, e } from "./index-CVakL7U_.js";
+export {
+  s as monaco,
+  e as styles
+};
+//# sourceMappingURL=index.js.map

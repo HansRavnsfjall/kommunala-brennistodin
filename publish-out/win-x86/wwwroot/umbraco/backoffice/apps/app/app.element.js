@@ -18,9 +18,10 @@ import { UmbContextDebugController } from '@umbraco-cms/backoffice/debug';
 import { UmbBundleExtensionInitializer, UmbServerExtensionRegistrator } from '@umbraco-cms/backoffice/extension-api';
 import { UmbAppEntryPointExtensionInitializer, umbExtensionsRegistry, } from '@umbraco-cms/backoffice/extension-registry';
 import { filter, first, firstValueFrom } from '@umbraco-cms/backoffice/external/rxjs';
-import { hasOwnOpener, retrieveStoredPath } from '@umbraco-cms/backoffice/utils';
+import { hasOwnOpener, redirectToStoredPath } from '@umbraco-cms/backoffice/utils';
 import { UmbApiInterceptorController } from '@umbraco-cms/backoffice/resources';
 import { umbHttpClient } from '@umbraco-cms/backoffice/http-client';
+import { UmbViewContext } from '@umbraco-cms/backoffice/view';
 import './app-logo.element.js';
 import './app-oauth.element.js';
 let UmbAppElement = class UmbAppElement extends UmbLitElement {
@@ -57,7 +58,7 @@ let UmbAppElement = class UmbAppElement extends UmbLitElement {
             {
                 path: 'oauth_complete',
                 component: () => import('./app-oauth.element.js'),
-                setup: (component) => {
+                setup: async (component) => {
                     if (!this.#authContext) {
                         component.failure = true;
                         console.error('[Fatal] Auth context is not available');
@@ -70,25 +71,35 @@ let UmbAppElement = class UmbAppElement extends UmbLitElement {
                         console.error('[Fatal] No code in query parameters');
                         return;
                     }
-                    // If we are in the main window (i.e. no opener), we should redirect to the root after the authorization request is completed.
-                    // The authorization request will be completed in the active window (main or popup) and the authorization signal will be sent.
-                    // If we are in a popup window, the storage event in UmbAuthContext will catch the signal and close the window.
-                    // If we are in the main window, the signal will be caught right here and the user will be redirected to the root.
-                    if (!hasOwnOpener(this.backofficePath)) {
-                        this.observe(this.#authContext.authorizationSignal, () => {
-                            // Redirect to the saved state or root
-                            const url = retrieveStoredPath();
-                            const isBackofficePath = url?.pathname.startsWith(this.backofficePath) ?? true;
-                            if (isBackofficePath) {
-                                history.replaceState(null, '', url?.toString() ?? '');
-                            }
-                            else {
-                                window.location.href = url?.toString() ?? this.backofficePath;
-                            }
-                        });
+                    // Check that we are not already authorized
+                    if (this.#authContext.getIsAuthorized()) {
+                        redirectToStoredPath(this.backofficePath, true);
+                        return;
                     }
                     // Complete the authorization request, which will send the authorization signal
-                    this.#authContext.completeAuthorizationRequest().catch(() => undefined);
+                    try {
+                        const result = await this.#authContext.completeAuthorizationRequest();
+                        if (result === null) {
+                            // If the result is null, it could mean that no new token was required, so we can redirect the user
+                            // This could happen if the user is already authorized or accidentally enters the oauth_complete url
+                            redirectToStoredPath(this.backofficePath, true);
+                            return;
+                        }
+                        // If we are in the main window (i.e. no opener), we should redirect to the root after the authorization request is completed.
+                        // The authorization request will be completed in the active window (main or popup) and the authorization signal will be sent.
+                        // If we are in a popup window, the storage event in UmbAuthContext will catch the signal and close the window.
+                        // If we are in the main window, the signal will be caught right here and the user will be redirected to their previous path (or root).
+                        if (hasOwnOpener(this.backofficePath))
+                            return;
+                        // Listen for the first authorization signal after the initial authorization request
+                        await firstValueFrom(this.#authContext.authorizationSignal);
+                        // When it hits, we should redirect the user to the backoffice
+                        redirectToStoredPath(this.backofficePath);
+                    }
+                    catch {
+                        component.failure = true;
+                        console.error('[Fatal] Authorization request failed');
+                    }
                 },
             },
             {
@@ -127,6 +138,7 @@ let UmbAppElement = class UmbAppElement extends UmbLitElement {
         new UUIIconRegistryEssential().attach(this);
         new UmbContextDebugController(this);
         new UmbNetworkConnectionStatusManager(this);
+        new UmbViewContext(this, null);
     }
     connectedCallback() {
         super.connectedCallback();

@@ -1,7 +1,7 @@
 import { U as F, a as G, b as H } from "../constants-D8nfzuQw.js";
 import { U as k } from "../external-login-modal.token-BIuwBNJv.js";
 import { U as Y } from "../current-user-history.store.token-C66NWwR2.js";
-import { U as q } from "../current-user-modal.token-AO0ePjaF.js";
+import { U as q } from "../current-user-modal.token-If722qVy.js";
 import { U as K } from "../current-user-mfa-modal.token-DXwGMNEd.js";
 import { a as Z, U as j } from "../current-user-mfa-enable-modal.token-Daw2B3OI.js";
 import { U as l } from "../current-user.context.token-BnYpMzWI.js";
@@ -10,7 +10,7 @@ import { state as S, property as T, customElement as v, ifDefined as f, nothing 
 import { UmbLitElement as A } from "@umbraco-cms/backoffice/lit-element";
 import { UmbActionExecutedEvent as M } from "@umbraco-cms/backoffice/event";
 import { U as et } from "../mfa-provider-default.element-BajRhbvE.js";
-import { UmbCurrentUserContext as ot } from "../current-user.context-CCTKdW5o.js";
+import { UmbCurrentUserContext as ot } from "../current-user.context-C_RaIxUa.js";
 import { UmbCurrentUserHistoryStore as at } from "../current-user-history.store-Ca48wRgT.js";
 import { U as it } from "../current-user.store.token-N-3TWEFa.js";
 import { UmbCurrentUserRepository as Ut } from "../current-user.repository-CzsCrtUS.js";

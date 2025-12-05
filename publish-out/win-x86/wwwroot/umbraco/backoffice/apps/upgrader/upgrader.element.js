@@ -16,62 +16,63 @@ import './upgrader-view.element.js';
 let UmbUpgraderElement = class UmbUpgraderElement extends UmbLitElement {
     constructor() {
         super();
-        this.fetching = true;
-        this.upgrading = false;
-        this.errorMessage = '';
-        this._handleSubmit = async (e) => {
+        this._fetching = true;
+        this._upgrading = false;
+        this._errorMessage = '';
+        this.#handleSubmit = async (e) => {
             e.stopPropagation();
-            this.errorMessage = '';
-            this.upgrading = true;
+            this._errorMessage = '';
+            this._upgrading = true;
             const { error } = await tryExecute(this, UpgradeService.postUpgradeAuthorize());
             if (error) {
-                this.errorMessage = UmbApiError.isUmbApiError(error)
+                this._errorMessage = UmbApiError.isUmbApiError(error)
                     ? (error.problemDetails.detail ?? 'Unknown error, please try again')
                     : (error.message ?? 'Unknown error, please try again');
             }
             else {
                 history.pushState(null, '', 'section/content');
             }
-            this.upgrading = false;
+            this._upgrading = false;
         };
         this._setup();
     }
     render() {
         return html `<umb-installer-layout data-test="upgrader">
 			<umb-upgrader-view
-				.fetching=${this.fetching}
-				.upgrading=${this.upgrading}
-				.settings=${this.upgradeSettings}
-				.errorMessage=${this.errorMessage}
-				@onAuthorizeUpgrade=${this._handleSubmit}></umb-upgrader-view>
+				.fetching=${this._fetching}
+				.upgrading=${this._upgrading}
+				.settings=${this._upgradeSettings}
+				.errorMessage=${this._errorMessage}
+				@onAuthorizeUpgrade=${this.#handleSubmit}></umb-upgrader-view>
 		</umb-installer-layout>`;
     }
     async _setup() {
-        this.fetching = true;
+        this._fetching = true;
         const { data, error } = await tryExecute(this, UpgradeService.getUpgradeSettings(), { disableNotifications: true });
         if (data) {
-            this.upgradeSettings = data;
+            this._upgradeSettings = data;
         }
         else if (error) {
-            this.errorMessage = UmbApiError.isUmbApiError(error)
+            this._errorMessage = UmbApiError.isUmbApiError(error)
                 ? (error.problemDetails.detail ?? 'Unknown error, please try again')
                 : error.message;
         }
-        this.fetching = false;
+        this._fetching = false;
     }
+    #handleSubmit;
 };
 __decorate([
     state()
-], UmbUpgraderElement.prototype, "upgradeSettings", void 0);
+], UmbUpgraderElement.prototype, "_upgradeSettings", void 0);
 __decorate([
     state()
-], UmbUpgraderElement.prototype, "fetching", void 0);
+], UmbUpgraderElement.prototype, "_fetching", void 0);
 __decorate([
     state()
-], UmbUpgraderElement.prototype, "upgrading", void 0);
+], UmbUpgraderElement.prototype, "_upgrading", void 0);
 __decorate([
     state()
-], UmbUpgraderElement.prototype, "errorMessage", void 0);
+], UmbUpgraderElement.prototype, "_errorMessage", void 0);
 UmbUpgraderElement = __decorate([
     customElement('umb-upgrader')
 ], UmbUpgraderElement);

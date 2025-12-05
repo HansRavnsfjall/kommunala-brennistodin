@@ -1,11 +1,11 @@
-import { U as a, a as i } from "./constants-CH_iDk6H.js";
-import { UMB_SECTION_USER_PERMISSION_CONDITION_ALIAS as t } from "@umbraco-cms/backoffice/section";
-const n = [
+import { U as t, a as i } from "./constants-CH_iDk6H.js";
+import { UMB_SECTION_USER_PERMISSION_CONDITION_ALIAS as s, UMB_SECTION_ALIAS_CONDITION_ALIAS as a } from "@umbraco-cms/backoffice/section";
+const c = [
   {
     type: "repository",
-    alias: a,
+    alias: t,
     name: "Package Repository",
-    api: () => import("./package.repository-DyWS8t6-.js")
+    api: () => import("./package.repository-Cg-nPSQY.js")
   },
   {
     type: "store",
@@ -13,17 +13,17 @@ const n = [
     name: "Package Store",
     api: () => import("./package.store-BoQ5HfpI.js")
   }
-], s = [
+], n = [
   {
     type: "workspace",
     alias: "Umb.Workspace.PackageBuilder",
     name: "Package Builder Workspace",
-    element: () => import("./workspace-package-builder.element-CvmzvjzB.js"),
+    element: () => import("./workspace-package-builder.element-DqEOz4Kj.js"),
     meta: {
       entityType: "package-builder"
     }
   }
-], c = [
+], o = [
   {
     type: "workspace",
     alias: "Umb.Workspace.Package",
@@ -33,7 +33,7 @@ const n = [
       entityType: "package"
     }
   }
-], e = "Umb.Section.Packages", o = [
+], e = "Umb.Section.Packages", m = [
   {
     type: "section",
     alias: e,
@@ -45,7 +45,7 @@ const n = [
     },
     conditions: [
       {
-        alias: t,
+        alias: s,
         match: e
       }
     ]
@@ -63,7 +63,7 @@ const n = [
     },
     conditions: [
       {
-        alias: "Umb.Condition.SectionAlias",
+        alias: a,
         match: e
       }
     ]
@@ -72,7 +72,7 @@ const n = [
     type: "sectionView",
     alias: "Umb.SectionView.Packages.Installed",
     name: "Installed Packages Section View",
-    element: () => import("./installed-packages-section-view.element-BrbjdLzX.js"),
+    element: () => import("./installed-packages-section-view.element-DomcSLwv.js"),
     weight: 200,
     meta: {
       label: "#packager_installed",
@@ -81,7 +81,7 @@ const n = [
     },
     conditions: [
       {
-        alias: "Umb.Condition.SectionAlias",
+        alias: a,
         match: e
       }
     ]
@@ -90,7 +90,7 @@ const n = [
     type: "sectionView",
     alias: "Umb.SectionView.Packages.Builder",
     name: "Packages Builder Section View",
-    element: () => import("./created-packages-section-view.element-B98yWbSC.js"),
+    element: () => import("./created-packages-section-view.element-BCOXOtxs.js"),
     weight: 100,
     meta: {
       label: "#packager_created",
@@ -99,18 +99,18 @@ const n = [
     },
     conditions: [
       {
-        alias: "Umb.Condition.SectionAlias",
+        alias: a,
         match: e
       }
     ]
   }
-], p = [
-  ...n,
-  ...s,
+], r = [
   ...c,
-  ...o
+  ...n,
+  ...o,
+  ...m
 ];
 export {
-  p as manifests
+  r as manifests
 };
 //# sourceMappingURL=manifests.js.map

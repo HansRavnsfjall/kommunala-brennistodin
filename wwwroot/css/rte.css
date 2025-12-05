@@ -1,0 +1,104 @@
+/* /wwwroot/css/rte.css */
+/* Load your font (all weights) */
+@font-face {
+  font-family: 'Alexandria';
+  font-style: normal;
+  font-weight: 100;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/alexandria/v6/UMBCrPdDqW66y0Y2usFeQCH18mulUxBvI9r7T6bH.ttf) format('truetype');
+}
+@font-face {
+  font-family: 'Alexandria';
+  font-style: normal;
+  font-weight: 200;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/alexandria/v6/UMBCrPdDqW66y0Y2usFeQCH18mulUxBvI9p7TqbH.ttf) format('truetype');
+}
+@font-face {
+  font-family: 'Alexandria';
+  font-style: normal;
+  font-weight: 300;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/alexandria/v6/UMBCrPdDqW66y0Y2usFeQCH18mulUxBvI9qlTqbH.ttf) format('truetype');
+}
+@font-face {
+  font-family: 'Alexandria';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/alexandria/v6/UMBCrPdDqW66y0Y2usFeQCH18mulUxBvI9r7TqbH.ttf) format('truetype');
+}
+@font-face {
+  font-family: 'Alexandria';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/alexandria/v6/UMBCrPdDqW66y0Y2usFeQCH18mulUxBvI9rJTqbH.ttf) format('truetype');
+}
+@font-face {
+  font-family: 'Alexandria';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/alexandria/v6/UMBCrPdDqW66y0Y2usFeQCH18mulUxBvI9olSabH.ttf) format('truetype');
+}
+@font-face {
+  font-family: 'Alexandria';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/alexandria/v6/UMBCrPdDqW66y0Y2usFeQCH18mulUxBvI9ocSabH.ttf) format('truetype');
+}
+@font-face {
+  font-family: 'Alexandria';
+  font-style: normal;
+  font-weight: 800;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/alexandria/v6/UMBCrPdDqW66y0Y2usFeQCH18mulUxBvI9p7SabH.ttf) format('truetype');
+}
+@font-face {
+  font-family: 'Alexandria';
+  font-style: normal;
+  font-weight: 900;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/alexandria/v6/UMBCrPdDqW66y0Y2usFeQCH18mulUxBvI9pSSabH.ttf) format('truetype');
+}
+/* Target the Tiptap editor in backoffice */
+umb-property-editor-ui-tiptap .ProseMirror {
+  font-family: "Alexandria", system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+  font-size: 16px;
+  line-height: 1.7;
+  color: #222;
+  padding: 1rem 0;
+  /* visual comfort while editing */
+}
+/* Headings inside the editor */
+umb-property-editor-ui-tiptap .ProseMirror h1,
+umb-property-editor-ui-tiptap .ProseMirror h2,
+umb-property-editor-ui-tiptap .ProseMirror h3,
+umb-property-editor-ui-tiptap .ProseMirror h4,
+umb-property-editor-ui-tiptap .ProseMirror h5,
+umb-property-editor-ui-tiptap .ProseMirror h6 {
+  font-family: "Alexandria", sans-serif;
+  font-weight: 700;
+  line-height: 1.3;
+  margin: 1.2em 0 0.5em;
+}
+/* Paragraphs, links, lists, quotes */
+umb-property-editor-ui-tiptap .ProseMirror p {
+  margin: 0 0 1em;
+}
+umb-property-editor-ui-tiptap .ProseMirror a {
+  text-decoration: underline;
+}
+umb-property-editor-ui-tiptap .ProseMirror ul,
+umb-property-editor-ui-tiptap .ProseMirror ol {
+  padding-left: 1.5em;
+  margin: 0 0 1em;
+}
+umb-property-editor-ui-tiptap .ProseMirror blockquote {
+  border-left: 4px solid #ccc;
+  padding-left: 1em;
+  color: #555;
+  font-style: italic;
+}

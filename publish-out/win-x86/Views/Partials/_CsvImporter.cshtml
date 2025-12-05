@@ -1,0 +1,85 @@
+<!-- CSV Importer for luturSkiljing -->
+<div class="container my-4">
+  <h3>Import CSV → <code>luturSkiljing</code></h3>
+
+  <form id="csvImportForm" enctype="multipart/form-data">
+    <div class="mb-3">
+      <label for="csvFile" class="form-label">Choose CSV (UTF-8, comma separated)</label>
+      <input class="form-control" type="file" id="csvFile" name="file" accept=".csv" required>
+    </div>
+
+    <div class="d-flex gap-2">
+      <button type="submit" class="btn btn-primary" id="btnImport">Import</button>
+      <button type="button" class="btn btn-outline-secondary" id="btnSample">Download header sample</button>
+    </div>
+  </form>
+
+  <div id="importStatus" class="mt-3" style="display:none;">
+    <div id="importAlert" class="alert" role="alert"></div>
+    <pre id="importResult" class="p-2 bg-light border rounded" style="max-height: 400px; overflow:auto;"></pre>
+  </div>
+</div>
+
+<script>
+(function () {
+  const form = document.getElementById('csvImportForm');
+  const btnImport = document.getElementById('btnImport');
+  const btnSample = document.getElementById('btnSample');
+  const statusBox = document.getElementById('importStatus');
+  const alertBox = document.getElementById('importAlert');
+  const resultPre = document.getElementById('importResult');
+
+  // Provide a downloadable header template
+  btnSample.addEventListener('click', () => {
+    const csv = "parent,name,searchwords,WhereTo,Notice,WhatHappens\n";
+    const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url; a.download = 'import-template.csv';
+    a.click();
+    URL.revokeObjectURL(url);
+  });
+
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const fileInput = document.getElementById('csvFile');
+    if (!fileInput.files.length) return;
+
+    const formData = new FormData();
+    formData.append('file', fileInput.files[0]); // name must be "file"
+
+    btnImport.disabled = true;
+    btnImport.textContent = 'Importing…';
+    statusBox.style.display = 'none';
+
+    try {
+      const res = await fetch('/umbraco/api/import/luturSkiljing', {
+        method: 'POST',
+        body: formData
+      });
+
+      const text = await res.text();
+      let json;
+      try { json = JSON.parse(text); } catch { json = { raw: text }; }
+
+      statusBox.style.display = 'block';
+      if (res.ok) {
+        alertBox.className = 'alert alert-success';
+        alertBox.textContent = 'Import complete.';
+      } else {
+        alertBox.className = 'alert alert-danger';
+        alertBox.textContent = `Import failed (HTTP ${res.status}).`;
+      }
+      resultPre.textContent = JSON.stringify(json, null, 2);
+    } catch (err) {
+      statusBox.style.display = 'block';
+      alertBox.className = 'alert alert-danger';
+      alertBox.textContent = 'Network or server error during import.';
+      resultPre.textContent = String(err);
+    } finally {
+      btnImport.disabled = false;
+      btnImport.textContent = 'Import';
+    }
+  });
+})();
+</script>

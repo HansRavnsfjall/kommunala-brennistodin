@@ -1,5 +1,7 @@
-import { UmbBooleanState, UmbStringState } from '@umbraco-cms/backoffice/observable-api';
+import { tryExecute } from '@umbraco-cms/backoffice/resources';
 import { umbConfirmModal } from '@umbraco-cms/backoffice/modal';
+import { DocumentService } from '@umbraco-cms/backoffice/external/backend-api';
+import { UmbBooleanState, UmbStringState } from '@umbraco-cms/backoffice/observable-api';
 import { UmbContextBase } from '@umbraco-cms/backoffice/class-api';
 import { UmbContextToken } from '@umbraco-cms/backoffice/context-api';
 import { UmbDocumentPreviewRepository } from '@umbraco-cms/backoffice/document';
@@ -59,6 +61,18 @@ export class UmbPreviewContext extends UmbContextBase {
                 }
             }
         });
+    }
+    async #getPublishedUrl() {
+        if (!this.#unique)
+            return null;
+        // NOTE: We should be reusing `UmbDocumentUrlRepository` here, but the preview app doesn't register the `itemStore` extensions, so can't resolve/consume `UMB_DOCUMENT_URL_STORE_CONTEXT`. [LK]
+        const { data } = await tryExecute(this, DocumentService.getDocumentUrls({ query: { id: [this.#unique] } }));
+        if (!data?.length)
+            return null;
+        const urlInfo = this.#culture ? data[0].urlInfos.find((x) => x.culture === this.#culture) : data[0].urlInfos[0];
+        if (!urlInfo?.url)
+            return null;
+        return urlInfo.url.startsWith('/') ? `${this.#serverUrl}${urlInfo.url}` : urlInfo.url;
     }
     #getSessionCount() {
         return Math.max(Number(localStorage.getItem(UMB_LOCALSTORAGE_SESSION_KEY)), 0) || 0;
@@ -128,7 +142,10 @@ export class UmbPreviewContext extends UmbContextBase {
             this.#webSocket.close();
             this.#webSocket = undefined;
         }
-        const url = this.#previewUrl.getValue();
+        let url = await this.#getPublishedUrl();
+        if (!url) {
+            url = this.#previewUrl.getValue();
+        }
         window.location.replace(url);
     }
     async exitSession() {
@@ -145,8 +162,11 @@ export class UmbPreviewContext extends UmbContextBase {
     getIFrameWrapper() {
         return this.getHostElement().shadowRoot?.querySelector('#wrapper');
     }
-    openWebsite() {
-        const url = this.#previewUrl.getValue();
+    async openWebsite() {
+        let url = await this.#getPublishedUrl();
+        if (!url) {
+            url = this.#previewUrl.getValue();
+        }
         window.open(url, '_blank');
     }
     reloadIFrame(iframe) {

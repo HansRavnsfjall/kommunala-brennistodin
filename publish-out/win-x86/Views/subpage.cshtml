@@ -3,31 +3,20 @@
 @using Umbraco.Cms.Core.Models.Blocks
 @using Umbraco.Cms.Core.Models.PublishedContent
 @using Kob.ViewModels
-
 @{
     Layout = "master.cshtml";
     ViewBag.Title = Model?.Name;
 }
 
 @{
-    var culture = CultureInfo.CurrentUICulture?.Name; // e.g. "fo-FO"
-
-    // 1) Try language fallback on this page
+    var culture = CultureInfo.CurrentUICulture?.Name;
+    
+    // Only take local value; no inheritance - NO FALLBACK
     var blocks = Model.Value<BlockListModel>(
         "modul",
         culture: culture,
-        fallback: Fallback.ToLanguage
+        fallback: Fallback.ToDefaultValue
     );
-
-    // 2) If still empty, try ancestors (manual cascade)
-    if (blocks == null || !blocks.Any())
-    {
-        blocks = Model.Value<BlockListModel>(
-            "modul",
-            culture: culture,
-            fallback: Fallback.ToAncestors
-        );
-    }
 }
 
 @if (blocks != null && blocks.Any())
@@ -38,33 +27,7 @@
         {
             Blocks = blocks,
             Scope = Model.ContentType.Alias,
-            FallbackView = "~/Views/Partials/blocklist/_Default.cshtml"
+            FallbackView = "~/Views/Partials/BlockList/Default.cshtml"
         }
     )
 }
-else
-{
-    <div class="alert alert-warning">
-        No blocks in <code>modul</code> for culture <strong>@culture</strong>.
-    </div>
-}
-
-<!-- ===== Theme block (your static section, unchanged) ===== -->
-<section class="py-4 py-lg-5">
-  <div class="container">
-    <div class="theme-wrap row g-0">
-      <div class="col-md-6 theme-img">
-        <img src="/images/batteries.webp" alt="" />
-      </div>
-      <div class="col-md-6 theme-panel">
-        <small>TEMA</small>
-        <h3>Snildar loysnir til at skilja heima</h3>
-        <p class="fw-700 text-muted-600">
-          Tað kann vera ein avbjóðing at skilja og goyma burturkast heima.
-          Her á síðuni kanst tú lesa um snildar loysnir, sum onnur hava brúkt.
-        </p>
-        <a class="link-more" href="#">Les meira <svg class="arr" viewBox="0 0 24 24"><path d="M5 12h14M13 5l7 7-7 7"/></svg></a>
-      </div>
-    </div>
-  </div>
-</section>

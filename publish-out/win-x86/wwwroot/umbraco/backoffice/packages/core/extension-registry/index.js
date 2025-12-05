@@ -1,9 +1,10 @@
 import { a as M, U as B } from "../switch.condition-BRc-UvRa.js";
-import { UmbExtensionInitializerBase as p, loadManifestPlainJs as h, hasInitExport as c, hasOnUnloadExport as u, createExtensionApi as x, UmbExtensionElementAndApiInitializer as y } from "@umbraco-cms/backoffice/extension-api";
-import { u as d } from "../registry-COJCa03J.js";
-import { property as f, state as m } from "@umbraco-cms/backoffice/external/lit";
-import { UmbLitElement as E } from "@umbraco-cms/backoffice/lit-element";
-class P extends p {
+import { UmbExtensionInitializerBase as p, loadManifestPlainJs as h, hasInitExport as c, hasOnUnloadExport as m, createExtensionApi as x, UmbExtensionElementAndApiInitializer as E } from "@umbraco-cms/backoffice/extension-api";
+import { u as f } from "../ref-manifest.element-U7BEJu6e.js";
+import { U as z, a as S, b as D } from "../ref-manifest.element-U7BEJu6e.js";
+import { property as u, state as d } from "@umbraco-cms/backoffice/external/lit";
+import { UmbLitElement as y } from "@umbraco-cms/backoffice/lit-element";
+class _ extends p {
   #t = /* @__PURE__ */ new Map();
   constructor(t, e) {
     super(t, e, "appEntryPoint");
@@ -17,10 +18,10 @@ class P extends p {
   }
   async unloadExtension(t) {
     const e = this.#t.get(t.alias);
-    e && (u(e) && e.onUnload(this.host, this.extensionRegistry), this.#t.delete(t.alias));
+    e && (m(e) && e.onUnload(this.host, this.extensionRegistry), this.#t.delete(t.alias));
   }
 }
-class j extends p {
+class A extends p {
   #t = /* @__PURE__ */ new Map();
   constructor(t, e) {
     super(t, e, "backofficeEntryPoint");
@@ -34,10 +35,10 @@ class j extends p {
   }
   async unloadExtension(t) {
     const e = this.#t.get(t.alias);
-    e && (u(e) && e.onUnload(this.host, this.extensionRegistry), this.#t.delete(t.alias));
+    e && (m(e) && e.onUnload(this.host, this.extensionRegistry), this.#t.delete(t.alias));
   }
 }
-class v extends p {
+class R extends p {
   #t = /* @__PURE__ */ new Map();
   constructor(t, e) {
     super(t, e, "entryPoint");
@@ -51,11 +52,11 @@ class v extends p {
   }
   async unloadExtension(t) {
     const e = this.#t.get(t.alias);
-    e && (u(e) && e.onUnload(this.host, this.extensionRegistry), this.#t.delete(t.alias));
+    e && (m(e) && e.onUnload(this.host, this.extensionRegistry), this.#t.delete(t.alias));
   }
 }
-async function A(i, t, e) {
-  const s = d.getByAlias(t);
+async function j(i, t, e) {
+  const s = f.getByAlias(t);
   if (!s)
     throw new Error(`Failed to get manifest by alias: ${t}`);
   const n = await x(i, s, e);
@@ -63,37 +64,38 @@ async function A(i, t, e) {
     throw new Error(`Failed to create extension api from alias: ${t}`);
   return n;
 }
-var g = Object.defineProperty, b = Object.getOwnPropertyDescriptor, o = (i, t, e, s) => {
-  for (var n = s > 1 ? void 0 : s ? b(t, e) : t, r = i.length - 1, l; r >= 0; r--)
+var b = Object.defineProperty, g = Object.getOwnPropertyDescriptor, o = (i, t, e, s) => {
+  for (var n = s > 1 ? void 0 : s ? g(t, e) : t, r = i.length - 1, l; r >= 0; r--)
     (l = i[r]) && (n = (s ? l(t, e, n) : l(n)) || n);
-  return s && n && g(t, e, n), n;
+  return s && n && b(t, e, n), n;
 };
-class a extends E {
+class a extends y {
   get alias() {
-    return this._alias;
-  }
-  set alias(t) {
-    this._alias = t, this.#n();
-  }
-  set props(t) {
-    this.#t = t, this.#e && (this.#e.elementProps = t);
-  }
-  get props() {
     return this.#t;
   }
-  #t = {};
-  #e;
-  #n() {
-    this._alias && (this.#e = new y(
-      this,
-      d,
-      this._alias,
-      [this],
-      this.#i,
-      this.getDefaultElementName()
-    ), this.#e.elementProps = this.#t);
+  set alias(t) {
+    this.#t = t, this.#i();
   }
-  #i = (t, e) => {
+  #t;
+  set props(t) {
+    this.#n = t, this.#e && (this.#e.elementProps = t);
+  }
+  get props() {
+    return this.#n;
+  }
+  #n = {};
+  #e;
+  #i() {
+    this.alias && (this.#e = new E(
+      this,
+      f,
+      this.alias,
+      [this],
+      this.#s,
+      this.getDefaultElementName()
+    ), this.#e.elementProps = this.props);
+  }
+  #s = (t, e) => {
     this.apiChanged(t ? e.api : void 0), this.elementChanged(t ? e.component : void 0);
   };
   /**
@@ -130,25 +132,28 @@ class a extends E {
   }
 }
 o([
-  f({ type: String, reflect: !0 })
+  u({ type: String, reflect: !0 })
 ], a.prototype, "alias", 1);
 o([
-  f({ type: Object, attribute: !1 })
+  u({ type: Object, attribute: !1 })
 ], a.prototype, "props", 1);
 o([
-  m()
+  d()
 ], a.prototype, "_api", 2);
 o([
-  m()
+  d()
 ], a.prototype, "_element", 2);
 export {
-  P as UmbAppEntryPointExtensionInitializer,
-  j as UmbBackofficeEntryPointExtensionInitializer,
+  _ as UmbAppEntryPointExtensionInitializer,
+  A as UmbBackofficeEntryPointExtensionInitializer,
   M as UmbConditionBase,
-  v as UmbEntryPointExtensionInitializer,
+  R as UmbEntryPointExtensionInitializer,
   a as UmbExtensionElementAndApiSlotElementBase,
+  z as UmbExtensionSlotElement,
+  S as UmbExtensionWithApiSlotElement,
+  D as UmbRefManifestElement,
   B as UmbSwitchCondition,
-  A as createExtensionApiByAlias,
-  d as umbExtensionsRegistry
+  j as createExtensionApiByAlias,
+  f as umbExtensionsRegistry
 };
 //# sourceMappingURL=index.js.map

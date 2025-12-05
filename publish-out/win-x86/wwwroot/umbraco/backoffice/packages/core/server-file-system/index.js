@@ -66,7 +66,7 @@ class C extends l {
       this.#e = i, this.#e && (this.#e.removeEventListener(s.TYPE, this.#o), this.#e.addEventListener(s.TYPE, this.#o));
     });
   }
-  #o = (e) => {
+  #o = ((e) => {
     if (!this.#t) throw new Error("Router is required for this controller.");
     const r = this.#r.getUnique(), t = e.getUnique();
     if (r !== t) return;
@@ -78,7 +78,7 @@ class C extends l {
       unique: i
     });
     this.destroy(), window.history.replaceState(null, "", a);
-  };
+  });
   destroy() {
     super.destroy(), this.#e?.removeEventListener(s.TYPE, this.#o);
   }

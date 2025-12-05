@@ -1,6 +1,6 @@
 import { UmbContextToken as l } from "@umbraco-cms/backoffice/context-api";
-import { U as r } from "../variant-id.class-CbSg1vyg.js";
-import { a as y, v as U } from "../variant-id.class-CbSg1vyg.js";
+import { U as r } from "../variant-id.class-DtPIPk7p.js";
+import { a as y, v as U } from "../variant-id.class-DtPIPk7p.js";
 import { UmbContextBase as n } from "@umbraco-cms/backoffice/class-api";
 import { UmbClassState as o, UmbStringState as a, mergeObservables as h } from "@umbraco-cms/backoffice/observable-api";
 const u = new l("UmbVariantContext");

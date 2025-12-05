@@ -1,0 +1,82 @@
+﻿@* Views/Partials/RichText/Components/inlineIconText.cshtml *@
+@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<Umbraco.Cms.Core.Models.Blocks.RichTextBlockItem>
+
+@using System.Collections.Generic
+@using System.Linq
+@using Umbraco.Extensions
+@using Umbraco.Cms.Core.Models
+@using Umbraco.Cms.Core.Models.PublishedContent
+
+@{
+    var el = Model?.Content;
+    if (el is null) { return; }
+
+    MediaWithCrops? media = null;
+
+    // 1) Try Single Media Picker (ikon)
+    try
+    {
+        media = el.Value<MediaWithCrops?>("ikon");
+    }
+    catch
+    {
+        // ignore and try multi
+    }
+
+    // 2) Try Multi Media Picker (ikon)
+    if (media == null)
+    {
+        try
+        {
+            var medias = el.Value<IEnumerable<MediaWithCrops>>("ikon");
+            media = medias?.FirstOrDefault();
+        }
+        catch
+        {
+            // ignore, we'll bail out below
+        }
+    }
+
+    // Text
+    var caption = el.Value<string>("tekstur");
+
+    if (media == null)
+    {
+        // No media -> nothing to render
+        return;
+    }
+
+    string? imgUrl = null;
+
+    // ✅ Try to get the crop "icon100", but NEVER let it throw
+    try
+    {
+        imgUrl = media.GetCropUrl("icon100");
+    }
+    catch
+    {
+        imgUrl = null;
+    }
+
+    // Fallback to full image URL if crop missing / failed
+    if (string.IsNullOrWhiteSpace(imgUrl))
+    {
+        imgUrl = media.Url();
+    }
+
+    if (string.IsNullOrWhiteSpace(imgUrl)) { return; }
+
+    var alt = media.Name ?? string.Empty;
+}
+
+<div class="inline-icon-text">
+    <img src="@imgUrl"
+         alt="@alt"
+         loading="lazy"
+         decoding="async" />
+
+    @if (!string.IsNullOrWhiteSpace(caption))
+    {
+        <div>@caption</div>
+    }
+</div>

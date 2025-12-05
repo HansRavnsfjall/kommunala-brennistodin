@@ -1,0 +1,81 @@
+﻿@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<Umbraco.Cms.Core.Models.Blocks.BlockListItem>
+@using Umbraco.Cms.Core.Models
+@using Umbraco.Cms.Core.Models.Blocks
+@using Umbraco.Cms.Core.Strings
+@using Umbraco.Extensions
+
+@{
+    var el = Model?.Content;
+
+    var items = el?.Value<IEnumerable<BlockListItem>>("boxes")
+             ?? Enumerable.Empty<BlockListItem>();
+
+    var list = items.ToList();
+    if (!list.Any()) { return; }
+}
+
+<section class="three-boxes py-3 py-lg-4">
+  <div class="container">
+    <div class="row g-5">
+      @foreach (var b in list)
+      {
+          var c = b.Content;
+
+          var title = c?.Value<string>("yvirskrift") ?? "";
+          IHtmlEncodedString? body = c?.Value<IHtmlEncodedString?>("tekstur");
+          MediaWithCrops? image = c?.Value<MediaWithCrops?>("mynd");
+
+          // Optimized WebP image (width 800, q=85, no upscaling)
+          string? imgUrl = image?.GetCropUrl(
+              width: 800,
+              quality: 85,
+              furtherOptions: "&format=webp&upscale=false"
+          );
+
+          // ALT text fallback
+          string alt = title;
+          try
+          {
+              var maybeNameProp = image?.GetType().GetProperty("Name");
+              if (maybeNameProp is not null)
+              {
+                  var maybeName = maybeNameProp.GetValue(image) as string;
+                  if (!string.IsNullOrWhiteSpace(maybeName)) alt = maybeName!;
+              }
+          }
+          catch { /* ignore and use title */ }
+
+      <div class="col-12 col-md-6 col-lg-4">
+        <article class="box h-100">
+          @if (!string.IsNullOrWhiteSpace(imgUrl))
+          {
+            <div class="box-img-wrap mb-3">
+              <img src="@imgUrl" alt="@alt" class="img-fluid w-100 box-img" loading="lazy" decoding="async" />
+            </div>
+          }
+
+          @if (!string.IsNullOrWhiteSpace(title))
+          {
+            <h3 class="box-title mb-3">@title</h3>
+          }
+
+          @if (body is not null)
+          {
+            <div class="box-body rte mb-0">@body</div>
+          }
+        </article>
+      </div>
+      }
+    </div>
+  </div>
+</section>
+
+<style>
+.three-boxes .row.g-5 { --bs-gutter-x: 2rem; --bs-gutter-y: 2.25rem; }
+.three-boxes .box-img-wrap { overflow: hidden; }
+.three-boxes .box-img { display:block; width:100%; height:auto; }
+.three-boxes .box-title { font-weight:800; line-height:1.2; font-size:clamp(1.4rem,1.1rem+1.3vw,2.25rem); margin-top:0; }
+.three-boxes .box-body { font-size:1.0625rem; line-height:1.65; }
+.three-boxes .rte p { margin-bottom:.75rem; }
+.three-boxes .rte p:last-child { margin-bottom:0; }
+</style>

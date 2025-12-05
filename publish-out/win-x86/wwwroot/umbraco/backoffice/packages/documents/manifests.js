@@ -1,29 +1,32 @@
-import { UMB_CONTENT_SECTION_ALIAS as y, UMB_WORKSPACE_HAS_CONTENT_COLLECTION_CONDITION_ALIAS as Ee, UMB_CONTENT_HAS_PROPERTIES_WORKSPACE_CONDITION as De } from "@umbraco-cms/backoffice/content";
-import { U as D, b as c, e as V, n as h, l as B, a as R, f as F, i as H, j as Ue, g as de, p as N, q as Ae, s as W, m as Re, u as P } from "./paths-BF32ZUyU.js";
+import { UMB_CONTENT_SECTION_ALIAS as y, UMB_CONTENT_HAS_PROPERTIES_WORKSPACE_CONDITION as Ue } from "@umbraco-cms/backoffice/content";
+import { UMB_SECTION_ALIAS_CONDITION_ALIAS as H, UMB_SECTION_USER_PERMISSION_CONDITION_ALIAS as L } from "@umbraco-cms/backoffice/section";
+import { U as D, b as c, e as x, n as g, l as h, a as f, f as K, i as G, j as de, g as Ae, p as k, q as fe, s as v, m as Re, u as B } from "./document-blueprint-item.server.cache-DONXnfyi.js";
 import "@umbraco-cms/backoffice/id";
 import "@umbraco-cms/backoffice/external/backend-api";
-import { UMB_DOCUMENT_ROOT_ENTITY_TYPE as Oe, UMB_CONTENT_MENU_ALIAS as Ie } from "@umbraco-cms/backoffice/document";
 import "@umbraco-cms/backoffice/resources";
 import { UMB_MANAGEMENT_API_DATA_SOURCE_ALIAS as U } from "@umbraco-cms/backoffice/repository";
-import "@umbraco-cms/backoffice/entity-item";
+import "@umbraco-cms/backoffice/management-api";
 import "@umbraco-cms/backoffice/notification";
-import { UMB_WORKSPACE_CONDITION_ALIAS as t, UmbSubmitWorkspaceAction as O, UMB_WORKSPACE_ENTITY_IS_NEW_CONDITION_ALIAS as L } from "@umbraco-cms/backoffice/workspace";
-import { Q as n, X as x, Y as fe, d as be, T as l, ar as K, e, S as G, l as q, ay as z, _ as Me, av as g, aE as Se, $ as j, aw as I, U as $, b as J, a2 as X, ax as Q, D as p, a1 as Ce, as as Z, aF as Pe, aq as _, C as T, P as ee, a3 as te, a4 as ie, a5 as Be, aG as Ne, B as E, aa as ke, a9 as he, z as w, R as f, ab as Le, ac as ge, au as b, ad as $e, ae as we, af as u, w as Ye, J as M, W as We, ai as ne, ag as oe, ah as ve, aj as Ve, aA as ae, ak as Fe, al as He, V as se, am as xe, an as Ke, ao as Ge, aB as qe, ap as ze, at as je, az as Je, aH as Xe, I as Qe, y as Ze, G as et, c as v, H as tt, aI as it, aJ as nt } from "./manifests-BP7S9LPy.js";
+import { UMB_WORKSPACE_CONDITION_ALIAS as t, UmbSubmitWorkspaceAction as R, UMB_WORKSPACE_ENTITY_IS_NEW_CONDITION_ALIAS as $ } from "@umbraco-cms/backoffice/workspace";
+import { R as o, X as j, Y as Oe, d as Ie, Q as l, as as q, e, S as z, l as J, az as X, _ as be, aw as w, aF as Me, $ as Q, ax as O, U as Y, b as Z, a2 as ee, ay as te, D as p, a1 as Se, at as ie, aG as Pe, ar as _, C as E, P as ne, a3 as oe, a4 as ae, a5 as Ce, aH as Be, B as T, ab as he, aa as ke, z as W, T as I, ac as Ne, ad as Le, av as b, ae as ge, af as $e, ag as u, w as we, J as M, W as Ye, aj as se, ah as me, ai as We, ak as ve, aB as re, al as Ve, am as Fe, V as ce, an as He, ao as xe, ap as Ke, aC as Ge, aq as je, au as qe, aA as ze, aI as Je, I as Xe, y as Qe, G as Ze, c as V, H as et, aJ as tt, aK as it } from "./manifests-BfVrApfB.js";
 import { UMB_COLLECTION_ALIAS_CONDITION as s } from "@umbraco-cms/backoffice/collection";
-import { UMB_ENTITY_IS_NOT_TRASHED_CONDITION_ALIAS as i, UMB_ENTITY_IS_TRASHED_CONDITION_ALIAS as me } from "@umbraco-cms/backoffice/recycle-bin";
+import "@umbraco-cms/backoffice/utils";
+import "@umbraco-cms/backoffice/document-type";
+import "@umbraco-cms/backoffice/class-api";
+import { UMB_ENTITY_IS_NOT_TRASHED_CONDITION_ALIAS as i, UMB_ENTITY_IS_TRASHED_CONDITION_ALIAS as pe } from "@umbraco-cms/backoffice/recycle-bin";
 import "@umbraco-cms/backoffice/tree";
-import { UMB_ENTITY_BULK_ACTION_TRASH_WITH_RELATION_KIND as ot } from "@umbraco-cms/backoffice/relations";
-import { UMB_ENTITY_HAS_CHILDREN_CONDITION_ALIAS as at } from "@umbraco-cms/backoffice/entity-action";
-import { UMB_SECTION_USER_PERMISSION_CONDITION_ALIAS as Y } from "@umbraco-cms/backoffice/section";
-import { UMB_BLOCK_WORKSPACE_ALIAS as st } from "@umbraco-cms/backoffice/block";
-import { r as d, o as m, n as a, b as o, A as re, H as S, U as A, x as ce, y as mt, z as rt, p as pe, u as le, a as ct, D as pt, E as lt, C as ye, t as ue, F as yt, I as ut, s as k, L as C, M as _e, G as _t, N as Tt, q as r } from "./constants-D9L2jSGX.js";
+import { UMB_ENTITY_BULK_ACTION_TRASH_WITH_RELATION_KIND as nt } from "@umbraco-cms/backoffice/relations";
+import { UMB_ENTITY_HAS_CHILDREN_CONDITION_ALIAS as ot } from "@umbraco-cms/backoffice/entity-action";
+import { UMB_BLOCK_WORKSPACE_ALIAS as at } from "@umbraco-cms/backoffice/block";
+import { r as d, o as m, n as a, b as n, A as le, H as S, U as A, x as ye, y as st, z as mt, p as ue, u as _e, O as F, a as rt, D as ct, E as pt, C as Ee, t as Te, F as lt, I as yt, s as N, L as P, M as De, G as ut, N as _t, q as r } from "./constants-rt5n84j4.js";
 import { UMB_SETTINGS_SECTION_ALIAS as Et } from "@umbraco-cms/backoffice/settings";
-const Dt = [
+import { UMB_DOCUMENT_ROOT_ENTITY_TYPE as Tt, UMB_CONTENT_MENU_ALIAS as Dt } from "@umbraco-cms/backoffice/document";
+const Ut = [
   {
     type: "dashboard",
     alias: "Umb.Dashboard.RedirectManagement",
     name: "Redirect Management Dashboard",
-    element: () => import("./dashboard-redirect-management.element-DQUXn1PU.js"),
+    element: () => import("./dashboard-redirect-management.element-BN7MpvjI.js"),
     weight: 10,
     meta: {
       label: "#dashboardTabs_contentRedirectManager",
@@ -31,23 +34,23 @@ const Dt = [
     },
     conditions: [
       {
-        alias: "Umb.Condition.SectionAlias",
+        alias: H,
         match: y
       }
     ]
   }
-], Ut = [
+], dt = [
   {
     type: "entityAction",
     kind: "default",
     alias: "Umb.EntityAction.DocumentBlueprint.Create",
     name: "Document Blueprint Options Create Entity Action",
     weight: 1200,
-    api: () => import("./create.action-ttJ1WVZm.js"),
+    api: () => import("./create.action-9nvoHk3a.js"),
     forEntityTypes: [D, c],
     meta: {
       icon: "icon-add",
-      label: "#actions_create",
+      label: "#actions_createFor",
       additionalOptions: !0
     }
   },
@@ -55,41 +58,41 @@ const Dt = [
     type: "modal",
     alias: "Umb.Modal.DocumentBlueprintOptionsCreate",
     name: "Document Blueprint Options Create Modal",
-    element: () => import("./document-blueprint-options-create-modal.element-RjYkldO0.js")
+    element: () => import("./document-blueprint-options-create-modal.element-BDt3YKzi.js")
   }
-], dt = {
+], At = {
   type: "repository",
-  alias: V,
+  alias: x,
   name: "Move Document Blueprint Repository",
   api: () => import("./document-blueprint-move.repository-CnJWcCQb.js")
-}, At = [dt], Rt = [
+}, ft = [At], Rt = [
   {
     type: "entityAction",
     kind: "moveTo",
     alias: "Umb.EntityAction.DocumentBlueprint.MoveTo",
     name: "Move Document Blueprint Entity Action",
-    forEntityTypes: [R],
+    forEntityTypes: [f],
     meta: {
-      treeRepositoryAlias: B,
-      moveRepositoryAlias: V,
-      treeAlias: h,
+      treeRepositoryAlias: h,
+      moveRepositoryAlias: x,
+      treeAlias: g,
       foldersOnly: !0
     }
   },
-  ...At
+  ...ft
 ], Ot = [
   {
     type: "entityAction",
     kind: "delete",
     alias: "Umb.EntityAction.DocumentBlueprintItem.Delete",
     name: "Delete Document Blueprint Item Entity Action",
-    forEntityTypes: [R],
+    forEntityTypes: [f],
     meta: {
-      detailRepositoryAlias: H,
-      itemRepositoryAlias: F
+      detailRepositoryAlias: G,
+      itemRepositoryAlias: K
     }
   },
-  ...Ut,
+  ...dt,
   ...Rt
 ], It = [
   {
@@ -99,57 +102,57 @@ const Dt = [
     name: "Document Blueprints Menu Item",
     weight: 100,
     meta: {
-      treeAlias: h,
+      treeAlias: g,
       label: "#treeHeaders_contentBlueprints",
       menus: ["Umb.Menu.StructureSettings"]
     }
   }
-], ft = [
-  {
-    type: "repository",
-    alias: H,
-    name: "Document Blueprint Detail Repository",
-    api: () => import("./document-blueprint-detail.repository-v6KhCqYg.js")
-  },
-  {
-    type: "store",
-    alias: Ue,
-    name: "Document Blueprint Detail Store",
-    api: () => import("./document-blueprint-detail.store-Ctc14hsK.js")
-  }
 ], bt = [
   {
     type: "repository",
-    alias: F,
-    name: "Document Blueprint Item Repository",
-    api: () => import("./document-blueprint-item.repository-DnCe4qgh.js")
-  },
-  {
-    type: "itemStore",
-    alias: de,
-    name: "Document Blueprint Item Store",
-    api: () => import("./document-blueprint-item.store-D44gA2EQ.js")
-  }
-], Mt = [...ft, ...bt], St = [
-  {
-    type: "repository",
-    alias: N,
-    name: "Document Blueprint Folder Repository",
-    api: () => import("./document-blueprint-folder.repository-Dggs5KIG.js")
+    alias: G,
+    name: "Document Blueprint Detail Repository",
+    api: () => import("./document-blueprint-detail.repository-CueAI7vS.js")
   },
   {
     type: "store",
+    alias: de,
+    name: "Document Blueprint Detail Store",
+    api: () => import("./document-blueprint-detail.store-ipGfszU_.js")
+  }
+], Mt = [
+  {
+    type: "repository",
+    alias: K,
+    name: "Document Blueprint Item Repository",
+    api: () => import("./document-blueprint-item.repository-cY1Pfesr.js")
+  },
+  {
+    type: "itemStore",
     alias: Ae,
+    name: "Document Blueprint Item Store",
+    api: () => import("./document-blueprint-item.store-tpIR52O1.js")
+  }
+], St = [...bt, ...Mt], Pt = [
+  {
+    type: "repository",
+    alias: k,
+    name: "Document Blueprint Folder Repository",
+    api: () => import("./document-blueprint-folder.repository-BFdXsDBe.js")
+  },
+  {
+    type: "store",
+    alias: fe,
     name: "Document Blueprint Folder Store",
-    api: () => import("./document-blueprint-folder.store-B5NoWDzi.js")
+    api: () => import("./document-blueprint-folder.store-CFvflK8e.js")
   }
 ], Ct = [
   {
     type: "workspace",
     kind: "routable",
-    alias: W,
+    alias: v,
     name: "Document Blueprint Folder Workspace",
-    api: () => import("./document-blueprint-folder-workspace.context-V97CfanW.js"),
+    api: () => import("./document-blueprint-folder-workspace.context-DUzN-zpK.js"),
     meta: {
       entityType: c
     }
@@ -159,7 +162,7 @@ const Dt = [
     kind: "default",
     alias: "Umb.WorkspaceAction.DocumentBlueprint.Folder.Submit",
     name: "Submit Document Blueprint Folder Workspace Action",
-    api: O,
+    api: R,
     meta: {
       label: "#buttons_save",
       look: "primary",
@@ -168,11 +171,11 @@ const Dt = [
     conditions: [
       {
         alias: t,
-        match: W
+        match: v
       }
     ]
   }
-], Pt = [
+], Bt = [
   {
     type: "entityAction",
     kind: "folderUpdate",
@@ -180,7 +183,7 @@ const Dt = [
     name: "Rename Document Blueprint Folder Entity Action",
     forEntityTypes: [c],
     meta: {
-      folderRepositoryAlias: N
+      folderRepositoryAlias: k
     }
   },
   {
@@ -190,12 +193,12 @@ const Dt = [
     name: "Delete Document Blueprint Folder Entity Action",
     forEntityTypes: [c],
     meta: {
-      folderRepositoryAlias: N
+      folderRepositoryAlias: k
     }
   },
-  ...St,
+  ...Pt,
   ...Ct
-], Bt = [
+], ht = [
   {
     type: "entityAction",
     kind: "reloadTreeItemChildren",
@@ -204,26 +207,26 @@ const Dt = [
     forEntityTypes: [D, c],
     meta: {}
   }
-], Nt = [
+], kt = [
   {
     type: "repository",
-    alias: B,
+    alias: h,
     name: "Document Blueprint Tree Repository",
-    api: () => import("./document-blueprint-tree.repository-BMaFgzPh.js")
+    api: () => import("./document-blueprint-tree.repository-v120qUW3.js")
   },
   {
     type: "treeStore",
     alias: Re,
     name: "Document Blueprint Tree Store",
-    api: () => import("./document-blueprint-tree.store-6h2voZ4z.js")
+    api: () => import("./document-blueprint-tree.store-KvGnWrlJ.js")
   },
   {
     type: "tree",
     kind: "default",
-    alias: h,
+    alias: g,
     name: "Document Blueprints Tree",
     meta: {
-      repositoryAlias: B
+      repositoryAlias: h
     }
   },
   {
@@ -233,7 +236,7 @@ const Dt = [
     name: "Document Blueprint Tree Item",
     forEntityTypes: [
       D,
-      R,
+      f,
       c
     ]
   },
@@ -247,17 +250,17 @@ const Dt = [
       headline: "#treeHeaders_contentBlueprints"
     }
   },
-  ...Bt,
-  ...Pt
-], kt = [
+  ...ht,
+  ...Bt
+], Nt = [
   {
     type: "workspace",
     kind: "routable",
-    alias: P,
+    alias: B,
     name: "Document Blueprint Workspace",
-    api: () => import("./document-blueprint-workspace.context-fYz2YrCi.js"),
+    api: () => import("./document-blueprint-workspace.context-WnS23Cxh.js"),
     meta: {
-      entityType: R
+      entityType: f
     }
   },
   {
@@ -274,7 +277,7 @@ const Dt = [
     conditions: [
       {
         alias: t,
-        match: P
+        match: B
       }
     ]
   },
@@ -284,7 +287,7 @@ const Dt = [
     alias: "Umb.WorkspaceAction.DocumentBlueprint.Save",
     name: "Save Document Workspace Action",
     weight: 80,
-    api: O,
+    api: R,
     meta: {
       label: "Save",
       look: "primary",
@@ -293,37 +296,43 @@ const Dt = [
     conditions: [
       {
         alias: t,
-        match: P
+        match: B
       }
     ]
   }
-], ht = [
+], Lt = [
   ...Ot,
   ...It,
-  ...Mt,
+  ...St,
+  ...kt,
   ...Nt,
-  ...kt
-], Lt = [
+  {
+    name: "Document Blueprint Backoffice Entry Point",
+    alias: "Umb.BackofficeEntryPoint.DocumentBlueprint",
+    type: "backofficeEntryPoint",
+    js: () => import("./entry-point-DNZW_leG.js")
+  }
+], gt = [
   {
     type: "workspaceInfoApp",
     name: "Document History Workspace Info App",
     alias: "Umb.WorkspaceInfoApp.Document.History",
-    element: () => import("./document-history-workspace-info-app.element-CG4bCpS9.js"),
+    element: () => import("./document-history-workspace-info-app.element-CcmDh7IU.js"),
     weight: 80,
     conditions: [
       {
         alias: t,
-        match: n
+        match: o
       }
     ]
   }
-], gt = [...Lt], $t = [
+], $t = [...gt], wt = [
   {
     type: "collectionAction",
     kind: "button",
     name: "Create Document Collection Action",
     alias: "Umb.CollectionAction.Document.Create",
-    element: () => import("./create-document-collection-action.element-CPNgLjMi.js"),
+    element: () => import("./create-document-collection-action.element-ksKmJRr8.js"),
     weight: 100,
     meta: {
       label: "#general_create"
@@ -335,19 +344,19 @@ const Dt = [
       }
     ]
   }
-], wt = [
-  {
-    type: "repository",
-    alias: x,
-    name: "Document Collection Repository",
-    api: () => import("./document-collection.repository-DvIDcubX.js")
-  }
 ], Yt = [
   {
+    type: "repository",
+    alias: j,
+    name: "Document Collection Repository",
+    api: () => import("./document-collection.repository-iiYObbaE.js")
+  }
+], Wt = [
+  {
     type: "collectionView",
-    alias: fe,
+    alias: Oe,
     name: "Document Grid Collection View",
-    element: () => import("./document-grid-collection-view.element-BqvsXsY0.js"),
+    element: () => import("./document-grid-collection-view.element-B--tP-zv.js"),
     weight: 200,
     meta: {
       label: "Grid",
@@ -363,9 +372,9 @@ const Dt = [
   },
   {
     type: "collectionView",
-    alias: be,
+    alias: Ie,
     name: "Document Table Collection View",
-    element: () => import("./document-table-collection-view.element-DUxdGrI6.js"),
+    element: () => import("./document-table-collection-view.element-CB6d5fth.js"),
     weight: 300,
     meta: {
       label: "Table",
@@ -379,28 +388,28 @@ const Dt = [
       }
     ]
   }
-], Wt = [
+], vt = [
   {
     type: "collection",
     alias: l,
     name: "Document Collection",
-    api: () => import("./document-collection.context-pkFCbtPl.js"),
+    api: () => import("./document-collection.context-Cdx-UUZg.js"),
     element: () => import("./document-collection.element-DnGxM0Wz.js"),
     meta: {
-      repositoryAlias: x
+      repositoryAlias: j
     }
   },
-  ...$t,
   ...wt,
-  ...Yt
-], vt = [
+  ...Yt,
+  ...Wt
+], Vt = [
   {
     type: "entityAction",
     kind: "default",
     alias: "Umb.EntityAction.Document.CreateBlueprint",
     name: "Create Document Blueprint Entity Action",
     weight: 1e3,
-    api: () => import("./create-blueprint.action-D0SqqUHu.js"),
+    api: () => import("./create-blueprint.action-Cmo_--3P.js"),
     forEntityTypes: [e],
     meta: {
       icon: "icon-blueprint",
@@ -410,7 +419,7 @@ const Dt = [
     conditions: [
       {
         alias: "Umb.Condition.UserPermission.Document",
-        allOf: [K]
+        allOf: [q]
       },
       {
         alias: i
@@ -421,50 +430,20 @@ const Dt = [
     type: "modal",
     alias: "Umb.Modal.CreateBlueprint",
     name: "Create Blueprint Modal",
-    element: () => import("./create-blueprint-modal.element-BMQ6Qukp.js")
+    element: () => import("./create-blueprint-modal.element-5V97z8Rc.js")
   }
-], Vt = [
+], Ft = [
   {
     type: "entityAction",
     kind: "default",
     alias: "Umb.EntityAction.Document.Create",
     name: "Create Document Entity Action",
     weight: 1200,
-    api: () => import("./create.action-C0Ng8tHt.js"),
-    forEntityTypes: [q, e],
+    api: () => import("./create.action-B1zu-QpD.js"),
+    forEntityTypes: [J, e],
     meta: {
       icon: "icon-add",
-      label: "#actions_create",
-      additionalOptions: !0
-    },
-    conditions: [
-      {
-        alias: "Umb.Condition.UserPermission.Document",
-        allOf: [G]
-      },
-      {
-        alias: i
-      }
-    ]
-  },
-  {
-    type: "modal",
-    alias: "Umb.Modal.Document.CreateOptions",
-    name: "Document Create Options Modal",
-    element: () => import("./document-create-options-modal.element-hAXPkhsG.js")
-  }
-], Ft = [
-  {
-    type: "entityAction",
-    kind: "default",
-    alias: "Umb.EntityAction.Document.CultureAndHostnames",
-    name: "Culture And Hostnames Document Entity Action",
-    weight: 400,
-    api: () => import("./culture-and-hostnames.action-DsQRK0Ig.js"),
-    forEntityTypes: [e],
-    meta: {
-      icon: "icon-home",
-      label: "#actions_assigndomain",
+      label: "#actions_createFor",
       additionalOptions: !0
     },
     conditions: [
@@ -479,45 +458,75 @@ const Dt = [
   },
   {
     type: "modal",
-    alias: "Umb.Modal.CultureAndHostnames",
-    name: "Culture And Hostnames Modal",
-    element: () => import("./culture-and-hostnames-modal.element-DgqNE89K.js").then((Te) => Te.c)
+    alias: "Umb.Modal.Document.CreateOptions",
+    name: "Document Create Options Modal",
+    element: () => import("./document-create-options-modal.element-Baj5xsTV.js")
   }
 ], Ht = [
   {
-    type: "repository",
-    alias: Me,
-    name: "Duplicate Document Repository",
-    api: () => import("./document-duplicate.repository-Cz6LQokO.js")
-  }
-], xt = [
-  {
     type: "entityAction",
-    kind: "duplicateTo",
-    alias: "Umb.EntityAction.Document.DuplicateTo",
-    name: "Duplicate Document To Entity Action",
+    kind: "default",
+    alias: "Umb.EntityAction.Document.CultureAndHostnames",
+    name: "Culture And Hostnames Document Entity Action",
+    weight: 400,
+    api: () => import("./culture-and-hostnames.action-BCJ5IjwX.js"),
     forEntityTypes: [e],
-    api: () => import("./duplicate-document.action-Kbcu8ceB.js"),
+    meta: {
+      icon: "icon-home",
+      label: "#actions_assigndomain",
+      additionalOptions: !0
+    },
     conditions: [
       {
         alias: "Umb.Condition.UserPermission.Document",
-        allOf: [g]
+        allOf: [X]
       },
       {
         alias: i
       }
     ]
   },
-  ...Ht,
-  ...Se
-], Kt = [
+  {
+    type: "modal",
+    alias: "Umb.Modal.CultureAndHostnames",
+    name: "Culture And Hostnames Modal",
+    element: () => import("./culture-and-hostnames-modal.element-DgqNE89K.js").then((C) => C.c)
+  }
+], xt = [
   {
     type: "repository",
-    alias: j,
+    alias: be,
+    name: "Duplicate Document Repository",
+    api: () => import("./document-duplicate.repository-Cz6LQokO.js")
+  }
+], Kt = [
+  {
+    type: "entityAction",
+    kind: "duplicateTo",
+    alias: "Umb.EntityAction.Document.DuplicateTo",
+    name: "Duplicate Document To Entity Action",
+    forEntityTypes: [e],
+    api: () => import("./duplicate-document.action-BJq0XsPT.js"),
+    conditions: [
+      {
+        alias: "Umb.Condition.UserPermission.Document",
+        allOf: [w]
+      },
+      {
+        alias: i
+      }
+    ]
+  },
+  ...xt,
+  ...Me
+], Gt = [
+  {
+    type: "repository",
+    alias: Q,
     name: "Move Document Repository",
     api: () => import("./document-move.repository-Co8XfLpx.js")
   }
-], Gt = [
+], jt = [
   {
     type: "entityAction",
     kind: "moveTo",
@@ -525,25 +534,25 @@ const Dt = [
     name: "Move Document Entity Action",
     forEntityTypes: [e],
     meta: {
-      treeRepositoryAlias: J,
-      moveRepositoryAlias: j,
-      treeAlias: $
+      treeRepositoryAlias: Z,
+      moveRepositoryAlias: Q,
+      treeAlias: Y
     },
     conditions: [
       {
         alias: "Umb.Condition.UserPermission.Document",
-        allOf: [I]
+        allOf: [O]
       },
       {
         alias: i
       }
     ]
   },
-  ...Kt
+  ...Gt
 ], qt = [
   {
     type: "repository",
-    alias: X,
+    alias: ee,
     name: "Sort Children Of Document Repository",
     api: () => import("./sort-children-of.repository-B6_m1pd9.js")
   }
@@ -554,38 +563,38 @@ const Dt = [
     kind: "sortChildrenOfContent",
     alias: "Umb.EntityAction.Document.SortChildrenOf",
     name: "Sort Children Of Document Entity Action",
-    forEntityTypes: [q, e],
+    forEntityTypes: [J, e],
     meta: {
       itemRepositoryAlias: p,
-      sortChildrenOfRepositoryAlias: X,
-      treeRepositoryAlias: J,
+      sortChildrenOfRepositoryAlias: ee,
+      treeRepositoryAlias: Z,
       additionalOptions: !0
     },
     conditions: [
       {
         alias: "Umb.Condition.UserPermission.Document",
-        allOf: [Q]
+        allOf: [te]
       },
       {
         alias: i
       }
     ]
   }
-], jt = [
+], Jt = [
   {
     type: "repository",
-    alias: Ce,
+    alias: Se,
     name: "Document Notifications Repository",
     api: () => import("./document-notifications.repository-Crs2B9Ne.js")
   }
-], Jt = [
+], Xt = [
   {
     type: "entityAction",
     kind: "default",
     alias: "Umb.EntityAction.Document.Notifications",
     name: "Notifications",
     weight: 100,
-    api: () => import("./document-notifications.action-B3hJLS9d.js"),
+    api: () => import("./document-notifications.action-DkND_P3L.js"),
     forEntityTypes: [e],
     meta: {
       icon: "icon-megaphone",
@@ -595,14 +604,14 @@ const Dt = [
     conditions: [
       {
         alias: "Umb.Condition.UserPermission.Document",
-        allOf: [Z]
+        allOf: [ie]
       },
       {
         alias: i
       }
     ]
   }
-], Xt = [...Jt, ...Pe, ...jt], Qt = [
+], Qt = [...Xt, ...Pe, ...Jt], Zt = [
   {
     type: "entityAction",
     kind: "deleteWithRelation",
@@ -611,8 +620,8 @@ const Dt = [
     forEntityTypes: [e],
     meta: {
       itemRepositoryAlias: p,
-      detailRepositoryAlias: ee,
-      referenceRepositoryAlias: T
+      detailRepositoryAlias: ne,
+      referenceRepositoryAlias: E
     },
     conditions: [
       {
@@ -620,27 +629,27 @@ const Dt = [
         allOf: [_]
       },
       {
-        alias: me
+        alias: pe
       }
     ]
   }
-], Zt = [
-  ...vt,
+], ei = [
   ...Vt,
   ...Ft,
-  ...xt,
-  ...Gt,
+  ...Ht,
+  ...Kt,
+  ...jt,
   ...zt,
-  ...Qt,
-  ...Xt
-], ei = [
+  ...Zt,
+  ...Qt
+], ti = [
   {
     type: "repository",
-    alias: te,
+    alias: oe,
     name: "Bulk Duplicate Media Repository",
     api: () => import("./duplicate-to.repository-DAADCcTm.js")
   }
-], ti = [
+], ii = [
   {
     type: "entityBulkAction",
     kind: "duplicateTo",
@@ -649,8 +658,8 @@ const Dt = [
     weight: 30,
     forEntityTypes: [e],
     meta: {
-      bulkDuplicateRepositoryAlias: te,
-      treeAlias: $
+      bulkDuplicateRepositoryAlias: oe,
+      treeAlias: Y
     },
     conditions: [
       {
@@ -659,19 +668,19 @@ const Dt = [
       },
       {
         alias: "Umb.Condition.UserPermission.Document",
-        allOf: [g]
+        allOf: [w]
       }
     ]
   },
-  ...ei
-], ii = [
+  ...ti
+], ni = [
   {
     type: "repository",
-    alias: ie,
+    alias: ae,
     name: "Bulk Move Document Repository",
     api: () => import("./move-to.repository-CHGd2CBT.js")
   }
-], ni = [
+], oi = [
   {
     type: "entityBulkAction",
     kind: "moveTo",
@@ -680,8 +689,8 @@ const Dt = [
     weight: 20,
     forEntityTypes: [e],
     meta: {
-      bulkMoveRepositoryAlias: ie,
-      treeAlias: $
+      bulkMoveRepositoryAlias: ae,
+      treeAlias: Y
     },
     conditions: [
       {
@@ -690,41 +699,84 @@ const Dt = [
       },
       {
         alias: "Umb.Condition.UserPermission.Document",
-        allOf: [I]
+        allOf: [O]
       }
     ]
   },
-  ...ii
-], oi = [...ti, ...ni], ai = [
+  ...ni
+], ai = [...ii, ...oi], si = {
+  type: "entitySign",
+  kind: "icon",
+  alias: "Umb.EntitySign.Document.IsProtected",
+  name: "Is Protected Document Entity Sign",
+  forEntityTypes: [e],
+  forEntityFlags: ["Umb.IsProtected"],
+  weight: 1e3,
+  meta: {
+    iconName: "icon-block",
+    label: "Protected",
+    iconColorAlias: "red"
+  }
+}, mi = [
+  {
+    type: "entitySign",
+    kind: "icon",
+    alias: "Umb.EntitySign.Document.HasScheduledPublish",
+    name: "Document has scheduled publish Entity Sign",
+    forEntityTypes: [e],
+    forEntityFlags: ["Umb.ScheduledForPublish"],
+    overwrites: "Umb.EntitySign.Document.HasPendingChanges",
+    weight: 500,
+    meta: {
+      iconName: "icon-time",
+      label: "Scheduled publishing",
+      iconColorAlias: "green"
+    }
+  }
+], ri = [
+  {
+    type: "entitySign",
+    kind: "icon",
+    alias: "Umb.EntitySign.Document.HasPendingChanges",
+    name: "Has Pending Changes Document Entity Sign",
+    forEntityTypes: [e],
+    forEntityFlags: ["Umb.PendingChanges"],
+    meta: { iconName: "icon-edit", label: "Unpublished changes" }
+  }
+], ci = [
+  si,
+  ...mi,
+  ...ri
+], pi = [
   {
     type: "globalContext",
     alias: "Umb.GlobalContext.DocumentConfiguration",
     name: "Document Configuration Context",
     api: () => import("./document-configuration.context-Bz7FvH_D.js")
   }
-], si = [
+], li = [
   {
     type: "repository",
     alias: p,
     name: "Document Item Repository",
-    api: () => import("./document-item.repository-Xg9sohq8.js")
+    api: () => import("./document-item.repository-C0SbAo-7.js")
   },
   {
     type: "itemStore",
-    alias: Be,
+    alias: Ce,
     name: "Document Item Store",
-    api: () => import("./document-item.store-CBgBJQCY.js")
+    api: () => import("./document-item.store-DL8GkdM_.js")
   }
-], mi = [
+], yi = [
   {
     type: "entityItemRef",
     alias: "Umb.EntityItemRef.Document",
     name: "Document Entity Item Reference",
-    element: () => import("./document-item-ref.element-5Q4bYfBj.js"),
+    element: () => import("./document-item-ref.element-BSivZZBv.js"),
     forEntityTypes: [e]
   },
-  ...si
-], ri = [Ne], ci = [
+  ...li
+], ui = [Be], _i = [
   {
     type: "pickerSearchResultItem",
     kind: "default",
@@ -733,7 +785,7 @@ const Dt = [
     element: () => import("./document-picker-search-result-item.element-DaWo3iMs.js"),
     forEntityTypes: [e]
   }
-], pi = {
+], Ei = {
   type: "propertyEditorSchema",
   name: "Content Picker",
   alias: "Umbraco.ContentPicker",
@@ -750,12 +802,12 @@ const Dt = [
       ]
     }
   }
-}, li = [
+}, Ti = [
   {
     type: "propertyEditorUi",
     alias: "Umb.PropertyEditorUi.DocumentPicker",
     name: "Document Picker Property Editor UI",
-    element: () => import("./property-editor-ui-document-picker.element-BFT-DE9R.js"),
+    element: () => import("./property-editor-ui-document-picker.element-CaVj22Re.js"),
     meta: {
       label: "Document Picker",
       propertyEditorSchemaAlias: "Umbraco.ContentPicker",
@@ -780,15 +832,15 @@ const Dt = [
       }
     }
   },
-  pi
-], yi = [...li], ui = [
+  Ei
+], Di = [...Ti], Ui = [
   {
     type: "entityAction",
     kind: "default",
     alias: "Umb.EntityAction.Document.Publish",
     name: "Publish Document Entity Action",
     weight: 600,
-    api: () => import("./publish.action-DO5hmVQV.js"),
+    api: () => import("./publish.action-X591nSgh.js"),
     forEntityTypes: [e],
     meta: {
       icon: "icon-globe",
@@ -798,21 +850,21 @@ const Dt = [
     conditions: [
       {
         alias: "Umb.Condition.UserPermission.Document",
-        allOf: [E]
+        allOf: [T]
       },
       {
         alias: i
       }
     ]
   }
-], _i = [
+], di = [
   {
     type: "entityBulkAction",
     kind: "default",
     alias: "Umb.EntityBulkAction.Document.Publish",
     name: "Publish Document Entity Bulk Action",
     weight: 50,
-    api: () => import("./publish.bulk-action-D-PfmdHn.js"),
+    api: () => import("./publish.bulk-action-D7TF_g43.js"),
     meta: {
       icon: "icon-globe",
       label: "#actions_publish"
@@ -825,25 +877,25 @@ const Dt = [
       },
       {
         alias: "Umb.Condition.UserPermission.Document",
-        allOf: [E]
+        allOf: [T]
       }
     ]
   }
-], Ti = [
+], Ai = [
   {
     type: "modal",
-    alias: ke,
+    alias: he,
     name: "Document Publish Modal",
-    element: () => import("./document-publish-modal.element-BNzliI_Y.js")
+    element: () => import("./document-publish-modal.element-CDNuuR70.js")
   }
-], Ei = [
+], fi = [
   {
     type: "workspaceAction",
     kind: "default",
     alias: "Umb.WorkspaceAction.Document.SaveAndPublish",
     name: "Save And Publish Document Workspace Action",
     weight: 70,
-    api: () => import("./save-and-publish.action-DZ7tGJth.js"),
+    api: () => import("./save-and-publish.action-RUrp5288.js"),
     meta: {
       label: "#buttons_saveAndPublish",
       look: "primary",
@@ -852,33 +904,33 @@ const Dt = [
     conditions: [
       {
         alias: t,
-        match: n
+        match: o
       },
       {
         alias: i
       }
     ]
   }
-], Di = [
-  ...ui,
-  ..._i,
-  ...Ti,
-  ...Ei
-], Ui = [
+], Ri = [
+  ...Ui,
+  ...di,
+  ...Ai,
+  ...fi
+], Oi = [
   {
     type: "modal",
-    alias: he,
+    alias: ke,
     name: "Document Publish With Descendants Modal",
     element: () => import("./document-publish-with-descendants-modal.element-BHe7VdlT.js")
   }
-], di = [
+], Ii = [
   {
     type: "workspaceActionMenuItem",
     kind: "default",
     alias: "Umb.Document.WorkspaceActionMenuItem.PublishWithDescendants",
     name: "Publish with descendants",
     weight: 10,
-    api: () => import("./publish-with-descendants.action-BzLaOTSI.js"),
+    api: () => import("./publish-with-descendants.action-D5qjlLcr.js"),
     forWorkspaceActions: "Umb.WorkspaceAction.Document.SaveAndPublish",
     meta: {
       label: "#buttons_publishDescendants",
@@ -886,40 +938,40 @@ const Dt = [
     },
     conditions: [
       {
-        alias: f,
-        allOf: [w, E]
+        alias: I,
+        allOf: [W, T]
       },
       {
         alias: i
       },
       {
-        alias: L,
+        alias: $,
         match: !1
       }
     ]
   }
-], Ai = [...Ui, ...di], Ri = [
+], bi = [...Oi, ...Ii], Mi = [
   {
     type: "repository",
-    alias: Le,
+    alias: Ne,
     name: "Document Publishing Repository",
-    api: () => import("./document-publishing.repository-BtIywgYV.js")
+    api: () => import("./document-publishing.repository-R5iIv5OV.js")
   }
-], Oi = [
+], Si = [
   {
     type: "modal",
-    alias: ge,
+    alias: Le,
     name: "Document Schedule Modal",
     element: () => import("./document-schedule-modal.element-C4WypZk2.js")
   }
-], Ii = [
+], Pi = [
   {
     type: "workspaceActionMenuItem",
     kind: "default",
     alias: "Umb.Document.WorkspaceActionMenuItem.SchedulePublishing",
     name: "Schedule publishing",
     weight: 20,
-    api: () => import("./save-and-schedule.action-BzuBvP6D.js"),
+    api: () => import("./save-and-schedule.action-BQzncrRN.js"),
     forWorkspaceActions: "Umb.WorkspaceAction.Document.SaveAndPublish",
     meta: {
       label: "#buttons_schedulePublish",
@@ -927,26 +979,26 @@ const Dt = [
     },
     conditions: [
       {
-        alias: f,
-        allOf: [w, E]
+        alias: I,
+        allOf: [W, T]
       },
       {
         alias: i
       },
       {
-        alias: L,
+        alias: $,
         match: !1
       }
     ]
   }
-], fi = [...Oi, ...Ii], bi = [
+], Ci = [...Si, ...Pi], Bi = [
   {
     type: "entityAction",
     kind: "default",
     alias: "Umb.EntityAction.Document.Unpublish",
     name: "Unpublish Document Entity Action",
     weight: 500,
-    api: () => import("./unpublish.action-CaeHdDMa.js"),
+    api: () => import("./unpublish.action--4VixTAA.js"),
     forEntityTypes: [e],
     meta: {
       icon: "icon-globe",
@@ -963,14 +1015,14 @@ const Dt = [
       }
     ]
   }
-], Mi = [
+], hi = [
   {
     type: "entityBulkAction",
     kind: "default",
     alias: "Umb.EntityBulkAction.Document.Unpublish",
     name: "Unpublish Document Entity Bulk Action",
     weight: 40,
-    api: () => import("./unpublish.bulk-action-DWZoDRLl.js"),
+    api: () => import("./unpublish.bulk-action-B7tIUlwL.js"),
     meta: {
       icon: "icon-globe",
       label: "#actions_unpublish"
@@ -987,21 +1039,21 @@ const Dt = [
       }
     ]
   }
-], Si = [
+], ki = [
   {
     type: "modal",
-    alias: $e,
+    alias: ge,
     name: "Document Unpublish Modal",
-    element: () => import("./document-unpublish-modal.element-nf9-R3ki.js")
+    element: () => import("./document-unpublish-modal.element-AjaAP0i-.js")
   }
-], Ci = [
+], Ni = [
   {
     type: "workspaceActionMenuItem",
     kind: "default",
     alias: "Umb.Document.WorkspaceActionMenuItem.Unpublish",
     name: "Unpublish",
     weight: 0,
-    api: () => import("./unpublish.action-oznCGmHh.js"),
+    api: () => import("./unpublish.action-joPjKqe7.js"),
     forWorkspaceActions: "Umb.WorkspaceAction.Document.SaveAndPublish",
     meta: {
       label: "#actions_unpublish",
@@ -1009,54 +1061,54 @@ const Dt = [
     },
     conditions: [
       {
-        alias: f,
+        alias: I,
         allOf: [b]
       },
       {
         alias: i
       },
       {
-        alias: L,
+        alias: $,
         match: !1
       }
     ]
   }
-], Pi = [
-  ...bi,
-  ...Mi,
-  ...Si,
-  ...Ci
-], Bi = [
+], Li = [
+  ...Bi,
+  ...hi,
+  ...ki,
+  ...Ni
+], gi = [
   {
     type: "workspaceContext",
     name: "Document Publishing Workspace Context",
     alias: "Umb.WorkspaceContext.Document.Publishing",
-    api: () => import("./document-publishing.workspace-context-Bu3zFT67.js"),
+    api: () => import("./document-publishing.workspace-context-De5j-yxD.js"),
     conditions: [
       {
         alias: t,
-        match: n
+        match: o
       }
     ]
   }
-], Ni = [
-  ...Di,
-  ...Ai,
+], $i = [
   ...Ri,
-  ...fi,
-  ...Pi,
-  ...Bi
-], ki = [
+  ...bi,
+  ...Mi,
+  ...Ci,
+  ...Li,
+  ...gi
+], wi = [
   {
     type: "repository",
-    alias: we,
+    alias: $e,
     name: "Bulk Trash Document Repository",
     api: () => import("./trash.repository-C5KL4UkK.js")
   }
-], hi = [
+], Yi = [
   {
     type: "entityBulkAction",
-    kind: ot,
+    kind: nt,
     alias: "Umb.EntityBulkAction.Document.Trash",
     name: "Trash Document Entity Bulk Action",
     weight: 10,
@@ -1064,7 +1116,7 @@ const Dt = [
     meta: {
       itemRepositoryAlias: p,
       recycleBinRepositoryAlias: u,
-      referenceRepositoryAlias: T
+      referenceRepositoryAlias: E
     },
     conditions: [
       {
@@ -1077,8 +1129,8 @@ const Dt = [
       }
     ]
   },
-  ...ki
-], Li = [
+  ...wi
+], Wi = [
   {
     type: "entityAction",
     kind: "trashWithRelation",
@@ -1088,7 +1140,7 @@ const Dt = [
     meta: {
       itemRepositoryAlias: p,
       recycleBinRepositoryAlias: u,
-      referenceRepositoryAlias: T
+      referenceRepositoryAlias: E
     },
     conditions: [
       {
@@ -1109,15 +1161,15 @@ const Dt = [
     meta: {
       itemRepositoryAlias: p,
       recycleBinRepositoryAlias: u,
-      pickerModal: Ye
+      pickerModal: we
     },
     conditions: [
       {
         alias: "Umb.Condition.UserPermission.Document",
-        allOf: [I]
+        allOf: [O]
       },
       {
-        alias: me
+        alias: pe
       }
     ]
   },
@@ -1136,12 +1188,12 @@ const Dt = [
         allOf: [_]
       },
       {
-        alias: at
+        alias: ot
       }
     ]
   },
-  ...hi
-], gi = [
+  ...Yi
+], vi = [
   {
     type: "menuItem",
     kind: "tree",
@@ -1149,10 +1201,10 @@ const Dt = [
     name: "Document Recycle Bin Menu Item",
     weight: 100,
     meta: {
-      treeAlias: ne,
+      treeAlias: se,
       label: "Recycle Bin",
       icon: "icon-trash",
-      menus: [We]
+      menus: [Ye]
     },
     conditions: [
       {
@@ -1160,27 +1212,27 @@ const Dt = [
       }
     ]
   }
-], $i = [
+], Vi = [
   {
     type: "repository",
     alias: u,
     name: "Document Recycle Bin Repository",
     api: () => import("./document-recycle-bin.repository-DffgP1i2.js")
   }
-], wi = [
+], Fi = [
   {
     type: "repository",
-    alias: oe,
+    alias: me,
     name: "Document Recycle Bin Tree Repository",
-    api: () => import("./document-recycle-bin-tree.repository-C8TG9GHX.js")
+    api: () => import("./document-recycle-bin-tree.repository-C8UcvjQc.js")
   },
   {
     type: "treeStore",
-    alias: ve,
+    alias: We,
     name: "Document Recycle Bin Tree Store",
-    api: () => import("./document-recycle-bin-tree.store-IVd6QkDJ.js")
+    api: () => import("./document-recycle-bin-tree.store-C7qB_ok7.js")
   }
-], Yi = [
+], Hi = [
   {
     type: "entityAction",
     kind: "reloadTreeItemChildren",
@@ -1188,7 +1240,7 @@ const Dt = [
     name: "Reload Document Recycle Bin Tree Item Children Entity Action",
     forEntityTypes: [M]
   }
-], Wi = [
+], xi = [
   {
     type: "treeItem",
     kind: "recycleBin",
@@ -1199,14 +1251,14 @@ const Dt = [
       supportedEntityTypes: [e]
     }
   }
-], vi = [
+], Ki = [
   {
     type: "tree",
     kind: "default",
-    alias: ne,
+    alias: se,
     name: "Document Recycle Bin Tree",
     meta: {
-      repositoryAlias: oe
+      repositoryAlias: me
     }
   },
   {
@@ -1219,41 +1271,41 @@ const Dt = [
       headline: "#general_recycleBin"
     }
   },
-  ...wi,
-  ...Yi,
-  ...Wi
-], Vi = [
+  ...Fi,
+  ...Hi,
+  ...xi
+], Gi = [
   {
     type: "condition",
     name: "Allow Document Recycle Bin Current User Condition",
     alias: "Umb.Condition.CurrentUser.AllowDocumentRecycleBin",
     api: () => import("./allow-document-recycle-bin.condition-BbjBGWsb.js")
   },
-  ...Li,
-  ...gi,
-  ...$i,
-  ...vi
-], Fi = [
+  ...Wi,
+  ...vi,
+  ...Vi,
+  ...Ki
+], ji = [
   {
     type: "repository",
-    alias: ee,
+    alias: ne,
     name: "Document Detail Repository",
-    api: () => import("./document-detail.repository-DnC9zsqm.js")
+    api: () => import("./document-detail.repository-CtE7HTwC.js")
   },
   {
     type: "store",
-    alias: Ve,
+    alias: ve,
     name: "Document Detail Store",
-    api: () => import("./document-detail.store-BPwJ_jWe.js")
+    api: () => import("./document-detail.store-De-_eABC.js")
   }
-], Hi = [...Fi], xi = [
+], qi = [...ji], zi = [
   {
     type: "entityAction",
     kind: "default",
     alias: "Umb.EntityAction.Document.Rollback",
     name: "Rollback Document Entity Action",
     weight: 450,
-    api: () => import("./rollback.action-Bghylyto.js"),
+    api: () => import("./rollback.action-i90qg8op.js"),
     forEntityTypes: [e],
     meta: {
       icon: "icon-history",
@@ -1263,55 +1315,55 @@ const Dt = [
     conditions: [
       {
         alias: "Umb.Condition.UserPermission.Document",
-        allOf: [ae]
+        allOf: [re]
       },
       {
         alias: i
       }
     ]
   }
-], Ki = [
+], Ji = [
   {
     type: "modal",
-    alias: Fe,
+    alias: Ve,
     name: "Document Rollback Modal",
-    element: () => import("./rollback-modal.element-D8t9uS2g.js")
+    element: () => import("./rollback-modal.element-CdoTwM33.js")
   }
-], Gi = [
+], Xi = [
   {
     type: "repository",
-    alias: He,
+    alias: Fe,
     name: "Rollback Repository",
     api: () => import("./rollback.repository-Be4ZtX_9.js")
   }
-], qi = [
-  ...xi,
-  ...Ki,
-  ...Gi
-], zi = [
+], Qi = [
+  ...zi,
+  ...Ji,
+  ...Xi
+], Zi = [
   {
     name: "Document Global Search",
-    alias: xe,
+    alias: He,
     type: "globalSearch",
     weight: 800,
     api: () => import("./document-global-search-nD8a5kJ7.js"),
     meta: {
       label: "Documents",
-      searchProviderAlias: se
+      searchProviderAlias: ce
     },
     conditions: [
       {
-        alias: Y,
+        alias: L,
         match: y
       }
     ]
   }
-], ji = [
+], en = [
   {
     name: "Document Search Provider",
-    alias: se,
+    alias: ce,
     type: "searchProvider",
-    api: () => import("./document.search-provider-B-gcfDuL.js"),
+    api: () => import("./document.search-provider-_j2SZaGG.js"),
     weight: 800,
     meta: {
       label: "Documents"
@@ -1324,8 +1376,8 @@ const Dt = [
     element: () => import("./document-search-result-item.element-tbl0_RYd.js"),
     forEntityTypes: [e]
   },
-  ...zi
-], Ji = [
+  ...Zi
+], tn = [
   {
     type: "workspaceInfoApp",
     kind: "entityReferences",
@@ -1334,70 +1386,70 @@ const Dt = [
     conditions: [
       {
         alias: t,
-        match: n
+        match: o
       }
     ],
     meta: {
-      referenceRepositoryAlias: T
+      referenceRepositoryAlias: E
     }
   }
-], Xi = [
+], nn = [
   {
     type: "repository",
-    alias: T,
+    alias: E,
     name: "Document Reference Repository",
-    api: () => import("./document-reference.repository-S55nfu_J.js")
+    api: () => import("./document-reference.repository-BLxPpYxT.js")
   },
   {
     type: "dataSourceDataMapping",
     alias: "Umb.DataSourceDataMapping.ManagementApi.DocumentReferenceResponse",
     name: "Document Reference Response Management Api Data Mapping",
-    api: () => import("./document-reference-response.management-api.mapping-Cggly957.js"),
+    api: () => import("./document-reference-response.management-api.mapping-Tdfsn1O9.js"),
     forDataSource: U,
     forDataModel: "DocumentReferenceResponseModel"
   }
-], Qi = [...Ji, ...Xi], Zi = [
+], on = [...tn, ...nn], an = [
   {
     type: "workspaceInfoApp",
     name: "Document Links Workspace Info App",
     alias: "Umb.WorkspaceInfoApp.Document.Links",
-    element: () => import("./document-links-workspace-info-app.element-BN18RSED.js"),
+    element: () => import("./document-links-workspace-info-app.element-DLOLbfHr.js"),
     weight: 100,
     conditions: [
       {
         alias: t,
-        match: n
+        match: o
       }
     ]
   }
-], en = {
+], sn = {
   type: "repository",
-  alias: Ke,
+  alias: xe,
   name: "Document Url Repository",
-  api: () => import("./document-url.repository-DuwotY28.js")
-}, tn = {
+  api: () => import("./document-url.repository-BBTB3jpe.js")
+}, mn = {
   type: "itemStore",
-  alias: Ge,
+  alias: Ke,
   name: "Document Url Store",
-  api: () => import("./document-url.store-BuBmcDv0.js")
-}, nn = [en, tn], on = [...nn, ...Zi], an = [
+  api: () => import("./document-url.store-CpXniI-K.js")
+}, rn = [sn, mn], cn = [...rn, ...an], pn = [
   {
     type: "repository",
-    alias: qe,
+    alias: Ge,
     name: "Document Permission Repository",
-    api: () => import("./document-permission.repository-Dlz2NUte.js")
+    api: () => import("./document-permission.repository-DTHGLVXN.js")
   }
-], sn = [
+], ln = [
   {
     type: "condition",
     name: "Document User Permission Condition",
-    alias: f,
+    alias: I,
     api: () => import("./document-user-permission.condition-BkDOsmEj.js")
   }
-], mn = [
+], yn = [
   {
     type: "entityUserPermission",
-    alias: ze,
+    alias: je,
     name: "Read Document User Permission",
     forEntityTypes: [e],
     meta: {
@@ -1408,7 +1460,7 @@ const Dt = [
   },
   {
     type: "entityUserPermission",
-    alias: K,
+    alias: q,
     name: "Create Document Blueprint User Permission",
     forEntityTypes: [e],
     meta: {
@@ -1430,18 +1482,18 @@ const Dt = [
   },
   {
     type: "entityUserPermission",
-    alias: G,
+    alias: z,
     name: "Create Document User Permission",
     forEntityTypes: [e],
     meta: {
       verbs: ["Umb.Document.Create"],
-      label: "#actions_create",
+      label: "#actions_createFor",
       description: "#actionDescriptions_create"
     }
   },
   {
     type: "entityUserPermission",
-    alias: Z,
+    alias: ie,
     name: "Document Notifications User Permission",
     forEntityTypes: [e],
     meta: {
@@ -1452,7 +1504,7 @@ const Dt = [
   },
   {
     type: "entityUserPermission",
-    alias: E,
+    alias: T,
     name: "Publish Document User Permission",
     forEntityTypes: [e],
     meta: {
@@ -1463,7 +1515,7 @@ const Dt = [
   },
   {
     type: "entityUserPermission",
-    alias: je,
+    alias: qe,
     name: "Document Permissions User Permission",
     forEntityTypes: [e],
     meta: {
@@ -1485,7 +1537,7 @@ const Dt = [
   },
   {
     type: "entityUserPermission",
-    alias: w,
+    alias: W,
     name: "Update Document User Permission",
     forEntityTypes: [e],
     meta: {
@@ -1496,7 +1548,7 @@ const Dt = [
   },
   {
     type: "entityUserPermission",
-    alias: g,
+    alias: w,
     name: "Duplicate Document User Permission",
     forEntityTypes: [e],
     meta: {
@@ -1508,7 +1560,7 @@ const Dt = [
   },
   {
     type: "entityUserPermission",
-    alias: I,
+    alias: O,
     name: "Move Document User Permission",
     forEntityTypes: [e],
     meta: {
@@ -1520,7 +1572,7 @@ const Dt = [
   },
   {
     type: "entityUserPermission",
-    alias: Q,
+    alias: te,
     name: "Sort Document User Permission",
     forEntityTypes: [e],
     meta: {
@@ -1532,7 +1584,7 @@ const Dt = [
   },
   {
     type: "entityUserPermission",
-    alias: z,
+    alias: X,
     name: "Document Culture And Hostnames User Permission",
     forEntityTypes: [e],
     meta: {
@@ -1544,7 +1596,7 @@ const Dt = [
   },
   {
     type: "entityUserPermission",
-    alias: Je,
+    alias: ze,
     name: "Document Public Access User Permission",
     forEntityTypes: [e],
     meta: {
@@ -1556,7 +1608,7 @@ const Dt = [
   },
   {
     type: "entityUserPermission",
-    alias: ae,
+    alias: re,
     name: "Document Rollback User Permission",
     forEntityTypes: [e],
     meta: {
@@ -1566,66 +1618,66 @@ const Dt = [
       group: "administration"
     }
   }
-], rn = [
+], un = [
   {
     type: "userGranularPermission",
     alias: "Umb.UserGranularPermission.Document",
     name: "Document Granular User Permission",
     weight: 1e3,
-    element: () => import("./input-document-granular-user-permission.element-DklMjygR.js"),
+    element: () => import("./input-document-granular-user-permission.element-DTcOaSbr.js"),
     meta: {
       schemaType: "DocumentPermissionPresentationModel",
       label: "#user_granularRightsLabel",
       description: "{#user_granularRightsDescription}"
     }
   }
-], cn = [
-  ...an,
-  ...mn,
-  ...rn,
-  ...sn
-], pn = [
+], _n = [
+  ...pn,
+  ...yn,
+  ...un,
+  ...ln
+], En = [
   {
     type: "modal",
     alias: "Umb.Modal.DocumentPropertyValueUserPermissionFlow",
     name: "Document Property Value User Permission Flow Modal",
-    element: () => import("./document-property-value-permission-flow-modal.element-CdHLz9XC.js")
+    element: () => import("./document-property-value-permission-flow-modal.element-GS4GGDfd.js")
   },
-  ...Xe
-], ln = [
+  ...Je
+], Tn = [
   {
     type: "condition",
     name: "Document Property Value User Permission Condition",
-    alias: Qe,
-    api: () => import("./document-property-value-user-permission.condition-k7fLfaLW.js")
+    alias: Xe,
+    api: () => import("./document-property-value-user-permission.condition-CU3w8NKw.js")
   }
-], yn = [
+], Dn = [
   {
     type: "dataSourceDataMapping",
     alias: "Umb.DataSourceDataMapping.ManagementApi.To.DocumentPropertyValuePermissionPresentationModel",
     name: "Document Property Value Permission To Management Api Data Mapping",
     api: () => import("./to-server.management-api.mapping-Cv7DOLAt.js"),
     forDataSource: U,
-    forDataModel: Ze
+    forDataModel: Qe
   },
   {
     type: "dataSourceDataMapping",
     alias: "Umb.DataSourceDataMapping.ManagementApi.From.DocumentPropertyValuePermissionPresentationModel",
     name: "Document Property Value Permission From Management Api Data Mapping",
-    api: () => import("./from-server.management-api.mapping-CrCCMvDb.js"),
+    api: () => import("./from-server.management-api.mapping-9ogCj1ic.js"),
     forDataSource: U,
     forDataModel: "DocumentPropertyValuePermissionPresentationModel"
   }
-], un = [
+], Un = [
   {
     type: "workspaceContext",
     name: "Document Property Value User Permission Document Workspace Context",
     alias: "Umb.WorkspaceContext.Document.DocumentPropertyValueUserPermission",
-    api: () => import("./document-property-value-user-permission.workspace-context-AFzfpHfm.js"),
+    api: () => import("./document-property-value-user-permission.workspace-context-CRTGkL2D.js"),
     conditions: [
       {
         alias: t,
-        match: n
+        match: o
       }
     ]
   },
@@ -1633,23 +1685,23 @@ const Dt = [
     type: "workspaceContext",
     name: "Document Property Value User Permission Block Workspace Context",
     alias: "Umb.WorkspaceContext.Block.DocumentPropertyValueUserPermission",
-    api: () => import("./document-block-property-value-user-permission.workspace-context-D-VyES6Q.js"),
+    api: () => import("./document-block-property-value-user-permission.workspace-context-BcA2JyP0.js"),
     conditions: [
       {
         alias: t,
-        match: st
+        match: at
       }
     ]
   }
-], _n = [
+], dn = [
   {
     type: "entityUserPermission",
     alias: "Umb.EntityUserPermission.Document.PropertyValue.Read",
     name: "Read Document Property Value User Permission",
-    forEntityTypes: [v],
+    forEntityTypes: [V],
     weight: 200,
     meta: {
-      verbs: [et],
+      verbs: [Ze],
       label: "UI Read",
       description: "Allow access to read Document property values in the UI"
     }
@@ -1658,10 +1710,10 @@ const Dt = [
     type: "entityUserPermission",
     alias: "Umb.EntityUserPermission.DocumentPropertyValue.Write",
     name: "Write Document Property Value User Permission",
-    forEntityTypes: [v],
+    forEntityTypes: [V],
     weight: 200,
     meta: {
-      verbs: [tt],
+      verbs: [et],
       label: "UI Write",
       description: "Allow access to write Document property values from the UI"
     }
@@ -1671,28 +1723,28 @@ const Dt = [
     alias: "Umb.UserGranularPermission.Document.PropertyValue",
     name: "Document Property Values Granular User Permission",
     weight: 950,
-    element: () => import("./input-document-property-value-user-permission.element-DcJaXsVI.js"),
+    element: () => import("./input-document-property-value-user-permission.element-BhBOKkjF.js"),
     meta: {
       schemaType: "DocumentPropertyValuePermissionPresentationModel",
       label: "Document Property Values",
       description: "Assign permissions to Document property values"
     }
   },
-  ...ln,
-  ...yn,
-  ...pn,
-  ...un
-], Tn = [
-  ...cn,
-  ..._n
-], En = [
+  ...Tn,
+  ...Dn,
+  ...En,
+  ...Un
+], An = [
+  ..._n,
+  ...dn
+], fn = [
   {
     type: "workspaceAction",
     kind: "default",
     alias: "Umb.WorkspaceAction.Document.Save",
     name: "Save Document Workspace Action",
     weight: 80,
-    api: () => import("./save.action-B9_Aackz.js"),
+    api: () => import("./save.action-DH7wWlrz.js"),
     meta: {
       label: "#buttons_save",
       look: "secondary",
@@ -1701,7 +1753,7 @@ const Dt = [
     conditions: [
       {
         alias: t,
-        match: n
+        match: o
       },
       {
         alias: i
@@ -1714,50 +1766,30 @@ const Dt = [
     alias: "Umb.WorkspaceAction.Document.SaveAndPreview",
     name: "Save And Preview Document Workspace Action",
     weight: 90,
-    api: () => import("./save-and-preview.action-lKlGXFpy.js"),
+    api: () => import("./save-and-preview.action-D1bS_iCo.js"),
     meta: {
       label: "#buttons_saveAndPreview"
     },
     conditions: [
       {
         alias: t,
-        match: n
+        match: o
       },
       {
         alias: i
       }
     ]
   }
-], Dn = [
+], Rn = [
   {
     type: "workspace",
     kind: "routable",
-    alias: n,
+    alias: o,
     name: "Document Workspace",
-    api: () => import("./document-workspace.context-2iTL70-k.js"),
+    api: () => import("./document-workspace.context-CJunPKok.js"),
     meta: {
       entityType: e
     }
-  },
-  {
-    type: "workspaceView",
-    kind: "contentCollection",
-    alias: "Umb.WorkspaceView.Document.Collection",
-    name: "Document Workspace Collection View",
-    meta: {
-      label: "Collection",
-      pathname: "collection",
-      icon: "icon-grid"
-    },
-    conditions: [
-      {
-        alias: t,
-        match: n
-      },
-      {
-        alias: Ee
-      }
-    ]
   },
   {
     type: "workspaceView",
@@ -1773,10 +1805,10 @@ const Dt = [
     conditions: [
       {
         alias: t,
-        match: n
+        match: o
       },
       {
-        alias: De
+        alias: Ue
       }
     ]
   },
@@ -1784,7 +1816,7 @@ const Dt = [
     type: "workspaceView",
     alias: "Umb.WorkspaceView.Document.Info",
     name: "Document Workspace Info View",
-    element: () => import("./document-workspace-view-info.element-BqZnUhkV.js"),
+    element: () => import("./document-workspace-view-info.element-BPnXkFOg.js"),
     weight: 100,
     meta: {
       label: "#general_info",
@@ -1794,33 +1826,40 @@ const Dt = [
     conditions: [
       {
         alias: t,
-        match: n
+        match: o
       }
     ]
   },
-  ...En
-], Un = [
-  ...gt,
-  ...Wt,
-  ...Zt,
-  ...oi,
+  ...fn
+], On = [
+  ...$t,
+  ...vt,
+  ...ei,
   ...ai,
-  ...mi,
-  ...it,
-  ...ri,
   ...ci,
+  ...pi,
   ...yi,
-  ...Ni,
-  ...Vi,
-  ...Hi,
+  ...tt,
+  ...ui,
+  ..._i,
+  ...Di,
+  ...$i,
+  ...Gi,
   ...qi,
-  ...ji,
   ...Qi,
-  ...nt,
+  ...en,
   ...on,
-  ...Tn,
-  ...Dn
-], dn = [
+  ...it,
+  ...cn,
+  ...An,
+  ...Rn,
+  {
+    name: "Document Backoffice Entry Point",
+    alias: "Umb.BackofficeEntryPoint.Document",
+    type: "backofficeEntryPoint",
+    js: () => import("./entry-point-C3C6o2mr.js")
+  }
+], In = [
   {
     type: "entityCreateOptionAction",
     kind: "folder",
@@ -1834,7 +1873,7 @@ const Dt = [
       folderRepositoryAlias: d
     }
   }
-], An = [
+], bn = [
   {
     type: "entityAction",
     kind: "create",
@@ -1842,13 +1881,13 @@ const Dt = [
     name: "Create Document Type Entity Action",
     weight: 1200,
     forEntityTypes: [
-      o,
+      n,
       m,
       a
     ],
     meta: {
       icon: "icon-add",
-      label: "#actions_create",
+      label: "#actions_createFor",
       additionalOptions: !0,
       headline: "#create_createUnder #treeHeaders_documentTypes"
     }
@@ -1858,9 +1897,9 @@ const Dt = [
     alias: "Umb.EntityCreateOptionAction.DocumentType.Default",
     name: "Default Document Type Entity Create Option Action",
     weight: 100,
-    api: () => import("./default-document-type-create-option-action-DPhV3znj.js"),
+    api: () => import("./default-document-type-create-option-action-MuNjyeGY.js"),
     forEntityTypes: [
-      o,
+      n,
       m,
       a
     ],
@@ -1875,9 +1914,9 @@ const Dt = [
     alias: "Umb.EntityCreateOptionAction.DocumentType.DocumentWithTemplate",
     name: "Document Type with Template Document Type Entity Create Option Action",
     weight: 90,
-    api: () => import("./document-type-with-template-create-option-action-DT-Dfy8E.js"),
+    api: () => import("./document-type-with-template-create-option-action-NgappFOB.js"),
     forEntityTypes: [
-      o,
+      n,
       m,
       a
     ],
@@ -1892,9 +1931,9 @@ const Dt = [
     alias: "Umb.EntityCreateOptionAction.DocumentType.ElementType",
     name: "Element Type Document Type Entity Create Option Action",
     weight: 80,
-    api: () => import("./element-type-create-option-action-BwCdhNJj.js"),
+    api: () => import("./element-type-create-option-action-DwmLIRoB.js"),
     forEntityTypes: [
-      o,
+      n,
       m,
       a
     ],
@@ -1904,65 +1943,65 @@ const Dt = [
       description: "#create_elementTypeDescription"
     }
   },
-  ...dn
-], Rn = [
+  ...In
+], Mn = [
   {
     type: "repository",
-    alias: re,
+    alias: le,
     name: "Move Document Type Repository",
     api: () => import("./document-type-move.repository-Bur1vBeJ.js")
   }
-], On = [
+], Sn = [
   {
     type: "entityAction",
     kind: "moveTo",
     alias: "Umb.EntityAction.DocumentType.MoveTo",
     name: "Move Document Type Entity Action",
-    forEntityTypes: [o],
+    forEntityTypes: [n],
     meta: {
       treeRepositoryAlias: A,
-      moveRepositoryAlias: re,
+      moveRepositoryAlias: le,
       treeAlias: S,
       foldersOnly: !0
     }
   },
-  ...Rn
-], In = [
+  ...Mn
+], Pn = [
   {
     type: "repository",
-    alias: ce,
+    alias: ye,
     name: "Duplicate Document Type Repository",
     api: () => import("./document-type-duplicate.repository-DiiVWECi.js")
   }
-], fn = [
+], Cn = [
   {
     type: "entityAction",
     kind: "duplicateTo",
     alias: "Umb.EntityAction.DocumentType.DuplicateTo",
     name: "Duplicate Document To Entity Action",
-    forEntityTypes: [o],
+    forEntityTypes: [n],
     meta: {
-      duplicateRepositoryAlias: ce,
+      duplicateRepositoryAlias: ye,
       treeAlias: S,
       treeRepositoryAlias: A,
       foldersOnly: !0
     }
   },
-  ...In
-], bn = [
+  ...Pn
+], Bn = [
   {
     type: "repository",
-    alias: mt,
+    alias: st,
     name: "Export Document Type Repository",
     api: () => import("./document-type-export.repository-DE_VGxKN.js")
   }
-], Mn = [
+], hn = [
   {
     type: "entityAction",
     kind: "default",
     alias: "Umb.EntityAction.DocumentType.Export",
     name: "Export Document Type Entity Action",
-    forEntityTypes: [o],
+    forEntityTypes: [n],
     api: () => import("./document-type-export.action-DCoGXYa-.js"),
     meta: {
       icon: "icon-download-alt",
@@ -1970,60 +2009,60 @@ const Dt = [
       additionalOptions: !0
     }
   },
-  ...bn
-], Sn = [
+  ...Bn
+], kn = [
   {
     type: "repository",
-    alias: rt,
+    alias: mt,
     name: "Import Document Type Repository",
     api: () => import("./document-type-import.repository-Cc5QCRew.js")
   }
-], Cn = [
+], Nn = [
   {
     type: "modal",
     alias: "Umb.Modal.DocumentType.Import",
     name: "Document Type Import Modal",
     element: () => import("./document-type-import-modal.element-C_zOElEL.js")
   }
-], Pn = [
+], Ln = [
   {
     type: "entityAction",
     kind: "default",
     alias: "Umb.EntityAction.DocumentType.Import",
     name: "Export Document Type Entity Action",
     forEntityTypes: [m],
-    api: () => import("./document-type-import.action-B8n1UdPS.js"),
+    api: () => import("./document-type-import.action-CQYzWwNa.js"),
     meta: {
       icon: "icon-page-up",
       label: "#actions_import",
       additionalOptions: !0
     }
   },
-  ...Sn,
-  ...Cn
-], Bn = [
+  ...kn,
+  ...Nn
+], gn = [
   {
     type: "entityAction",
     kind: "delete",
     alias: "Umb.EntityAction.DocumentType.Delete",
     name: "Delete Document-Type Entity Action",
-    forEntityTypes: [o],
+    forEntityTypes: [n],
     meta: {
-      itemRepositoryAlias: le,
-      detailRepositoryAlias: pe,
+      itemRepositoryAlias: _e,
+      detailRepositoryAlias: ue,
       additionalOptions: !0
     }
   },
-  ...An,
-  ...On,
-  ...fn,
-  ...Mn,
-  ...Pn
-], Nn = [
+  ...bn,
+  ...Sn,
+  ...Cn,
+  ...hn,
+  ...Ln
+], $n = [
   {
     type: "menuItem",
     kind: "tree",
-    alias: "Umb.MenuItem.DocumentTypes",
+    alias: F,
     name: "Document Types Menu Item",
     weight: 900,
     meta: {
@@ -2034,9 +2073,13 @@ const Dt = [
   },
   {
     type: "workspaceContext",
+    kind: "menuStructure",
     name: "Document Type Menu Structure Workspace Context",
     alias: "Umb.Context.DocumentType.Menu.Structure",
-    api: () => import("./document-type-menu-structure.context-CwTDc8TP.js"),
+    api: () => import("./document-type-menu-structure.context-BzDREXkS.js"),
+    meta: {
+      menuItemAlias: F
+    },
     conditions: [
       {
         alias: t,
@@ -2056,16 +2099,16 @@ const Dt = [
       }
     ]
   }
-], kn = [
+], wn = [
   {
     type: "pickerSearchResultItem",
     kind: "default",
     alias: "Umb.PickerSearchResultItem.DocumentType",
     name: "Document Type Picker Search Result Item",
     element: () => import("./document-type-picker-search-result-item.element-4R6o-5UA.js"),
-    forEntityTypes: [o]
+    forEntityTypes: [n]
   }
-], hn = {
+], Yn = {
   type: "propertyEditorUi",
   alias: "Umb.PropertyEditorUi.DocumentTypePicker",
   name: "Document Type Picker Property Editor UI",
@@ -2086,12 +2129,12 @@ const Dt = [
       ]
     }
   }
-}, Ln = [hn], gn = [
+}, Wn = [Yn], vn = [
   {
     type: "dataSourceDataMapping",
     alias: "Umb.DataSourceDataMapping.ManagementApi.DocumentTypePropertyTypeReferenceResponse",
     name: "Document Type Property Type Reference Response Management Api Data Mapping",
-    api: () => import("./document-type-property-type-reference-response.management-api.mapping-C7x6W2lK.js"),
+    api: () => import("./document-type-property-type-reference-response.management-api.mapping-1p4TbwNp.js"),
     forDataSource: U,
     forDataModel: "DocumentTypePropertyTypeReferenceResponseModel"
   },
@@ -2099,65 +2142,65 @@ const Dt = [
     type: "entityItemRef",
     alias: "Umb.EntityItemRef.DocumentTypePropertyType",
     name: "Document Type Property Type Entity Item Reference",
-    element: () => import("./document-type-property-type-item-ref.element-BHqImEIM.js"),
-    forEntityTypes: [ct]
+    element: () => import("./document-type-property-type-item-ref.element-DUuNMsiT.js"),
+    forEntityTypes: [rt]
   }
-], $n = [
+], Vn = [
   {
     type: "repository",
-    alias: pe,
+    alias: ue,
     name: "Document Types Repository",
-    api: () => import("./document-type-detail.repository-V__Mk04y.js")
+    api: () => import("./document-type-detail.repository-CpC7IMIu.js").then((C) => C.d)
   },
   {
     type: "store",
-    alias: pt,
+    alias: ct,
     name: "Document Type Store",
-    api: () => import("./document-type-detail.store-CK4xnkjB.js")
+    api: () => import("./document-type-detail.store-BRIoIgqA.js")
   }
-], wn = [
+], Fn = [
   {
     type: "repository",
-    alias: le,
+    alias: _e,
     name: "Document Type Item Repository",
-    api: () => import("./document-type-item.repository-CK9-9XMP.js")
+    api: () => import("./document-type-item.repository-ByLLQhzN.js")
   },
   {
     type: "itemStore",
-    alias: lt,
+    alias: pt,
     name: "Document Type Item Store",
-    api: () => import("./document-type-item.store-8gSbncS9.js")
+    api: () => import("./document-type-item.store-8659wTP3.js")
   }
-], Yn = [
+], Hn = [
   {
     type: "repository",
-    alias: ye,
+    alias: Ee,
     name: "Document Type Composition Repository",
     api: () => import("./document-type-composition.repository-BLbQD94J.js")
   }
-], Wn = [...$n, ...wn, ...Yn], vn = [
+], xn = [...Vn, ...Fn, ...Hn], Kn = [
   {
     name: "Document Type Global Search",
-    alias: yt,
+    alias: lt,
     type: "globalSearch",
     weight: 600,
     meta: {
       label: "Document Types",
-      searchProviderAlias: ue
+      searchProviderAlias: Te
     },
     conditions: [
       {
-        alias: Y,
+        alias: L,
         match: Et
       }
     ]
   }
-], Vn = [
+], Gn = [
   {
     name: "Document Type Search Provider",
-    alias: ue,
+    alias: Te,
     type: "searchProvider",
-    api: () => import("./document-type.search-provider-BomHt9t7.js"),
+    api: () => import("./document-type.search-provider-Bi7Spbsb.js"),
     weight: 600,
     meta: {
       label: "Document Types"
@@ -2168,29 +2211,29 @@ const Dt = [
     alias: "Umb.SearchResultItem.DocumentType",
     type: "searchResultItem",
     element: () => import("./document-type-search-result-item.element-CDCu6XTV.js"),
-    forEntityTypes: [o]
+    forEntityTypes: [n]
   },
-  ...vn
-], Fn = [
+  ...Kn
+], jn = [
   {
     type: "repository",
     alias: d,
     name: "Document Type Folder Repository",
-    api: () => import("./document-type-folder.repository-Bzu-6mUl.js")
+    api: () => import("./document-type-folder.repository-Bnl0WtVC.js")
   },
   {
     type: "store",
-    alias: ut,
+    alias: yt,
     name: "Document Type Folder Store",
-    api: () => import("./document-type-folder.store-WdZCvQ-J.js")
+    api: () => import("./document-type-folder.store-B4uEfXQg.js")
   }
-], Hn = [
+], qn = [
   {
     type: "workspace",
     kind: "routable",
-    alias: k,
+    alias: N,
     name: "Document Type Folder Workspace",
-    api: () => import("./document-type-folder-workspace.context-Cqc6Tgme.js"),
+    api: () => import("./document-type-folder-workspace.context-2_J7UV_-.js"),
     meta: {
       entityType: a
     }
@@ -2200,7 +2243,7 @@ const Dt = [
     kind: "default",
     alias: "Umb.WorkspaceAction.DocumentType.Folder.Submit",
     name: "Submit Document Type Folder Workspace Action",
-    api: O,
+    api: R,
     meta: {
       label: "#buttons_save",
       look: "primary",
@@ -2209,11 +2252,11 @@ const Dt = [
     conditions: [
       {
         alias: t,
-        match: k
+        match: N
       }
     ]
   }
-], xn = [
+], zn = [
   {
     type: "entityAction",
     kind: "folderUpdate",
@@ -2234,9 +2277,9 @@ const Dt = [
       folderRepositoryAlias: d
     }
   },
-  ...Fn,
-  ...Hn
-], Kn = [
+  ...jn,
+  ...qn
+], Jn = [
   {
     type: "collectionAction",
     kind: "create",
@@ -2245,23 +2288,23 @@ const Dt = [
     conditions: [
       {
         alias: s,
-        match: C
+        match: P
       }
     ]
   }
-], Gn = [
+], Xn = [
   {
     type: "repository",
-    alias: _e,
+    alias: De,
     name: "Document Type Tree Item Children Collection Repository",
-    api: () => import("./document-type-tree-item-children-collection.repository-BsQ4-8jx.js")
+    api: () => import("./document-type-tree-item-children-collection.repository-BbAk0czs.js")
   }
-], qn = [
+], Qn = [
   {
     type: "collectionView",
     alias: "Umb.CollectionView.DocumentType.TreeItem.Table",
     name: "Document Type Tree Item Table Collection View",
-    element: () => import("./document-type-tree-item-table-collection-view.element-td9veAa7.js"),
+    element: () => import("./document-type-tree-item-table-collection-view.element-B-pZrFtk.js"),
     weight: 300,
     meta: {
       label: "Table",
@@ -2271,24 +2314,24 @@ const Dt = [
     conditions: [
       {
         alias: s,
-        match: C
+        match: P
       }
     ]
   }
-], zn = [
+], Zn = [
   {
     type: "collection",
     kind: "default",
-    alias: C,
+    alias: P,
     name: "Document Type Tree Item Children Collection",
     meta: {
-      repositoryAlias: _e
+      repositoryAlias: De
     }
   },
-  ...Kn,
-  ...Gn,
-  ...qn
-], jn = [
+  ...Jn,
+  ...Xn,
+  ...Qn
+], eo = [
   {
     type: "entityAction",
     alias: "Umb.EntityAction.DocumentType.Tree.ReloadChildrenOf",
@@ -2296,22 +2339,22 @@ const Dt = [
     kind: "reloadTreeItemChildren",
     forEntityTypes: [
       m,
-      o,
+      n,
       a
     ]
   }
-], Jn = [...zn, ...jn], Xn = [
+], to = [...Zn, ...eo], io = [
   {
     type: "repository",
     alias: A,
     name: "Document Type Tree Repository",
-    api: () => import("./document-type-tree.repository-lsJHwcEP.js")
+    api: () => import("./document-type-tree.repository-yCAi_Un2.js")
   },
   {
     type: "treeStore",
-    alias: _t,
+    alias: ut,
     name: "Document Type Tree Store",
-    api: () => import("./document-type.tree.store-ZLlZwTXD.js")
+    api: () => import("./document-type.tree.store-DvhyesZE.js")
   },
   {
     type: "tree",
@@ -2329,7 +2372,7 @@ const Dt = [
     name: "Document Type Tree Item",
     forEntityTypes: [
       m,
-      o,
+      n,
       a
     ]
   },
@@ -2342,24 +2385,24 @@ const Dt = [
       label: "#general_design",
       pathname: "design",
       icon: "icon-member-dashed-line",
-      collectionAlias: C
+      collectionAlias: P
     },
     conditions: [
       {
-        alias: "Umb.Condition.WorkspaceAlias",
-        oneOf: [Tt, k]
+        alias: t,
+        oneOf: [_t, N]
       }
     ]
   },
-  ...xn,
-  ...Jn
-], Qn = [
+  ...zn,
+  ...to
+], no = [
   {
     type: "workspace",
     kind: "routable",
     alias: r,
     name: "Document Type Workspace",
-    api: () => import("./document-type-workspace.context-CbCunNQk.js"),
+    api: () => import("./document-type-workspace.context-DYrPZML8.js"),
     meta: {
       entityType: "document-type"
     }
@@ -2373,7 +2416,7 @@ const Dt = [
       label: "#general_design",
       pathname: "design",
       icon: "icon-document-dashed-line",
-      compositionRepositoryAlias: ye
+      compositionRepositoryAlias: Ee
     },
     conditions: [
       {
@@ -2386,7 +2429,7 @@ const Dt = [
     type: "workspaceView",
     alias: "Umb.WorkspaceView.DocumentType.Structure",
     name: "Document Type Workspace Structure View",
-    element: () => import("./document-type-workspace-view-structure.element-CuAX-ajI.js"),
+    element: () => import("./document-type-workspace-view-structure.element-DaZbkOHZ.js"),
     weight: 800,
     meta: {
       label: "#contentTypeEditor_structure",
@@ -2404,7 +2447,7 @@ const Dt = [
     type: "workspaceView",
     alias: "Umb.WorkspaceView.DocumentType.Settings",
     name: "Document Type Workspace Settings View",
-    element: () => import("./document-type-workspace-view-settings.element-CuXtq6st.js"),
+    element: () => import("./document-type-workspace-view-settings.element-Bwyu94E0.js"),
     weight: 600,
     meta: {
       label: "#general_settings",
@@ -2422,7 +2465,7 @@ const Dt = [
     type: "workspaceView",
     alias: "Umb.WorkspaceView.DocumentType.Templates",
     name: "Document Type Workspace Templates View",
-    element: () => import("./document-type-workspace-view-templates.element-BMZId_af.js"),
+    element: () => import("./document-type-workspace-view-templates.element-BshIn97z.js"),
     weight: 400,
     meta: {
       label: "#treeHeaders_templates",
@@ -2441,7 +2484,7 @@ const Dt = [
     kind: "default",
     alias: "Umb.WorkspaceAction.DocumentType.Save",
     name: "Save Document Type Workspace Action",
-    api: O,
+    api: R,
     meta: {
       label: "#buttons_save",
       look: "primary",
@@ -2454,7 +2497,7 @@ const Dt = [
       }
     ]
   }
-], Zn = [
+], oo = [
   {
     type: "workspace",
     kind: "default",
@@ -2465,17 +2508,23 @@ const Dt = [
       headline: "#treeHeaders_documentTypes"
     }
   }
-], eo = [...Qn, ...Zn], to = [
-  ...Bn,
-  ...Nn,
-  ...kn,
-  ...Ln,
+], ao = [...no, ...oo], so = [
   ...gn,
+  ...$n,
+  ...wn,
   ...Wn,
-  ...Vn,
-  ...Xn,
-  ...eo
-], io = [
+  ...vn,
+  ...xn,
+  ...Gn,
+  ...io,
+  ...ao,
+  {
+    name: "Document Type Backoffice Entry Point",
+    alias: "Umb.EntryPoint.DocumentType",
+    type: "backofficeEntryPoint",
+    js: () => import("./entry-point-DKfMfW5i.js")
+  }
+], mo = [
   {
     type: "section",
     alias: y,
@@ -2487,7 +2536,7 @@ const Dt = [
     },
     conditions: [
       {
-        alias: Y,
+        alias: L,
         match: y
       }
     ]
@@ -2500,24 +2549,24 @@ const Dt = [
     weight: 100,
     meta: {
       label: "#sections_content",
-      menu: Ie,
-      entityType: Oe
+      menu: Dt,
+      entityType: Tt
     },
     conditions: [
       {
-        alias: "Umb.Condition.SectionAlias",
+        alias: H,
         match: y
       }
     ]
   }
-], fo = [
-  ...Dt,
-  ...ht,
-  ...Un,
-  ...to,
-  ...io
+], ko = [
+  ...Ut,
+  ...Lt,
+  ...On,
+  ...so,
+  ...mo
 ];
 export {
-  fo as manifests
+  ko as manifests
 };
 //# sourceMappingURL=manifests.js.map

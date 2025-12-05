@@ -1,0 +1,56 @@
+﻿@* Views/Partials/BlockList/Components/inlineImageText.cshtml *@
+@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<Umbraco.Cms.Core.Models.Blocks.BlockListItem>
+
+@using Umbraco.Extensions
+@using Umbraco.Cms.Core.Models
+@using Umbraco.Cms.Core.Models.Blocks
+@using Umbraco.Cms.Core.Models.PublishedContent
+
+@{
+    // Model.Content is IPublishedElement
+    var el = Model?.Content;
+    if (el is null) { return; }
+
+    // Your aliases: image (Media Picker), myndatekstur (caption)
+    MediaWithCrops? media   = el.Value<MediaWithCrops?>("image");
+    string?        caption = el.Value<string>("myndatekstur");
+
+    // WebP optimized URL
+    var imgUrl = media?.GetCropUrl(
+        furtherOptions: "&format=webp&upscale=false"
+    ) ?? media?.Url();
+
+    var alt = media?.Name ?? string.Empty;
+
+    if (string.IsNullOrWhiteSpace(imgUrl)) { return; }
+}
+
+<figure class="rte-inline-image-text" contenteditable="false">
+  <img src="@imgUrl" alt="@alt" loading="lazy" decoding="async" />
+  @if (!string.IsNullOrWhiteSpace(caption))
+  {
+    <figcaption>@caption</figcaption>
+  }
+</figure>
+
+<style>
+  .rte-inline-image-text { 
+    display:inline-block; 
+    max-width:100%; 
+    margin:.25rem .5rem; 
+    vertical-align:middle; 
+  }
+
+  .rte-inline-image-text img { 
+    display:block; 
+    max-width:100%; 
+    height:auto; 
+  }
+
+  .rte-inline-image-text figcaption { 
+    font-size:.875rem; 
+    line-height:1.3; 
+    opacity:.8; 
+    margin-top:.25rem; 
+  }
+</style>

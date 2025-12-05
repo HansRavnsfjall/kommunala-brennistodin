@@ -1,0 +1,70 @@
+@using Umbraco.Cms.Core.Models.Blocks
+@using Umbraco.Cms.Core.Models.PublishedContent
+@using Umbraco.Extensions
+@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<IPublishedContent>
+
+/*
+  Usage:
+  - Render this partial on your Global Blocks page (repository) and pass the page as the model:
+      @await Html.PartialAsync("~/Views/Partials/Helpers/ListGlobalBlockKeys.cshtml", Model)
+  - It will show each block from the "modul" property with alias, a friendly label, and the GUID to copy.
+*/
+
+@{
+    var culture = System.Globalization.CultureInfo.CurrentUICulture?.Name;
+    var blocks = Model?.Value<BlockListModel>("modul", culture: culture, fallback: Fallback.ToLanguage) ?? new BlockListModel();
+    string LabelFor(IPublishedElement el)
+    {
+        // Try common heading props you use; adjust aliases if needed
+        var heading = el.Value<string>("yvirskrift", culture: culture, fallback: Fallback.ToLanguage)
+                  ?? el.Value<string>("title", culture: culture, fallback: Fallback.ToLanguage)
+                  ?? el.Value<string>("heading", culture: culture, fallback: Fallback.ToLanguage);
+        return !string.IsNullOrWhiteSpace(heading) ? heading : "";
+    }
+}
+
+<div class="container my-4">
+  <h5>Global Blocks in <code>@Model?.Name</code></h5>
+  @if (!blocks.Any())
+  {
+      <div class="alert alert-warning">No blocks in <code>modul</code>.</div>
+  }
+  else
+  {
+      <div class="table-responsive">
+        <table class="table table-sm align-middle">
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>Alias</th>
+              <th>Label</th>
+              <th>GUID (key)</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody>
+          @{
+              var i = 0;
+              foreach (var b in blocks)
+              {
+                  i++;
+                  var alias = b.Content.ContentType.Alias;
+                  var label = LabelFor(b.Content);
+                  var key = b.Udi.Guid.ToString("D");
+              <tr>
+                <td>@i</td>
+                <td><code>@alias</code></td>
+                <td>@(string.IsNullOrWhiteSpace(label) ? "—" : label)</td>
+                <td><code id="g-@i">@key</code></td>
+                <td>
+                  <button type="button" class="btn btn-outline-secondary btn-sm" onclick="navigator.clipboard.writeText('@key')">Copy</button>
+                </td>
+              </tr>
+              }
+          }
+          </tbody>
+        </table>
+      </div>
+      <p class="text-muted small">Copy the GUID and paste it into <strong>Global Block</strong> on your <code>globalBlockReference</code> item.</p>
+  }
+</div>

@@ -1,0 +1,157 @@
+@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<Umbraco.Cms.Core.Models.Blocks.BlockListItem>
+@using System.Globalization
+@using Umbraco.Cms.Core.Models
+@using Umbraco.Cms.Core.Models.Blocks
+@using Umbraco.Cms.Core.Models.PublishedContent
+@using Umbraco.Extensions
+
+@functions{
+    private static string TelHref(string? input)
+    {
+        if (string.IsNullOrWhiteSpace(input)) return "";
+        var clean = new string(input.Trim().Where(c => char.IsDigit(c) || c == '+').ToArray());
+        if (!clean.StartsWith("+") && clean.Length > 0) clean = "+" + clean;
+        return $"tel:{clean}";
+    }
+}
+
+@{
+    var culture = CultureInfo.CurrentUICulture?.Name;
+    var el = Model?.Content;
+    if (el is null) { return; }
+
+    var heading = el.Value<string>("deild", culture: culture, fallback: Fallback.ToLanguage);
+
+    var employees = el.Value<BlockListModel>("starvsfolk", culture: culture, fallback: Fallback.ToLanguage)
+                   ?? new BlockListModel(new List<BlockListItem>());
+}
+
+<section class="starvsfolkadeild my-4">
+    @if (!string.IsNullOrWhiteSpace(heading))
+    {
+        <h2 class="h3 mb-3">@heading</h2>
+    }
+
+    @if (employees.Any())
+    {
+        <div class="row g-4">
+            @foreach (var item in employees)
+            {
+                var e = item.Content;
+                var name   = e.Value<string>("navn", culture: culture, fallback: Fallback.ToLanguage) ?? "";
+                var title  = e.Value<string>("starvsheiti", culture: culture, fallback: Fallback.ToLanguage) ?? ""; // keep as-is per your model
+                var email  = e.Value<string>("teldupostur", culture: culture, fallback: Fallback.ToLanguage) ?? "";
+                var phone  = e.Value<string>("telefon", culture: culture, fallback: Fallback.ToLanguage) ?? "";
+                var mobile = e.Value<string>("fartelefon", culture: culture, fallback: Fallback.ToLanguage) ?? "";
+                var photo  = e.Value<MediaWithCrops?>("mynd", culture: culture, fallback: Fallback.ToLanguage);
+
+                // ---- Crop-first, focal-point aware; then default crop; then original URL ----
+                var imgUrl = photo?.GetCropUrl(
+                                cropAlias: "starvsfolk",
+                                useCropDimensions: true,
+                                preferFocalPoint: true
+                             )
+                             ?? photo?.GetCropUrl(preferFocalPoint: true)
+                             ?? photo?.Url()
+                             ?? "";
+
+                var imgAlt = string.IsNullOrWhiteSpace(name) ? "Mynd" : name;
+
+                <div class="col-12 col-lg-6">
+                    <article class="employee-card card border-0 shadow-0 overflow-hidden h-100">
+                        <div class="d-flex align-items-stretch">
+                            <div class="employee-card__photo flex-shrink-0">
+                                @if (!string.IsNullOrWhiteSpace(imgUrl))
+                                {
+                                    <img src="@imgUrl" alt="@imgAlt" loading="lazy" class="w-100 h-100 object-fit-cover" />
+                                }
+                            </div>
+
+                            <div class="employee-card__body bg-success-subtle p-3 p-md-4 d-flex flex-column justify-content-start w-100">
+                                @if (!string.IsNullOrWhiteSpace(name))
+                                {
+                                    <h3 class="employee-card__name h4 fw-bold mb-1">@name</h3>
+                                }
+
+                                @if (!string.IsNullOrWhiteSpace(title))
+                                {
+                                    <div class="employee-card__title fw-semibold mb-2">@title</div>
+                                }
+
+                                @if (!string.IsNullOrWhiteSpace(email))
+                                {
+                                    <div class="employee-card__email mb-1">
+                                        <a class="link-underline link-underline-opacity-75" href="mailto:@email">@email</a>
+                                    </div>
+                                }
+
+                                @if (!string.IsNullOrWhiteSpace(phone))
+                                {
+                                    <div class="employee-card__phone mb-0">
+                                        <a class="link-underline link-underline-opacity-75" href="@TelHref(phone)">Tel. @phone</a>
+                                    </div>
+                                }
+
+                                @if (!string.IsNullOrWhiteSpace(mobile))
+                                {
+                                    <div class="employee-card__mobile mt-0">
+                                        <a class="link-underline link-underline-opacity-75" href="@TelHref(mobile)">Far. @mobile</a>
+                                    </div>
+                                }
+                            </div>
+                        </div>
+                    </article>
+                </div>
+            }
+        </div>
+    }
+</section>
+
+<style>
+/* ===== starvsfolkadeild styling (Bootstrap 5 based) ===== */
+
+.starvsfolkadeild .employee-card__photo {
+    width: 200px;
+    max-width: 200px;
+    aspect-ratio: 1 / 1;
+}
+
+.starvsfolkadeild .employee-card__photo img {
+    display: block;
+    border: 0;
+}
+
+/* Remove rounded corners */
+.starvsfolkadeild .employee-card,
+.starvsfolkadeild .employee-card img,
+.starvsfolkadeild .employee-card__body {
+    border-radius: 0 !important;
+}
+
+/* Typography */
+.starvsfolkadeild .employee-card__name {
+    line-height: 1.1;
+    color: #3b5323; /* muted green tone */
+}
+
+.starvsfolkadeild .employee-card__title {
+    font-weight: 600;
+    color: #000;
+}
+
+.starvsfolkadeild .employee-card__body {
+    background-color: #eef5ec; /* light green, same tone as screenshot */
+}
+
+/* Mobile: stack is already 1 per row via col-12 */
+@@media (max-width: 575.98px) {
+    .starvsfolkadeild .employee-card__photo {
+        width: 140px;
+        max-width: 140px;
+    }
+}
+</style>
+          
+          
+ 
+

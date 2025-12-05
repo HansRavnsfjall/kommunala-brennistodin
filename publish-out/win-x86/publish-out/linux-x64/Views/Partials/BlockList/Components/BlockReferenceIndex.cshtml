@@ -1,0 +1,53 @@
+@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<ContentModels.BlockReferenceIndex>
+@using Umbraco.Cms.Core.Models.Blocks
+@using Umbraco.Cms.Core.Models.PublishedContent
+
+@{
+    var source = Model.Value<IPublishedContent>("sourceNode");
+    var alias = Model.Value<string>("blockListAlias");
+    var index = Model.Value<int?>("blockIndex") ?? 0;
+
+    if (source == null || string.IsNullOrWhiteSpace(alias) || index <= 0)
+    {
+        <div class="text-muted small">Select source page, block list alias, and a 1-based block index.</div>
+        return;
+    }
+
+    var blocks = source.Value<BlockListModel>(alias);
+    if (blocks == null || !blocks.Any())
+    {
+        <div class="text-muted small">No blocks found on the source page.</div>
+        return;
+    }
+
+    var zeroBased = index - 1;
+    if (zeroBased < 0 || zeroBased >= blocks.Count)
+    {
+        <div class="text-muted small">Block index @index is out of range (1–@blocks.Count).</div>
+        return;
+    }
+
+    var item = blocks[zeroBased];
+    var elementAlias = item.Content.ContentType.Alias;
+    @await Html.PartialAsync($"blocklist/Components/{elementAlias}", item)
+}
+# 0) Make sure you’re at the repo root
+pwd
+
+# 1) Stop any running dotnet process
+pkill -f "^dotnet .*kob\.dll" 2>/dev/null || true
+
+# 2) Delete the custom data-source + composer we added earlier
+rm -f "Controllers/BlocksFromNodeDataSource.cs" \
+      "Startup/ContentmentStartup.cs"
+
+# 3) Sanity check: confirm nothing remains that references those types
+grep -R --line-number -E "BlocksFromNodeDataSource|ContentmentStartup|IContentment" . || echo "No references left"
+
+# 4) Clean and rebuild
+rm -rf bin obj
+dotnet build "./kob.csproj"
+
+# 5) Run on a clean port (adjust if needed)
+dotnet run --project "./kob.csproj" --urls "http://127.0.0.1:5215"
+

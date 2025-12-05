@@ -1,16 +1,17 @@
-import { a as s, b as a } from "./sort-children-of-content-modal.token-DYwtOc5Y.js";
-import { UMB_ENTITY_ACTION_SORT_CHILDREN_OF_KIND_MANIFEST as c } from "@umbraco-cms/backoffice/tree";
-import { U as m } from "./property-structure-workspace.context-token-Et7VqtUe.js";
-import { UmbConditionBase as r } from "@umbraco-cms/backoffice/extension-registry";
-import { m as p } from "./manifests-zQrebjfk.js";
+import { a as i, b as a } from "./sort-children-of-content-modal.token-DYwtOc5Y.js";
+import { UMB_WORKSPACE_ENTITY_IS_NEW_CONDITION_ALIAS as c } from "@umbraco-cms/backoffice/workspace";
+import { UMB_ENTITY_ACTION_SORT_CHILDREN_OF_KIND_MANIFEST as m } from "@umbraco-cms/backoffice/tree";
+import { U as r } from "./property-structure-workspace.context-token-Et7VqtUe.js";
+import { UmbConditionBase as p } from "@umbraco-cms/backoffice/extension-registry";
+import { m as l } from "./manifests-CWDBBlXC.js";
 const d = [
   {
     type: "condition",
     name: "Workspace Has Collection Condition",
-    alias: s,
-    api: () => import("./workspace-has-content-collection.condition-DiREHSAL.js")
+    alias: i,
+    api: () => import("./workspace-has-content-collection.condition-Bl43BOAh.js")
   }
-], l = [
+], C = [
   {
     type: "kind",
     alias: "Umb.Kind.WorkspaceView.Content.Collection",
@@ -19,7 +20,7 @@ const d = [
     manifest: {
       type: "workspaceView",
       kind: "contentCollection",
-      element: () => import("./content-collection-workspace-view.element-D4uBnTzf.js"),
+      element: () => import("./content-collection-workspace-view.element-DF3G9B0I.js"),
       weight: 300,
       meta: {
         label: "Collection",
@@ -28,34 +29,55 @@ const d = [
       }
     }
   },
+  {
+    type: "workspaceView",
+    kind: "contentCollection",
+    alias: "Umb.WorkspaceView.Content.Collection",
+    name: "Content Workspace Collection View",
+    weight: 1e3,
+    meta: {
+      label: "Collection",
+      pathname: "collection",
+      icon: "icon-grid"
+    },
+    conditions: [
+      {
+        alias: i
+      },
+      {
+        alias: c,
+        match: !1
+      }
+    ]
+  },
   ...d
 ], f = {
   type: "condition",
   name: "Content has properties Workspace Condition",
   alias: "Umb.Condition.Workspace.ContentHasProperties",
   api: () => import("./content-has-properties.condition-D9nz-yE1.js")
-}, C = [f], h = {
+}, h = [f], y = {
   type: "kind",
   alias: "Umb.Kind.EntityAction.SortChildrenOfContent",
   matchKind: "sortChildrenOfContent",
   matchType: "entityAction",
   manifest: {
-    ...c.manifest,
+    ...m.manifest,
     type: "entityAction",
     kind: "sortChildrenOfContent",
     api: () => import("./sort-children-of-content.action-xSVGb0rT.js")
   }
-}, y = [
+}, T = [
   {
     type: "modal",
     alias: a,
     name: "Sort Children Of Content Modal",
     element: () => import("./sort-children-of-content-modal.element-BzdE70Vx.js")
   }
-], T = [
-  h,
-  ...y
-], k = [...T], O = {
+], k = [
+  y,
+  ...T
+], _ = [...k], O = {
   type: "kind",
   alias: "Umb.Kind.WorkspaceView.ContentEditor",
   matchKind: "contentEditor",
@@ -63,7 +85,7 @@ const d = [
   manifest: {
     type: "workspaceView",
     kind: "contentEditor",
-    element: () => import("./content-editor.element-B8GhrxyO.js"),
+    element: () => import("./content-editor.element-_oGtUweD.js"),
     weight: 1e3,
     meta: {
       label: "Content",
@@ -71,24 +93,24 @@ const d = [
       icon: "icon-document-line"
     }
   }
-}, _ = [O], E = [..._], b = [
-  ...l,
+}, E = [O], w = [...E], b = [
   ...C,
-  ...k,
-  ...E
-], w = Symbol();
-class $ extends r {
-  constructor(i, o) {
-    super(i, o);
+  ...h,
+  ..._,
+  ...w
+], A = Symbol();
+class U extends p {
+  constructor(o, s) {
+    super(o, s);
     let e;
     if (this.config.match ? e = (t) => t.includes(this.config.match) : this.config.oneOf && (e = (t) => t.some((n) => this.config.oneOf.includes(n))), e !== void 0)
-      this.consumeContext(m, (t) => {
+      this.consumeContext(r, (t) => {
         this.observe(
           t?.structure.contentTypeAliases,
           (n) => {
             this.permitted = n ? e(n) : !1;
           },
-          w
+          A
         );
       });
     else
@@ -97,17 +119,17 @@ class $ extends r {
       );
   }
 }
-const A = {
+const N = {
   type: "condition",
   name: "Workspace Content Type Alias Condition",
   alias: "Umb.Condition.WorkspaceContentTypeAlias",
-  api: $
-}, U = [A], g = {
+  api: U
+}, $ = [N], g = {
   type: "modal",
   alias: "Umb.Modal.CompositionPicker",
   name: "ContentType Composition Picker Modal",
-  element: () => import("./composition-picker-modal.element-ByJWMdoW.js")
-}, N = [g], S = {
+  element: () => import("./composition-picker-modal.element-DRrNdxot.js")
+}, I = [g], S = {
   type: "kind",
   alias: "Umb.Kind.WorkspaceView.ContentTypeDesignEditor",
   matchKind: "contentTypeDesignEditor",
@@ -115,7 +137,7 @@ const A = {
   manifest: {
     type: "workspaceView",
     kind: "contentTypeDesignEditor",
-    element: () => import("./content-type-design-editor.element-DxZdtbOy.js"),
+    element: () => import("./content-type-design-editor.element-BFuW8ij1.js"),
     weight: 1e3,
     meta: {
       label: "#general_design",
@@ -123,12 +145,12 @@ const A = {
       icon: "icon-document-dashed-line"
     }
   }
-}, W = [S], u = [...W, ...N, ...U], I = [...p], P = [
+}, W = [S], K = [...W, ...I, ...$], M = [...l], H = [
   ...b,
-  ...u,
-  ...I
+  ...K,
+  ...M
 ];
 export {
-  P as manifests
+  H as manifests
 };
 //# sourceMappingURL=manifests.js.map

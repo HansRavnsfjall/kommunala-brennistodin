@@ -1,14 +1,10 @@
 {
-  "$schema": "https://json.schemastore.org/launchsettings.json",
   "profiles": {
-    "Umbraco.Web.UI": {
+    "kob": {
       "commandName": "Project",
+      "applicationUrl": "http://127.0.0.1:5215",
       "dotnetRunMessages": true,
-      "launchBrowser": true,
-      "applicationUrl": "https://127.0.0.1:7215;http://127.0.0.1:5215",
-      "environmentVariables": {
-        "ASPNETCORE_ENVIRONMENT": "Development"
-      }
+      "environmentVariables": { "ASPNETCORE_ENVIRONMENT": "Development" }
     }
   }
 }

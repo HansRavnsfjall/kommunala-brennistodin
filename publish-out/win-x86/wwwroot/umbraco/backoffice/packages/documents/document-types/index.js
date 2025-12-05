@@ -1,17 +1,17 @@
-import { t as M, o as Y, e as L, b as P, u as B, v as b, c as v } from "../constants-D9L2jSGX.js";
-import { g as de, f as ye, C as Ae, w as Ce, p as Re, D as Se, i as De, n as Ie, r as fe, I as Ne, l as Ye, s as Le, J as Be, K as be, F as ve, h as ge, z as xe, E as we, j as We, a as Ke, N as Fe, H as qe, L as $e, M as ke, U as He, G as Xe, d as ze, q as Ve, k as Ge, B as je, x as Je, m as Qe, y as Ze, A as et } from "../constants-D9L2jSGX.js";
+import { t as M, o as Y, e as L, b as U, u as B, v as b, c as v } from "../constants-rt5n84j4.js";
+import { g as ye, f as de, C as Ae, w as Ce, p as Re, D as Se, i as De, n as Ie, r as fe, I as Ne, l as Ye, s as Le, J as Be, K as be, F as ve, h as ge, z as xe, E as we, j as We, O as Ke, a as Fe, N as qe, H as $e, L as ke, M as He, U as Xe, G as ze, d as Ve, q as Ge, k as je, B as Je, x as Qe, m as Ze, y as et, A as tt } from "../constants-rt5n84j4.js";
 import { UmbModalToken as g } from "@umbraco-cms/backoffice/modal";
 import { UMB_TREE_PICKER_MODAL_ALIAS as x } from "@umbraco-cms/backoffice/tree";
 import { UmbPickerInputContext as w } from "@umbraco-cms/backoffice/picker-input";
-import { html as u, nothing as U, repeat as W, when as K, css as F, property as a, state as d, customElement as q } from "@umbraco-cms/backoffice/external/lit";
+import { html as u, nothing as P, repeat as W, when as K, css as F, property as a, state as y, customElement as q } from "@umbraco-cms/backoffice/external/lit";
 import { splitStringToArray as $ } from "@umbraco-cms/backoffice/utils";
 import { UmbChangeEvent as k } from "@umbraco-cms/backoffice/event";
 import { UmbLitElement as H } from "@umbraco-cms/backoffice/lit-element";
 import { UmbModalRouteRegistrationController as X } from "@umbraco-cms/backoffice/router";
 import { UmbSorterController as z } from "@umbraco-cms/backoffice/sorter";
 import { UmbFormControlMixin as V } from "@umbraco-cms/backoffice/validation";
-import { UmbDocumentTypeDetailRepository as nt } from "../document-type-detail.repository-V__Mk04y.js";
-import { UmbDocumentTypeItemRepository as st } from "../document-type-item.repository-CK9-9XMP.js";
+import { U as rt, a as st } from "../document-type-detail.repository-CpC7IMIu.js";
+import { UmbDocumentTypeItemRepository as ot } from "../document-type-item.repository-ByLLQhzN.js";
 import { DocumentTypeService as h } from "@umbraco-cms/backoffice/external/backend-api";
 import { UmbContentTypeStructureServerDataSourceBase as G, UmbContentTypeStructureRepositoryBase as j } from "@umbraco-cms/backoffice/content-type";
 const he = "Umb.Repository.DocumentType.Structure", J = new g(x, {
@@ -24,7 +24,7 @@ const he = "Umb.Repository.DocumentType.Structure", J = new g(x, {
     createAction: {
       label: "#content_createEmpty",
       modalData: {
-        entityType: P,
+        entityType: U,
         preset: {}
       },
       extendWithPathPattern: L,
@@ -58,13 +58,13 @@ class Q extends w {
     }, await super.openPicker(_);
   }
 }
-var Z = Object.defineProperty, ee = Object.getOwnPropertyDescriptor, y = (e) => {
+var Z = Object.defineProperty, ee = Object.getOwnPropertyDescriptor, d = (e) => {
   throw TypeError(e);
 }, o = (e, t, n, l) => {
   for (var _ = l > 1 ? void 0 : l ? ee(t, n) : t, m = e.length - 1, O; m >= 0; m--)
     (O = e[m]) && (_ = (l ? O(t, n, _) : O(_)) || _);
   return l && _ && Z(t, n, _), _;
-}, A = (e, t, n) => t.has(e) || y("Cannot " + n), i = (e, t, n) => (A(e, t, "read from private field"), n ? n.call(e) : t.get(e)), c = (e, t, n) => t.has(e) ? y("Cannot add the same private member more than once") : t instanceof WeakSet ? t.add(e) : t.set(e, n), E = (e, t, n) => (A(e, t, "access private method"), n), p, r, T, C, R, S, D, I, f, N;
+}, A = (e, t, n) => t.has(e) || d("Cannot " + n), i = (e, t, n) => (A(e, t, "read from private field"), n ? n.call(e) : t.get(e)), c = (e, t, n) => t.has(e) ? d("Cannot add the same private member more than once") : t instanceof WeakSet ? t.add(e) : t.set(e, n), E = (e, t, n) => (A(e, t, "access private method"), n), p, r, T, C, R, S, D, I, f, N;
 let s = class extends V(
   H,
   void 0
@@ -146,7 +146,7 @@ S = function(e) {
   i(this, r).requestRemoveItem(e.unique);
 };
 D = function() {
-  return this.readonly || this.max > 0 && this.selection.length >= this.max ? U : u`
+  return this.readonly || this.max > 0 && this.selection.length >= this.max ? P : u`
 			<uui-button
 				id="btn-add"
 				look="placeholder"
@@ -163,7 +163,7 @@ I = function() {
     (e) => E(this, T, f).call(this, e)
   )}
 			</uui-ref-list>
-		` : U;
+		` : P;
 };
 f = function(e) {
   if (!e.unique) return;
@@ -223,10 +223,10 @@ o([
   a({ type: Boolean, attribute: "readonly" })
 ], s.prototype, "readonly", 2);
 o([
-  d()
+  y()
 ], s.prototype, "_items", 2);
 o([
-  d()
+  y()
 ], s.prototype, "_editPath", 2);
 s = o([
   q("umb-input-document-type")
@@ -241,7 +241,7 @@ const ne = (e, t) => e ? h.getDocumentTypeByIdAllowedChildren({
   query: { parentContentKey: t ?? void 0 }
 }) : h.getDocumentTypeAllowedAtRoot({}), re = (e) => ({
   unique: e.id,
-  entityType: P,
+  entityType: U,
   name: e.name,
   description: e.description || null,
   icon: e.icon || null
@@ -253,14 +253,14 @@ class Me extends j {
 }
 export {
   L as UMB_CREATE_DOCUMENT_TYPE_WORKSPACE_PATH_PATTERN,
-  de as UMB_CREATE_DOCUMENT_TYPE_WORKSPACE_PRESET_ELEMENT,
-  ye as UMB_CREATE_DOCUMENT_TYPE_WORKSPACE_PRESET_TEMPLATE,
+  ye as UMB_CREATE_DOCUMENT_TYPE_WORKSPACE_PRESET_ELEMENT,
+  de as UMB_CREATE_DOCUMENT_TYPE_WORKSPACE_PRESET_TEMPLATE,
   Ae as UMB_DOCUMENT_TYPE_COMPOSITION_REPOSITORY_ALIAS,
   Ce as UMB_DOCUMENT_TYPE_CREATE_OPTIONS_MODAL,
   Re as UMB_DOCUMENT_TYPE_DETAIL_REPOSITORY_ALIAS,
   Se as UMB_DOCUMENT_TYPE_DETAIL_STORE_ALIAS,
   De as UMB_DOCUMENT_TYPE_DETAIL_STORE_CONTEXT,
-  P as UMB_DOCUMENT_TYPE_ENTITY_TYPE,
+  U as UMB_DOCUMENT_TYPE_ENTITY_TYPE,
   Ie as UMB_DOCUMENT_TYPE_FOLDER_ENTITY_TYPE,
   fe as UMB_DOCUMENT_TYPE_FOLDER_REPOSITORY_ALIAS,
   Ne as UMB_DOCUMENT_TYPE_FOLDER_STORE_ALIAS,
@@ -274,29 +274,31 @@ export {
   B as UMB_DOCUMENT_TYPE_ITEM_REPOSITORY_ALIAS,
   we as UMB_DOCUMENT_TYPE_ITEM_STORE_ALIAS,
   We as UMB_DOCUMENT_TYPE_ITEM_STORE_CONTEXT,
+  Ke as UMB_DOCUMENT_TYPE_MENU_ITEM_ALIAS,
   J as UMB_DOCUMENT_TYPE_PICKER_MODAL,
-  Ke as UMB_DOCUMENT_TYPE_PROPERTY_TYPE_ENTITY_TYPE,
+  Fe as UMB_DOCUMENT_TYPE_PROPERTY_TYPE_ENTITY_TYPE,
   Y as UMB_DOCUMENT_TYPE_ROOT_ENTITY_TYPE,
-  Fe as UMB_DOCUMENT_TYPE_ROOT_WORKSPACE_ALIAS,
+  qe as UMB_DOCUMENT_TYPE_ROOT_WORKSPACE_ALIAS,
   M as UMB_DOCUMENT_TYPE_SEARCH_PROVIDER_ALIAS,
   he as UMB_DOCUMENT_TYPE_STRUCTURE_REPOSITORY_ALIAS,
-  qe as UMB_DOCUMENT_TYPE_TREE_ALIAS,
-  $e as UMB_DOCUMENT_TYPE_TREE_ITEM_CHILDREN_COLLECTION_ALIAS,
-  ke as UMB_DOCUMENT_TYPE_TREE_ITEM_CHILDREN_COLLECTION_REPOSITORY_ALIAS,
-  He as UMB_DOCUMENT_TYPE_TREE_REPOSITORY_ALIAS,
-  Xe as UMB_DOCUMENT_TYPE_TREE_STORE_ALIAS,
-  ze as UMB_DOCUMENT_TYPE_TREE_STORE_CONTEXT,
-  Ve as UMB_DOCUMENT_TYPE_WORKSPACE_ALIAS,
-  Ge as UMB_DOCUMENT_TYPE_WORKSPACE_CONTEXT,
+  $e as UMB_DOCUMENT_TYPE_TREE_ALIAS,
+  ke as UMB_DOCUMENT_TYPE_TREE_ITEM_CHILDREN_COLLECTION_ALIAS,
+  He as UMB_DOCUMENT_TYPE_TREE_ITEM_CHILDREN_COLLECTION_REPOSITORY_ALIAS,
+  Xe as UMB_DOCUMENT_TYPE_TREE_REPOSITORY_ALIAS,
+  ze as UMB_DOCUMENT_TYPE_TREE_STORE_ALIAS,
+  Ve as UMB_DOCUMENT_TYPE_TREE_STORE_CONTEXT,
+  Ge as UMB_DOCUMENT_TYPE_WORKSPACE_ALIAS,
+  je as UMB_DOCUMENT_TYPE_WORKSPACE_CONTEXT,
   b as UMB_DOCUMENT_TYPE_WORKSPACE_MODAL,
-  je as UMB_DOCUMENT_TYPE_WORKSPACE_PATH,
-  Je as UMB_DUPLICATE_DOCUMENT_TYPE_REPOSITORY_ALIAS,
-  Qe as UMB_EDIT_DOCUMENT_TYPE_FOLDER_WORKSPACE_PATH_PATTERN,
+  Je as UMB_DOCUMENT_TYPE_WORKSPACE_PATH,
+  Qe as UMB_DUPLICATE_DOCUMENT_TYPE_REPOSITORY_ALIAS,
+  Ze as UMB_EDIT_DOCUMENT_TYPE_FOLDER_WORKSPACE_PATH_PATTERN,
   v as UMB_EDIT_DOCUMENT_TYPE_WORKSPACE_PATH_PATTERN,
-  Ze as UMB_EXPORT_DOCUMENT_TYPE_REPOSITORY_ALIAS,
-  et as UMB_MOVE_DOCUMENT_TYPE_REPOSITORY_ALIAS,
-  nt as UmbDocumentTypeDetailRepository,
-  st as UmbDocumentTypeItemRepository,
+  et as UMB_EXPORT_DOCUMENT_TYPE_REPOSITORY_ALIAS,
+  tt as UMB_MOVE_DOCUMENT_TYPE_REPOSITORY_ALIAS,
+  rt as UmbDocumentTypeDetailRepository,
+  st as UmbDocumentTypeDetailServerDataSource,
+  ot as UmbDocumentTypeItemRepository,
   Q as UmbDocumentTypePickerInputContext,
   Me as UmbDocumentTypeStructureRepository,
   s as UmbInputDocumentTypeElement

@@ -1,28 +1,65 @@
 import { a as g } from "../picker-search-result-item-element-base-DBhAKPkt.js";
-import { U as ue } from "../picker-search-result-item-element-base-DBhAKPkt.js";
-import { U as _e, a as de } from "../default-picker-search-result-item.context-7tVujM-8.js";
-import { UmbControllerBase as T, UmbContextBase as R } from "@umbraco-cms/backoffice/class-api";
-import { createExtensionApiByAlias as M } from "@umbraco-cms/backoffice/extension-registry";
-import { UmbBooleanState as q, UmbObjectState as A, UmbArrayState as F, UmbNumberState as B } from "@umbraco-cms/backoffice/observable-api";
-import { debounce as Q, UmbSelectionManager as W } from "@umbraco-cms/backoffice/utils";
-import { css as D, state as u, customElement as P, nothing as b, html as c, property as N, repeat as z } from "@umbraco-cms/backoffice/external/lit";
-import { UmbLitElement as U } from "@umbraco-cms/backoffice/lit-element";
-import { UmbTextStyles as G } from "@umbraco-cms/backoffice/style";
-class K extends T {
-  /**
-   * Creates an instance of UmbPickerSearchManager.
-   * @param {UmbControllerHost} host The controller host for the search manager.
-   * @memberof UmbPickerSearchManager
-   */
-  constructor(e) {
-    super(e), this.#s = new q(!1), this.searchable = this.#s.asObservable(), this.#e = new A(void 0), this.query = this.#e.asObservable(), this.#r = new q(!1), this.searching = this.#r.asObservable(), this.#i = new F([], (r) => r.unique), this.resultItems = this.#i.asObservable(), this.#a = new B(0), this.resultTotalItems = this.#a.asObservable(), this.#n = Q(this.#c, 300);
+import { U as ge } from "../picker-search-result-item-element-base-DBhAKPkt.js";
+import { U as Ce, a as we } from "../default-picker-search-result-item.context-7tVujM-8.js";
+import { UmbModalBaseElement as $ } from "@umbraco-cms/backoffice/modal";
+import { UMB_PICKER_INPUT_CONTEXT as R } from "@umbraco-cms/backoffice/picker-input";
+import { createExtensionApiByAlias as V } from "@umbraco-cms/backoffice/extension-registry";
+import { debounce as B, UmbSelectionManager as F } from "@umbraco-cms/backoffice/utils";
+import { UmbBooleanState as w, UmbObjectState as A, UmbArrayState as N, UmbNumberState as Q } from "@umbraco-cms/backoffice/observable-api";
+import { UmbControllerBase as D, UmbContextBase as W } from "@umbraco-cms/backoffice/class-api";
+import { UmbInteractionMemoryManager as X } from "@umbraco-cms/backoffice/interaction-memory";
+import { UMB_PROPERTY_TYPE_BASED_PROPERTY_CONTEXT as K } from "@umbraco-cms/backoffice/content";
+import { css as Y, state as u, customElement as U, nothing as f, html as c, property as z, repeat as G } from "@umbraco-cms/backoffice/external/lit";
+import { UmbLitElement as q } from "@umbraco-cms/backoffice/lit-element";
+import { UmbTextStyles as L } from "@umbraco-cms/backoffice/style";
+class ve extends $ {
+  #t;
+  constructor() {
+    super(), this.consumeContext(R, (e) => {
+      this.#t = e, this.#i();
+    });
   }
-  #s;
+  connectedCallback() {
+    super.connectedCallback(), this.#e();
+  }
+  #e() {
+    this.observe(this._pickerContext.interactionMemory.memories, (e) => {
+      this.#a(e);
+    });
+  }
+  #r() {
+    return "UmbPickerModal";
+  }
+  #i() {
+    this.observe(
+      this.#t?.interactionMemory.memory(this.#r()),
+      (e) => {
+        e?.memories?.forEach((r) => this._pickerContext.interactionMemory.setMemory(r));
+      },
+      "umbModalInteractionMemoryObserver"
+    );
+  }
+  #a(e) {
+    if (e?.length > 0) {
+      const r = {
+        unique: this.#r(),
+        memories: e
+      };
+      this.#t?.interactionMemory.setMemory(r);
+    } else
+      this.#t?.interactionMemory.deleteMemory(this.#r());
+  }
+}
+class H extends D {
+  constructor() {
+    super(...arguments), this.#t = new w(!1), this.searchable = this.#t.asObservable(), this.#e = new A(void 0), this.query = this.#e.asObservable(), this.#r = new w(!1), this.searching = this.#r.asObservable(), this.#i = new N([], (e) => e.unique), this.resultItems = this.#i.asObservable(), this.#a = new Q(0), this.resultTotalItems = this.#a.asObservable(), this.#o = B(this.#c, 300);
+  }
+  #t;
   #e;
   #r;
   #i;
   #a;
-  #t;
+  #s;
   #h;
   /**
    * Set the configuration for the search manager.
@@ -30,7 +67,7 @@ class K extends T {
    * @memberof UmbPickerSearchManager
    */
   setConfig(e) {
-    this.#t = e, this.#o();
+    this.#s = e, this.#n();
   }
   /**
    * Get the current configuration for the search manager.
@@ -38,7 +75,7 @@ class K extends T {
    * @memberof UmbPickerSearchManager
    */
   getConfig() {
-    return this.#t;
+    return this.#s;
   }
   /**
    * Update the current configuration for the search manager.
@@ -46,7 +83,7 @@ class K extends T {
    * @memberof UmbPickerSearchManager
    */
   updateConfig(e) {
-    const r = { ...this.#t, ...e };
+    const r = { ...this.#s, ...e };
     this.setConfig(r);
   }
   /**
@@ -55,7 +92,7 @@ class K extends T {
    * @memberof UmbPickerSearchManager
    */
   getSearchable() {
-    return this.#s.getValue();
+    return this.#t.getValue();
   }
   /**
    * Sets whether items can be searched.
@@ -63,7 +100,7 @@ class K extends T {
    * @memberof UmbPickerSearchManager
    */
   setSearchable(e) {
-    this.#s.setValue(e);
+    this.#t.setValue(e);
   }
   /**
    * Search for items based on the current query.
@@ -75,7 +112,7 @@ class K extends T {
       this.clear();
       return;
     }
-    this.#r.setValue(!0), this.#n();
+    this.#r.setValue(!0), this.#o();
   }
   /**
    * Clear the current search query and result items.
@@ -113,15 +150,15 @@ class K extends T {
     const r = { ...this.getQuery(), ...e };
     this.#e.setValue(r);
   }
-  async #o() {
-    const e = this.#t?.providerAlias;
+  async #n() {
+    const e = this.#s?.providerAlias;
     if (!e)
       throw this.setSearchable(!1), new Error("No search provider alias provided");
-    if (this.#h = await M(this, e), !this.#h)
+    if (this.#h = await V(this, e), !this.#h)
       throw this.setSearchable(!1), new Error(`Search Provider with alias ${e} is not available`);
     this.setSearchable(!0);
   }
-  #n;
+  #o;
   async #c() {
     if (this.getSearchable() === !1) throw new Error("Search is not enabled");
     if (!this.#h) throw new Error("Search provider is not available");
@@ -133,23 +170,34 @@ class K extends T {
     const r = {
       ...e,
       // ensure that config params are always included
-      ...this.#t?.queryParams,
-      searchFrom: this.#t?.searchFrom
+      ...this.#s?.queryParams,
+      searchFrom: this.#s?.searchFrom,
+      // TODO: Move this implementation to another place. The generic picker search manager shouldn't be aware of data types.
+      dataTypeUnique: this.#s?.dataTypeUnique
     }, { data: i } = await this.#h.search(r), s = i?.items ?? [];
     this.#i.setValue(s), this.#a.setValue(i?.total ?? 0), this.#r.setValue(!1);
   }
 }
-var L = Object.defineProperty, X = Object.getOwnPropertyDescriptor, $ = (t) => {
+class be extends W {
+  constructor(e) {
+    super(e, g), this.interactionMemory = new X(this), this.selection = new F(this), this.search = new H(this), this.consumeContext(K, (r) => {
+      this.observe(r?.dataType, (i) => {
+        this.dataType = i;
+      });
+    });
+  }
+}
+var J = Object.defineProperty, Z = Object.getOwnPropertyDescriptor, x = (t) => {
   throw TypeError(t);
-}, m = (t, e, r, i) => {
-  for (var s = i > 1 ? void 0 : i ? X(e, r) : e, h = t.length - 1, n; h >= 0; h--)
-    (n = t[h]) && (s = (i ? n(e, r, s) : n(s)) || s);
-  return i && s && L(e, r, s), s;
-}, S = (t, e, r) => e.has(t) || $("Cannot " + r), p = (t, e, r) => (S(t, e, "read from private field"), e.get(t)), C = (t, e, r) => e.has(t) ? $("Cannot add the same private member more than once") : e instanceof WeakSet ? e.add(t) : e.set(t, r), H = (t, e, r, i) => (S(t, e, "write to private field"), e.set(t, r), r), J = (t, e, r) => (S(t, e, "access private method"), r), a, y, k;
-let _ = class extends U {
+}, b = (t, e, r, i) => {
+  for (var s = i > 1 ? void 0 : i ? Z(e, r) : e, h = t.length - 1, o; h >= 0; h--)
+    (o = t[h]) && (s = (i ? o(e, r, s) : o(s)) || s);
+  return i && s && J(e, r, s), s;
+}, S = (t, e, r) => e.has(t) || x("Cannot " + r), p = (t, e, r) => (S(t, e, "read from private field"), e.get(t)), E = (t, e, r) => e.has(t) ? x("Cannot add the same private member more than once") : e instanceof WeakSet ? e.add(t) : e.set(t, r), j = (t, e, r, i) => (S(t, e, "write to private field"), e.set(t, r), r), ee = (t, e, r) => (S(t, e, "access private method"), r), a, y, k;
+let m = class extends q {
   constructor() {
-    super(), C(this, y), this._query = "", this._searching = !1, this._isSearchable = !1, C(this, a), this.consumeContext(g, (t) => {
-      H(this, a, t), this.observe(
+    super(), E(this, y), this._query = "", this._searching = !1, this._isSearchable = !1, E(this, a), this.consumeContext(g, (t) => {
+      j(this, a, t), this.observe(
         p(this, a)?.search.searchable,
         (e) => this._isSearchable = e ?? !1
       ), this.observe(p(this, a)?.search.searching, (e) => this._searching = e ?? !1), this.observe(p(this, a)?.search.query, (e) => this._query = e?.query || "");
@@ -157,7 +205,7 @@ let _ = class extends U {
   }
   render() {
     return this._isSearchable ? c`
-			<uui-input .value=${this._query} placeholder="Search..." @input=${J(this, y, k)}>
+			<uui-input .value=${this._query} placeholder="Search..." @input=${ee(this, y, k)}>
 				<div slot="prepend">
 					${this._searching ? c`<uui-loader-circle id="searching-indicator"></uui-loader-circle>` : c`<uui-icon name="search"></uui-icon>`}
 				</div>
@@ -166,10 +214,10 @@ let _ = class extends U {
 							<uui-button slot="append" type="button" @click=${() => p(this, a)?.search.clear()} compact>
 								<uui-icon name="icon-delete"></uui-icon>
 							</uui-button>
-						` : b}
+						` : f}
 			</uui-input>
 			<div id="divider"></div>
-		` : b;
+		` : f;
   }
 };
 a = /* @__PURE__ */ new WeakMap();
@@ -178,9 +226,9 @@ k = function(t) {
   const e = t.target.value;
   p(this, a)?.search.updateQuery({ query: e }), p(this, a)?.search.search();
 };
-_.styles = [
-  G,
-  D`
+m.styles = [
+  L,
+  Y`
 			uui-input {
 				width: 100%;
 			}
@@ -204,55 +252,55 @@ _.styles = [
 			}
 		`
 ];
-m([
+b([
   u()
-], _.prototype, "_query", 2);
-m([
+], m.prototype, "_query", 2);
+b([
   u()
-], _.prototype, "_searching", 2);
-m([
+], m.prototype, "_searching", 2);
+b([
   u()
-], _.prototype, "_isSearchable", 2);
-_ = m([
-  P("umb-picker-search-field")
-], _);
-var Y = Object.defineProperty, Z = Object.getOwnPropertyDescriptor, O = (t) => {
+], m.prototype, "_isSearchable", 2);
+m = b([
+  U("umb-picker-search-field")
+], m);
+var te = Object.defineProperty, re = Object.getOwnPropertyDescriptor, T = (t) => {
   throw TypeError(t);
 }, d = (t, e, r, i) => {
-  for (var s = i > 1 ? void 0 : i ? Z(e, r) : e, h = t.length - 1, n; h >= 0; h--)
-    (n = t[h]) && (s = (i ? n(e, r, s) : n(s)) || s);
-  return i && s && Y(e, r, s), s;
-}, w = (t, e, r) => e.has(t) || O("Cannot " + r), v = (t, e, r) => (w(t, e, "read from private field"), e.get(t)), E = (t, e, r) => e.has(t) ? O("Cannot add the same private member more than once") : e instanceof WeakSet ? e.add(t) : e.set(t, r), j = (t, e, r, i) => (w(t, e, "write to private field"), e.set(t, r), r), x = (t, e, r) => (w(t, e, "access private method"), r), o, f, V, I;
-let l = class extends U {
+  for (var s = i > 1 ? void 0 : i ? re(e, r) : e, h = t.length - 1, o; h >= 0; h--)
+    (o = t[h]) && (s = (i ? o(e, r, s) : o(s)) || s);
+  return i && s && te(e, r, s), s;
+}, C = (t, e, r) => e.has(t) || T("Cannot " + r), _ = (t, e, r) => (C(t, e, "read from private field"), e.get(t)), M = (t, e, r) => e.has(t) ? T("Cannot add the same private member more than once") : e instanceof WeakSet ? e.add(t) : e.set(t, r), se = (t, e, r, i) => (C(t, e, "write to private field"), e.set(t, r), r), P = (t, e, r) => (C(t, e, "access private method"), r), n, v, I, O;
+let l = class extends q {
   constructor() {
-    super(), E(this, f), this._searching = !1, this._items = [], this._isSearchable = !1, this.pickableFilter = () => !0, E(this, o), this.consumeContext(g, (t) => {
-      j(this, o, t), this.observe(
-        v(this, o)?.search.searchable,
+    super(), M(this, v), this._searching = !1, this._items = [], this._isSearchable = !1, this.pickableFilter = () => !0, M(this, n), this.consumeContext(g, (t) => {
+      se(this, n, t), this.observe(
+        _(this, n)?.search.searchable,
         (e) => this._isSearchable = e ?? !1,
         "obsSearchable"
-      ), this.observe(v(this, o)?.search.query, (e) => this._query = e, "obsQuery"), this.observe(
-        v(this, o)?.search.searching,
+      ), this.observe(_(this, n)?.search.query, (e) => this._query = e, "obsQuery"), this.observe(
+        _(this, n)?.search.searching,
         (e) => this._searching = e ?? !1,
         "obsSearching"
-      ), this.observe(v(this, o)?.search.resultItems, (e) => this._items = e ?? [], "obsResultItems");
+      ), this.observe(_(this, n)?.search.resultItems, (e) => this._items = e ?? [], "obsResultItems");
     });
   }
   render() {
-    return this._isSearchable ? this._query?.query && this._searching === !1 && this._items.length === 0 ? x(this, f, V).call(this) : c`
-			${z(
+    return this._isSearchable ? this._query?.query && this._searching === !1 && this._items.length === 0 ? P(this, v, I).call(this) : c`
+			${G(
       this._items,
       (t) => t.unique,
-      (t) => x(this, f, I).call(this, t)
+      (t) => P(this, v, O).call(this, t)
     )}
-		` : b;
+		` : f;
   }
 };
-o = /* @__PURE__ */ new WeakMap();
-f = /* @__PURE__ */ new WeakSet();
-V = function() {
+n = /* @__PURE__ */ new WeakMap();
+v = /* @__PURE__ */ new WeakSet();
+I = function() {
   return c`<small>No result for <strong>"${this._query?.query}"</strong>.</small>`;
 };
-I = function(t) {
+O = function(t) {
   return c`
 			<umb-extension-with-api-slot
 				type="pickerSearchResultItem"
@@ -276,24 +324,20 @@ d([
   u()
 ], l.prototype, "_isSearchable", 2);
 d([
-  N({ attribute: !1 })
+  z({ attribute: !1 })
 ], l.prototype, "pickableFilter", 2);
 l = d([
-  P("umb-picker-search-result")
+  U("umb-picker-search-result")
 ], l);
-class oe extends R {
-  constructor(e) {
-    super(e, g), this.selection = new W(this), this.search = new K(this);
-  }
-}
 export {
   g as UMB_PICKER_CONTEXT,
-  _e as UMB_PICKER_SEARCH_RESULT_ITEM_CONTEXT,
-  de as UmbDefaultPickerSearchResultItemContext,
-  oe as UmbPickerContext,
-  _ as UmbPickerSearchFieldElement,
-  K as UmbPickerSearchManager,
+  Ce as UMB_PICKER_SEARCH_RESULT_ITEM_CONTEXT,
+  we as UmbDefaultPickerSearchResultItemContext,
+  be as UmbPickerContext,
+  ve as UmbPickerModalBaseElement,
+  m as UmbPickerSearchFieldElement,
+  H as UmbPickerSearchManager,
   l as UmbPickerSearchResultElement,
-  ue as UmbPickerSearchResultItemElementBase
+  ge as UmbPickerSearchResultItemElementBase
 };
 //# sourceMappingURL=index.js.map

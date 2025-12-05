@@ -1,4 +1,4 @@
-import { k as a, e as t, l as n, U as i, f as s, a as e, b as p, h as l, j as r, n as m, d as c, c as o } from "./manifests-D6Yzql_a.js";
+import { k as a, e as t, l as n, U as i, f as s, a as e, b as p, h as l, j as r, n as m, d as c, c as o } from "./manifests-BtMo_QOj.js";
 import "@umbraco-cms/backoffice/class-api";
 import "@umbraco-cms/backoffice/current-user";
 import "@umbraco-cms/backoffice/repository";
@@ -47,20 +47,20 @@ const d = [
     type: "globalContext",
     alias: "Umb.GlobalContext.Clipboard",
     name: "Clipboard Context",
-    api: () => import("./clipboard.context-D3d_lkgA.js")
+    api: () => import("./clipboard.context-1aFOGS3J.js")
   }
 ], b = [
   {
     type: "repository",
     alias: i,
     name: "Clipboard Detail Repository",
-    api: () => import("./clipboard-entry-detail.repository-Be0QsLx1.js")
+    api: () => import("./clipboard-entry-detail.repository-B4ollNpJ.js")
   },
   {
     type: "store",
     alias: s,
     name: "Clipboard Detail Store",
-    api: () => import("./clipboard-entry-detail.store-BOXR5opj.js")
+    api: () => import("./clipboard-entry-detail.store-CmFGWToX.js")
   },
   {
     type: "entityAction",
@@ -82,13 +82,13 @@ const d = [
     type: "repository",
     alias: e,
     name: "Clipboard Entry Item Repository",
-    api: () => import("./clipboard-entry-item.repository-CIuifbrD.js")
+    api: () => import("./clipboard-entry-item.repository-CcIsaRWM.js")
   },
   {
     type: "itemStore",
     alias: l,
     name: "Clipboard Entry Item Store",
-    api: () => import("./clipboard-entry-item.store-DtricQ2S.js")
+    api: () => import("./clipboard-entry-item.store-D5V6R9L-.js")
   }
 ], R = [
   {
@@ -124,7 +124,7 @@ const d = [
     manifest: {
       type: "propertyContext",
       kind: "clipboard",
-      api: () => import("./clipboard.property-context-CM7UAgst.js"),
+      api: () => import("./clipboard.property-context-DYmkRcdT.js"),
       weight: 1200
     }
   }

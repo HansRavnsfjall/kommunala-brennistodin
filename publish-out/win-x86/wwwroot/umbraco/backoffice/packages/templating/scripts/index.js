@@ -1,11 +1,11 @@
-import { U as T } from "../manifests-cHFy6NXv.js";
-import { c as s, m as r, b as a, a as L, t as o, e as B, f as t, g as e, u as p, w as N, n as m, o as D, p as Y, q as i, r as f, h as x, d as c, v as n, k as F, i as K, j as X, l as b, s as u } from "../manifests-cHFy6NXv.js";
+import { U as T } from "../manifests-CH0eoEje.js";
+import { c as s, m as r, b as a, a as L, t as o, e as B, f as t, g as e, u as p, w as N, n as m, o as D, p as Y, q as i, r as f, h as x, d as c, v as n, k as F, i as K, j as X, l as b, s as u } from "../manifests-CH0eoEje.js";
 import { U as k } from "../index-DTLu03tH.js";
 import { U as d } from "../script-workspace.context-token-DNmI_P4e.js";
 import { U as I } from "../script-picker-modal.token-40IoQpW7.js";
 import { UmbPickerInputContext as E } from "@umbraco-cms/backoffice/picker-input";
-import { UmbScriptDetailRepository as g } from "../script-detail.repository-rCDnl-Wx.js";
-import { UmbScriptTreeRepository as j } from "../script-tree.repository-zV--g9K5.js";
+import { UmbScriptDetailRepository as g } from "../script-detail.repository-BTaA0TCB.js";
+import { UmbScriptTreeRepository as j } from "../script-tree.repository-D5AKqach.js";
 import "@umbraco-cms/backoffice/tree";
 import { U as v } from "../script-item.store.context-token-5j5GfCRe.js";
 class P extends E {

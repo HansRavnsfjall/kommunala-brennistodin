@@ -1,0 +1,245 @@
+// /Controllers/ImportController.cs
+using System.Globalization;
+using System.Text;
+using System.Linq;
+using System.Collections.Generic;
+using System.IO;
+using System.Threading.Tasks;
+using CsvHelper;
+using CsvHelper.Configuration;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
+using Umbraco.Cms.Core.Models;
+using Umbraco.Cms.Core.Models.ContentPublishing; // CultureAndScheduleModel
+using Umbraco.Cms.Core.Services;
+using Umbraco.Cms.Web.Common.Controllers;
+
+namespace Kob.Controllers
+{
+    [ApiController]
+    [Route("umbraco/api/import")]
+    public class ImportController : ControllerBase
+    {
+        private readonly IContentService _contentService;
+        private readonly IContentTypeService _contentTypeService;
+        private readonly IContentPublishingService _publishingService;
+
+        public ImportController(
+            IContentService contentService,
+            IContentTypeService contentTypeService,
+            IContentPublishingService publishingService)
+        {
+            _contentService = contentService;
+            _contentTypeService = contentTypeService;
+            _publishingService = publishingService;
+        }
+
+        // -------- Option A: upload CSV (recommended) --------
+        // POST /umbraco/api/import/luturSkiljing
+        // multipart/form-data with file field named "file"
+        [HttpPost("luturSkiljing")]
+        [Consumes("multipart/form-data")]
+        public async Task<IActionResult> ImportLuturSkiljing([FromForm] IFormFile file)
+        {
+            if (file == null || file.Length == 0)
+                return BadRequest("No file uploaded. Post a CSV in a field named 'file'.");
+
+            using var stream = file.OpenReadStream();
+            return await ImportStreamAsync(stream);
+        }
+
+        // -------- Option B: read CSV from ./import/import.csv --------
+        // GET /umbraco/api/import/luturSkiljing/fromfile
+        // Optional: ?delete=true  (delete file after successful import)
+        [HttpGet("luturSkiljing/fromfile")]
+        public async Task<IActionResult> ImportLuturSkiljingFromFile([FromQuery] bool delete = false)
+        {
+            var filePath = Path.Combine(Directory.GetCurrentDirectory(), "import", "import.csv");
+            if (!System.IO.File.Exists(filePath))
+                return NotFound($"File not found: {filePath}");
+
+            try
+            {
+                using var stream = System.IO.File.OpenRead(filePath);
+                var result = await ImportStreamAsync(stream);
+
+                if (delete && result is ObjectResult obj && (!obj.StatusCode.HasValue || (obj.StatusCode.Value >= 200 && obj.StatusCode.Value < 300)))
+                {
+                    System.IO.File.Delete(filePath);
+                }
+
+                return result;
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, $"Failed to read file: {ex.Message}");
+            }
+        }
+
+        // ---------------- Core import logic ----------------
+        private async Task<IActionResult> ImportStreamAsync(Stream csvStream)
+        {
+            // Ensure content type exists
+            var ct = _contentTypeService.Get("luturSkiljing");
+            if (ct == null)
+                return BadRequest("Content type 'luturSkiljing' does not exist.");
+
+            var results = new List<RowResult>();
+            int created = 0, failed = 0, lineNo = 1; // header = line 1
+
+            try
+            {
+                // Read full text to auto-detect delimiter
+                string csvText;
+                using (var reader = new StreamReader(csvStream, new UTF8Encoding(false), true, 4096, leaveOpen: true))
+                {
+                    csvText = await reader.ReadToEndAsync();
+                }
+                if (string.IsNullOrWhiteSpace(csvText))
+                    return BadRequest("CSV is empty.");
+
+                var headerLine = csvText.Split(new[] { '\r', '\n' }, StringSplitOptions.RemoveEmptyEntries).FirstOrDefault() ?? "";
+                var delimiter = DetectDelimiter(headerLine); // "," or ";"
+
+                var cfg = new CsvConfiguration(CultureInfo.InvariantCulture)
+                {
+                    HasHeaderRecord = true,
+                    TrimOptions = TrimOptions.Trim,
+                    IgnoreBlankLines = true,
+                    Delimiter = delimiter,
+                    BadDataFound = null,
+                    MissingFieldFound = null,
+                    HeaderValidated = null,
+                    PrepareHeaderForMatch = args => (args.Header ?? string.Empty).Trim()
+                };
+
+                using var sr = new StringReader(csvText);
+                using var csv = new CsvReader(sr, cfg);
+                csv.Context.RegisterClassMap<ImportRowMap>();
+
+                IEnumerable<ImportRow> records;
+                try
+                {
+                    records = csv.GetRecords<ImportRow>().ToList();
+                }
+                catch (Exception ex)
+                {
+                    return BadRequest($"CSV parse error: {ex.Message}");
+                }
+
+                foreach (var row in records)
+                {
+                    lineNo++;
+                    try
+                    {
+                        // Validate
+                        if (string.IsNullOrWhiteSpace(row.Parent))
+                            throw new Exception("Missing 'parent' (GUID of parent node).");
+                        if (string.IsNullOrWhiteSpace(row.Name))
+                            throw new Exception("Missing 'name'.");
+
+                        if (!Guid.TryParse(row.Parent, out var parentKey))
+                            throw new Exception($"Invalid parent GUID: {row.Parent}");
+
+                        var parent = _contentService.GetById(parentKey);
+                        if (parent == null)
+                            throw new Exception($"Parent not found for key {row.Parent}");
+
+                        // Create (invariant)
+                        var content = _contentService.Create(row.Name!.Trim(), parent, "luturSkiljing");
+
+                        // Map fields
+                        content.SetValue("leitiord", row.Searchwords ?? string.Empty);
+                        content.SetValue("hvarSkalBurturkasti", row.WhereTo ?? string.Empty);
+                        content.SetValue("leggTilMerkis", row.Notice ?? string.Empty);
+                        content.SetValue("hvatHendirBurturkasti", row.WhatHappens ?? string.Empty);
+
+                        // Save + Publish (Umbraco 16 pattern)
+                        _contentService.Save(content);
+
+                        var cultureAndSchedule = new CultureAndScheduleModel
+                        {
+                            CulturesToPublishImmediately = new HashSet<string>(), // empty = publish all (invariant)
+                            Schedules = new ContentScheduleCollection()
+                        };
+                        var publishResult = await _publishingService.PublishAsync(content.Key, cultureAndSchedule, Guid.Empty);
+                        if (!publishResult.Success)
+                            throw new Exception($"Publish failed: {publishResult.Status}");
+
+                        results.Add(RowResult.Ok(lineNo, content.Key, content.Id, content.Name!));
+                        created++;
+                    }
+                    catch (Exception ex)
+                    {
+                        results.Add(RowResult.Fail(lineNo, ex.Message));
+                        failed++;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, $"Unexpected import error: {ex.Message}");
+            }
+
+            return Ok(new
+            {
+                contentType = "luturSkiljing",
+                created,
+                failed,
+                total = created + failed,
+                rows = results
+            });
+        }
+
+        private static string DetectDelimiter(string headerLine)
+        {
+            int commas = headerLine.Count(ch => ch == ',');
+            int semis  = headerLine.Count(ch => ch == ';');
+            if (semis > commas) return ";";
+            if (commas > semis) return ",";
+            if (headerLine.Contains("parent;") || headerLine.Contains(";name") || headerLine.Contains(";searchwords"))
+                return ";";
+            return ",";
+        }
+
+        // ---------------- DTOs & mapping ----------------
+        private sealed class ImportRow
+        {
+            public string? Parent { get; set; }        // GUID of parent
+            public string? Name { get; set; }          // document name
+            public string? Searchwords { get; set; }   // -> leitiord
+            public string? WhereTo { get; set; }       // -> hvarSkalBurturkasti
+            public string? Notice { get; set; }        // -> leggTilMerkis
+            public string? WhatHappens { get; set; }   // -> hvatHendirBurturkasti
+        }
+
+        private sealed class ImportRowMap : ClassMap<ImportRow>
+        {
+            public ImportRowMap()
+            {
+                Map(m => m.Parent).Name("parent");
+                Map(m => m.Name).Name("name");
+                Map(m => m.Searchwords).Name("searchwords");
+                Map(m => m.WhereTo).Name("WhereTo");
+                Map(m => m.Notice).Name("Notice");
+                Map(m => m.WhatHappens).Name("WhatHappens");
+            }
+        }
+
+        private sealed class RowResult
+        {
+            public int line { get; set; }
+            public string status { get; set; } = "";
+            public string? message { get; set; }
+            public Guid? key { get; set; }
+            public int? id { get; set; }
+            public string? name { get; set; }
+
+            public static RowResult Ok(int line, Guid key, int id, string name) =>
+                new RowResult { line = line, status = "created", key = key, id = id, name = name };
+
+            public static RowResult Fail(int line, string message) =>
+                new RowResult { line = line, status = "failed", message = message };
+        }
+    }
+}

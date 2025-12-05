@@ -1,0 +1,28 @@
+﻿@* Views/Partials/RichText/Components/inlineImageText.cshtml *@
+@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<Umbraco.Cms.Core.Models.Blocks.RichTextBlockItem>
+
+@using Umbraco.Extensions
+@using Umbraco.Cms.Core.Models
+@using Umbraco.Cms.Core.Models.PublishedContent
+
+@{
+    // For RTE blocks, Model is a RichTextBlockItem
+    var el = Model?.Content; // IPublishedElement
+    if (el is null) { return; }
+
+    // Your aliases
+    MediaWithCrops? media = el.Value<MediaWithCrops?>("image");   // Media Picker (single)
+    string? caption       = el.Value<string>("myndatekstur");     // caption/text
+
+    var imgUrl = media?.GetCropUrl() ?? media?.Url();
+    var alt    = media?.Name ?? string.Empty;
+
+    if (string.IsNullOrWhiteSpace(imgUrl)) { return; }
+}
+
+<figure class="rte-inline-image-text" contenteditable="false">
+  <img src="@imgUrl" alt="@alt" loading="lazy" decoding="async" />
+  @if (!string.IsNullOrWhiteSpace(caption)) { <figcaption>@caption</figcaption> }
+</figure>
+
+

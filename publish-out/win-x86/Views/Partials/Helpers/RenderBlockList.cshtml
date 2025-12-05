@@ -1,57 +1,62 @@
+﻿@model Kob.ViewModels.BlockListRenderModel
 @using System.Globalization
+@using Microsoft.AspNetCore.Html
+@using Microsoft.AspNetCore.Mvc.ViewEngines
+@using Microsoft.AspNetCore.Mvc.ViewFeatures
 @using Umbraco.Cms.Core.Models.Blocks
-@using Umbraco.Cms.Core.Models.PublishedContent
 @using Umbraco.Extensions
 @inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<Kob.ViewModels.BlockListRenderModel>
+@inject ICompositeViewEngine ViewEngine
 
 @{
-    var culture = CultureInfo.CurrentUICulture?.Name;
-    var items = Model.Blocks ?? Enumerable.Empty<BlockListItem>();
+    // Materialize to list so we can use Count and index
+    var items = (Model?.Blocks ?? Enumerable.Empty<BlockListItem>()).ToList();
 
-    BlockListItem? FindBlockByKey(IPublishedContent repo, Guid key)
-    {
-        var list = repo.Value<BlockListModel>("modul", culture: culture, fallback: Fallback.ToLanguage);
-        return list?.FirstOrDefault(b => b.Udi.Guid == key);
-    }
+    string ComponentPath(string alias) => $"~/Views/Partials/BlockList/Components/{alias}.cshtml";
+    const string FallbackPath = "~/Views/Partials/BlockList/Default.cshtml";
+
+    bool ViewExists(string path) =>
+        ViewEngine.GetView(executingFilePath: null, viewPath: path, isMainPage: false).Success;
 }
 
-@foreach (var item in items)
+@if (!items.Any())
 {
-    var alias = item.Content.ContentType.Alias;
-
-    // Regular inline blocks → render as usual
-    if (!alias.InvariantEquals("globalBlockReference"))
+    <div class="alert alert-info my-3">No blocks to render.</div>
+}
+else
+{
+    for (var i = 0; i < items.Count; i++)
     {
-        @await Html.GetBlockListItemHtmlAsync(item)
-        continue;
-    }
+        var item = items[i];
 
-    // Handle global reference
-    var repo = item.Content.Value<IPublishedContent>("repository", culture: culture, fallback: Fallback.ToLanguage);
-    var blockKeyStr = item.Content.Value<string>("globalBlock"); // GUID string pasted by editor
+        // --- First/last detection ---
+        var isFirst = i == 0;
+        var isLast  = i == items.Count - 1;
 
-    if (repo == null || string.IsNullOrWhiteSpace(blockKeyStr) || !Guid.TryParse(blockKeyStr, out var key))
-    {
-        if (UmbracoContext?.InPreviewMode == true)
+        // Optional extra pos class if you want it
+        var posClass = isFirst ? "pos-first"
+                     : isLast  ? "pos-last"
+                     :          string.Empty;
+
+        // Build ViewData for this specific block
+        var viewData = new ViewDataDictionary(ViewData)
         {
-            <div class="alert alert-warning my-3">
-                Global block reference is not configured correctly (missing repository or GUID).
-            </div>
+            ["BlockIsFirst"]  = isFirst,
+            ["BlockIsLast"]   = isLast,
+            ["BlockPosClass"] = posClass
+        };
+
+        // Resolve view path
+        var alias = item.Content.ContentType.Alias;
+        var viewPath = ComponentPath(alias);
+
+        if (ViewExists(viewPath))
+        {
+            @await Html.PartialAsync(viewPath, item, viewData)
         }
-        continue;
-    }
-
-    var refBlock = FindBlockByKey(repo, key);
-
-    if (refBlock != null)
-    {
-        // Reuse your existing block partials & conventions
-        @await Html.GetBlockListItemHtmlAsync(refBlock)
-    }
-    else if (UmbracoContext?.InPreviewMode == true)
-    {
-        <div class="alert alert-danger my-3">
-            Referenced global block not found in repository.
-        </div>
+        else
+        {
+            @await Html.PartialAsync(FallbackPath, item, viewData)
+        }
     }
 }

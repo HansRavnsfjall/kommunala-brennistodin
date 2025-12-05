@@ -1,5 +1,6 @@
 @using Umbraco.Cms.Core.Models
 @using Umbraco.Cms.Core.Models.Blocks
+@using Umbraco.Extensions
 @inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<BlockListItem>
 
 @{
@@ -9,8 +10,15 @@
 }
 
 <section class="full-w-image @posClass">
-  @if (img is not null)
-  {
-      <img src="@img.GetCropUrl()" alt="@img.Name" class="img-fluid" />
-  }
+    @if (img is not null)
+    {
+        // Force max width 2000px, quality 85, WebP output, and avoid upscaling
+        var url = img.GetCropUrl(
+            width: 2000,
+            quality: 85,
+            furtherOptions: "&format=webp&upscale=false"
+        );
+
+        <img src="@url" alt="@img.Name" class="img-fluid" loading="lazy" decoding="async" />
+    }
 </section>

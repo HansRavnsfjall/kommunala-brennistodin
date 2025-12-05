@@ -10,9 +10,10 @@ export const getDefaultConfig = (args) => {
             emptyOutDir: true,
             sourcemap: true,
             rollupOptions: {
-                external: [/^@umbraco/],
+                external: args.external || [/^@umbraco-cms/],
             },
         },
         plugins: args.plugins,
+        base: args.base,
     };
 };

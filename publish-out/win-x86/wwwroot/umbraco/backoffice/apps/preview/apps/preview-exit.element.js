@@ -10,7 +10,7 @@ import { UmbLitElement } from '@umbraco-cms/backoffice/lit-element';
 let UmbPreviewExitElement = class UmbPreviewExitElement extends UmbLitElement {
     async #onClick() {
         const previewContext = await this.getContext(UMB_PREVIEW_CONTEXT);
-        previewContext?.exitPreview(0);
+        await previewContext?.exitPreview(0);
     }
     render() {
         return html `

@@ -1,14 +1,15 @@
-import { d as u, i as L, g as i, h as _, f as n, j as o, U as s, b as m, c, k as U, m as y, o as a, r as t } from "./language-access.workspace.context-token-Bqcpkg-3.js";
-import { UmbConditionBase as d } from "@umbraco-cms/backoffice/extension-registry";
-import { UMB_CONTENT_SECTION_ALIAS as b } from "@umbraco-cms/backoffice/content";
-import { UMB_COLLECTION_ALIAS_CONDITION as l } from "@umbraco-cms/backoffice/collection";
+import { d as u, i as L, g as n, h as _, f as i, j as o, U as s, b as m, c, k as y, m as U, o as a, r as t } from "./language-access.workspace.context-token-Bqcpkg-3.js";
+import { UmbConditionBase as b } from "@umbraco-cms/backoffice/extension-registry";
+import { UMB_CONTENT_SECTION_ALIAS as d } from "@umbraco-cms/backoffice/content";
+import { UMB_SECTION_ALIAS_CONDITION_ALIAS as E } from "@umbraco-cms/backoffice/section";
+import { UMB_COLLECTION_ALIAS_CONDITION as p } from "@umbraco-cms/backoffice/collection";
 import "@umbraco-cms/backoffice/external/backend-api";
 import "@umbraco-cms/backoffice/resources";
 import "@umbraco-cms/backoffice/repository";
-import { UMB_WORKSPACE_CONDITION_ALIAS as e, UmbSubmitWorkspaceAction as C } from "@umbraco-cms/backoffice/workspace";
-class E extends d {
-  constructor(p, r) {
-    super(p, r), this.consumeContext(u, (g) => {
+import { UMB_WORKSPACE_CONDITION_ALIAS as e, UmbSubmitWorkspaceAction as I } from "@umbraco-cms/backoffice/workspace";
+class C extends b {
+  constructor(l, r) {
+    super(l, r), this.consumeContext(u, (g) => {
       this.observe(
         g?.moreThanOneLanguage,
         (A) => {
@@ -19,12 +20,12 @@ class E extends d {
     });
   }
 }
-const I = {
+const S = {
   type: "condition",
   name: "Multiple App Languages Condition",
   alias: "Umb.Condition.MultipleAppLanguages",
-  api: E
-}, S = {
+  api: C
+}, f = {
   type: "condition",
   name: "Language User Permission Condition",
   alias: L,
@@ -34,19 +35,19 @@ const I = {
     type: "sectionSidebarApp",
     alias: "Umb.SectionSidebarItem.LanguageSelect",
     name: "App Language Select Section Sidebar Item",
-    js: () => import("./app-language-select.element-DrTscH-B.js"),
+    js: () => import("./app-language-select.element-5mZfgnvB.js"),
     weight: 900,
     conditions: [
       {
-        alias: "Umb.Condition.SectionAlias",
-        match: b
+        alias: E,
+        match: d
       },
       {
         alias: "Umb.Condition.MultipleAppLanguages"
       }
     ]
   }
-], f = [
+], T = [
   {
     type: "collectionAction",
     kind: "button",
@@ -59,19 +60,19 @@ const I = {
     },
     conditions: [
       {
-        alias: l,
+        alias: p,
         match: "Umb.Collection.Language"
       }
     ]
   }
-], T = [
+], O = [
   {
     type: "repository",
-    alias: i,
+    alias: n,
     name: "Language Collection Repository",
     api: () => import("./language-collection.repository-GzJNHJc2.js")
   }
-], O = [
+], N = [
   {
     type: "collectionView",
     alias: _,
@@ -84,25 +85,25 @@ const I = {
     },
     conditions: [
       {
-        alias: l,
+        alias: p,
         match: "Umb.Collection.Language"
       }
     ]
   }
-], N = [
+], M = [
   {
     type: "collection",
     kind: "default",
-    alias: n,
+    alias: i,
     name: "Language Collection",
     meta: {
-      repositoryAlias: i
+      repositoryAlias: n
     }
   },
-  ...f,
   ...T,
-  ...O
-], M = [
+  ...O,
+  ...N
+], G = [
   {
     type: "entityAction",
     kind: "delete",
@@ -124,18 +125,18 @@ const I = {
     forEntityTypes: [c],
     meta: {
       icon: "icon-add",
-      label: "#actions_create",
+      label: "#actions_createFor",
       additionalOptions: !0
     }
   }
-], G = [
+], R = [
   {
     type: "globalContext",
     alias: "Umb.GlobalContext.AppLanguage",
     name: "App Language Context",
     api: () => import("./app-language.context-DwkHp6Yy.js")
   }
-], R = [
+], h = [
   {
     type: "entityItemRef",
     alias: "Umb.EntityItemRef.Language",
@@ -143,7 +144,7 @@ const I = {
     element: () => import("./langauge-item-ref.element-CGq7iq2w.js"),
     forEntityTypes: [m]
   }
-], h = [
+], B = [
   {
     type: "menuItem",
     alias: "Umb.MenuItem.Languages",
@@ -196,30 +197,30 @@ const I = {
   },
   {
     type: "store",
-    alias: U,
+    alias: y,
     name: "Language Detail Store",
     api: () => import("./language-detail.store-CxF6Kou8.js")
   }
-], B = [
+], P = [
   {
     type: "repository",
     alias: s,
     name: "Language Item Repository",
-    api: () => import("./language-item.repository-R0RHQ4z3.js")
+    api: () => import("./language-item.repository-CCdsna_d.js")
   },
   {
     type: "itemStore",
-    alias: y,
+    alias: U,
     name: "Language Item Store",
     api: () => import("./language-item.store-Dd-XucOS.js")
   }
-], $ = [...W, ...B], D = [
+], $ = [...W, ...P], D = [
   {
     type: "workspace",
     kind: "routable",
     alias: a,
     name: "Language Workspace",
-    api: () => import("./language-workspace.context-DJvyozfu.js"),
+    api: () => import("./language-workspace.context-B1BBxKKM.js"),
     meta: {
       entityType: "language"
     }
@@ -247,7 +248,7 @@ const I = {
     kind: "default",
     alias: "Umb.WorkspaceAction.Language.Save",
     name: "Save Language Workspace Action",
-    api: C,
+    api: I,
     meta: {
       look: "primary",
       color: "positive",
@@ -260,7 +261,7 @@ const I = {
       }
     ]
   }
-], P = [
+], x = [
   {
     type: "workspace",
     kind: "default",
@@ -280,7 +281,7 @@ const I = {
       label: "Collection",
       pathname: "collection",
       icon: "icon-layers",
-      collectionAlias: n
+      collectionAlias: i
     },
     conditions: [
       {
@@ -289,18 +290,18 @@ const I = {
       }
     ]
   }
-], x = [...D, ...P], z = [
+], V = [...D, ...x], Q = [
   ...k,
-  ...N,
   ...M,
   ...G,
   ...R,
   ...h,
+  ...B,
   ...w,
   ...$,
-  ...x,
-  I,
+  ...V,
   S,
+  f,
   {
     type: "workspaceContext",
     name: "Document Language Access Workspace Context",
@@ -312,9 +313,15 @@ const I = {
         match: "Umb.Workspace.Document"
       }
     ]
+  },
+  {
+    name: "Language Backoffice Entry Point",
+    alias: "Umb.EntryPoint.Language",
+    type: "backofficeEntryPoint",
+    js: () => import("./entry-point-DhrXVKxf.js")
   }
 ];
 export {
-  z as manifests
+  Q as manifests
 };
 //# sourceMappingURL=manifests.js.map

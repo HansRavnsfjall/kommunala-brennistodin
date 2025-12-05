@@ -1,4 +1,4 @@
-import { C as a, U as m, a as E } from "./code-editor.element-Bq6IgBpV.js";
+import { C as a, U as m, a as E } from "./code-editor.element-Y_YLZjcC.js";
 import { UmbModalToken as o } from "@umbraco-cms/backoffice/modal";
 const d = new o(
   "Umb.Modal.CodeEditor",

@@ -622,6 +622,7 @@ export default {
         design: 'Design',
         dictionary: 'Dictionnaire',
         dimensions: 'Dimensions',
+        dividerPosition: (value) => `Séparateur à ${value}%`,
         down: 'Bas',
         download: 'Télécharger',
         edit: 'Editer',
@@ -1698,6 +1699,7 @@ export default {
         openBackofficeSearch: 'Ouvrir la recherche backoffice',
         openCloseBackofficeHelp: "Ouvrir/Fermer l'aide backoffice",
         openCloseBackofficeProfileOptions: 'Ouvrir/Fermer vos options de profil',
+        profileOptions: 'Options de profil',
         openContextMenu: 'Ouvrir le menu de contexte pour',
         currentLanguage: 'Langue actuelle',
         switchLanguage: 'Changer la langue vers',
@@ -1708,6 +1710,7 @@ export default {
         searchContentTree: "Chercher dans l'arborescence de contenu",
         maxAmount: 'Quantité maximum',
         expandChildItems: 'Afficher les éléments enfant pour',
+        collapseChildItems: 'Cacher les éléments enfant pour',
         openContextNode: 'Ouvrir le noeud de contexte pour',
     },
     references: {

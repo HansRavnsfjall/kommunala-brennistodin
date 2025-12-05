@@ -4,7 +4,7 @@ import { UmbRepositoryBase as b } from "@umbraco-cms/backoffice/repository";
 import { css as S, property as f, customElement as F, html as d } from "@umbraco-cms/backoffice/external/lit";
 import { UmbLitElement as I } from "@umbraco-cms/backoffice/lit-element";
 import { clamp as T, formatBytes as _ } from "@umbraco-cms/backoffice/utils";
-import { UmbTemporaryFileConfigRepository as x } from "../config.repository-BoHBgUwb.js";
+import { UmbTemporaryFileConfigRepository as x } from "../config.repository-eH2FsqDW.js";
 import { U as oe } from "../config.store.token-CsbU_19N.js";
 import { UmbTemporaryFileConfigStore as ne } from "../config.store-CVJDS2rs.js";
 import { U as pe, a as ce } from "../constants-CDwqkOdg.js";

@@ -1,0 +1,36 @@
+﻿@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<Umbraco.Cms.Core.Models.Blocks.BlockListItem>
+
+@using Umbraco.Extensions
+@using Umbraco.Cms.Core.Models.PublishedContent
+
+@{
+    var el = Model?.Content;
+    if (el is null) { return; }
+
+    var kota = el.Value<string>("kota");
+    var yvirskrift = el.Value<string>("yvirskrift");
+    var bodyRte = el.Value<IHtmlEncodedString>("tekstur");
+
+    if (string.IsNullOrWhiteSpace(kota))
+    {
+        return;
+    }
+}
+
+<div class="container my-4 mt-5 mb-5">
+    <div class="row">
+        <div class="col-12 col-lg-6 editor">
+
+            @* Only show heading if it has a value *@
+            @if (!string.IsNullOrWhiteSpace(yvirskrift))
+            {
+                <h1 class="h1head">@yvirskrift</h1>
+            }
+            @bodyRte
+            </div>
+<div class="col-12 col-lg-6">
+            @Html.Raw(kota)
+            </div>
+        </div>
+    
+</div>

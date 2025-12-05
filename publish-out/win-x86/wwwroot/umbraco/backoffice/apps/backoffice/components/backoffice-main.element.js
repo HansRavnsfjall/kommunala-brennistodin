@@ -59,6 +59,7 @@ let UmbBackofficeMainElement = class UmbBackofficeMainElement extends UmbLitElem
         }
         this._routes = newRoutes;
     }
+    // TODO: v17. Remove this section context when we have api's as part of the section manifest.
     _provideSectionContext(sectionManifest) {
         if (!this._sectionContext) {
             this._sectionContext = new UmbSectionContext(this);

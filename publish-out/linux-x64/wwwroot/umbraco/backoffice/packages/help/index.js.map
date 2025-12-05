@@ -1,0 +1,1 @@
+{"version":3,"file":"index.js","sources":["../../../src/packages/help/menu/constants.ts"],"sourcesContent":["export const UMB_HELP_MENU_ALIAS = 'Umb.Menu.Help';\r\n"],"names":["UMB_HELP_MENU_ALIAS"],"mappings":"AAAO,MAAMA,IAAsB;"}

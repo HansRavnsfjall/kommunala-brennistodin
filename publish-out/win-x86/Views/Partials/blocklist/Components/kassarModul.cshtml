@@ -1,0 +1,91 @@
+﻿@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<BlockListItem>
+@using Umbraco.Cms.Core.Models
+@using Umbraco.Cms.Core.Models.Blocks
+@using Umbraco.Cms.Core.Strings
+@using Umbraco.Extensions
+
+@{
+    var el = Model?.Content;
+
+    // Get block list items
+    var blocks = el?.Value<IEnumerable<BlockListItem>>("kassar")
+                ?? Enumerable.Empty<BlockListItem>();
+
+    var items = blocks.ToList();
+    if (!items.Any()) { return; }
+}
+
+<section class="kassar-section py-3 py-lg-4">
+  <div class="container">
+    <div class="row g-5">
+      @foreach (var b in items)
+      {
+          var c = b.Content;
+
+          var title = c?.Value<string>("yvirskrift") ?? "";
+          IHtmlEncodedString? body = c?.Value<IHtmlEncodedString?>("tekstur");
+          MediaWithCrops? image = c?.Value<MediaWithCrops?>("mynd");
+
+          // Optimized WebP image (max width 800, q=85, no upscaling)
+          string? imgUrl = image?.GetCropUrl(
+              width: 800,
+              quality: 85,
+              furtherOptions: "&format=webp&upscale=false"
+          );
+
+          var alt = image?.MediaItem?.Value<string>("altText")
+                    ?? image?.MediaItem?.Name
+                    ?? title;
+      <div class="col-12 col-md-6 col-lg-4">
+        <article class="kassi h-100">
+          @if (!string.IsNullOrWhiteSpace(imgUrl))
+          {
+              <div class="kassi-img-wrap mb-3">
+                <img src="@imgUrl" alt="@alt" class="img-fluid w-100 kassi-img" loading="lazy" decoding="async" />
+              </div>
+          }
+
+          @if (!string.IsNullOrWhiteSpace(title))
+          {
+              <h3 class="kassi-title mb-3">@title</h3>
+          }
+
+          @if (body is not null)
+          {
+              <div class="kassi-body rte mb-0">@body</div>
+          }
+        </article>
+      </div>
+      }
+    </div>
+  </div>
+</section>
+
+<style>
+.kassar-section .row.g-5 { --bs-gutter-x: 2rem; --bs-gutter-y: 2.25rem; }
+
+.kassi-img-wrap {
+  overflow: hidden;
+}
+
+.kassi-img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.kassi-title {
+  font-weight: 800;
+  line-height: 1.2;
+  font-size: clamp(1.4rem, 1.1rem + 1.3vw, 2.25rem);
+  margin-top: 0;
+}
+
+.kassi-body {
+  font-size: 1.0625rem;
+  line-height: 1.65;
+}
+
+.kassi .rte p { margin-bottom: 0.75rem; }
+.kassi .rte p:last-child { margin-bottom: 0; }
+</style>

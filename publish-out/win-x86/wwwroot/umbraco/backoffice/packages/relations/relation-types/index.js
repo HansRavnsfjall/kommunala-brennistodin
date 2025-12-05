@@ -1,5 +1,5 @@
 import { UmbRelationTypeCollectionRepository as E } from "../relation-type-collection.repository-Bw0BK4M6.js";
-import { U as A, a as I, b as R, c as L, d as o } from "../manifests-BTP3sv7U.js";
+import { U as A, a as I, b as R, c as L, d as o } from "../manifests-BGq4UYLP.js";
 import { U as P } from "../relation-type-detail.store.context-token-Dk0XD8Vu.js";
 import { U as Y } from "../relation-type-workspace.context-token-D96LZ9-c.js";
 import { a as e, U as r } from "../entity-CGrHYXC8.js";

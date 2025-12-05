@@ -1,0 +1,52 @@
+@using Umbraco.Cms.Core.Models.Blocks
+@using Umbraco.Cms.Core.Strings
+@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<BlockListItem>
+
+@{
+    var c = Model.Content;
+
+    // Fields
+    var heading = c.Value<string>("yvirskrift");
+    var bodyRte = c.Value<IHtmlEncodedString>("tekstur");
+
+    // Helper-provided flags
+    var isFirst = ViewData["BlockIsFirst"] as bool? ?? false;
+    var isLast  = ViewData["BlockIsLast"]  as bool? ?? false;
+    var posClass = (ViewData["BlockPosClass"] as string) ?? string.Empty;
+
+    // Build combined class string
+    var classes = $"textblock {posClass}";
+    if (isFirst) classes += " is-first";
+    if (isLast)  classes += " is-last";
+}
+
+<section class="@classes">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 editor">
+        @if (!string.IsNullOrWhiteSpace(heading))
+        {
+            <h1>@heading</h1>
+        }
+
+        @if (bodyRte is not null)
+        {
+            <div class="rte">
+                @bodyRte
+            </div>
+        }
+        else
+        {
+            // Fallback if RTE value is a plain string
+            var bodyStr = c.Value<string>("tekstur");
+            if (!string.IsNullOrWhiteSpace(bodyStr))
+            {
+                <div class="rte">
+                    @Html.Raw(bodyStr)
+                </div>
+            }
+        }
+      </div>
+    </div>
+  </div>
+</section>

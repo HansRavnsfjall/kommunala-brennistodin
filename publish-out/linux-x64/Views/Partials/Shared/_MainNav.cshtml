@@ -1,0 +1,203 @@
+@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage
+@using System.Linq
+@using System.Collections.Generic
+@using Umbraco.Cms.Core.Models.PublishedContent
+@using Umbraco.Cms.Core.Routing
+@using Umbraco.Extensions
+
+@{
+    // ----- Aliases / property keys -----
+    const string AliasMegaFolder = "megamenuFolder"; // top-level mega root (label)
+    string[] HeadingAliases      = { "megamenuHeading", "megamenuYvirskrift", "megamenuHeader" };
+    const string PropHideInMenu  = "hideInMenu";
+
+    // ---------- Helpers ----------
+    bool IsHiddenInMenu(IPublishedContent c)
+        => c != null && c.HasProperty(PropHideInMenu) && c.Value<bool>(PropHideInMenu);
+
+    bool IsRoutablePage(IPublishedContent c)
+        => c != null && !c.ContentType.IsElement;
+
+    // Single-language site: no culture gating
+    bool ShouldInclude(IPublishedContent c)
+        => c != null && c.IsVisible() && c.IsPublished() && !IsHiddenInMenu(c);
+
+    bool IsAlias(IPublishedContent c, params string[] aliases)
+        => c != null && aliases.Any(a => a.Equals(c.ContentType.Alias, System.StringComparison.OrdinalIgnoreCase));
+
+    bool IsMega(IPublishedContent c)    => IsAlias(c, AliasMegaFolder);
+    bool IsHeading(IPublishedContent c) => IsAlias(c, HeadingAliases);
+
+    string BuildPathFromSegments(IPublishedContent c)
+    {
+        var parts = c.Ancestors().Where(a => a.Level > 1)
+                     .OrderBy(a => a.Level)
+                     .Select(a => a.UrlSegment())
+                     .Where(seg => !string.IsNullOrWhiteSpace(seg))
+                     .ToList();
+        var me = c.UrlSegment();
+        if (!string.IsNullOrWhiteSpace(me)) parts.Add(me);
+        return "/" + string.Join("/", parts);
+    }
+
+    string GetUrl(IPublishedContent c)
+    {
+        if (c == null || !IsRoutablePage(c)) return "#";
+        var url = c.Url(mode: UrlMode.Auto);
+        if (string.IsNullOrWhiteSpace(url) || url == "/")
+        {
+            var built = BuildPathFromSegments(c);
+            return string.IsNullOrWhiteSpace(built) ? "#" : built;
+        }
+        return url;
+    }
+
+    // ---------- Fetch content (preserve order) ----------
+    var root = Model?.AncestorOrSelf(1) ?? Model?.Root();
+    var top  = (root?.Children ?? Enumerable.Empty<IPublishedContent>())
+               .Where(ShouldInclude)
+               .ToList();
+
+    // ---------- Rendering helpers ----------
+    void RenderMega(IPublishedContent megaRoot)
+    {
+        if (!ShouldInclude(megaRoot)) return;
+
+        // Children included in menu: published + visible + not hidden
+        bool Inc(IPublishedContent n) => ShouldInclude(n);
+
+        var kids = (megaRoot.Children ?? Enumerable.Empty<IPublishedContent>())
+                   .Where(Inc)
+                   .ToList();
+
+        // Headings strictly by alias (prevents structural items from becoming their own group)
+        var headings = kids.Where(IsHeading).ToList();
+
+        // Direct links under mega root:
+        // ANY routable child type (e.g., starvsfolkaSida), filtered by hide/visible/published,
+        // and NOT a heading container.
+        var directLinks = kids
+            .Where(c => IsRoutablePage(c) && !IsHeading(c))
+            .ToList();
+
+        var groups = new List<(string Title, List<IPublishedContent> Links)>();
+
+        foreach (var h in headings)
+        {
+            var hKids = (h.Children ?? Enumerable.Empty<IPublishedContent>())
+                        .Where(Inc)
+                        .ToList();
+
+            // Level 1: ANY routable child type under the heading (alias-agnostic, respects hideInMenu)
+            var level1 = hKids.Where(IsRoutablePage).ToList();
+
+            // Level 2 fallback: if headings use an extra container level, flatten one level deeper
+            var level2 = !level1.Any()
+                ? hKids
+                    .SelectMany(ch => (ch.Children ?? Enumerable.Empty<IPublishedContent>()))
+                    .Where(Inc)
+                    .Where(IsRoutablePage)
+                    .ToList()
+                : new List<IPublishedContent>();
+
+            var links = level1.Any() ? level1 : level2;
+
+            // Always add a group so headings with no children render as title-only columns
+            groups.Add((h.Name, links));
+        }
+
+        // Add direct links group (if any)
+        if (directLinks.Any())
+            groups.Add((megaRoot.Name, directLinks));
+
+        if (!groups.Any()) return;
+
+        <div class="mega">
+          <div class="container">
+            <div class="row g-4">
+              @foreach (var group in groups)
+              {
+                  var links = group.Links;
+                  var lotsOfLinks = links.Count > 6;
+                  var colClass = lotsOfLinks ? "col-12 col-lg-6" : "col-6 col-lg-3";
+
+                  <div class="@colClass">
+                    <h6>@group.Title</h6>
+
+                    @if (links.Any())
+                    {
+                        if (lotsOfLinks)
+                        {
+                            var half = (int)System.Math.Ceiling(links.Count / 2.0);
+                            var left = links.Take(half).ToList();
+                            var right = links.Skip(half).ToList();
+
+                            <div class="row">
+                              <div class="col-12 col-md-6">
+                                @foreach (var l in left) { <a href="@GetUrl(l)">@l.Name</a> }
+                              </div>
+                              <div class="col-12 col-md-6">
+                                @foreach (var l in right) { <a href="@GetUrl(l)">@l.Name</a> }
+                              </div>
+                            </div>
+                        }
+                        else
+                        {
+                            foreach (var l in links) { <a href="@GetUrl(l)">@l.Name</a> }
+                        }
+                    }
+                    @* else: title-only column *@
+                  </div>
+              }
+            </div><!--/row-->
+          </div><!--/container-->
+        </div><!--/mega-->
+    }
+
+    void RenderTopItem(IPublishedContent node)
+    {
+        if (!ShouldInclude(node)) return;
+
+        if (IsMega(node))
+        {
+            <li class="nav-item dropdown mega-parent position-static">
+              <a class="nav-link is-mega" href="#" role="button" data-title="@node.Name" aria-expanded="false">
+                @node.Name
+              </a>
+              @{ RenderMega(node); }
+            </li>
+        }
+        else
+        {
+            if (IsRoutablePage(node))
+            {
+                <li class="nav-item">
+                  <a class="nav-link" href="@GetUrl(node)">@node.Name</a>
+                </li>
+            }
+        }
+    }
+}
+
+<!-- ===== Main navbar (single green row) ===== -->
+<nav class="navbar navbar-expand-lg navbar-main sticky-top">
+  <div class="container">
+    <a class="navbar-brand d-flex align-items-center gap-2 fw-700 text-white" href="@Url.Content("~")">
+      <img src="~/assets/logo-main.svg" alt="Ringrás" height="28" class="me-2">
+    </a>
+
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNav"
+            aria-controls="mainNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="mainNav">
+      <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+        @foreach (var node in top)
+        {
+            RenderTopItem(node);
+        }
+      </ul>
+    </div>
+  </div>
+</nav>

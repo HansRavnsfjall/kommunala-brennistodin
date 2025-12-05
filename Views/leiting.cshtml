@@ -1,0 +1,137 @@
+﻿@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage
+@using System.Web
+@{
+    Layout = "master.cshtml";
+
+    // Read query params
+    var q = Context?.Request?.Query?["q"].ToString() ?? string.Empty;
+    var groupParam = (Context?.Request?.Query?["group"].ToString() ?? string.Empty).ToLowerInvariant();
+
+    // Map group code -> human label (UI)
+    string GroupLabel(string g) => g switch
+    {
+        "news"   => "Tíðindi",
+        "guides" => "Skiljiskjáttan",
+        "others" => "Aðrar síður",
+        _        => "Allir bólkar"
+    };
+
+    var groupLabel = GroupLabel(groupParam);
+    var safeQ = string.IsNullOrWhiteSpace(q) ? "" : q;
+}
+
+<section class="py-5">
+  <div class="container searchpage">
+    <header class="mb-4">
+      <h1>Leitiúrslit</h1>
+      <h2 class="h3 mb-2">
+        Leiting eftir “@Html.Raw(HttpUtility.HtmlEncode(safeQ))”
+        í “@groupLabel”
+      </h2>
+      <p class="text-muted mb-0">
+       @if (string.IsNullOrWhiteSpace(safeQ) || safeQ.Trim().Length < 2)
+        {
+            <text>Skriva minst 2 stavir fyri at fáa úrslit.</text>
+        }
+        else
+        {
+            <text>Vísir øll úrslit í valda bólkinum.</text>
+        }
+      </p>
+    </header>
+
+    <div id="resultsMount">
+      <div class="spinner-border" role="status" aria-hidden="true"></div>
+      <span class="ms-2">Leiti…</span>
+    </div>
+
+    <div id="resultsNone" class="alert alert-light border d-none" role="status">
+      Onki úrslit
+    </div>
+
+    <ul id="resultsList" class="list-unstyled d-none"></ul>
+  </div>
+</section>
+
+@section Scripts {
+<script>
+(function () {
+  const ENDPOINT = "/umbraco/api/sortsearch/site";
+  const TAKE = 1000; // effectively "all" (controller caps to 20 if not raised; we changed it earlier to allow 20+, but we pass a big ask)
+
+  // Read query params
+  const url = new URL(window.location.href);
+  const q = (url.searchParams.get("q") || "").trim();
+  const group = (url.searchParams.get("group") || "").toLowerCase(); // news | guides | others
+
+  const mount = document.getElementById("resultsMount");
+  const list = document.getElementById("resultsList");
+  const none = document.getElementById("resultsNone");
+
+  // Early exit if query too short
+  if (!q || q.length < 2) {
+    if (mount) mount.classList.add("d-none");
+    if (list) list.classList.add("d-none");
+    if (none) { none.textContent = "Skriva minst 2 stavir fyri at fáa úrslit."; none.classList.remove("d-none"); }
+    return;
+  }
+
+  const esc = s => (s || "").replace(/[&<>"']/g, m => ({
+    "&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;","'":"&#39;"
+  }[m]));
+
+  function pickGroupData(data, g){
+    // API shape: { news:{total,items}, guides:{...}, topics:{...} }
+    if (!data) return { total:0, items:[] };
+    if (g === "news") return data.news || { total:0, items:[] };
+    if (g === "guides") return data.guides || { total:0, items:[] };
+    if (g === "others") return data.topics || { total:0, items:[] }; // topics maps to "Aðrar síður"
+    // default: merge all
+    const n = data.news   || { total:0, items:[] };
+    const gds = data.guides || { total:0, items:[] };
+    const t = data.topics || { total:0, items:[] };
+    return { total: (n.total + gds.total + t.total), items: [...(n.items||[]), ...(gds.items||[]), ...(t.items||[])] };
+  }
+
+  async function load(){
+    try {
+      const qs = new URLSearchParams({ term: q, takePerGroup: String(TAKE) });
+      const res = await fetch(`${ENDPOINT}?${qs.toString()}`, { headers: { "Accept":"application/json" }});
+      if (!res.ok) throw new Error("Search endpoint failed: " + res.status);
+      const data = await res.json();
+
+      const groupData = pickGroupData(data, group);
+      const items = Array.isArray(groupData.items) ? groupData.items : [];
+
+      // Render
+      if (mount) mount.classList.add("d-none");
+
+      if (!items.length) {
+        if (list) list.classList.add("d-none");
+        if (none) { none.textContent = "Onki úrslit"; none.classList.remove("d-none"); }
+        return;
+      }
+
+      const html = items.map(it => {
+        return `<li class="mb-2"><a href="${esc(it.url)}" class="link-dark">${esc(it.title)}</a></li>`;
+      }).join("");
+
+      if (list) {
+        list.innerHTML = html;
+        list.classList.remove("d-none");
+      }
+      if (none) none.classList.add("d-none");
+
+    } catch (e) {
+      if (mount) mount.classList.add("d-none");
+      if (list) list.classList.add("d-none");
+      if (none) { none.textContent = "Onki úrslit"; none.classList.remove("d-none"); }
+      // console.warn(e);
+    }
+  }
+
+  // Kick it off
+  load();
+})();
+</script>
+}

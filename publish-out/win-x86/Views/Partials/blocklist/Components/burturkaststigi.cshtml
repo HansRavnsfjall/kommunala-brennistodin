@@ -1,0 +1,79 @@
+﻿@using System.Globalization
+@using Umbraco.Cms.Core.Models
+@using Umbraco.Cms.Core.Models.Blocks
+@using Umbraco.Cms.Core.Strings
+@using Umbraco.Extensions
+@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<BlockListItem>
+
+@{
+    var c = Model.Content;
+    if (c == null) { return; }
+
+    var culture = CultureInfo.CurrentUICulture?.Name ?? string.Empty;
+
+    // Fields with culture + fallback
+    var heading = c.Value<string>("yvirskrift", culture: culture, fallback: Fallback.ToLanguage);
+    IHtmlEncodedString? text = c.Value<IHtmlEncodedString>("tekstur", culture: culture, fallback: Fallback.ToLanguage);
+
+    MediaWithCrops? img = c.Value<MediaWithCrops>("mynd", culture: culture, fallback: Fallback.ToLanguage);
+    var imgUrl = img?.GetCropUrl() ?? img?.Url();
+
+    Link? link = c.Value<Link>("leinki", culture: culture, fallback: Fallback.ToLanguage);
+
+    // Link pieces
+    var href     = link?.Url ?? string.Empty;
+    var linkText = !string.IsNullOrWhiteSpace(link?.Name) ? link!.Name! : "Les meira";
+    var target   = string.IsNullOrWhiteSpace(link?.Target) ? null : link!.Target;
+    var rel      = (target == "_blank") ? "noopener noreferrer" : null;
+
+    // Position classes (from your ViewData helper)
+    var isFirst  = ViewData["BlockIsFirst"] as bool? ?? false;
+    var isLast   = ViewData["BlockIsLast"]  as bool? ?? false;
+    var posClass = (ViewData["BlockPosClass"] as string) ?? string.Empty;
+
+    var sectionClasses = $"kb-section img-txt-heading-btn container my-5 {posClass}"
+                         + (isFirst ? " is-first" : "")
+                         + (isLast  ? " is-last"  : "");
+}
+
+<div class="@sectionClasses burturkaststigin">
+    <div class="row align-items-center">
+        
+        <!-- IMAGE COLUMN -->
+        <div class="col-md-6 imgcol">
+            @if (!string.IsNullOrWhiteSpace(imgUrl))
+            {
+                <img src="@imgUrl"
+                     alt="@img?.Name"
+                     class="img-fluid" />
+            }
+        </div>
+
+        <!-- TEXT COLUMN -->
+        <div class="col-md-6 txtcol">
+            
+            @if (!string.IsNullOrWhiteSpace(heading))
+            {
+                <h3>@heading</h3>
+            }
+
+            @if (text != null)
+            {
+                @text
+            }
+
+            @if (!string.IsNullOrWhiteSpace(href))
+            {
+                <a href="@href"
+                   target="@target"
+                   rel="@rel"
+                  >
+                    @linkText <svg xmlns="http://www.w3.org/2000/svg" width="43" height="43" viewBox="0 0 43 43" fill="none">
+  <path d="M21.5003 28.6665L12.542 19.7082L15.0503 17.1103L19.7087 21.7686V7.1665H23.292V21.7686L27.9503 17.1103L30.4587 19.7082L21.5003 28.6665ZM10.7503 35.8332C9.76491 35.8332 8.92133 35.4823 8.2196 34.7806C7.51786 34.0788 7.16699 33.2353 7.16699 32.2498V26.8748H10.7503V32.2498H32.2503V26.8748H35.8337V32.2498C35.8337 33.2353 35.4828 34.0788 34.7811 34.7806C34.0793 35.4823 33.2357 35.8332 32.2503 35.8332H10.7503Z" fill="white"/>
+</svg>
+                </a>
+            }
+        </div>
+
+    </div>
+</div>

@@ -1,9 +1,9 @@
-import { U as t, a as e, d as a } from "./constants-3DrlJG7v.js";
-import { UMB_SECTION_USER_PERMISSION_CONDITION_ALIAS as n } from "@umbraco-cms/backoffice/section";
+import { U as a, a as e, d as n } from "./constants-3DrlJG7v.js";
+import { UMB_SECTION_ALIAS_CONDITION_ALIAS as t, UMB_SECTION_USER_PERMISSION_CONDITION_ALIAS as s } from "@umbraco-cms/backoffice/section";
 const i = [
   {
     type: "menu",
-    alias: t,
+    alias: a,
     name: "Advanced Settings Menu"
   },
   {
@@ -14,16 +14,16 @@ const i = [
     weight: 100,
     meta: {
       label: "#treeHeaders_advancedGroup",
-      menu: t
+      menu: a
     },
     conditions: [
       {
-        alias: "Umb.Condition.SectionAlias",
+        alias: t,
         match: e
       }
     ]
   }
-], s = [
+], m = [
   {
     type: "section",
     alias: e,
@@ -35,15 +35,15 @@ const i = [
     },
     conditions: [
       {
-        alias: n,
+        alias: s,
         match: e
       }
     ]
   }
-], o = [
+], S = [
   {
     type: "menu",
-    alias: a,
+    alias: n,
     name: "Settings Menu"
   },
   {
@@ -54,16 +54,16 @@ const i = [
     weight: 300,
     meta: {
       label: "#treeHeaders_structureGroup",
-      menu: a
+      menu: n
     },
     conditions: [
       {
-        alias: "Umb.Condition.SectionAlias",
+        alias: t,
         match: e
       }
     ]
   }
-], m = [
+], o = [
   {
     type: "dashboard",
     alias: "Umb.Dashboard.SettingsWelcome",
@@ -76,18 +76,18 @@ const i = [
     },
     conditions: [
       {
-        alias: "Umb.Condition.SectionAlias",
+        alias: t,
         match: e
       }
     ]
   }
-], d = [
+], r = [
   ...i,
-  ...s,
-  ...o,
-  ...m
+  ...m,
+  ...S,
+  ...o
 ];
 export {
-  d as manifests
+  r as manifests
 };
 //# sourceMappingURL=manifests.js.map

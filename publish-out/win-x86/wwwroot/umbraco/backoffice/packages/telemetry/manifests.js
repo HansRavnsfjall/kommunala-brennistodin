@@ -1,5 +1,6 @@
-import { UMB_SETTINGS_SECTION_ALIAS as e } from "@umbraco-cms/backoffice/settings";
-const a = [
+import { UMB_SECTION_ALIAS_CONDITION_ALIAS as e } from "@umbraco-cms/backoffice/section";
+import { UMB_SETTINGS_SECTION_ALIAS as t } from "@umbraco-cms/backoffice/settings";
+const r = [
   {
     type: "dashboard",
     alias: "Umb.Dashboard.Telemetry",
@@ -12,13 +13,13 @@ const a = [
     },
     conditions: [
       {
-        alias: "Umb.Condition.SectionAlias",
-        match: e
+        alias: e,
+        match: t
       }
     ]
   }
 ];
 export {
-  a as manifests
+  r as manifests
 };
 //# sourceMappingURL=manifests.js.map

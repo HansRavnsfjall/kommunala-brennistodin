@@ -1,42 +1,136 @@
-import { U as Ue } from "../deprecation-SeDYTswO.js";
-import { d as Ie } from "../index-ZFYMtjhW.js";
-import { UmbControllerBase as f } from "@umbraco-cms/backoffice/class-api";
-import { UmbArrayState as d, mergeObservables as P, UmbNumberState as c, UmbBooleanState as b } from "@umbraco-cms/backoffice/observable-api";
+import { U as He } from "../deprecation-SeDYTswO.js";
+import { U as c, a as b, b as w } from "../expansion-entry-expanded.event-Ct82JR9u.js";
+import { d as De } from "../expansion-entry-expanded.event-Ct82JR9u.js";
+import { UmbControllerBase as d } from "@umbraco-cms/backoffice/class-api";
+import { UmbArrayState as f, mergeObservables as P, UmbNumberState as h, UmbBooleanState as S } from "@umbraco-cms/backoffice/observable-api";
 import { clamp as O } from "@umbraco-cms/backoffice/external/uui";
-import { clamp as Ae } from "@umbraco-cms/backoffice/external/uui";
-import { UmbChangeEvent as V, UmbSelectedEvent as v, UmbSelectionChangeEvent as w, UmbDeselectedEvent as R } from "@umbraco-cms/backoffice/event";
-import { u as Ce } from "../url-pattern-to-string.function-BAOMgyZQ.js";
-import { DOMPurify as E } from "@umbraco-cms/backoffice/external/dompurify";
-function $(t, e) {
+import { clamp as Be } from "@umbraco-cms/backoffice/external/uui";
+import { UmbChangeEvent as _, UmbSelectedEvent as x, UmbSelectionChangeEvent as E, UmbDeselectedEvent as V } from "@umbraco-cms/backoffice/event";
+import { u as Fe } from "../url-pattern-to-string.function-BAOMgyZQ.js";
+import { DOMPurify as R } from "@umbraco-cms/backoffice/external/dompurify";
+function j(t, e) {
   const s = [];
-  for (let r = 0; r < t.length; r += e)
-    s.push(t.slice(r, r + e));
+  for (let n = 0; n < t.length; n += e)
+    s.push(t.slice(n, n + e));
   return s;
 }
-function N(t, e) {
+function Z(t, e) {
   if (t === 0) return "0 Bytes";
-  const s = e?.kilo ?? 1024, r = e?.decimals ?? 2, n = ["Bytes", "KB", "MB", "GB", "TB", "PB", "EB", "ZB", "YB"], i = Math.floor(Math.log(t) / Math.log(s));
-  return `${parseFloat((t / Math.pow(s, i)).toFixed(r)).toLocaleString(e?.culture)} ${n[i]}`;
+  const s = e?.kilo ?? 1024, n = e?.decimals ?? 2, i = ["Bytes", "KB", "MB", "GB", "TB", "PB", "EB", "ZB", "YB"], r = Math.floor(Math.log(t) / Math.log(s));
+  return `${parseFloat((t / Math.pow(s, r)).toFixed(n)).toLocaleString(e?.culture)} ${i[r]}`;
 }
-const G = (t, e = 0) => {
+const X = (t, e = 0) => {
   let s;
-  return function(...r) {
-    clearTimeout(s), s = setTimeout(() => t.apply(this, r), e);
+  return function(...n) {
+    clearTimeout(s), s = setTimeout(() => t.apply(this, n), e);
   };
-}, z = Object.freeze({
+}, K = Object.freeze({
   ASCENDING: "Ascending",
   DESCENDING: "Descending"
-}), j = (t, e, s) => {
-  const r = new Blob([t], { type: s }), n = window.URL.createObjectURL(r), i = document.createElement("a");
-  i.href = n, i.download = e, i.style.display = "none", document.body.appendChild(i), i.dispatchEvent(new MouseEvent("click")), i.remove(), window.URL.revokeObjectURL(n);
+}), Y = (t, e, s) => {
+  const n = new Blob([t], { type: s }), i = window.URL.createObjectURL(n), r = document.createElement("a");
+  r.href = i, r.download = e, r.style.display = "none", document.body.appendChild(r), r.dispatchEvent(new MouseEvent("click")), r.remove(), window.URL.revokeObjectURL(i);
 };
-function Z(t) {
+class J extends d {
+  constructor() {
+    super(...arguments), this._expansion = new f([], (e) => e.entityType + e.unique), this.expansion = this._expansion.asObservable();
+  }
+  /**
+   * Checks if an entity is expanded
+   * @param {EntryModelType} entity The entity to check
+   * @returns {Observable<boolean>} True if the entity is expanded
+   * @memberof UmbEntityExpansionManager
+   */
+  isExpanded(e) {
+    return this._expansion.asObservablePart(
+      (s) => s?.some((n) => n.entityType === e.entityType && n.unique === e.unique)
+    );
+  }
+  /**
+   * Sets the expansion state
+   * @param {UmbEntityExpansionModel<EntryModelType> | undefined} expansion The expansion state
+   * @memberof UmbEntityExpansionManager
+   * @returns {void}
+   */
+  setExpansion(e) {
+    this._expansion.setValue(e), this.getHostElement()?.dispatchEvent(new c());
+  }
+  /**
+   * Gets the expansion state
+   * @memberof UmbEntityExpansionManager
+   * @returns {UmbEntityExpansionModel} The expansion state
+   */
+  getExpansion() {
+    return this._expansion.getValue();
+  }
+  /**
+   * Expands an entity
+   * @param {EntryModelType} entity The entity to open
+   * @memberof UmbEntityExpansionManager
+   * @returns {Promise<void>}
+   */
+  async expandItem(e) {
+    this._expansion.appendOne(e), this.getHostElement()?.dispatchEvent(new b(e)), this.getHostElement()?.dispatchEvent(new c());
+  }
+  /**
+   * Expands multiple entities
+   * @param {UmbEntityExpansionModel<EntryModelType>} entities The entities to open
+   * @memberof UmbEntityExpansionManager
+   * @returns {void}
+   */
+  expandItems(e) {
+    !e || e.length === 0 || (this._expansion.append(e), e.forEach((s) => {
+      this.getHostElement()?.dispatchEvent(new b(s));
+    }), this.getHostElement()?.dispatchEvent(new c()));
+  }
+  /**
+   * Collapses an entity
+   * @param {EntryModelType} entry The entity to open
+   * @memberof UmbEntityExpansionManager
+   * @returns {Promise<void>}
+   */
+  async collapseItem(e) {
+    this._expansion.filter((s) => s.entityType !== e.entityType || s.unique !== e.unique), this.getHostElement()?.dispatchEvent(new w(e)), this.getHostElement()?.dispatchEvent(new c());
+  }
+  /**
+   * Collapses multiple entities
+   * @param {UmbEntityExpansionModel<EntryModelType>} entries The entities to close
+   * @memberof UmbEntityExpansionManager
+   * @returns {void}
+   */
+  collapseItems(e) {
+    !e || e.length === 0 || (this._expansion.filter(
+      (s) => !e.some((n) => n.entityType === s.entityType && n.unique === s.unique)
+    ), e.forEach((s) => {
+      this.getHostElement()?.dispatchEvent(new w(s));
+    }), this.getHostElement()?.dispatchEvent(new c()));
+  }
+  /**
+   * Collapses all expanded entities
+   * @memberof UmbEntityExpansionManager
+   * @returns {Promise<void>}
+   */
+  async collapseAll() {
+    this._expansion.setValue([]), this.getHostElement()?.dispatchEvent(new c());
+  }
+}
+const Q = (t) => t.map((e, s) => {
+  const n = {
+    entityType: e.entityType,
+    unique: e.unique
+  }, i = t[s + 1];
+  return i && (n.target = {
+    entityType: i.entityType,
+    unique: i.unique
+  }), n;
+});
+function ee(t) {
   if (!t.startsWith("umb://")) throw new Error("udi does not start with umb://");
   const s = t.replace("umb://", "").split("/")[1];
   if (s.length !== 32) throw new Error("udi is not 32 chars");
   return `${s.substring(0, 8)}-${s.substring(8, 12)}-${s.substring(12, 16)}-${s.substring(16, 20)}-${s.substring(20)}`;
 }
-async function q(t, e) {
+async function te(t, e) {
   if (!e)
     return t;
   const s = new URLSearchParams({
@@ -46,9 +140,9 @@ async function q(t, e) {
   });
   return `${t}?${s.toString()}`;
 }
-class _ extends f {
+class U extends d {
   constructor() {
-    super(...arguments), this._rules = new d([], (e) => e.unique), this.rules = this._rules.asObservable(), this.hasRules = this._rules.asObservablePart((e) => e.length > 0), this._fallback = !1;
+    super(...arguments), this._rules = new f([], (e) => e.unique), this.rules = this._rules.asObservable(), this.hasRules = this._rules.asObservablePart((e) => e.length > 0), this._fallback = !1;
   }
   fallbackToNotPermitted() {
     this._fallback = !1;
@@ -102,7 +196,7 @@ class _ extends f {
     this._rules.destroy(), super.destroy();
   }
 }
-class U extends _ {
+class I extends U {
   constructor() {
     super(...arguments), this.permitted = this._rules.asObservablePart((e) => this.#e(e));
   }
@@ -113,10 +207,10 @@ class U extends _ {
     return e.filter((s) => s.permitted === !1).length > 0 ? !1 : e.filter((s) => s.permitted === !0).length > 0 ? !0 : this._fallback;
   }
 }
-function S(t, e) {
+function y(t, e) {
   return t.variantId?.compare(e) || t.variantId === void 0;
 }
-class X extends U {
+class se extends I {
   /**
    * Observe if the given variantId is permitted to read
    * @param {UmbVariantId} variantId
@@ -132,7 +226,7 @@ class X extends U {
    * @memberof UmbReadOnlyVariantGuardManager
    */
   isPermittedForObservableVariant(e) {
-    return P([this.rules, e], ([s, r]) => r ? this.#e(s, r) : !1);
+    return P([this.rules, e], ([s, n]) => n ? this.#e(s, n) : !1);
   }
   /**
    * Check if the given variantId is permitted to read
@@ -144,83 +238,83 @@ class X extends U {
     return this.#e(this.getRules(), e);
   }
   #e(e, s) {
-    return e.filter((r) => r.permitted === !1).some((r) => S(r, s)) ? !1 : e.filter((r) => r.permitted === !0).some((r) => S(r, s)) ? !0 : this._fallback;
+    return e.filter((n) => n.permitted === !1).some((n) => y(n, s)) ? !1 : e.filter((n) => n.permitted === !0).some((n) => y(n, s)) ? !0 : this._fallback;
   }
 }
-function K(t, e, s) {
+function ne(t, e, s) {
   return s = O(s, 0, 1), t * (1 - s) + e * s;
 }
-function Y(t, e, s) {
+function ie(t, e, s) {
   return t === e ? 0 : (s - t) / (e - t);
 }
-function J(t, e) {
+function re(t, e) {
   return Math.abs(t - e);
 }
-function Q(t, e) {
+function ae(t, e) {
   return e < 0 || e >= 1 ? NaN : t / (1 - e);
 }
-function ee(t, e) {
+function oe(t, e) {
   const s = [0];
   e.reduce((a, l, u) => s[u + 1] = a + l, 0);
-  const r = s.reduce((a, l) => {
-    const u = Math.abs(a - t), h = Math.abs(l - t);
-    return u === h ? a < l ? a : l : h < u ? l : a;
-  }), n = s.indexOf(r), i = t - r;
-  let o = n;
-  if (!(i < 0 && n === 0)) {
-    if (!(i > 0 && n === s.length - 1)) {
-      const a = e[i >= 0 ? n : n - 1];
-      o += a === 0 ? o : i / a;
+  const n = s.reduce((a, l) => {
+    const u = Math.abs(a - t), g = Math.abs(l - t);
+    return u === g ? a < l ? a : l : g < u ? l : a;
+  }), i = s.indexOf(n), r = t - n;
+  let o = i;
+  if (!(r < 0 && i === 0)) {
+    if (!(r > 0 && i === s.length - 1)) {
+      const a = e[r >= 0 ? i : i - 1];
+      o += a === 0 ? o : r / a;
     }
   }
   return o;
 }
-function te(t, e) {
+function le(t, e) {
   const s = Math.min(t, e.length);
-  let r = 0, n = 0;
-  for (; r < s; )
-    n += e[r++];
-  return n;
+  let n = 0, i = 0;
+  for (; n < s; )
+    i += e[n++];
+  return i;
 }
-function se(t, e, s, r = 0) {
-  return t > s.left - r && t < s.right + r && e > s.top - r && e < s.bottom + r;
+function ue(t, e, s, n = 0) {
+  return t > s.left - n && t < s.right + n && e > s.top - n && e < s.bottom + n;
 }
-function re(t, e) {
-  const s = new Image(), r = new Promise(
-    (n, i) => {
+function ce(t, e) {
+  const s = new Image(), n = new Promise(
+    (i, r) => {
       s.onload = () => {
         const o = s.naturalWidth, a = s.naturalHeight;
         let l = o, u = a;
         if (e?.maxWidth && e.maxWidth > 0 || e?.maxHeight && e.maxHeight > 0) {
-          const h = e?.maxWidth ? e.maxWidth / o : 1, p = e?.maxHeight ? e.maxHeight / a : 1, m = Math.min(h, p, 1);
-          l = Math.round(o * m), u = Math.round(a * m);
+          const g = e?.maxWidth ? e.maxWidth / o : 1, v = e?.maxHeight ? e.maxHeight / a : 1, p = Math.min(g, v, 1);
+          l = Math.round(o * p), u = Math.round(a * p);
         }
-        n({ width: l, height: u, naturalWidth: o, naturalHeight: a });
-      }, s.onerror = i;
+        i({ width: l, height: u, naturalWidth: o, naturalHeight: a });
+      }, s.onerror = r;
     }
   );
-  return s.src = t, r;
+  return s.src = t, n;
 }
-function y(t, e) {
+function M(t, e) {
   const s = { ...e };
-  for (const r in t)
-    Object.prototype.hasOwnProperty.call(t, r) && t[r] !== void 0 && (t[r]?.constructor === Object && e[r]?.constructor === Object ? s[r] = y(t[r], e[r]) : s[r] = t[r]);
+  for (const n in t)
+    Object.prototype.hasOwnProperty.call(t, n) && t[n] !== void 0 && (t[n]?.constructor === Object && e[n]?.constructor === Object ? s[n] = M(t[n], e[n]) : s[n] = t[n]);
   return s;
 }
-class ne extends EventTarget {
+class he extends EventTarget {
   constructor() {
     super(...arguments), this.#e = {
       totalItems: 0,
       totalPages: 1,
       currentPage: 1
-    }, this.#t = new c(10), this.pageSize = this.#t.asObservable(), this.#r = new c(this.#e.totalItems), this.totalItems = this.#r.asObservable(), this.#s = new c(this.#e.totalPages), this.totalPages = this.#s.asObservable(), this.#n = new c(this.#e.currentPage), this.currentPage = this.#n.asObservable(), this.#i = new c(0), this.skip = this.#i.asObservable();
+    }, this.#t = new h(10), this.pageSize = this.#t.asObservable(), this.#n = new h(this.#e.totalItems), this.totalItems = this.#n.asObservable(), this.#s = new h(this.#e.totalPages), this.totalPages = this.#s.asObservable(), this.#i = new h(this.#e.currentPage), this.currentPage = this.#i.asObservable(), this.#r = new h(0), this.skip = this.#r.asObservable();
   }
   #e;
   #t;
-  #r;
-  #s;
   #n;
+  #s;
   #i;
+  #r;
   /**
    * Sets the number of items per page and recalculates the total number of pages
    * @param {number} pageSize
@@ -243,7 +337,7 @@ class ne extends EventTarget {
    * @memberof UmbPaginationManager
    */
   getTotalItems() {
-    return this.#r.getValue();
+    return this.#n.getValue();
   }
   /**
    * Sets the total number of items and recalculates the total number of pages
@@ -251,7 +345,7 @@ class ne extends EventTarget {
    * @memberof UmbPaginationManager
    */
   setTotalItems(e) {
-    this.#r.setValue(e), this.#a();
+    this.#n.setValue(e), this.#a();
   }
   /**
    * Gets the total number of pages
@@ -267,7 +361,7 @@ class ne extends EventTarget {
    * @memberof UmbPaginationManager
    */
   getCurrentPageNumber() {
-    return this.#n.getValue();
+    return this.#i.getValue();
   }
   /**
    * Sets the current page number
@@ -275,7 +369,7 @@ class ne extends EventTarget {
    * @memberof UmbPaginationManager
    */
   setCurrentPageNumber(e) {
-    e < 1 && (e = 1), e > this.#s.getValue() && (e = this.#s.getValue()), this.#n.setValue(e), this.#o(), this.dispatchEvent(new V());
+    e < 1 && (e = 1), e > this.#s.getValue() && (e = this.#s.getValue()), this.#i.setValue(e), this.#o(), this.dispatchEvent(new _());
   }
   /**
    * Gets the number of items to skip
@@ -283,110 +377,130 @@ class ne extends EventTarget {
    * @memberof UmbPaginationManager
    */
   getSkip() {
-    return this.#i.getValue();
+    return this.#r.getValue();
   }
   /**
    * Clears the pagination manager values and resets them to their default values
    * @memberof UmbPaginationManager
    */
   clear() {
-    this.#r.setValue(this.#e.totalItems), this.#s.setValue(this.#e.totalPages), this.#n.setValue(this.#e.currentPage), this.#i.setValue(0);
+    this.#n.setValue(this.#e.totalItems), this.#s.setValue(this.#e.totalPages), this.#i.setValue(this.#e.currentPage), this.#r.setValue(0);
   }
   /**
    * Calculates the total number of pages
    * @memberof UmbPaginationManager
    */
   #a() {
-    let e = Math.ceil(this.#r.getValue() / this.#t.getValue());
+    let e = Math.ceil(this.#n.getValue() / this.#t.getValue());
     e = e === 0 ? 1 : e, this.#s.setValue(e), this.getCurrentPageNumber() > e && this.setCurrentPageNumber(e);
   }
   #o() {
-    const e = Math.max(0, (this.#n.getValue() - 1) * this.#t.getValue());
-    this.#i.setValue(e);
+    const e = Math.max(0, (this.#i.getValue() - 1) * this.#t.getValue());
+    this.#r.setValue(e);
+  }
+  /**
+   * Gets the index of the first item on the current page (for display).
+   * @returns {number}
+   * @memberof UmbPaginationManager
+   */
+  getDisplayStart() {
+    return this.getSkip() + 1;
+  }
+  /**
+   * Gets the index of the last item on the current page (for display).
+   * @returns {number}
+   * @memberof UmbPaginationManager
+   */
+  getDisplayEnd() {
+    return Math.min(this.getSkip() + this.getPageSize(), this.getTotalItems());
   }
 }
-function I(t, e) {
+function T(t, e) {
   const s = new URL(t, window.location.origin);
   return s.origin === window.location.origin ? s : e ? new URL(e) : new URL(window.location.origin);
 }
-function ie(t) {
+function ge(t) {
   return t.endsWith("/") ? t : t + "/";
 }
-function ae(t, e = globalThis.window) {
+function de(t, e = globalThis.window) {
   try {
     const s = e.opener;
     if (!s)
       return !1;
-    const r = s.location, n = e.location;
-    return !(r.origin !== n.origin || typeof t < "u" && !r.pathname.startsWith(t));
+    const n = s.location, i = e.location;
+    return !(n.origin !== i.origin || typeof t < "u" && !n.pathname.startsWith(t));
   } catch {
     return !1;
   }
 }
-const oe = (t) => decodeURIComponent(t), M = (t) => encodeURIComponent(t).replaceAll(".", "%2E").replaceAll(":", "%3A"), le = (t) => M(t), ue = (t) => {
+const fe = (t) => decodeURIComponent(t), A = (t) => encodeURIComponent(t).replaceAll(".", "%2E").replaceAll(":", "%3A"), me = (t) => A(t), pe = (t) => {
   const e = t.replace(/([A-Z])/g, " $1");
   return e.charAt(0).toUpperCase() + e.slice(1);
-}, A = (t) => {
+}, C = (t) => {
   const e = t.match(/[A-Z]{2,}(?=[A-Z][a-z]+[0-9]*|\b)|[A-Z]?[a-z]+[0-9]*|[A-Z]|[0-9]+/g)?.map((s) => s.slice(0, 1).toUpperCase() + s.slice(1).toLowerCase()).join("");
   return e && e.slice(0, 1).toLowerCase() + e.slice(1) || "";
 };
-function x(t) {
-  return A(t);
-}
-function ce(t) {
-  return t.replace(/(\d*)$/, (e, s) => (+s + 1).toString().padStart(s.length, "0"));
-}
-function he(t, e = ",") {
-  return t ? t.split(e).map((s) => s.trim()).filter((s) => s.length > 0) ?? [] : [];
-}
-function ge(t, e) {
-  return Array.isArray(t) ? t.indexOf(e) !== -1 : t === e;
-}
-function fe(t, e) {
-  return Array.isArray(t) ? t.some((s) => e.indexOf(s) !== -1) : e.indexOf(t) !== -1;
-}
-const de = x;
-function me(t) {
-  return t.startsWith("/") ? t.slice(1) : t;
+function H(t) {
+  return C(t);
 }
 function be(t) {
+  return t.replace(/(\d*)$/, (e, s) => (+s + 1).toString().padStart(s.length, "0"));
+}
+function we(t, e = ",") {
+  return t ? t.split(e).map((s) => s.trim()).filter((s) => s.length > 0) ?? [] : [];
+}
+function Se(t, e) {
+  return Array.isArray(t) ? t.indexOf(e) !== -1 : t === e;
+}
+function Ee(t, e) {
+  return Array.isArray(t) ? t.some((s) => e.indexOf(s) !== -1) : e.indexOf(t) !== -1;
+}
+const ye = H;
+function ve(t) {
+  return t.startsWith("/") ? t.slice(1) : t;
+}
+function Pe(t) {
   return t.endsWith("/") ? t.slice(void 0, -1) : t;
 }
-const g = "umb:auth:redirect";
-function we() {
+const m = "umb:auth:redirect";
+function L() {
   let t = "";
-  const e = sessionStorage.getItem(g);
-  return e && (sessionStorage.removeItem(g), t = e.endsWith("logout") ? t : e), t ? I(t) : null;
+  const e = sessionStorage.getItem(m);
+  return e && (sessionStorage.removeItem(m), t = e.endsWith("logout") ? t : e), t ? T(t) : null;
 }
-function Se(t) {
+function Oe(t) {
   const e = new URL(t, window.location.origin);
-  e.origin === window.location.origin && sessionStorage.setItem(g, e.toString());
+  e.origin === window.location.origin && sessionStorage.setItem(m, e.toString());
 }
-function pe(t) {
+function _e(t, e = !1) {
+  const s = L();
+  (s?.pathname.startsWith(t) ?? !1) && !e ? history.replaceState(null, "", s?.toString() ?? "") : window.location.href = s?.toString() ?? t;
+}
+function xe(t) {
   return t?.indexOf("~/") === 0 && (t = t.slice(1)), t?.indexOf("/wwwroot/") === 0 && (t = t.slice(8)), t;
 }
-function Pe(t, e = "v1") {
+function Ve(t, e = "v1") {
   return `/umbraco/management/api/${e}${t}`;
 }
-const C = /[\uD800-\uDBFF][\uDC00-\uDFFF]/g, L = /([^#-~| |!])/g;
-function Oe(t) {
-  return typeof t != "string" && !(t instanceof String) ? t : t.toString().replace(/&/g, "&amp;").replace(C, function(e) {
-    const s = e.charCodeAt(0), r = e.charCodeAt(1);
-    return "&#" + ((s - 55296) * 1024 + (r - 56320) + 65536) + ";";
-  }).replace(L, function(e) {
+const D = /[\uD800-\uDBFF][\uDC00-\uDFFF]/g, k = /([^#-~| |!])/g;
+function Re(t) {
+  return typeof t != "string" && !(t instanceof String) ? t : t.toString().replace(/&/g, "&amp;").replace(D, function(e) {
+    const s = e.charCodeAt(0), n = e.charCodeAt(1);
+    return "&#" + ((s - 55296) * 1024 + (n - 56320) + 65536) + ";";
+  }).replace(k, function(e) {
     return "&#" + e.charCodeAt(0) + ";";
   }).replace(/</g, "&lt;").replace(/>/g, "&gt;");
 }
-function Ve(t) {
-  return E.sanitize(t);
+function Ue(t) {
+  return R.sanitize(t);
 }
-class ve extends f {
+class Ie extends d {
   constructor(e) {
-    super(e), this.#e = new b(!0), this.selectable = this.#e.asObservable(), this.#t = new d([], (s) => s), this.selection = this.#t.asObservable(), this.hasSelection = this.#t.asObservablePart((s) => s.length > 0), this.#r = new b(!1), this.multiple = this.#r.asObservable(), this.#s = (s) => !0;
+    super(e), this.#e = new S(!0), this.selectable = this.#e.asObservable(), this.#t = new f([], (s) => s), this.selection = this.#t.asObservable(), this.hasSelection = this.#t.asObservablePart((s) => s.length > 0), this.#n = new S(!1), this.multiple = this.#n.asObservable(), this.#s = (s) => !0;
   }
   #e;
   #t;
-  #r;
+  #n;
   #s;
   /**
    * Returns whether items can be selected.
@@ -420,9 +534,9 @@ class ve extends f {
   setSelection(e) {
     if (this.getSelectable() === !1) return;
     if (e === void 0) throw new Error("Value cannot be undefined");
-    e.forEach((r) => {
-      if (this.#s(r) === !1)
-        throw new Error(`${r} is now allowed to be selected`);
+    e.forEach((n) => {
+      if (this.#s(n) === !1)
+        throw new Error(`${n} is now allowed to be selected`);
     });
     const s = this.getMultiple() ? e : e.slice(0, 1);
     this.#t.setValue(s);
@@ -433,7 +547,7 @@ class ve extends f {
    * @memberof UmbSelectionManager
    */
   getMultiple() {
-    return this.#r.getValue();
+    return this.#n.getValue();
   }
   /**
    * Sets whether multiple items can be selected.
@@ -441,7 +555,7 @@ class ve extends f {
    * @memberof UmbSelectionManager
    */
   setMultiple(e) {
-    if (this.#r.setValue(e), e === !1 && this.getSelection().length > 1) {
+    if (this.#n.setValue(e), e === !1 && this.getSelection().length > 1) {
       const s = this.getSelection()[0];
       this.clearSelection(), this.select(s);
     }
@@ -464,7 +578,7 @@ class ve extends f {
     if (this.#s(e) === !1)
       throw new Error("The item is now allowed to be selected");
     const s = this.getMultiple() ? [...this.getSelection(), e] : [e];
-    this.#t.setValue(s), this.getHostElement().dispatchEvent(new v(e)), this.getHostElement().dispatchEvent(new w());
+    this.#t.setValue(s), this.getHostElement().dispatchEvent(new x(e)), this.getHostElement().dispatchEvent(new E());
   }
   /**
    * Removes the given unique id from the current selection.
@@ -473,8 +587,8 @@ class ve extends f {
    */
   deselect(e) {
     if (this.getSelectable() === !1) return;
-    const s = this.getSelection().filter((r) => r !== e);
-    this.#t.setValue(s), this.getHostElement().dispatchEvent(new R(e)), this.getHostElement().dispatchEvent(new w());
+    const s = this.getSelection().filter((n) => n !== e);
+    this.#t.setValue(s), this.getHostElement().dispatchEvent(new V(e)), this.getHostElement().dispatchEvent(new E());
   }
   /**
    * Returns true if the given unique id is selected.
@@ -509,14 +623,14 @@ class ve extends f {
     return this.#s;
   }
 }
-class T extends f {
+class B extends d {
   /**
    * Creates an instance of UmbStateManager.
    * @param {UmbControllerHost} host
    * @memberof UmbStateManager
    */
   constructor(e) {
-    super(e), this._states = new d([], (s) => s.unique), this.states = this._states.asObservable(), this.isOn = this._states.asObservablePart((s) => s.length > 0), this.isOff = this._states.asObservablePart((s) => s.length === 0);
+    super(e), this._states = new f([], (s) => s.unique), this.states = this._states.asObservable(), this.isOn = this._states.asObservablePart((s) => s.length > 0), this.isOff = this._states.asObservablePart((s) => s.length === 0);
   }
   /**
    * Add a new state to the state manager
@@ -578,7 +692,7 @@ class T extends f {
     super.destroy(), this._states.destroy();
   }
 }
-class D extends T {
+class W extends B {
   constructor() {
     super(...arguments), this.isReadOnly = this.isOn;
   }
@@ -591,59 +705,70 @@ class D extends T {
     return this.getIsOn();
   }
 }
-class Re extends D {
+class Me extends W {
+}
+function Te() {
+  return typeof window > "u" || // Check if running under Playwright
+  typeof window.__playwright__binding__ < "u";
 }
 export {
-  g as UMB_STORAGE_REDIRECT_URL,
-  Ue as UmbDeprecation,
-  z as UmbDirection,
-  _ as UmbGuardManagerBase,
-  ne as UmbPaginationManager,
-  U as UmbReadOnlyGuardManager,
-  D as UmbReadOnlyStateManager,
-  X as UmbReadOnlyVariantGuardManager,
-  Re as UmbReadOnlyVariantStateManager,
-  ve as UmbSelectionManager,
-  T as UmbStateManager,
-  le as aliasToPath,
-  $ as batchArray,
-  j as blobDownload,
-  Q as calculateExtrapolatedValue,
-  Ae as clamp,
-  G as debounce,
-  oe as decodeFilePath,
-  Ie as diffWords,
-  J as distance,
-  M as encodeFilePath,
-  I as ensureLocalPath,
-  ie as ensurePathEndsWithSlash,
-  Oe as escapeHTML,
-  N as formatBytes,
-  ue as fromCamelCase,
-  x as generateAlias,
-  te as getAccumulatedValueOfIndex,
-  Z as getGuidFromUdi,
-  ee as getInterpolatedIndexOfPositionInWeightMap,
-  q as getProcessedImageUrl,
-  ae as hasOwnOpener,
-  re as imageSize,
-  ce as incrementString,
-  Y as inverseLerp,
-  se as isWithinRect,
-  K as lerp,
-  de as pathFolderName,
-  me as removeInitialSlashFromPath,
-  be as removeLastSlashFromPath,
-  we as retrieveStoredPath,
-  Ve as sanitizeHTML,
-  Se as setStoredPath,
-  he as splitStringToArray,
-  ge as stringOrStringArrayContains,
-  fe as stringOrStringArrayIntersects,
-  A as toCamelCase,
-  pe as transformServerPathToClientPath,
-  y as umbDeepMerge,
-  Ce as umbUrlPatternToString,
-  Pe as umbracoPath
+  m as UMB_STORAGE_REDIRECT_URL,
+  He as UmbDeprecation,
+  K as UmbDirection,
+  J as UmbEntityExpansionManager,
+  c as UmbExpansionChangeEvent,
+  w as UmbExpansionEntryCollapsedEvent,
+  b as UmbExpansionEntryExpandedEvent,
+  U as UmbGuardManagerBase,
+  he as UmbPaginationManager,
+  I as UmbReadOnlyGuardManager,
+  W as UmbReadOnlyStateManager,
+  se as UmbReadOnlyVariantGuardManager,
+  Me as UmbReadOnlyVariantStateManager,
+  Ie as UmbSelectionManager,
+  B as UmbStateManager,
+  me as aliasToPath,
+  j as batchArray,
+  Y as blobDownload,
+  ae as calculateExtrapolatedValue,
+  Be as clamp,
+  X as debounce,
+  fe as decodeFilePath,
+  De as diffWords,
+  re as distance,
+  A as encodeFilePath,
+  T as ensureLocalPath,
+  ge as ensurePathEndsWithSlash,
+  Re as escapeHTML,
+  Z as formatBytes,
+  pe as fromCamelCase,
+  H as generateAlias,
+  le as getAccumulatedValueOfIndex,
+  ee as getGuidFromUdi,
+  oe as getInterpolatedIndexOfPositionInWeightMap,
+  te as getProcessedImageUrl,
+  de as hasOwnOpener,
+  ce as imageSize,
+  be as incrementString,
+  ie as inverseLerp,
+  Te as isTestEnvironment,
+  ue as isWithinRect,
+  ne as lerp,
+  Q as linkEntityExpansionEntries,
+  ye as pathFolderName,
+  _e as redirectToStoredPath,
+  ve as removeInitialSlashFromPath,
+  Pe as removeLastSlashFromPath,
+  L as retrieveStoredPath,
+  Ue as sanitizeHTML,
+  Oe as setStoredPath,
+  we as splitStringToArray,
+  Se as stringOrStringArrayContains,
+  Ee as stringOrStringArrayIntersects,
+  C as toCamelCase,
+  xe as transformServerPathToClientPath,
+  M as umbDeepMerge,
+  Fe as umbUrlPatternToString,
+  Ve as umbracoPath
 };
 //# sourceMappingURL=index.js.map

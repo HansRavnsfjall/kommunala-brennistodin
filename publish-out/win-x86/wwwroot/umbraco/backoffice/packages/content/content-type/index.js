@@ -1,60 +1,60 @@
-import { b as rt } from "../content-type-move-root-containers-into-first-tab-helper.class-BMcf-7X5.js";
-import { d as ie, U as se, a as oe, c as ae } from "../content-type-move-root-containers-into-first-tab-helper.class-BMcf-7X5.js";
-import { U as he, a as pe } from "../content-type-property-structure-helper.class-DttfFuly.js";
-import { U as ce } from "../property-structure-workspace.context-token-Et7VqtUe.js";
-import { UmbLitElement as x, umbFocus as nt } from "@umbraco-cms/backoffice/lit-element";
-import { css as z, state as m, customElement as W, ifDefined as it, html as A, nothing as F, property as st } from "@umbraco-cms/backoffice/external/lit";
-import { UMB_MODAL_MANAGER_CONTEXT as ot } from "@umbraco-cms/backoffice/modal";
-import { UMB_ICON_PICKER_MODAL as at } from "@umbraco-cms/backoffice/icon";
-import { umbBindToValidation as ut, UmbFormControlMixin as ht } from "@umbraco-cms/backoffice/validation";
-import { UmbChangeEvent as pt } from "@umbraco-cms/backoffice/event";
-import { UMB_DATA_TYPE_PICKER_FLOW_DATA_TYPE_PICKER_MODAL as lt, UMB_DATATYPE_WORKSPACE_MODAL as ct, UMB_DATA_TYPE_ENTITY_TYPE as L } from "@umbraco-cms/backoffice/data-type";
-import { UmbModalRouteRegistrationController as D } from "@umbraco-cms/backoffice/router";
-import { UmbRepositoryBase as dt, UmbRepositoryDetailsManager as ft } from "@umbraco-cms/backoffice/repository";
-import { tryExecute as yt } from "@umbraco-cms/backoffice/resources";
-import { UmbId as M } from "@umbraco-cms/backoffice/id";
-import { UmbArrayState as R, createObservablePart as h, appendToFrozenArray as U, partialUpdateFrozenArray as $, filterFrozenArray as mt } from "@umbraco-cms/backoffice/observable-api";
-import { incrementString as Ct } from "@umbraco-cms/backoffice/utils";
-import { UmbControllerBase as wt } from "@umbraco-cms/backoffice/class-api";
-import { UmbExtensionApiInitializer as Tt } from "@umbraco-cms/backoffice/extension-api";
-import { umbExtensionsRegistry as vt } from "@umbraco-cms/backoffice/extension-registry";
-import { firstValueFrom as I } from "@umbraco-cms/backoffice/external/rxjs";
-import { UmbEntityDetailWorkspaceContextBase as _t } from "@umbraco-cms/backoffice/workspace";
-import { UMB_ACTION_EVENT_CONTEXT as V } from "@umbraco-cms/backoffice/action";
-import { UmbRequestReloadChildrenOfEntityEvent as Ot, UmbRequestReloadStructureForEntityEvent as gt } from "@umbraco-cms/backoffice/entity-action";
-import { U as fe } from "../property-type-based-property.element-BMqRIO7K.js";
-const Zt = "Umb.Condition.WorkspaceContentTypeAlias";
-var bt = Object.defineProperty, Pt = Object.getOwnPropertyDescriptor, Y = (i) => {
+import { b as st } from "../content-type-move-root-containers-into-first-tab-helper.class-CkGOWf1Z.js";
+import { d as le, U as de, a as ce, c as fe } from "../content-type-move-root-containers-into-first-tab-helper.class-CkGOWf1Z.js";
+import { U as me, a as Ce } from "../content-type-property-structure-helper.class-jQi1Hj18.js";
+import { U as ve } from "../property-structure-workspace.context-token-Et7VqtUe.js";
+import { UmbLitElement as L, umbFocus as ot } from "@umbraco-cms/backoffice/lit-element";
+import { css as F, state as C, customElement as Y, ifDefined as at, html as M, nothing as K, property as ut } from "@umbraco-cms/backoffice/external/lit";
+import { UMB_MODAL_MANAGER_CONTEXT as ht } from "@umbraco-cms/backoffice/modal";
+import { UMB_ICON_PICKER_MODAL as pt } from "@umbraco-cms/backoffice/icon";
+import { umbBindToValidation as lt, UmbFormControlMixin as dt } from "@umbraco-cms/backoffice/validation";
+import { UmbChangeEvent as ct } from "@umbraco-cms/backoffice/event";
+import { UMB_DATA_TYPE_PICKER_FLOW_DATA_TYPE_PICKER_MODAL as ft, UMB_DATATYPE_WORKSPACE_MODAL as yt, UMB_DATA_TYPE_ENTITY_TYPE as G } from "@umbraco-cms/backoffice/data-type";
+import { UmbModalRouteRegistrationController as U, encodeFolderName as mt } from "@umbraco-cms/backoffice/router";
+import { UmbRepositoryBase as Ct, UmbRepositoryDetailsManager as wt } from "@umbraco-cms/backoffice/repository";
+import { tryExecute as vt, UmbError as $ } from "@umbraco-cms/backoffice/resources";
+import { UmbId as R } from "@umbraco-cms/backoffice/id";
+import { UmbArrayState as I, createObservablePart as h, mergeObservables as Tt, observationAsPromise as gt, appendToFrozenArray as V, partialUpdateFrozenArray as q, filterFrozenArray as Ot } from "@umbraco-cms/backoffice/observable-api";
+import { incrementString as _t } from "@umbraco-cms/backoffice/utils";
+import { UmbControllerBase as bt } from "@umbraco-cms/backoffice/class-api";
+import { UmbExtensionApiInitializer as Pt } from "@umbraco-cms/backoffice/extension-api";
+import { umbExtensionsRegistry as Et } from "@umbraco-cms/backoffice/extension-registry";
+import { firstValueFrom as k } from "@umbraco-cms/backoffice/external/rxjs";
+import { UmbEntityDetailWorkspaceContextBase as At } from "@umbraco-cms/backoffice/workspace";
+import { UmbRequestReloadChildrenOfEntityEvent as St, UmbRequestReloadStructureForEntityEvent as Mt, UmbEntityUpdatedEvent as Nt } from "@umbraco-cms/backoffice/entity-action";
+import { UMB_ACTION_EVENT_CONTEXT as x } from "@umbraco-cms/backoffice/action";
+import { U as ge } from "../property-type-based-property.element-BMqRIO7K.js";
+const se = "Umb.Condition.WorkspaceContentTypeAlias";
+var Bt = Object.defineProperty, Dt = Object.getOwnPropertyDescriptor, H = (i) => {
   throw TypeError(i);
-}, C = (i, t, r, e) => {
-  for (var n = e > 1 ? void 0 : e ? Pt(t, r) : t, s = i.length - 1, o; s >= 0; s--)
+}, w = (i, t, r, e) => {
+  for (var n = e > 1 ? void 0 : e ? Dt(t, r) : t, s = i.length - 1, o; s >= 0; s--)
     (o = i[s]) && (n = (e ? o(t, r, n) : o(n)) || n);
-  return e && n && bt(t, r, n), n;
-}, S = (i, t, r) => t.has(i) || Y("Cannot " + r), l = (i, t, r) => (S(i, t, "read from private field"), t.get(i)), q = (i, t, r) => t.has(i) ? Y("Cannot add the same private member more than once") : t instanceof WeakSet ? t.add(i) : t.set(i, r), Et = (i, t, r, e) => (S(i, t, "write to private field"), t.set(i, r), r), P = (i, t, r) => (S(i, t, "access private method"), r), u, w, H, K, G;
-let y = class extends x {
+  return e && n && Bt(t, r, n), n;
+}, N = (i, t, r) => t.has(i) || H("Cannot " + r), d = (i, t, r) => (N(i, t, "read from private field"), t.get(i)), z = (i, t, r) => t.has(i) ? H("Cannot add the same private member more than once") : t instanceof WeakSet ? t.add(i) : t.set(i, r), Ut = (i, t, r, e) => (N(i, t, "write to private field"), t.set(i, r), r), A = (i, t, r) => (N(i, t, "access private method"), r), l, v, X, Q, J;
+let m = class extends L {
   constructor() {
-    super(), q(this, w), q(this, u), this.consumeContext(rt, (i) => {
-      Et(this, u, i), P(this, w, H).call(this);
+    super(), z(this, v), z(this, l), this.consumeContext(st, (i) => {
+      Ut(this, l, i), A(this, v, X).call(this);
     });
   }
   async _handleIconClick() {
-    const [i, t] = this._icon?.replace("color-", "")?.split(" ") ?? [], r = await this.getContext(ot);
+    const [i, t] = this._icon?.replace("color-", "")?.split(" ") ?? [], r = await this.getContext(ht);
     if (!r)
       throw new Error("Modal manager not found.");
-    r.open(this, at, {
+    r.open(this, pt, {
       value: {
         icon: i,
         color: t
       }
     })?.onSubmit().then((n) => {
-      n.icon && n.color ? l(this, u)?.setIcon(`${n.icon} color-${n.color}`) : n.icon && l(this, u)?.setIcon(n.icon);
+      n.icon && n.color ? d(this, l)?.setIcon(`${n.icon} color-${n.color}`) : n.icon && d(this, l)?.setIcon(n.icon);
     });
   }
   render() {
-    return A`
+    return M`
 			<div id="header">
 				<uui-button id="icon" compact label="icon" look="outline" @click=${this._handleIconClick}>
-					<umb-icon name=${it(this._icon)}></umb-icon>
+					<umb-icon name=${at(this._icon)}></umb-icon>
 				</uui-button>
 
 				<div id="editors">
@@ -64,10 +64,10 @@ let y = class extends x {
 						.value=${this._name}
 						.alias=${this._alias}
 						?auto-generate-alias=${this._isNew}
-						@change=${P(this, w, K)}
+						@change=${A(this, v, Q)}
 						required
-						${ut(this, "$.name", this._name)}
-						${nt()}>
+						${lt(this, "$.name", this._name)}
+						${ot()}>
 					</umb-input-with-alias>
 
 					<uui-input
@@ -75,29 +75,29 @@ let y = class extends x {
 						.label=${this.localize.term("placeholders_enterDescription")}
 						.value=${this._description}
 						.placeholder=${this.localize.term("placeholders_enterDescription")}
-						@input=${P(this, w, G)}></uui-input>
+						@input=${A(this, v, J)}></uui-input>
 				</div>
 			</div>
 		`;
   }
 };
-u = /* @__PURE__ */ new WeakMap();
-w = /* @__PURE__ */ new WeakSet();
-H = function() {
-  l(this, u) && (this.observe(l(this, u).name, (i) => this._name = i, "_observeName"), this.observe(l(this, u).alias, (i) => this._alias = i, "_observeAlias"), this.observe(
-    l(this, u).description,
+l = /* @__PURE__ */ new WeakMap();
+v = /* @__PURE__ */ new WeakSet();
+X = function() {
+  d(this, l) && (this.observe(d(this, l).name, (i) => this._name = i, "_observeName"), this.observe(d(this, l).alias, (i) => this._alias = i, "_observeAlias"), this.observe(
+    d(this, l).description,
     (i) => this._description = i,
     "_observeDescription"
-  ), this.observe(l(this, u).icon, (i) => this._icon = i, "_observeIcon"), this.observe(l(this, u).isNew, (i) => this._isNew = i, "_observeIsNew"));
+  ), this.observe(d(this, l).icon, (i) => this._icon = i, "_observeIcon"), this.observe(d(this, l).isNew, (i) => this._isNew = i, "_observeIsNew"));
 };
-K = function(i) {
-  l(this, u)?.setName(i.target.value ?? ""), l(this, u)?.setAlias(i.target.alias ?? "");
+Q = function(i) {
+  d(this, l)?.setName(i.target.value ?? ""), d(this, l)?.setAlias(i.target.alias ?? "");
 };
-G = function(i) {
-  l(this, u)?.setDescription(i.target.value.toString() ?? "");
+J = function(i) {
+  d(this, l)?.setDescription(i.target.value.toString() ?? "");
 };
-y.styles = [
-  z`
+m.styles = [
+  F`
 			:host {
 				display: contents;
 			}
@@ -112,6 +112,7 @@ y.styles = [
 				display: flex;
 				flex: 1 1 auto;
 				flex-direction: column;
+				gap: 1px;
 			}
 
 			#name {
@@ -121,7 +122,6 @@ y.styles = [
 
 			#description {
 				width: 100%;
-				margin-top: 1px;
 				--uui-input-height: var(--uui-size-8);
 				--uui-input-border-color: transparent;
 			}
@@ -139,111 +139,111 @@ y.styles = [
 			}
 		`
 ];
-C([
-  m()
-], y.prototype, "_name", 2);
-C([
-  m()
-], y.prototype, "_alias", 2);
-C([
-  m()
-], y.prototype, "_description", 2);
-C([
-  m()
-], y.prototype, "_icon", 2);
-C([
-  m()
-], y.prototype, "_isNew", 2);
-y = C([
-  W("umb-content-type-workspace-editor-header")
-], y);
-var At = Object.defineProperty, St = Object.getOwnPropertyDescriptor, X = (i) => {
+w([
+  C()
+], m.prototype, "_name", 2);
+w([
+  C()
+], m.prototype, "_alias", 2);
+w([
+  C()
+], m.prototype, "_description", 2);
+w([
+  C()
+], m.prototype, "_icon", 2);
+w([
+  C()
+], m.prototype, "_isNew", 2);
+m = w([
+  Y("umb-content-type-workspace-editor-header")
+], m);
+var $t = Object.defineProperty, Rt = Object.getOwnPropertyDescriptor, Z = (i) => {
   throw TypeError(i);
-}, N = (i, t, r, e) => {
-  for (var n = e > 1 ? void 0 : e ? St(t, r) : t, s = i.length - 1, o; s >= 0; s--)
+}, B = (i, t, r, e) => {
+  for (var n = e > 1 ? void 0 : e ? Rt(t, r) : t, s = i.length - 1, o; s >= 0; s--)
     (o = i[s]) && (n = (e ? o(t, r, n) : o(n)) || n);
-  return e && n && At(t, r, n), n;
-}, B = (i, t, r) => t.has(i) || X("Cannot " + r), O = (i, t, r) => (B(i, t, "read from private field"), r ? r.call(i) : t.get(i)), E = (i, t, r) => t.has(i) ? X("Cannot add the same private member more than once") : t instanceof WeakSet ? t.add(i) : t.set(i, r), Nt = (i, t, r, e) => (B(i, t, "write to private field"), t.set(i, r), r), f = (i, t, r) => (B(i, t, "access private method"), r), T, g, c, b, Q, J, Z, j, tt;
-let v = class extends ht(x) {
+  return e && n && $t(t, r, n), n;
+}, D = (i, t, r) => t.has(i) || Z("Cannot " + r), b = (i, t, r) => (D(i, t, "read from private field"), r ? r.call(i) : t.get(i)), S = (i, t, r) => t.has(i) ? Z("Cannot add the same private member more than once") : t instanceof WeakSet ? t.add(i) : t.set(i, r), It = (i, t, r, e) => (D(i, t, "write to private field"), t.set(i, r), r), y = (i, t, r) => (D(i, t, "access private method"), r), T, P, c, E, j, tt, et, rt, nt;
+let g = class extends dt(L) {
   constructor() {
-    super(), E(this, c), E(this, T), E(this, g, "Umb.PropertyEditorUi.Collection"), new D(this, lt).addAdditionalPath(":uiAlias").onSetup((i) => ({
+    super(), S(this, c), S(this, T), S(this, P, "Umb.PropertyEditorUi.Collection"), new U(this, ft).addAdditionalPath(":uiAlias").onSetup((i) => ({
       data: {
         propertyEditorUiAlias: i.uiAlias
       },
       value: void 0
     })).onSubmit((i) => {
-      i?.createNewWithPropertyEditorUiAlias ? f(this, c, J).call(this) : f(this, c, b).call(this, i?.dataTypeId ?? this.defaultValue ?? "");
+      i?.createNewWithPropertyEditorUiAlias ? y(this, c, tt).call(this) : y(this, c, E).call(this, i?.dataTypeId ?? this.defaultValue ?? "");
     }).observeRouteBuilder((i) => {
-      this._dataTypePickerModalPath = i({ uiAlias: O(this, g) });
-    }), Nt(this, T, new D(this, ct).addAdditionalPath(":uiAlias").onSetup((i) => ({ data: { entityType: L, preset: { editorUiAlias: i.uiAlias } } })).onSubmit((i) => {
-      f(this, c, b).call(this, i?.unique ?? this.defaultValue ?? "");
+      this._dataTypePickerModalPath = i({ uiAlias: b(this, P) });
+    }), It(this, T, new U(this, yt).addAdditionalPath(":uiAlias").onSetup((i) => ({ data: { entityType: G, preset: { editorUiAlias: i.uiAlias } } })).onSubmit((i) => {
+      y(this, c, E).call(this, i?.unique ?? this.defaultValue ?? "");
     }));
   }
   getFormElement() {
   }
   render() {
-    return this.value ? f(this, c, tt).call(this) : f(this, c, j).call(this);
+    return this.value ? y(this, c, nt).call(this) : y(this, c, rt).call(this);
   }
 };
 T = /* @__PURE__ */ new WeakMap();
-g = /* @__PURE__ */ new WeakMap();
+P = /* @__PURE__ */ new WeakMap();
 c = /* @__PURE__ */ new WeakSet();
-b = function(i) {
-  this.value = i, this.dispatchEvent(new pt());
-};
-Q = function() {
-  f(this, c, b).call(this, void 0);
-};
-J = function() {
-  O(this, T).open(
-    { uiAlias: O(this, g) },
-    `create/parent/${L}/null`
-  );
-};
-Z = function() {
-  O(this, T)?.open({}, `edit/${this.value}`);
+E = function(i) {
+  this.value = i, this.dispatchEvent(new ct());
 };
 j = function() {
-  return this._dataTypePickerModalPath ? A`
+  y(this, c, E).call(this, void 0);
+};
+tt = function() {
+  b(this, T).open(
+    { uiAlias: b(this, P) },
+    `create/parent/${G}/null`
+  );
+};
+et = function() {
+  b(this, T)?.open({}, `edit/${this.value}`);
+};
+rt = function() {
+  return this._dataTypePickerModalPath ? M`
 			<uui-button
 				id="create-button"
 				color="default"
 				look="placeholder"
 				label=${this.localize.term("collection_addCollectionConfiguration")}
 				href=${this._dataTypePickerModalPath}></uui-button>
-		` : F;
+		` : K;
 };
-tt = function() {
-  return !this.value || !this._dataTypePickerModalPath ? F : A`
+nt = function() {
+  return !this.value || !this._dataTypePickerModalPath ? K : M`
 			<uui-ref-list>
-				<umb-ref-data-type standalone data-type-id=${this.value} @open=${f(this, c, Z)}>
+				<umb-ref-data-type standalone data-type-id=${this.value} @open=${y(this, c, et)}>
 					<uui-action-bar slot="actions">
 						<uui-button
 							label=${this.localize.term("general_choose")}
 							href=${this._dataTypePickerModalPath}></uui-button>
-						<uui-button @click=${f(this, c, Q)} label=${this.localize.term("general_remove")}></uui-button>
+						<uui-button @click=${y(this, c, j)} label=${this.localize.term("general_remove")}></uui-button>
 					</uui-action-bar>
 				</umb-ref-data-type>
 			</uui-ref-list>
 		`;
 };
-v.styles = [
-  z`
+g.styles = [
+  F`
 			#create-button {
 				width: 100%;
 			}
 		`
 ];
-N([
-  m()
-], v.prototype, "_dataTypePickerModalPath", 2);
-N([
-  st({ attribute: "default-value" })
-], v.prototype, "defaultValue", 2);
-v = N([
-  W("umb-input-content-type-collection-configuration")
-], v);
-class jt extends dt {
+B([
+  C()
+], g.prototype, "_dataTypePickerModalPath", 2);
+B([
+  ut({ attribute: "default-value" })
+], g.prototype, "defaultValue", 2);
+g = B([
+  Y("umb-input-content-type-collection-configuration")
+], g);
+class oe extends Ct {
   #n;
   constructor(t, r) {
     super(t), this.#n = new r(t);
@@ -259,9 +259,9 @@ class jt extends dt {
     return this.#n.getAllowedChildrenOf(t, r);
   }
 }
-class te {
+class ae {
   #n;
-  #u;
+  #i;
   #e;
   /**
    * Creates an instance of UmbContentTypeStructureServerDataSourceBase.
@@ -270,7 +270,7 @@ class te {
    * @memberof UmbItemServerDataSourceBase
    */
   constructor(t, r) {
-    this.#n = t, this.#u = r.getAllowedChildrenOf, this.#e = r.mapper;
+    this.#n = t, this.#i = r.getAllowedChildrenOf, this.#e = r.mapper;
   }
   /**
    * Returns a promise with the allowed content types for the given unique
@@ -280,32 +280,63 @@ class te {
    * @memberof UmbContentTypeStructureServerDataSourceBase
    */
   async getAllowedChildrenOf(t, r) {
-    const { data: e, error: n } = await yt(this.#n, this.#u(t, r));
+    const { data: e, error: n } = await vt(this.#n, this.#i(t, r));
     return e ? { data: { items: e.items.map((o) => this.#e(o)), total: e.total } } : { error: n };
   }
 }
-const k = (i, t, r) => r.indexOf(i) === t;
-class Bt extends wt {
+const W = (i, t, r) => r.indexOf(i) === t;
+class Vt extends bt {
   constructor(t, r) {
     super(t), this.#e = new Promise((e, n) => {
-      this.#n = e, this.#u = n;
-    }), this.#i = new R([], (e) => e), this.#h = new Promise((e) => {
-      this.#s ? e(this.#s) : this.#p = e;
-    }), this.#l = new Array(), this.#t = new R([], (e) => e.unique), this.contentTypes = this.#t.asObservable(), this.ownerContentType = this.#t.asObservablePart(
+      this.#n = e, this.#i = n;
+    }), this.#s = new I([], (e) => e), this.#h = new Promise((e) => {
+      this.#o ? e(this.#o) : this.#l = e;
+    }), this.#d = new Array(), this.#t = new I([], (e) => e.unique), this.contentTypes = this.#t.asObservable(), this.ownerContentType = this.#t.asObservablePart(
       (e) => e.find((n) => n.unique === this.#r)
-    ), this.ownerContentTypeAlias = h(this.ownerContentType, (e) => e?.alias), this.ownerContentTypeName = h(this.ownerContentType, (e) => e?.name), this.ownerContentTypeCompositions = h(this.ownerContentType, (e) => e?.compositions), this.contentTypeCompositions = this.#t.asObservablePart((e) => e.flatMap((n) => n.compositions ?? [])), this.#a = this.#t.asObservablePart((e) => e.flatMap((n) => n.containers ?? [])), this.contentTypeProperties = this.#t.asObservablePart((e) => e.flatMap((n) => n.properties ?? [])), this.contentTypeDataTypeUniques = this.#t.asObservablePart((e) => e.flatMap((n) => n.properties?.map((s) => s.dataType.unique) ?? []).filter(k)), this.contentTypeHasProperties = this.#t.asObservablePart((e) => e.some((n) => n.properties.length > 0)), this.contentTypePropertyAliases = h(
+    ), this.ownerContentTypeAlias = h(this.ownerContentType, (e) => e?.alias), this.ownerContentTypeName = h(this.ownerContentType, (e) => e?.name), this.ownerContentTypeCompositions = h(this.ownerContentType, (e) => e?.compositions), this.contentTypeCompositions = this.#t.asObservablePart((e) => e.flatMap((n) => n.compositions ?? [])), this.#a = this.#t.asObservablePart((e) => e.flatMap((n) => n.containers ?? [])), this.contentTypeProperties = this.#t.asObservablePart((e) => e.flatMap((n) => n.properties ?? [])), this.contentTypeDataTypeUniques = this.#t.asObservablePart((e) => e.flatMap((n) => n.properties?.map((s) => s.dataType.unique) ?? []).filter(W)), this.contentTypeHasProperties = this.#t.asObservablePart((e) => e.some((n) => n.properties.length > 0)), this.contentTypePropertyAliases = h(
       this.contentTypeProperties,
       (e) => e.map((n) => n.alias)
-    ), this.contentTypeUniques = this.#t.asObservablePart((e) => e.map((n) => n.unique)), this.contentTypeAliases = this.#t.asObservablePart((e) => e.map((n) => n.alias)), this.variesByCulture = h(this.ownerContentType, (e) => e?.variesByCulture), this.variesBySegment = h(this.ownerContentType, (e) => e?.variesBySegment), typeof r == "string" ? this.#d(r) : (this.#s = r, this.#p?.(r)), this.#h.then(() => {
-      if (!this.#s)
+    ), this.contentTypeUniques = this.#t.asObservablePart((e) => e.map((n) => n.unique)), this.contentTypeAliases = this.#t.asObservablePart((e) => e.map((n) => n.alias)), this.contentTypeLoaded = Tt(
+      [this.contentTypeCompositions, this.contentTypeUniques],
+      ([e, n]) => e.every((s) => n.includes(s.contentType.unique))
+    ), this.variesByCulture = h(this.ownerContentType, (e) => e?.variesByCulture), this.variesBySegment = h(this.ownerContentType, (e) => e?.variesBySegment), this.#p = [], this.contentTypeMergedContainers = h(
+      this.#a,
+      (e) => {
+        const n = /* @__PURE__ */ new Map();
+        for (const a of e)
+          n.set(a.id, a);
+        const s = /* @__PURE__ */ new Map(), o = /* @__PURE__ */ new Map();
+        for (const a of e) {
+          const p = it(a, n, s), u = p?.join("|") ?? null, f = this.isOwnerContainer(a.id);
+          if (!o.has(u))
+            o.set(u, {
+              key: u,
+              ids: [a.id],
+              ownerId: f ? a.id : void 0,
+              parentIds: /* @__PURE__ */ new Set([a.parent?.id ?? null]),
+              path: p,
+              type: a.type,
+              name: a.name,
+              sortOrder: a.sortOrder
+              // Heavily assuming the first is the owner content type container, this could maybe turn out not always to be the case?
+            });
+          else {
+            const O = o.get(u);
+            O.ids.push(a.id), O.parentIds.add(a.parent?.id ?? null), O.ownerId ??= f ? a.id : void 0, f && (O.sortOrder = a.sortOrder);
+          }
+        }
+        return this.#p = Array.from(o.values());
+      }
+    ), typeof r == "string" ? this.#f(r) : (this.#o = r, this.#l?.(r)), this.#h.then(() => {
+      if (!this.#o)
         throw new Error(
           "Content Type Structure Manager failed cause it could not initialize or receive the Content Type Detail Repository."
         );
-      this.#o = new ft(this, r), this.observe(
-        this.#o.entries,
+      this.#u = new wt(this, r), this.observe(
+        this.#u.entries,
         (e) => {
           const n = e.filter(
-            (o) => !(this.#i.getHasOne(o.unique) && this.#t.getHasOne(o.unique))
+            (o) => !(this.#s.getHasOne(o.unique) && this.#t.getHasOne(o.unique))
           ), s = this.#t.getValue().filter((o) => !e.some((a) => a.unique === o.unique)).map((o) => o.unique);
           this.#t.mute(), this.#t.remove(s), this.#t.append(n), this.#t.unmute();
         },
@@ -320,18 +351,18 @@ class Bt extends wt {
     );
   }
   #n;
-  #u;
-  #e;
   #i;
+  #e;
   #s;
-  #p;
-  #h;
   #o;
+  #l;
+  #h;
+  #u;
   async whenLoaded() {
     return await this.#e, !0;
   }
   #r;
-  #l;
+  #d;
   #t;
   async getContentTypeCompositions() {
     return await this.observe(this.contentTypeCompositions).asPromise();
@@ -356,17 +387,23 @@ class Bt extends wt {
     if (this.#r === t)
       return await this.#e, { data: this.getOwnerContentType(), asObservable: () => this.ownerContentType };
     if (await this.#h, this.clear(), this.#r = t, !t)
-      return this.#u?.(`Content Type structure manager could not load: ${t}`), Promise.reject(
+      return this.#i?.(`Content Type structure manager could not load: ${t}`), this.#n = void 0, this.#i = void 0, Promise.reject(
         new Error("The unique identifier is missing. A valid unique identifier is required to load the content type.")
       );
-    this.#o.setUniques([t]);
-    const r = await this.observe(this.#o.entryByUnique(t)).asPromise();
-    return this.#n?.(r), await this.#e, { data: r, asObservable: () => this.ownerContentType };
+    this.#u.setUniques([t]);
+    const r = this.#u.entryByUnique(t), e = await this.observe(r).asPromise();
+    return e ? (await gt(this.contentTypeLoaded, async (n) => n === !0).catch(() => {
+      const n = `Content Type structure manager could not load: ${t}. Not all Content Types loaded successfully.`;
+      return this.#i?.(n), this.#n = void 0, this.#i = void 0, Promise.reject(new $(n));
+    }), this.#n?.(e), this.#n = void 0, this.#i = void 0, { data: e, asObservable: () => this.ownerContentType }) : (this.#i?.(`Content Type structure manager could not load: ${t}`), this.#n = void 0, this.#i = void 0, {
+      error: new $(`Content Type structure manager could not load: ${t}`),
+      asObservable: () => r
+    });
   }
   async createScaffold(t) {
     await this.#h, this.clear();
-    const r = await this.#s.createScaffold(t), { data: e } = r;
-    return e ? (this.#r = e.unique, this.#t.appendOne(e), this.#o.addEntry(e), this.#n?.(e), r) : (this.#u?.("Content Type structure manager could not create scaffold"), { error: r.error });
+    const r = await this.#o.createScaffold(t), { data: e } = r;
+    return e ? (this.#r = e.unique, this.#t.appendOne(e), this.#u.addEntry(e), this.#n?.(e), this.#n = void 0, this.#i = void 0, r) : (this.#i?.("Content Type structure manager could not create scaffold"), this.#n = void 0, this.#i = void 0, { error: r.error });
   }
   /**
    * Save the owner content type. Notice this is for a Content Type that is already stored on the server.
@@ -376,10 +413,10 @@ class Bt extends wt {
     await this.#h;
     const t = this.getOwnerContentType();
     if (!t || !t.unique) throw new Error("Could not find the Content Type to save");
-    const { error: r, data: e } = await this.#s.save(t);
+    const { error: r, data: e } = await this.#o.save(t);
     if (r || !e)
       throw r?.message ?? "Repository did not return data after save.";
-    return this.#t.updateOne(t.unique, e), this.#o.addEntry(e), e;
+    return this.#t.updateOne(t.unique, e), this.#u.addEntry(e), e;
   }
   /**
    * Create the owner content type. Notice this is for a Content Type that is NOT already stored on the server.
@@ -391,17 +428,17 @@ class Bt extends wt {
     const r = this.getOwnerContentType();
     if (!r || !r.unique)
       throw new Error("Could not find the Content Type to create");
-    const { error: e, data: n } = await this.#s.create(r, t);
+    const { error: e, data: n } = await this.#o.create(r, t);
     if (e || !n)
       throw e?.message ?? "Repository did not return data after create.";
-    return this.#t.updateOne(r.unique, n), this.#o.addEntry(n), n;
+    return this.#t.updateOne(r.unique, n), this.#u.addEntry(n), n;
   }
   async #c(t) {
     await Promise.resolve();
     const r = this.getOwnerContentTypeUnique();
     if (!r) return;
     const e = t?.map((s) => s.contentType.unique) ?? [], n = [r, ...e];
-    this.#t.filter((s) => n.includes(s.unique)), this.#o.setUniques(n);
+    this.#t.filter((s) => n.includes(s.unique)), this.#u.setUniques(n);
   }
   /** Public methods for consuming structure: */
   ownerContentTypeObservablePart(t) {
@@ -409,6 +446,9 @@ class Bt extends wt {
   }
   getOwnerContentType() {
     return this.#t.getValue().find((t) => t.unique === this.#r);
+  }
+  getOwnerContentTypeName() {
+    return this.getOwnerContentType()?.name;
   }
   getOwnerContentTypeUnique() {
     return this.#r;
@@ -427,7 +467,7 @@ class Bt extends wt {
     return this.#t.getValue().some((t) => t.properties.length > 0);
   }
   updateOwnerContentType(t) {
-    this.#i.appendOne(this.#r), this.#t.updateOne(this.#r, t);
+    this.#s.appendOne(this.#r), this.#t.updateOne(this.#r, t);
   }
   getContentTypes() {
     return this.#t.getValue();
@@ -460,12 +500,12 @@ class Bt extends wt {
    * @returns {Promise<UmbPropertyTypeContainerModel | undefined>} - The container cloned or found for the owner ContentType.
    */
   async cloneContainerTo(t, r) {
-    await this.#e, r = r ?? this.#r, this.#i.appendOne(r);
-    const e = (await I(this.#a)).find((o) => o.id === t);
+    await this.#e, r = r ?? this.#r, this.#s.appendOne(r);
+    const e = (await k(this.#a)).find((o) => o.id === t);
     if (!e) throw new Error("Container to clone was not found");
     const n = {
       ...e,
-      id: M.new()
+      id: R.new()
     };
     if (e.parent) {
       const o = await this.ensureContainerOf(e.parent.id, r);
@@ -482,21 +522,21 @@ class Bt extends wt {
     t = t ?? this.#r, this.getOwnerContainers(r, e)?.forEach((n) => {
       if (n.name === "") {
         const s = "Unnamed";
-        this.#i.appendOne(t), this.updateContainer(null, n.id, {
+        this.#s.appendOne(t), this.updateContainer(null, n.id, {
           name: this.makeContainerNameUniqueForOwnerContentType(n.id, s, r, e) ?? s
         });
       }
     });
   }
   async createContainer(t, r = null, e = "Group", n) {
-    if (await this.#e, t = t ?? this.#r, this.#i.appendOne(t), r) {
+    if (await this.#e, t = t ?? this.#r, this.#s.appendOne(t), r) {
       const o = await this.ensureContainerOf(r, t);
       if (!o)
         throw new Error("Parent container for creating a new container could not be found or created");
       r = o.id;
     }
     const s = {
-      id: M.new(),
+      id: R.new(),
       parent: r ? { id: r } : null,
       name: "",
       type: e,
@@ -508,34 +548,45 @@ class Bt extends wt {
     await this.#e, t = t ?? this.#r;
     const e = { ...r }, n = e.type, s = e.parent?.id ?? null;
     if (e.parent) {
-      const d = await this.ensureContainerOf(e.parent.id, t);
-      if (!d)
+      const p = await this.ensureContainerOf(e.parent.id, t);
+      if (!p)
         throw new Error("Container for inserting property could not be found or created");
-      e.parent.id = d.id;
+      e.parent.id = p.id;
     }
     this.ensureContainerNames(t, n, s);
-    const o = this.#t.getValue().find((d) => d.unique === t)?.containers ?? [], a = U(o, e, (d) => d.id === e.id);
+    const o = this.#t.getValue().find((p) => p.unique === t)?.containers ?? [], a = V(o, e, (p) => p.id === e.id);
     return this.#t.updateOne(t, { containers: a }), e;
   }
-  makeEmptyContainerName(t, r, e = null) {
+  makeEmptyContainerName(t, r, e) {
     return this.makeContainerNameUniqueForOwnerContentType(t, "Unnamed", r, e) ?? "Unnamed";
   }
-  makeContainerNameUniqueForOwnerContentType(t, r, e, n = null) {
-    const s = this.getOwnerContainers(e, n);
+  /**
+   *
+   * @param {string} containerId - The id of the container to make unique
+   * @param {string} newName - The new name to make unique
+   * @param {never} _legacyContainerType - do not use, has no effect. Is deprecated and will be removed in v.17
+   * @param {never} _legacyParentId - do not use, has no effect. Is deprecated and will be removed in v.17
+   * @returns
+   */
+  makeContainerNameUniqueForOwnerContentType(t, r, e, n) {
+    const s = this.getOwnerContainerById(t);
     if (!s)
+      return console.warn(`Container with id ${t} not found in owner content type.`), null;
+    const o = s.type, a = s.parent?.id ?? null, p = this.getOwnerContainers(o, a);
+    if (!p)
       return null;
-    let o = r;
-    for (; s.find((a) => a.name === o && a.id !== t); )
-      o = Ct(o);
-    return o === r ? null : o;
+    let u = r;
+    for (; p.find((f) => f.name === u && f.id !== t); )
+      u = _t(u);
+    return u === r ? null : u;
   }
   async updateContainer(t, r, e) {
-    await this.#e, t = t ?? this.#r, this.#i.appendOne(t);
+    await this.#e, t = t ?? this.#r, this.#s.appendOne(t);
     const n = this.#t.getValue().find((a) => a.unique === t)?.containers ?? [];
     n.find((a) => a.id === r) || console.error(
       "We do not have this container on the requested id, we should clone the container and append the change to it. [NL]"
     );
-    const o = $(
+    const o = q(
       n,
       e,
       (a) => a.id === r
@@ -543,17 +594,17 @@ class Bt extends wt {
     this.#t.updateOne(t, { containers: o });
   }
   async removeContainer(t, r = null, e) {
-    await this.#e, t = t ?? this.#r, this.#i.appendOne(t);
-    const n = this.#t.getValue().find((p) => p.unique === t);
+    await this.#e, t = t ?? this.#r, this.#s.appendOne(t);
+    const n = this.#t.getValue().find((u) => u.unique === t);
     if (!n)
       throw new Error("Could not find the Content Type to remove container from");
-    const s = n.containers ?? [], o = s.filter((p) => p.id === r || p.parent?.id === r).map((p) => p.id), d = { containers: s.filter((p) => p.id !== r && p.parent?.id !== r) };
-    e?.preventRemovingProperties !== !0 && (d.properties = n.properties.filter(
-      (p) => p.container ? !o.some((et) => et === p.container?.id) : !0
-    )), this.#t.updateOne(t, d);
+    const s = n.containers ?? [], o = s.filter((u) => u.id === r || u.parent?.id === r).map((u) => u.id), p = { containers: s.filter((u) => u.id !== r && u.parent?.id !== r) };
+    e?.preventRemovingProperties !== !0 && (p.properties = n.properties.filter(
+      (u) => u.container ? !o.some((f) => f === u.container?.id) : !0
+    )), this.#t.updateOne(t, p);
   }
   async insertProperty(t, r) {
-    if (await this.#e, t = t ?? this.#r, this.#i.appendOne(t), r.container) {
+    if (await this.#e, t = t ?? this.#r, this.#s.appendOne(t), r.container) {
       this.#t.mute();
       const s = await this.ensureContainerOf(r.container.id, t);
       if (this.#t.unmute(), !s)
@@ -561,17 +612,17 @@ class Bt extends wt {
       r = { ...r, container: { id: s.id } };
     }
     r.sortOrder === void 0 && (r.sortOrder = 0);
-    const e = this.#t.getValue().find((s) => s.unique === t)?.properties ?? [], n = U(e, r, (s) => s.unique === r.unique);
+    const e = this.#t.getValue().find((s) => s.unique === t)?.properties ?? [], n = V(e, r, (s) => s.unique === r.unique);
     this.#t.updateOne(t, { properties: n });
   }
   async removeProperty(t, r) {
-    await this.#e, t = t ?? this.#r, this.#i.appendOne(t);
-    const e = this.#t.getValue().find((s) => s.unique === t)?.properties ?? [], n = mt(e, (s) => s.unique !== r);
+    await this.#e, t = t ?? this.#r, this.#s.appendOne(t);
+    const e = this.#t.getValue().find((s) => s.unique === t)?.properties ?? [], n = Ot(e, (s) => s.unique !== r);
     this.#t.updateOne(t, { properties: n });
   }
   async updateProperty(t, r, e) {
-    await this.#e, t = t ?? this.#r, this.#i.appendOne(t);
-    const n = this.#t.getValue().find((o) => o.unique === t)?.properties ?? [], s = $(n, e, (o) => o.unique === r);
+    await this.#e, t = t ?? this.#r, this.#s.appendOne(t);
+    const n = this.#t.getValue().find((o) => o.unique === t)?.properties ?? [], s = q(n, e, (o) => o.unique === r);
     this.#t.updateOne(t, { properties: s });
   }
   // TODO: Refactor: These property methods, should maybe be named without structure in their name.
@@ -628,11 +679,27 @@ class Bt extends wt {
       }), e;
     });
   }
+  propertyStructuresOfGroupIds(t) {
+    return this.#t.asObservablePart((r) => {
+      const e = [];
+      return r.forEach((n) => {
+        n.properties?.forEach((s) => {
+          s.container?.id && t.includes(s.container.id) && e.push(s);
+        });
+      }), e;
+    });
+  }
+  hasPropertyStructuresOfGroupIds(t) {
+    return this.#t.asObservablePart((r) => r.some((e) => e.properties?.some((n) => n.container?.id && t.includes(n.container.id))));
+  }
+  hasPropertyStructuresOfRoot() {
+    return this.#t.asObservablePart((t) => t.some((r) => r.properties?.some((e) => !e.container)));
+  }
   rootContainers(t) {
     return h(this.#a, (r) => r.filter((e) => e.parent === null && e.type === t));
   }
   async getRootContainers(t) {
-    return (await I(this.#a)).filter(
+    return (await k(this.#a)).filter(
       (r) => r.parent === null && r.type === t
     );
   }
@@ -655,7 +722,7 @@ class Bt extends wt {
     );
   }
   isOwnerContainer(t) {
-    return this.getOwnerContentType()?.containers?.filter((r) => r.id === t);
+    return this.getOwnerContentType()?.containers?.some((r) => r.id === t);
   }
   containersOfParentId(t, r) {
     return h(this.#a, (e) => e.filter((n) => n.parent?.id === t && n.type === r));
@@ -688,15 +755,15 @@ class Bt extends wt {
       (r) => r.find((e) => e.properties.some((n) => n.unique === t))
     );
   }
-  #d(t) {
+  #f(t) {
     if (!t) throw new Error("Content Type structure manager must have a repository alias.");
-    new Tt(
+    new Pt(
       this,
-      vt,
+      Et,
       t,
       [this._host],
       (r, e) => {
-        this.#s = r ? e.api : void 0, this.#s && this.#p?.(this.#s);
+        this.#o = r ? e.api : void 0, this.#o && this.#l?.(this.#o);
       }
     );
   }
@@ -705,19 +772,96 @@ class Bt extends wt {
    * @returns {Promise<Array<string>>} - A promise that will be resolved with the list of all content type property aliases.
    */
   async getContentTypePropertyAliases() {
-    return this.#t.getValue().flatMap((t) => t.properties?.map((r) => r.alias) ?? []).filter(k);
+    return this.#t.getValue().flatMap((t) => t.properties?.map((r) => r.alias) ?? []).filter(W);
   }
   clear() {
-    this.#l.forEach((t) => t.destroy()), this.#l = [], this.#o?.clear(), this.#t.setValue([]), this.#r = void 0;
+    this.#d.forEach((t) => t.destroy()), this.#d = [], this.#u?.clear(), this.#t.setValue([]), this.#r = void 0;
   }
   destroy() {
     this.#t.destroy(), super.destroy();
   }
+  #p;
+  mergedContainersOfId(t) {
+    return h(this.contentTypeMergedContainers, (r) => r.find((e) => e.ids.includes(t)));
+  }
+  /**
+   *
+   * Find merged containers that match the provided container ids.
+   * Notice if you can provide one or more ids matching the same container and it will still only return return the matching container once.
+   * @param containerIds - An array of container ids to find merged containers for.
+   * @returns {Observable} - An observable that emits the merged containers that match the provided container ids.
+   */
+  /*
+  public mergedContainersOfIds(searchIds: Array<string>): Observable<Array<UmbPropertyTypeContainerMergedModel>> {
+  	return createObservablePart(this.contentTypeMergedContainers, (mergedContainers) => {
+  		return mergedContainers.filter((x) => searchIds.some((id) => x.ids.includes(id)));
+  	});
+  }
+  */
+  /**
+   * Find a merged container that match the provided container id.
+   * @param {string} id - The id to find the merged container of.
+   * @returns {UmbPropertyTypeContainerMergedModel | undefined} - The merged containers that match the provided container ids.
+   */
+  getMergedContainerById(t) {
+    return this.#p.find((r) => r.ids.includes(t));
+  }
+  /**
+   * Find a merged container that match the provided merged-container key.
+   * @param {string} key - The key to find the merged container of.
+   * @returns {UmbPropertyTypeContainerMergedModel | undefined} - The merged containers that match the provided merged-container key.
+   */
+  getMergedContainerByKey(t) {
+    return this.#p.find((r) => r.key === t);
+  }
+  /**
+   *
+   * Find merged child containers that are children of the provided parent container ids.
+   * Notice this will find matching containers and include their child containers in this.
+   * @param containerIds - An array of container ids to find merged child containers for.
+   * @param searchId
+   * @param type - The type of the containers to find.
+   * @returns {Observable} - An observable that emits the merged child containers that match the provided container ids.
+   */
+  mergedContainersOfParentIdAndType(t, r) {
+    return h(this.contentTypeMergedContainers, (e) => {
+      const n = t ? e.find((s) => s.ids.includes(t))?.ids ?? [] : [null];
+      return e.filter((s) => s.type === r && n.some((o) => s.parentIds.has(o)));
+    });
+  }
+  /**
+   *
+   * Find merged child containers that are children of one of the provided parent container ids.
+   * Notice if you can provide one or more ids matching the same parent and it will still only return return the matching child container once.
+   * @param containerIds - An array of container ids to find merged child containers for.
+   * @param type - The type of the containers to find.
+   * @returns {Observable} - An observable that emits the merged child containers that match the provided container ids.
+   */
+  /*
+  public mergedContainersOfParentIds(
+  	searchIds: Array<string | null>,
+  	type: UmbPropertyContainerTypes,
+  ): Observable<Array<UmbPropertyTypeContainerMergedModel>> {
+  	return createObservablePart(this.contentTypeMergedContainers, (mergedContainers) => {
+  		return mergedContainers.filter((x) => x.type === type && searchIds.some((id) => x.parentIds.has(id)));
+  	});
+  }
+  */
+}
+function it(i, t, r) {
+  if (r.has(i.id))
+    return r.get(i.id);
+  let e = [`${i.type.toLowerCase()}/${mt(i.name)}`];
+  if (i.parent && t.has(i.parent.id)) {
+    const n = t.get(i.parent.id);
+    e = [...it(n, t, r), ...e];
+  } else !i.parent && i.type;
+  return r.set(i.id, [...e]), e;
 }
 const _ = "umbLoadingContentTypeDetail";
-class ee extends _t {
+class ue extends At {
   constructor(t, r) {
-    super(t, r), this.IS_CONTENT_TYPE_WORKSPACE_CONTEXT = !0, this.structure = new Bt(this, r.detailRepositoryAlias), this.name = this.structure.ownerContentTypeObservablePart((e) => e?.name), this.alias = this.structure.ownerContentTypeObservablePart((e) => e?.alias), this.description = this.structure.ownerContentTypeObservablePart((e) => e?.description), this.icon = this.structure.ownerContentTypeObservablePart((e) => e?.icon), this.allowedAtRoot = this.structure.ownerContentTypeObservablePart((e) => e?.allowedAtRoot), this.variesByCulture = this.structure.ownerContentTypeObservablePart((e) => e?.variesByCulture), this.variesBySegment = this.structure.ownerContentTypeObservablePart((e) => e?.variesBySegment), this.isElement = this.structure.ownerContentTypeObservablePart((e) => e?.isElement), this.allowedContentTypes = this.structure.ownerContentTypeObservablePart((e) => e?.allowedContentTypes), this.compositions = this.structure.ownerContentTypeObservablePart((e) => e?.compositions), this.collection = this.structure.ownerContentTypeObservablePart((e) => e?.collection), this.observe(this.structure.ownerContentType, (e) => this._data.setCurrent(e));
+    super(t, r), this.IS_CONTENT_TYPE_WORKSPACE_CONTEXT = !0, this.structure = new Vt(this, r.detailRepositoryAlias), this.name = this.structure.ownerContentTypeObservablePart((e) => e?.name), this.alias = this.structure.ownerContentTypeObservablePart((e) => e?.alias), this.description = this.structure.ownerContentTypeObservablePart((e) => e?.description), this.icon = this.structure.ownerContentTypeObservablePart((e) => e?.icon), this.allowedAtRoot = this.structure.ownerContentTypeObservablePart((e) => e?.allowedAtRoot), this.variesByCulture = this.structure.ownerContentTypeObservablePart((e) => e?.variesByCulture), this.variesBySegment = this.structure.ownerContentTypeObservablePart((e) => e?.variesBySegment), this.isElement = this.structure.ownerContentTypeObservablePart((e) => e?.isElement), this.allowedContentTypes = this.structure.ownerContentTypeObservablePart((e) => e?.allowedContentTypes), this.compositions = this.structure.ownerContentTypeObservablePart((e) => e?.compositions), this.collection = this.structure.ownerContentTypeObservablePart((e) => e?.collection), this.observe(this.structure.ownerContentType, (e) => this._data.setCurrent(e), null), this.observe(this.name, (e) => this.view.setTitle(e), null);
   }
   /**
    * Creates a new scaffold
@@ -729,7 +873,7 @@ class ee extends _t {
     const r = this.structure.createScaffold(t.preset);
     this._getDataPromise = r;
     let { data: e } = await r;
-    return e && (e = await this._scaffoldProcessData(e), this.modalContext && (e = { ...e, ...this.modalContext.data.preset }), this.setUnique(e.unique), this.setIsNew(!0), this._data.setPersisted(e)), this.loading.removeState(_), e;
+    return e && (e = await this._processIncomingData(e), e = await this._scaffoldProcessData(e), this.modalContext && (e = { ...e, ...this.modalContext.data.preset }), this.setUnique(e.unique), this.setIsNew(!0), this._data.setPersisted(e)), this.loading.removeState(_), e;
   }
   /**
    * Loads the data for the workspace
@@ -759,10 +903,10 @@ class ee extends _t {
   async _create(t, r) {
     try {
       await this.structure.create(r?.unique), this._data.setPersisted(this.structure.getOwnerContentType());
-      const e = await this.getContext(V);
+      const e = await this.getContext(x);
       if (!e)
         throw new Error("Could not get the action event context");
-      const n = new Ot({
+      const n = new St({
         entityType: r.entityType,
         unique: r.unique
       });
@@ -778,14 +922,20 @@ class ee extends _t {
   async _update() {
     try {
       await this.structure.save(), this._data.setPersisted(this.structure.getOwnerContentType());
-      const t = await this.getContext(V);
+      const t = await this.getContext(x);
       if (!t)
         throw new Error("Could not get the action event context");
-      const r = new gt({
-        unique: this.getUnique(),
-        entityType: this.getEntityType()
+      const r = this.getUnique(), e = this.getEntityType(), n = new Mt({
+        unique: r,
+        entityType: e
       });
-      t.dispatchEvent(r);
+      t.dispatchEvent(n);
+      const s = new Nt({
+        unique: r,
+        entityType: e,
+        eventUnique: this._workspaceEventUnique
+      });
+      t.dispatchEvent(s);
     } catch (t) {
       console.error(t);
     }
@@ -866,21 +1016,21 @@ class ee extends _t {
   }
 }
 export {
-  ie as UMB_COMPOSITION_PICKER_MODAL,
-  se as UMB_CONTENT_TYPE_DESIGN_EDITOR_CONTEXT,
-  rt as UMB_CONTENT_TYPE_WORKSPACE_CONTEXT,
-  ce as UMB_PROPERTY_STRUCTURE_WORKSPACE_CONTEXT,
-  he as UMB_PROPERTY_TYPE_CONTEXT,
-  Zt as UMB_WORKSPACE_CONTENT_TYPE_ALIAS_CONDITION_ALIAS,
-  oe as UmbContentTypeContainerStructureHelper,
-  ae as UmbContentTypeMoveRootGroupsIntoFirstTabHelper,
-  pe as UmbContentTypePropertyStructureHelper,
-  Bt as UmbContentTypeStructureManager,
-  jt as UmbContentTypeStructureRepositoryBase,
-  te as UmbContentTypeStructureServerDataSourceBase,
-  ee as UmbContentTypeWorkspaceContextBase,
-  y as UmbContentTypeWorkspaceEditorHeaderElement,
-  v as UmbInputContentTypeCollectionConfigurationElement,
-  fe as UmbPropertyTypeBasedPropertyElement
+  le as UMB_COMPOSITION_PICKER_MODAL,
+  de as UMB_CONTENT_TYPE_DESIGN_EDITOR_CONTEXT,
+  st as UMB_CONTENT_TYPE_WORKSPACE_CONTEXT,
+  ve as UMB_PROPERTY_STRUCTURE_WORKSPACE_CONTEXT,
+  me as UMB_PROPERTY_TYPE_CONTEXT,
+  se as UMB_WORKSPACE_CONTENT_TYPE_ALIAS_CONDITION_ALIAS,
+  ce as UmbContentTypeContainerStructureHelper,
+  fe as UmbContentTypeMoveRootGroupsIntoFirstTabHelper,
+  Ce as UmbContentTypePropertyStructureHelper,
+  Vt as UmbContentTypeStructureManager,
+  oe as UmbContentTypeStructureRepositoryBase,
+  ae as UmbContentTypeStructureServerDataSourceBase,
+  ue as UmbContentTypeWorkspaceContextBase,
+  m as UmbContentTypeWorkspaceEditorHeaderElement,
+  g as UmbInputContentTypeCollectionConfigurationElement,
+  ge as UmbPropertyTypeBasedPropertyElement
 };
 //# sourceMappingURL=index.js.map

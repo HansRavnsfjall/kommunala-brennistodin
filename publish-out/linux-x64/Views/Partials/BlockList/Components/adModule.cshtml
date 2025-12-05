@@ -1,0 +1,72 @@
+@* Views/Partials/BlockList/Components/globalBlockReference.cshtml *@
+@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<Umbraco.Cms.Core.Models.Blocks.BlockListItem>
+@using System.Globalization
+@using Microsoft.AspNetCore.Mvc.ViewEngines
+@using Umbraco.Cms.Core.Models.Blocks
+@using Umbraco.Cms.Core.Models.PublishedContent
+@using Umbraco.Extensions
+@inject IGlobalBlockResolver GlobalBlocks
+@inject ICompositeViewEngine ViewEngine
+
+@{
+    var culture = CultureInfo.CurrentUICulture?.Name;
+
+    // This block's settings/content
+    var referenceElement = Model?.Content;
+    if (referenceElement is null) { yield break; }
+
+    // targetKey on the reference element
+    var keyString = referenceElement.Value<string>("targetKey", culture: culture, fallback: Fallback.ToLanguage);
+    if (string.IsNullOrWhiteSpace(keyString) || !Guid.TryParse(keyString, out var targetKey)) { yield break; }
+
+    // Resolve the global/original block (whatever your resolver returns)
+    var resolved = GlobalBlocks.Resolve(targetKey, culture);
+    if (resolved is null) { yield break; }
+
+    // We need to render a component partial by alias expecting a BlockListItem.
+    // Make sure we have a BlockListItem instance.
+    BlockListItem resolvedItem;
+
+    if (resolved is BlockListItem bli)
+    {
+        resolvedItem = bli;
+    }
+    else
+    {
+        // Try to extract content/settings from typical shapes
+        IPublishedElement? content = null;
+        IPublishedElement? settings = null;
+
+        var t = resolved.GetType();
+        var contentProp  = t.GetProperty("Content");
+        var settingsProp = t.GetProperty("Settings");
+        content  = contentProp?.GetValue(resolved)  as IPublishedElement;
+        settings = settingsProp?.GetValue(resolved) as IPublishedElement;
+
+        // Construct a BlockListItem (key can be targetKey to keep traceability)
+        resolvedItem = new BlockListItem(targetKey, content!, settings);
+    }
+
+    var alias = resolvedItem.Content?.ContentType?.Alias;
+    if (string.IsNullOrWhiteSpace(alias)) { yield break; }
+
+    string ComponentPath(string a) => $"~/Views/Partials/BlockList/Components/{a}.cshtml";
+    const string FallbackPath = "~/Views/Partials/BlockList/Default.cshtml";
+
+    var viewPath = ComponentPath(alias);
+
+    // Optional debug (remove when happy)
+    //<div style="font-size:.85rem;color:#666">Global ref → alias: <code>@alias</code> → @viewPath</div>
+
+    bool ViewExists(string path) => ViewEngine.GetView(null, path, isMainPage: false).Success;
+
+    if (ViewExists(viewPath))
+    {
+        @await Html.PartialAsync(viewPath, resolvedItem)
+    }
+    else
+    {
+        // Helpful fallback shows which alias failed
+        @await Html.PartialAsync(FallbackPath, resolvedItem)
+    }
+}

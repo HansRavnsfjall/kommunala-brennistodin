@@ -36,7 +36,7 @@ let UmbPreviewSegmentElement = class UmbPreviewSegmentElement extends UmbLitElem
         previewContext?.updateIFrame({ segment: segment?.unique });
     }
     render() {
-        if (this._segments.length <= 1)
+        if (!this._segments.length)
             return nothing;
         return html `
 			<uui-button look="primary" popovertarget="segments-popover">

@@ -1,10 +1,8 @@
-import { UMB_CONTEXT_PROVIDE_EVENT_TYPE, UMB_CONTEXT_REQUEST_EVENT_TYPE, } from '@umbraco-cms/backoffice/context-api';
 import { UmbControllerBase } from '@umbraco-cms/backoffice/class-api';
+import { UMB_CONTEXT_PROVIDE_EVENT_TYPE, UMB_CONTEXT_REQUEST_EVENT_TYPE } from '@umbraco-cms/backoffice/context-api';
 const CtrlAlias = Symbol();
 /**
  * @internal
- * This controller creates a Proxy for the Context API.
- * @description It is not advised for anyone to implement this unless they know exactly what they are doing.
  */
 export class UmbContextProxyController extends UmbControllerBase {
     #target;

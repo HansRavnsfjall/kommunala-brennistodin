@@ -54,7 +54,7 @@ export class UmbServerExtensionRegistrator extends UmbControllerBase {
             throw new Error('Server context is not available');
         }
         const apiBaseUrl = serverContext?.getServerUrl();
-        packages.forEach((p) => {
+        packages?.forEach((p) => {
             p.extensions?.forEach((e) => {
                 // Crudely validate that the extension at least follows a basic manifest structure
                 // Idea: Use `Zod` to validate the manifest

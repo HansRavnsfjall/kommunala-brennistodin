@@ -57,7 +57,7 @@ const e = [
     type: "propertyEditorUi",
     alias: "Umb.PropertyEditorUi.MultiUrlPicker",
     name: "Multi URL Picker Property Editor UI",
-    element: () => import("./property-editor-ui-multi-url-picker.element-CcHOs3FX.js"),
+    element: () => import("./property-editor-ui-multi-url-picker.element-B9jNUqU7.js"),
     meta: {
       label: "Multi URL Picker",
       propertyEditorSchemaAlias: "Umbraco.MultiUrlPicker",

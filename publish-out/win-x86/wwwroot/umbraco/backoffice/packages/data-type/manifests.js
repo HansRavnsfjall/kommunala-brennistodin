@@ -1,32 +1,32 @@
-import { j as y, i as f, g as i, h as t, E as o, e as T, C as r, A as n, f as s, m as c, s as l, U as A, t as _, N as a, u as I, w as R, y as S, z as O, H as p, F as U, k, L as m, M as D, B as C } from "./constants-DE93IEgK.js";
+import { j as T, i as I, g as i, h as t, F as o, e as c, D as r, B as n, f as s, m as A, t as l, U as _, u as D, n as y, O as a, v as R, x as S, z as O, A as k, I as p, G as U, k as b, M as m, N as E, C } from "./constants-mZOozcI2.js";
 import "@umbraco-cms/backoffice/external/backend-api";
 import "@umbraco-cms/backoffice/resources";
 import "@umbraco-cms/backoffice/notification";
 import "@umbraco-cms/backoffice/repository";
-import { UMB_WORKSPACE_CONDITION_ALIAS as e, UmbSubmitWorkspaceAction as E } from "@umbraco-cms/backoffice/workspace";
-import { UMB_SECTION_USER_PERMISSION_CONDITION_ALIAS as b } from "@umbraco-cms/backoffice/section";
-import { UMB_SETTINGS_SECTION_ALIAS as P } from "@umbraco-cms/backoffice/settings";
+import { UMB_WORKSPACE_CONDITION_ALIAS as e, UmbSubmitWorkspaceAction as d } from "@umbraco-cms/backoffice/workspace";
+import { UMB_SECTION_USER_PERMISSION_CONDITION_ALIAS as P } from "@umbraco-cms/backoffice/section";
+import { UMB_SETTINGS_SECTION_ALIAS as M } from "@umbraco-cms/backoffice/settings";
 import "@umbraco-cms/backoffice/id";
-import { UMB_COLLECTION_ALIAS_CONDITION as d } from "@umbraco-cms/backoffice/collection";
-const M = [
+import { UMB_COLLECTION_ALIAS_CONDITION as f } from "@umbraco-cms/backoffice/collection";
+const u = [
   {
     type: "repository",
-    alias: y,
+    alias: T,
     name: "Data Type Collection Repository",
-    api: () => import("./data-type-collection.repository-8M3nG1By.js")
+    api: () => import("./data-type-collection.repository-CeQyIK7L.js")
   }
-], u = [
+], L = [
   {
     type: "collection",
     kind: "default",
-    alias: f,
+    alias: I,
     name: "Data Type Collection",
     meta: {
-      repositoryAlias: y
+      repositoryAlias: T
     }
   },
-  ...M
-], L = [
+  ...u
+], h = [
   {
     type: "workspace",
     kind: "default",
@@ -37,13 +37,13 @@ const M = [
       headline: "#treeHeaders_dataTypes"
     }
   }
-], h = [
+], Y = [
   {
     type: "entityCreateOptionAction",
     alias: "Umb.EntityCreateOptionAction.DataType.Default",
     name: "Default Data Type Entity Create Option Action",
     weight: 1e3,
-    api: () => import("./default-data-type-create-option-action-CzOBTsaA.js"),
+    api: () => import("./default-data-type-create-option-action-CMIQZkz5.js"),
     forEntityTypes: [i, t],
     meta: {
       icon: "icon-autofill",
@@ -51,7 +51,7 @@ const M = [
       description: "#create_newDataTypeDescription"
     }
   }
-], Y = [
+], w = [
   {
     type: "entityCreateOptionAction",
     kind: "folder",
@@ -65,7 +65,7 @@ const M = [
       folderRepositoryAlias: o
     }
   }
-], w = [
+], B = [
   {
     type: "entityAction",
     kind: "create",
@@ -79,18 +79,18 @@ const M = [
     type: "modal",
     alias: "Umb.Modal.DataTypeCreateOptions",
     name: "Data Type Create Options Modal",
-    element: () => import("./data-type-create-options-modal.element-Cxps71S5.js")
+    element: () => import("./data-type-create-options-modal.element-HcJ-xe2z.js")
   },
-  ...h,
-  ...Y
-], B = [
+  ...Y,
+  ...w
+], $ = [
   {
     type: "repository",
-    alias: T,
+    alias: c,
     name: "Move Data Type Repository",
     api: () => import("./data-type-move.repository-SH_4ivkT.js")
   }
-], $ = [
+], W = [
   {
     type: "entityAction",
     kind: "moveTo",
@@ -99,20 +99,20 @@ const M = [
     forEntityTypes: [s],
     meta: {
       treeRepositoryAlias: n,
-      moveRepositoryAlias: T,
+      moveRepositoryAlias: c,
       treeAlias: r,
       foldersOnly: !0
     }
   },
-  ...B
-], W = [
+  ...$
+], F = [
   {
     type: "repository",
-    alias: c,
+    alias: A,
     name: "Duplicate Data Type Repository",
     api: () => import("./data-type-duplicate.repository-Bfx9m7Bd.js")
   }
-], F = [
+], N = [
   {
     type: "entityAction",
     kind: "duplicateTo",
@@ -120,14 +120,14 @@ const M = [
     name: "Duplicate Document To Entity Action",
     forEntityTypes: [s],
     meta: {
-      duplicateRepositoryAlias: c,
+      duplicateRepositoryAlias: A,
       treeAlias: r,
       treeRepositoryAlias: n,
       foldersOnly: !0
     }
   },
-  ...W
-], N = [
+  ...F
+], v = [
   {
     type: "entityAction",
     kind: "deleteWithRelation",
@@ -135,19 +135,19 @@ const M = [
     name: "Delete Data Type Entity Action",
     forEntityTypes: [s],
     meta: {
-      detailRepositoryAlias: _,
-      itemRepositoryAlias: A,
+      detailRepositoryAlias: D,
+      itemRepositoryAlias: _,
       referenceRepositoryAlias: l
     }
   },
-  ...w,
-  ...$,
-  ...F
-], v = [
+  ...B,
+  ...W,
+  ...N
+], g = [
   {
     type: "menuItem",
     kind: "tree",
-    alias: "Umb.MenuItem.DataTypes",
+    alias: y,
     name: "Data Types Menu Item",
     weight: 600,
     meta: {
@@ -159,9 +159,13 @@ const M = [
   },
   {
     type: "workspaceContext",
+    kind: "menuStructure",
     name: "Data Type Menu Structure Workspace Context",
     alias: "Umb.Context.DataType.Menu.Structure",
-    api: () => import("./data-type-menu-structure.context-mLPB-ASN.js"),
+    api: () => import("./data-type-menu-structure.context-DRfkVLaK.js"),
+    meta: {
+      menuItemAlias: y
+    },
     conditions: [
       {
         alias: e,
@@ -181,20 +185,20 @@ const M = [
       }
     ]
   }
-], g = [
+], V = [
   {
     type: "modal",
     alias: "Umb.Modal.DataTypePickerFlow",
     name: "Data Type Picker Flow Modal",
-    element: () => import("./data-type-picker-flow-modal.element-CwKBGEfv.js")
+    element: () => import("./data-type-picker-flow-modal.element-CUeaAbnh.js")
   },
   {
     type: "modal",
     alias: "Umb.Modal.DataTypePickerFlowDataTypePicker",
     name: "Data Type Picker Flow UI Picker Modal",
-    element: () => import("./data-type-picker-flow-data-type-picker-modal.element-CEO-g4oi.js")
+    element: () => import("./data-type-picker-flow-data-type-picker-modal.element-C7uTi0Cj.js")
   }
-], V = [
+], x = [
   {
     type: "repository",
     alias: l,
@@ -217,55 +221,55 @@ const M = [
       referenceRepositoryAlias: l
     }
   }
-], x = [...V, ...H], K = [
+], G = [...x, ...H], K = [
   {
     type: "repository",
-    alias: _,
+    alias: D,
     name: "Data Type Detail Repository",
-    api: () => import("./data-type-detail.repository-B-N3yXgt.js")
+    api: () => import("./data-type-detail.repository-BDroNu49.js")
   },
   {
     type: "store",
-    alias: I,
+    alias: R,
     name: "Data Type Detail Store",
-    api: () => import("./data-type-detail.store-DbzfgP_T.js")
+    api: () => import("./data-type-detail.store-CaYAkT2J.js")
   }
-], G = [
+], j = [
   {
     type: "repository",
-    alias: A,
+    alias: _,
     name: "Data Type Item Repository",
-    api: () => import("./data-type-item.repository-q-4SQwFW.js")
+    api: () => import("./data-type-item.repository-Piblw3_Z.js")
   },
   {
     type: "itemStore",
-    alias: R,
+    alias: S,
     name: "Data Type Item Store",
-    api: () => import("./data-type-item.store-DiIXiadg.js")
+    api: () => import("./data-type-item.store-CgnE_Bak.js")
   }
-], j = [...K, ...G], q = [
+], q = [...K, ...j], z = [
   {
     name: "Data Type Global Search",
-    alias: O,
+    alias: k,
     type: "globalSearch",
     weight: 400,
     meta: {
       label: "Data Types",
-      searchProviderAlias: S
+      searchProviderAlias: O
     },
     conditions: [
       {
-        alias: b,
-        match: P
+        alias: P,
+        match: M
       }
     ]
   }
-], z = [
+], J = [
   {
     name: "Data Type Search Provider",
     alias: "Umb.SearchProvider.DataType",
     type: "searchProvider",
-    api: () => import("./data-type.search-provider-QlEhX6Zj.js"),
+    api: () => import("./data-type.search-provider-B__2bltt.js"),
     weight: 400,
     meta: {
       label: "Data Types"
@@ -277,14 +281,14 @@ const M = [
     type: "searchResultItem",
     forEntityTypes: [s]
   },
-  ...q
-], J = [
+  ...z
+], Q = [
   {
     type: "workspace",
     kind: "routable",
     alias: p,
     name: "Data Type Folder Workspace",
-    api: () => import("./data-type-folder-workspace.context-LxgBqTKh.js"),
+    api: () => import("./data-type-folder-workspace.context-DMhZr-sJ.js"),
     meta: {
       entityType: t
     }
@@ -294,7 +298,7 @@ const M = [
     kind: "default",
     alias: "Umb.WorkspaceAction.DataType.Folder.Submit",
     name: "Submit Media Type Folder Workspace Action",
-    api: E,
+    api: d,
     meta: {
       label: "#buttons_save",
       look: "primary",
@@ -307,20 +311,20 @@ const M = [
       }
     ]
   }
-], Q = [
+], X = [
   {
     type: "repository",
     alias: o,
     name: "Data Type Folder Repository",
-    api: () => import("./data-type-folder.repository-CGHnMbP9.js")
+    api: () => import("./data-type-folder.repository-ztFDjaJb.js")
   },
   {
     type: "store",
     alias: U,
     name: "Data Type Folder Store",
-    api: () => import("./data-type-folder.store-D96wDEWa.js")
+    api: () => import("./data-type-folder.store-BenS5rQD.js")
   }
-], X = [
+], Z = [
   {
     type: "entityAction",
     kind: "folderUpdate",
@@ -354,19 +358,19 @@ const M = [
     },
     conditions: [
       {
-        alias: "Umb.Condition.WorkspaceAlias",
-        oneOf: [k, p]
+        alias: e,
+        oneOf: [b, p]
       }
     ]
   },
-  ...Q,
-  ...J
-], Z = [
+  ...X,
+  ...Q
+], ee = [
   {
     type: "collectionView",
     alias: "Umb.CollectionView.DataType.TreeItem.Table",
     name: "Data Type Tree Item Table Collection View",
-    element: () => import("./data-type-tree-item-table-collection-view.element-DHauD-1B.js"),
+    element: () => import("./data-type-tree-item-table-collection-view.element-DwaLIV99.js"),
     weight: 300,
     meta: {
       label: "Table",
@@ -375,19 +379,19 @@ const M = [
     },
     conditions: [
       {
-        alias: d,
+        alias: f,
         match: m
       }
     ]
   }
-], ee = [
+], te = [
   {
     type: "repository",
-    alias: D,
+    alias: E,
     name: "Data Type Tree Item Children Collection Repository",
-    api: () => import("./data-type-tree-item-children-collection.repository-BXEAhdFa.js")
+    api: () => import("./data-type-tree-item-children-collection.repository-CW74bOUE.js")
   }
-], te = [
+], ae = [
   {
     type: "collectionAction",
     kind: "create",
@@ -395,26 +399,26 @@ const M = [
     alias: "Umb.CollectionAction.DataTypeTreeItemChildren.Create",
     conditions: [
       {
-        alias: d,
+        alias: f,
         match: m
       }
     ]
   }
-], ae = [
+], ie = [
   {
     type: "collection",
     kind: "default",
     alias: m,
     name: "Data Type Tree Item Children Collection",
     meta: {
-      repositoryAlias: D
+      repositoryAlias: E
     }
   },
-  ...te,
-  ...Z,
-  ...ee
-], ie = [
   ...ae,
+  ...ee,
+  ...te
+], oe = [
+  ...ie,
   {
     type: "entityAction",
     kind: "reloadTreeItemChildren",
@@ -422,18 +426,18 @@ const M = [
     name: "Reload Data Type Tree Item Children Entity Action",
     forEntityTypes: [i, t]
   }
-], oe = [
+], ne = [
   {
     type: "repository",
     alias: n,
     name: "Data Type Tree Repository",
-    api: () => import("./data-type-tree.repository-siBRczJW.js")
+    api: () => import("./data-type-tree.repository-DLWsuiSu.js")
   },
   {
     type: "treeStore",
     alias: C,
     name: "Data Type Tree Store",
-    api: () => import("./data-type-tree.store-CsQNQaIE.js")
+    api: () => import("./data-type-tree.store-Cq8Esoik.js")
   },
   {
     type: "tree",
@@ -451,15 +455,15 @@ const M = [
     name: "Data Type Tree Item",
     forEntityTypes: ["data-type-root", "data-type", "data-type-folder"]
   },
-  ...X,
-  ...ie
-], ne = [
+  ...Z,
+  ...oe
+], se = [
   {
     type: "workspace",
     kind: "routable",
     alias: a,
     name: "Data Type Workspace",
-    api: () => import("./data-type-workspace.context-DvjZc-fc.js"),
+    api: () => import("./data-type-workspace.context-C4vWeiSW.js"),
     meta: {
       entityType: "data-type"
     }
@@ -468,7 +472,7 @@ const M = [
     type: "workspaceView",
     alias: "Umb.WorkspaceView.DataType.Edit",
     name: "Data Type Workspace Edit View",
-    element: () => import("./data-type-details-workspace-view.element-C9uqojO_.js"),
+    element: () => import("./data-type-details-workspace-view.element-KiIXuepK.js"),
     weight: 90,
     meta: {
       label: "#general_details",
@@ -486,7 +490,7 @@ const M = [
     type: "workspaceView",
     alias: "Umb.WorkspaceView.DataType.Info",
     name: "Data Type Workspace Info View",
-    element: () => import("./workspace-view-data-type-info.element-iERf3_VE.js"),
+    element: () => import("./workspace-view-data-type-info.element-qCeuMzgS.js"),
     weight: 90,
     meta: {
       label: "#general_info",
@@ -505,7 +509,7 @@ const M = [
     kind: "default",
     alias: "Umb.WorkspaceAction.DataType.Save",
     name: "Save Data Type Workspace Action",
-    api: E,
+    api: d,
     meta: {
       label: "#buttons_save",
       look: "primary",
@@ -518,19 +522,25 @@ const M = [
       }
     ]
   }
-], De = [
-  ...u,
+], Ee = [
   ...L,
-  ...N,
+  ...h,
   ...v,
   ...g,
-  ...x,
-  ...j,
-  ...z,
-  ...oe,
-  ...ne
+  ...V,
+  ...G,
+  ...q,
+  ...J,
+  ...ne,
+  ...se,
+  {
+    name: "Data Type Backoffice Entry Point",
+    alias: "Umb.EntryPoint.DataType",
+    type: "backofficeEntryPoint",
+    js: () => import("./entry-point-x0OydBz6.js")
+  }
 ];
 export {
-  De as manifests
+  Ee as manifests
 };
 //# sourceMappingURL=manifests.js.map

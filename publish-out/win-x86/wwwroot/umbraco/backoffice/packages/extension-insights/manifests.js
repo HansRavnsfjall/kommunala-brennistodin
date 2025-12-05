@@ -1,4 +1,4 @@
-import { m as a } from "./manifests-DEADnW7y.js";
+import { m as a } from "./manifests-laQ1dSDP.js";
 export {
   a as manifests
 };

@@ -1,0 +1,14 @@
+@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage
+@using System.Globalization
+@using Umbraco.Cms.Core.Models.Blocks
+@using Umbraco.Cms.Core.Models.PublishedContent
+@using Kob.ViewModels
+@{
+    Layout = "master.cshtml";
+    ViewBag.Title = Model?.Name;
+}
+
+<!-- Bootstrap 5 CSS must be loaded on your page -->
+@await Html.PartialAsync("Partials/Shared/_SearchHero")
+
+@await Html.PartialAsync("Partials/Helpers/_WasteCategoryBlocks")

@@ -1,6 +1,6 @@
 import { c as M, d as R, f as O, g as U, h as B, b as T, i as P, k as A, U as e, a as I, n as s, p as a, j as r, e as o, l as G, m as S, o as L, s as m, q as C, r as t, t as p } from "../member-group-picker-modal.element-I2C8EUhz.js";
 import { UmbMemberGroupDetailRepository as i } from "../member-group-detail.repository-BcV3efI7.js";
-import { UmbMemberGroupItemRepository as N } from "../member-group-item.repository-7xMUQD70.js";
+import { UmbMemberGroupItemRepository as N } from "../member-group-item.repository-B0EQoalz.js";
 export {
   M as UMB_MEMBER_GROUP_COLLECTION_ALIAS,
   R as UMB_MEMBER_GROUP_COLLECTION_REPOSITORY_ALIAS,

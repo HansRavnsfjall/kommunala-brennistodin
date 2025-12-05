@@ -1,22 +1,22 @@
-import { b as t } from "./index-jGJQ3LmE.js";
+import { b as t, U as E, a as u } from "./constants-Dj5jHHfK.js";
 import { UMB_WORKSPACE_CONDITION_ALIAS as o, UmbSubmitWorkspaceAction as a } from "@umbraco-cms/backoffice/workspace";
 import { l as e, c as y, e as p, k as r, m as i } from "./index-q0gJfrDp.js";
 import { UMB_BLOCK_CLIPBOARD_ENTRY_VALUE_TYPE as l, UmbStandardBlockValueResolver as b } from "@umbraco-cms/backoffice/block";
 import { UMB_PROPERTY_HAS_VALUE_CONDITION_ALIAS as B, UMB_WRITABLE_PROPERTY_CONDITION_ALIAS as U } from "@umbraco-cms/backoffice/property";
-import { UMB_PROPERTY_ACTION_PASTE_FROM_CLIPBOARD_KIND_MANIFEST as u } from "@umbraco-cms/backoffice/clipboard";
+import { UMB_PROPERTY_ACTION_PASTE_FROM_CLIPBOARD_KIND_MANIFEST as P } from "@umbraco-cms/backoffice/clipboard";
 import { a as c, U as n, e as m } from "./index-BbCqfSen.js";
-import { d, c as E } from "./index-Z0CAdsE6.js";
-const P = {
+import { d, c as C } from "./index-Z0CAdsE6.js";
+const T = {
   type: "modal",
   alias: "Umb.Modal.ManifestViewer",
   name: "Manifest Viewer Modal",
-  element: () => import("./manifest-viewer-modal.element-z-c12FK0.js")
-}, C = [
+  element: () => import("./manifest-viewer-modal.element-CKEJTjF8.js")
+}, g = [
   {
     type: "condition",
     name: "Block Has Settings Condition",
     alias: "Umb.Condition.BlockWorkspaceHasSettings",
-    api: () => import("./block-workspace-has-settings.condition-Bajia6Sg.js")
+    api: () => import("./block-workspace-has-settings.condition-BGe0b6Eo.js")
   },
   {
     type: "condition",
@@ -28,16 +28,16 @@ const P = {
     type: "condition",
     name: "Block Workspace Is Exposed Condition",
     alias: "Umb.Condition.BlockWorkspaceIsExposed",
-    api: () => import("./block-workspace-is-exposed.condition-zQOOL4-w.js")
+    api: () => import("./block-workspace-is-exposed.condition-BcvC0DUS.js")
   }
-], T = [
+], f = [
   {
     type: "modal",
     alias: "Umb.Modal.BlockCatalogue",
     name: "Block Catalogue Modal",
-    element: () => import("./block-catalogue-modal.element-xu0WxKrN.js")
+    element: () => import("./block-catalogue-modal.element-DgrfRSxG.js")
   }
-], g = [
+], A = [
   {
     type: "workspaceAction",
     kind: "default",
@@ -86,16 +86,16 @@ const P = {
     kind: "routable",
     name: "Block Workspace",
     alias: t,
-    api: () => import("./block-workspace.context-BroyvES7.js"),
+    api: () => import("./block-workspace.context-BqlzYaSC.js"),
     meta: {
       entityType: "block"
     }
   },
   {
     type: "workspaceView",
-    alias: "Umb.WorkspaceView.Block.Content",
+    alias: E,
     name: "Block Workspace Content View",
-    element: () => import("./block-workspace-view-edit.element-CRtmxjiO.js"),
+    element: () => import("./block-workspace-view-edit.element-h83-m4xf.js"),
     weight: 1e3,
     meta: {
       label: "#general_content",
@@ -109,6 +109,7 @@ const P = {
         match: t
       }
     ],
+    // eslint-disable-next-line @typescript-eslint/naming-convention
     TODO_conditions: [
       {
         alias: "Umb.Condition.BlockEntryShowContentEdit"
@@ -118,9 +119,9 @@ const P = {
   // TODO: Fix manifest types so it support additional properties.
   {
     type: "workspaceView",
-    alias: "Umb.WorkspaceView.Block.Settings",
+    alias: u,
     name: "Block Workspace Settings View",
-    element: () => import("./block-workspace-view-edit.element-CRtmxjiO.js"),
+    element: () => import("./block-workspace-view-edit.element-h83-m4xf.js"),
     weight: 900,
     meta: {
       label: "#general_settings",
@@ -138,7 +139,7 @@ const P = {
       }
     ]
   }
-], f = [...T, ...g, ...C], A = [
+], _ = [...f, ...A, ...g], L = [
   {
     type: "clipboardCopyPropertyValueTranslator",
     alias: "Umb.ClipboardCopyPropertyValueTranslator.BlockGridToBlock",
@@ -156,7 +157,7 @@ const P = {
     fromClipboardEntryValueType: l,
     toPropertyEditorUi: e
   }
-], _ = [
+], S = [
   {
     type: "clipboardCopyPropertyValueTranslator",
     alias: "Umb.ClipboardCopyPropertyValueTranslator.BlockGridToGridBlock",
@@ -174,7 +175,7 @@ const P = {
     weight: 1e3,
     toPropertyEditorUi: e
   }
-], k = [e], L = [
+], k = [e], V = [
   {
     type: "propertyContext",
     kind: "clipboard",
@@ -194,14 +195,14 @@ const P = {
       }
     ]
   },
-  ...A,
-  ..._
-], S = [
+  ...L,
+  ...S
+], h = [
   {
     type: "workspaceView",
     alias: "Umb.WorkspaceView.BlockGridAreaType.Settings",
     name: "Block Grid Area Type Workspace Settings View",
-    element: () => import("./settings.element-trXUzmHv.js"),
+    element: () => import("./settings.element-DPvivHfg.js"),
     weight: 1e3,
     meta: {
       label: "#general_settings",
@@ -215,8 +216,8 @@ const P = {
       }
     ]
   }
-], V = [...S], h = [
-  ...V,
+], G = [...h], w = [
+  ...G,
   {
     type: "workspace",
     kind: "routable",
@@ -245,27 +246,27 @@ const P = {
       }
     ]
   }
-], w = {
+], I = {
   type: "propertyEditorUi",
   alias: "Umb.PropertyEditorUi.BlockGridAreaTypePermission",
   name: "Block Grid Area Type Permission Configuration Property Editor UI",
-  element: () => import("./block-grid-area-type-permission.element-digrRV1Y.js"),
+  element: () => import("./block-grid-area-type-permission.element-Pi-jfMWD.js"),
   meta: {
     label: "Block Grid Area Type Permissions",
     icon: "icon-document",
     group: "common"
   }
-}, G = {
+}, R = {
   type: "propertyEditorUi",
   alias: "Umb.PropertyEditorUi.BlockGridAreasConfig",
   name: "Block Grid Areas Configuration Property Editor UI",
-  element: () => import("./property-editor-ui-block-grid-areas-config.element-D5lcdYzw.js"),
+  element: () => import("./property-editor-ui-block-grid-areas-config.element-a2XWy3gj.js"),
   meta: {
     label: "Block Grid Areas Configuration",
     icon: "icon-document",
     group: "common"
   }
-}, R = {
+}, O = {
   type: "propertyEditorUi",
   alias: "Umb.PropertyEditorUi.BlockGridColumnSpan",
   name: "Block Grid Column Span Property Editor UI",
@@ -275,7 +276,7 @@ const P = {
     icon: "icon-document",
     group: "common"
   }
-}, I = {
+}, W = {
   type: "propertyEditorSchema",
   name: "Block Grid",
   alias: "Umbraco.BlockGrid",
@@ -305,9 +306,9 @@ const P = {
       ]
     }
   }
-}, O = [
+}, v = [
   {
-    ...u.manifest,
+    ...P.manifest,
     type: "propertyAction",
     alias: "Umb.PropertyAction.BlockGrid.Clipboard.Paste",
     name: "Block Grid Paste From Clipboard Property Action",
@@ -319,12 +320,12 @@ const P = {
       }
     ]
   }
-], v = [
+], $ = [
   {
     type: "propertyEditorUi",
     alias: e,
     name: "Block Grid Property Editor UI",
-    element: () => import("./property-editor-ui-block-grid.element-Dx9bbC4X.js"),
+    element: () => import("./property-editor-ui-block-grid.element-E2GsijpN.js"),
     meta: {
       label: "Block Grid",
       propertyEditorSchemaAlias: r,
@@ -392,9 +393,9 @@ const P = {
       editorAlias: r
     }
   },
-  I,
-  ...O
-], W = {
+  W,
+  ...v
+], M = {
   type: "propertyEditorUi",
   alias: "Umb.PropertyEditorUi.BlockTypeGroupConfiguration",
   name: "Block Grid Group Configuration Property Editor UI",
@@ -404,7 +405,7 @@ const P = {
     icon: "icon-box-alt",
     group: "common"
   }
-}, $ = {
+}, x = {
   type: "propertyEditorUi",
   alias: "Umb.PropertyEditorUi.BlockGridLayoutStylesheet",
   name: "Block Grid Layout Stylesheet Property Editor UI",
@@ -414,25 +415,25 @@ const P = {
     icon: "icon-document",
     group: "common"
   }
-}, M = {
+}, K = {
   type: "propertyEditorUi",
   alias: "Umb.PropertyEditorUi.BlockGridTypeConfiguration",
   name: "Block Grid Block Configuration Property Editor UI",
-  element: () => import("./property-editor-ui-block-grid-type-configuration.element-s9KYjchC.js"),
+  element: () => import("./property-editor-ui-block-grid-type-configuration.element-Blz0gRiU.js"),
   meta: {
     label: "Block Grid Block Configuration",
     icon: "icon-autofill",
     group: "blocks"
   }
-}, x = [
-  w,
-  G,
+}, D = [
+  I,
   R,
-  ...v,
-  W,
-  $,
-  M
-], D = [
+  O,
+  ...$,
+  M,
+  x,
+  K
+], N = [
   {
     type: "propertyValueCloner",
     name: "Block Grid Value Cloner",
@@ -440,7 +441,7 @@ const P = {
     api: () => import("./property-value-cloner-block-grid.cloner-u37_S2gb.js"),
     forEditorAlias: r
   }
-], K = [
+], Y = [
   {
     type: "propertyValidationPathTranslator",
     alias: "Umb.PropertyValidationPathTranslator.BlockGrid",
@@ -448,7 +449,7 @@ const P = {
     forEditorAlias: r,
     api: () => import("./block-grid-validation-property-path-translator.api-CPBxIecU.js")
   }
-], N = [
+], H = [
   {
     type: "workspaceView",
     alias: "Umb.WorkspaceView.BlockType.Grid.Settings",
@@ -471,7 +472,7 @@ const P = {
     type: "workspaceView",
     alias: "Umb.WorkspaceView.BlockType.Grid.Areas",
     name: "Block Grid Type Workspace Areas View",
-    element: () => import("./block-grid-type-workspace-view-areas.element-Le4F77ey.js"),
+    element: () => import("./block-grid-type-workspace-view-areas.element-BTJYV1Qh.js"),
     weight: 1e3,
     meta: {
       label: "#blockEditor_tabAreas",
@@ -503,8 +504,8 @@ const P = {
       }
     ]
   }
-], Y = [
-  ...N,
+], F = [
+  ...H,
   {
     type: "workspace",
     kind: "routable",
@@ -515,14 +516,14 @@ const P = {
       entityType: "block-grid-type"
     }
   }
-], H = [
-  ...L,
-  ...h,
-  ...x,
+], q = [
+  ...V,
+  ...w,
   ...D,
-  ...K,
-  ...Y
-], F = [
+  ...N,
+  ...Y,
+  ...F
+], j = [
   {
     type: "clipboardCopyPropertyValueTranslator",
     alias: "Umb.ClipboardCopyPropertyValueTranslator.BlockListToBlock",
@@ -531,7 +532,7 @@ const P = {
     fromPropertyEditorUi: c,
     toClipboardEntryValueType: l
   }
-], q = [
+], z = [
   {
     type: "clipboardPastePropertyValueTranslator",
     alias: "Umb.ClipboardPastePropertyValueTranslator.BlockToBlockList",
@@ -540,7 +541,7 @@ const P = {
     fromClipboardEntryValueType: l,
     toPropertyEditorUi: c
   }
-], s = [c], j = [
+], s = [c], J = [
   {
     type: "propertyContext",
     kind: "clipboard",
@@ -572,9 +573,9 @@ const P = {
       }
     ]
   },
-  ...F,
-  ...q
-], z = [
+  ...j,
+  ...z
+], Q = [
   {
     type: "propertyValueCloner",
     name: "Block List Value Cloner",
@@ -582,17 +583,17 @@ const P = {
     api: () => import("./property-value-cloner-block-list.cloner-Cf4j7Y6X.js"),
     forEditorAlias: n
   }
-], J = {
+], X = {
   type: "propertyEditorUi",
   alias: "Umb.PropertyEditorUi.BlockListTypeConfiguration",
   name: "Block List Type Configuration Property Editor UI",
-  element: () => import("./property-editor-ui-block-list-type-configuration.element-Dkavwp5c.js"),
+  element: () => import("./property-editor-ui-block-list-type-configuration.element-Bug6Q8NO.js"),
   meta: {
     label: "Block List Type Configuration",
     icon: "icon-autofill",
     group: "common"
   }
-}, Q = {
+}, Z = {
   type: "propertyEditorSchema",
   name: "Block List",
   alias: "Umbraco.BlockList",
@@ -616,12 +617,12 @@ const P = {
       ]
     }
   }
-}, X = [
+}, oo = [
   {
     type: "propertyEditorUi",
     alias: "Umb.PropertyEditorUi.BlockList",
     name: "Block List Property Editor UI",
-    element: () => import("./property-editor-ui-block-list.element-BAxio0fh.js"),
+    element: () => import("./property-editor-ui-block-list.element-z8jC0iNy.js"),
     meta: {
       label: "Block List",
       propertyEditorSchemaAlias: n,
@@ -670,8 +671,8 @@ Single block mode requires a maximum of one available block, and an amount set t
       editorAlias: n
     }
   },
-  Q
-], Z = [J, ...X], oo = [
+  Z
+], eo = [X, ...oo], to = [
   {
     type: "propertyValidationPathTranslator",
     alias: "Umb.PropertyValidationPathTranslator.BlockList",
@@ -679,7 +680,7 @@ Single block mode requires a maximum of one available block, and an amount set t
     forEditorAlias: n,
     api: () => import("./block-list-validation-property-path-translator.api-BKhDmV9j.js")
   }
-], eo = [
+], io = [
   {
     type: "workspaceView",
     alias: "Umb.WorkspaceView.BlockType.List.Settings",
@@ -698,8 +699,8 @@ Single block mode requires a maximum of one available block, and an amount set t
       }
     ]
   }
-], to = [
-  ...eo,
+], ao = [
+  ...io,
   {
     type: "workspace",
     kind: "routable",
@@ -710,18 +711,18 @@ Single block mode requires a maximum of one available block, and an amount set t
       entityType: "block-list-type"
     }
   }
-], io = [
-  ...j,
-  ...z,
-  ...Z,
-  ...oo,
-  ...to
-], ao = [
+], ro = [
+  ...J,
+  ...Q,
+  ...eo,
+  ...to,
+  ...ao
+], lo = [
   {
     type: "workspaceView",
     alias: "Umb.WorkspaceView.BlockType.RTE.Settings",
     name: "Block List Type Workspace Settings View",
-    element: () => import("./block-rte-type-workspace-view.element-I8Qlzapc.js"),
+    element: () => import("./block-rte-type-workspace-view.element-r_VQAw3T.js"),
     weight: 1e3,
     meta: {
       label: "#general_settings",
@@ -735,8 +736,8 @@ Single block mode requires a maximum of one available block, and an amount set t
       }
     ]
   }
-], ro = [
-  ...ao,
+], no = [
+  ...lo,
   {
     type: "workspace",
     kind: "routable",
@@ -747,7 +748,7 @@ Single block mode requires a maximum of one available block, and an amount set t
       entityType: "block-rte-type"
     }
   }
-], lo = [
+], so = [
   {
     type: "propertyEditorUi",
     alias: "Umb.PropertyEditorUi.BlockRteTypeConfiguration",
@@ -759,19 +760,19 @@ Single block mode requires a maximum of one available block, and an amount set t
       group: "common"
     }
   }
-], no = [
+], po = [
   {
     type: "propertyValueCloner",
     name: "RTE Block Value Cloner",
     alias: "Umb.PropertyValueCloner.BlockRte",
     api: () => import("./property-value-cloner-block-rte.cloner-CXXyelaj.js"),
-    forEditorAlias: E
+    forEditorAlias: C
   }
-], so = [
-  ...ro,
-  ...lo,
-  ...no
-], po = [
+], co = [
+  ...no,
+  ...so,
+  ...po
+], mo = [
   {
     type: "workspaceAction",
     kind: "default",
@@ -794,16 +795,16 @@ Single block mode requires a maximum of one available block, and an amount set t
       }
     ]
   }
-], co = [...po], Po = [
+], yo = [...mo], To = [
   //manifest,
-  ...f,
+  ..._,
+  ...yo,
+  ...ro,
+  ...q,
   ...co,
-  ...io,
-  ...H,
-  ...so,
-  P
+  T
 ];
 export {
-  Po as manifests
+  To as manifests
 };
 //# sourceMappingURL=manifests.js.map

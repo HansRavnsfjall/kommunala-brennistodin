@@ -261,6 +261,7 @@ export default {
         openBackofficeSearch: 'Öppna sökfunktion (backoffice)',
         openCloseBackofficeHelp: 'Öppna/stäng hjälpfunktion',
         openCloseBackofficeProfileOptions: 'Öppna/stäng personliga inställningar',
+        profileOptions: 'Personliga inställningar',
         assignDomainDescription: 'Redigera språk och värdnamn för %0%',
         createDescription: 'Skapa en ny nod under %0%',
         protectDescription: 'Ändra behörigheter för %0%',
@@ -298,6 +299,7 @@ export default {
         searchContentTree: 'Sök i innehållsträdet',
         maxAmount: 'Maximalt värde',
         expandChildItems: 'Visa underliggande noder för',
+        collapseChildItems: 'Dölj underliggande noder för',
         openContextNode: 'Öppna kontext för',
     },
     prompt: {

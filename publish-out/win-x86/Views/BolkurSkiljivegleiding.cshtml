@@ -1,0 +1,33 @@
+﻿@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage
+@using System.Globalization
+@using Umbraco.Cms.Core.Models.Blocks
+@using Umbraco.Cms.Core.Models.PublishedContent
+@using Kob.ViewModels
+
+@using Umbraco.Extensions
+
+@{
+    Layout = "master.cshtml";
+    ViewBag.Title = Model?.Name;
+}
+
+<!-- Bootstrap 5 CSS must be loaded on your page -->
+@await Html.PartialAsync("Partials/Shared/_UndirbolkarHead")
+
+
+
+@{
+    // Checkbox/toggle on this doctype
+    var hasSubs = Model.Value<bool>("hasSubgroups"); // returns false if null/unchecked
+}
+
+@if (hasSubs)
+{
+    // When hasSubgroups == true
+    @await Html.PartialAsync("~/Views/Partials/Undirbolkur/_SubgroupList.cshtml", Model)
+}
+else
+{
+    // When hasSubgroups == false
+    @await Html.PartialAsync("~/Views/Partials/Undirbolkur/_ProductList.cshtml", Model)
+}

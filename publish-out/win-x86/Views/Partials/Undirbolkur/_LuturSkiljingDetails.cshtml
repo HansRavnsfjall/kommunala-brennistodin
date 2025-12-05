@@ -1,0 +1,227 @@
+﻿@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage
+@using System.Linq
+@using System.Text.RegularExpressions
+@using Umbraco.Cms.Core
+@using Umbraco.Cms.Core.Strings
+@using Umbraco.Cms.Core.Models
+@using Umbraco.Cms.Core.Models.PublishedContent
+@using Umbraco.Extensions
+
+@{
+    // ---------- Helpers ----------
+    string StripHtml(string? html)
+        => string.IsNullOrEmpty(html) ? string.Empty
+           : Regex.Replace(html, "<.*?>", string.Empty, RegexOptions.Singleline)
+                   .Replace("&nbsp;", " ").Trim();
+
+    bool IsRteEmpty(IHtmlEncodedString? rte)
+        => string.IsNullOrWhiteSpace(StripHtml(rte?.ToHtmlString()));
+
+    bool IsAlias(IPublishedContent? c, string alias)
+        => c?.ContentType?.Alias?.Equals(alias, StringComparison.OrdinalIgnoreCase) == true;
+
+    IPublishedContent? FindFallbackSource(IPublishedContent cur)
+    {
+        var par = cur.Parent;
+        if (IsAlias(par, "bolkurSkiljivegleiding") || IsAlias(par, "undirbolkur"))
+            return par;
+
+        return cur.Ancestors()
+                  .FirstOrDefault(a => IsAlias(a, "bolkurSkiljivegleiding") || IsAlias(a, "undirbolkur"));
+    }
+
+    // Icon URL from a picked dropdownItem (reads its `ikon` media)
+    string? BuildIconUrl(IPublishedContent? picked)
+    {
+        if (picked == null) return null;
+        var media = picked.Value<MediaWithCrops>("ikon", fallback: Fallback.ToLanguage);
+        if (media == null) return null;
+        return media.GetCropUrl(width: 200, height: 200, quality: 85) ?? media.MediaUrl();
+    }
+
+    var current = Model as IPublishedContent ?? Umbraco.AssignedContentItem;
+
+    // ---------- Right-hand hero image (with crop) ----------
+    var heroImg = current.Value<MediaWithCrops>("mynd") ?? current.Value<MediaWithCrops>("image");
+    var heroUrl = heroImg?.GetCropUrl(cropAlias: "skiljilutir", useCropDimensions: true, preferFocalPoint: true)
+               ?? heroImg?.GetCropUrl(preferFocalPoint: true)
+               ?? heroImg?.Url()
+               ?? "";
+    var heroAlt = current?.Name ?? "";
+
+    // ---------- DropdownItem references for icons ----------
+    var heimaPick = current.Value<IPublishedContent>("myndatekinHeima");
+    var endurPick = current.Value<IPublishedContent>("myndatekinEndurnytslan");
+
+    var heimaIconUrl = BuildIconUrl(heimaPick) ?? string.Empty;
+    var endurIconUrl = BuildIconUrl(endurPick) ?? string.Empty;
+
+    // ---------- Text from separate pickers (use Name of referenced element) ----------
+    // heimaText MUST come from the Name of the node referenced by "ilatHeima"
+    var heimaTextNode = current.Value<IPublishedContent>("ilatHeima");
+    var heimaText = heimaTextNode?.Name ?? string.Empty;
+
+    // Optionally support an Endurnýtslan text picker "ilatEndurnytslan" if you have it:
+    var endurTextNode = current.Value<IPublishedContent>("ilatEndurnytslan");
+    // Fallback: if you don't have a separate picker, try the picked dropdownItem name; then empty
+    var endurText = endurTextNode?.Name
+                 ?? endurPick?.Name()
+                 ?? string.Empty;
+
+    // ---------- Left-hand content ----------
+    IHtmlEncodedString? hvarSkalBurturkasti = current.Value<IHtmlEncodedString>("hvarSkalBurturkasti");
+    IHtmlEncodedString? hvatHendir          = current.Value<IHtmlEncodedString>("hvatHendirBurturkasti");
+    IHtmlEncodedString? leggTilMerkis       = current.Value<IHtmlEncodedString>("leggTilMerkis");
+      IHtmlEncodedString? lysing = current.Value<IHtmlEncodedString>("lysing");
+    IPublishedContent?  vidgerdRef          = current.Value<IPublishedContent>("vidgerd");
+    var vidgerdText = vidgerdRef?.Name ?? "";
+
+    // ---------- Parent fallback ----------
+    var fallbackSource = FindFallbackSource(current);
+    if (fallbackSource != null)
+    {
+        if (IsRteEmpty(hvarSkalBurturkasti))
+        {
+            var fbWhere = fallbackSource.Value<IHtmlEncodedString>("whereGarbage", fallback: Fallback.ToLanguage);
+            if (!IsRteEmpty(fbWhere)) hvarSkalBurturkasti = fbWhere;
+        }
+
+        if (IsRteEmpty(hvatHendir))
+        {
+            var fbWhat = fallbackSource.Value<IHtmlEncodedString>("whatGarbage", fallback: Fallback.ToLanguage);
+            if (!IsRteEmpty(fbWhat)) hvatHendir = fbWhat;
+        }
+    }
+
+    // ---------- Colours ----------
+    var green  = "#2d6a2f";
+    var beige  = "#f3ebdf";
+    var purple = "#7a1f7c";
+    var tileFg = "#ffffff";
+}
+
+<style>
+  .lsk-wrap h2, .lsk-wrap h3, .lsk-wrap h4 { margin: 0; }
+  .lsk-wrap .eyb-heading { font-weight: 700; font-size: 2rem; line-height: 1.2; }
+  .lsk-wrap .item { display:flex; gap:1.25rem; }
+  .lsk-wrap .item + .item { margin-top:2.25rem; }
+  .lsk-wrap .item .ic {
+      flex:0 0 44px; height:44px; width:44px;
+      display:inline-flex; align-items:center; justify-content:center;
+  }
+  .lsk-wrap .item .txt h4 { font-weight:700; margin-bottom:.25rem; }
+  .lsk-wrap .muted { color:#333; opacity:.85; }
+  .lsk-wrap .photo img { width:100%; height:auto; display:block; }
+
+  .lsk-wrap .how {
+    background: #FAF2E9; padding:40px 20px;
+  }
+  .lsk-wrap .how .head { font-weight:700; font-size:1.125rem; color:#000; }
+  .lsk-wrap .how .tile {
+    width: 100px;
+  height: 100px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 17px;
+  margin-bottom: 8px;
+   
+  }
+  .lsk-wrap .how .tile img { max-width:100px; max-height:100px; display:block; }
+
+  @@media (min-width:1200px){
+      .lsk-wrap .left-inner { padding-right:2.5rem; }
+  }
+</style>
+
+<section class="lsk-wrap py-3 py-md-4">
+  <div class="container">
+    <div class="row g-4 g-xl-5 align-items-start">
+
+      <!-- LEFT -->
+      <div class="col-12 col-lg-7">
+        <div class="left-inner">
+
+          <h2 class="eyb-heading mb-4">@current.Name</h2>
+@lysing
+          <!-- 1) Hvar skal burturkastið -->
+          <div class="item">
+            <div class="ic"><img src="/assets/icons/location_on.svg" alt="" /></div>
+            <div class="txt">
+              <h4>Hvar skal burturkastið</h4>
+              @if (!IsRteEmpty(hvarSkalBurturkasti)) { <div class="lut-txt">@hvarSkalBurturkasti</div> }
+            </div>
+          </div>
+
+          <!-- 2) Legg til merkis (only if not empty) -->
+          @if (!IsRteEmpty(leggTilMerkis))
+          {
+              <div class="item">
+                <div class="ic"><img src="/assets/icons/Alert_triangle.svg" alt=""/></div>
+                <div class="txt">
+                  <h4>Legg til merkis</h4>
+                  <div class="lut-txt">@leggTilMerkis</div>
+                </div>
+              </div>
+          }
+
+          <!-- 3) Viðgerð -->
+          <div class="item">
+            <div class="ic"><img src="/assets/icons/cog.svg" alt="" /></div>
+            <div class="txt">
+              <h4>Viðgerð</h4>
+              <div class="lut-txt">@vidgerdText</div>
+            </div>
+          </div>
+
+          <!-- 4) Hvat hendir við burturkastinum? -->
+          <div class="item">
+            <div class="ic"><img src="/assets/icons/glasses.svg" alt="" /></div>
+            <div class="txt">
+              <h4>Hvat hendir við burturkastinum?</h4>
+              @if (!IsRteEmpty(hvatHendir)) { <div class="lut-txt">@hvatHendir</div> }
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- RIGHT -->
+      <div class="col-12 col-lg-5 skil-right">
+        <h2 class="eyb-heading mb-4">Soleiðis skilir tú</h2>
+
+        
+
+        <div class="how">
+          <div class="row text-center text-md-start align-items-start">
+            <div class="col-6 col-sm-6 mb-3 mb-sm-0">
+              <div class="head">Heima</div>
+              <div class="tile mx-auto">
+                @if (!string.IsNullOrWhiteSpace(heimaIconUrl)) { <img src="@heimaIconUrl" alt="@heimaText" /> }
+              </div>
+              @if (!string.IsNullOrWhiteSpace(heimaText))
+              {
+                <div class="mx-auto text-center">@heimaText</div>
+              }
+            </div>
+
+            <div class="col-6 col-sm-6">
+              <div class="head">Endurnýtslan</div>
+              <div class="tile mx-auto">
+                @if (!string.IsNullOrWhiteSpace(endurIconUrl)) { <img src="@endurIconUrl" alt="@endurText" /> }
+              </div>
+              @if (!string.IsNullOrWhiteSpace(endurText) && 2==3)
+              {
+                <div class="text-center">@endurText</div>
+              }
+            </div>
+          </div>
+        </div>
+        <div class="photo">
+          @if (!string.IsNullOrWhiteSpace(heroUrl)) { <img src="@heroUrl" alt="@heroAlt" /> }
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>

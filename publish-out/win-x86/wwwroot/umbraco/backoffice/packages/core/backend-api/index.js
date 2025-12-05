@@ -1,14 +1,126 @@
-var w = /* @__PURE__ */ ((r) => (r.NEW = "New", r.SAVE = "Save", r.SAVE_VARIANT = "SaveVariant", r.OPEN = "Open", r.DELETE = "Delete", r.PUBLISH = "Publish", r.PUBLISH_VARIANT = "PublishVariant", r.SEND_TO_PUBLISH = "SendToPublish", r.SEND_TO_PUBLISH_VARIANT = "SendToPublishVariant", r.UNPUBLISH = "Unpublish", r.UNPUBLISH_VARIANT = "UnpublishVariant", r.MOVE = "Move", r.COPY = "Copy", r.ASSIGN_DOMAIN = "AssignDomain", r.PUBLIC_ACCESS = "PublicAccess", r.SORT = "Sort", r.NOTIFY = "Notify", r.SYSTEM = "System", r.ROLL_BACK = "RollBack", r.PACKAGER_INSTALL = "PackagerInstall", r.PACKAGER_UNINSTALL = "PackagerUninstall", r.CUSTOM = "Custom", r.CONTENT_VERSION_PREVENT_CLEANUP = "ContentVersionPreventCleanup", r.CONTENT_VERSION_ENABLE_CLEANUP = "ContentVersionEnableCleanup", r))(w || {}), A = /* @__PURE__ */ ((r) => (r.COMPOSITION = "Composition", r.INHERITANCE = "Inheritance", r))(A || {}), P = /* @__PURE__ */ ((r) => (r.TRUE = "True", r.FALSE = "False", r.FALSE_WITH_HELP_TEXT = "FalseWithHelpText", r))(P || {}), N = /* @__PURE__ */ ((r) => (r.ASCENDING = "Ascending", r.DESCENDING = "Descending", r))(N || {}), U = /* @__PURE__ */ ((r) => (r.NOT_CREATED = "NotCreated", r.DRAFT = "Draft", r.PUBLISHED = "Published", r.PUBLISHED_PENDING_CHANGES = "PublishedPendingChanges", r))(U || {}), L = /* @__PURE__ */ ((r) => (r.DEFAULT = "Default", r.INFO = "Info", r.ERROR = "Error", r.SUCCESS = "Success", r.WARNING = "Warning", r))(L || {}), O = /* @__PURE__ */ ((r) => (r.HEALTHY = "Healthy", r.UNHEALTHY = "Unhealthy", r.REBUILDING = "Rebuilding", r.CORRUPT = "Corrupt", r))(O || {}), F = /* @__PURE__ */ ((r) => (r.CROP = "Crop", r.MAX = "Max", r.STRETCH = "Stretch", r.PAD = "Pad", r.BOX_PAD = "BoxPad", r.MIN = "Min", r))(F || {}), _ = /* @__PURE__ */ ((r) => (r.VERBOSE = "Verbose", r.DEBUG = "Debug", r.INFORMATION = "Information", r.WARNING = "Warning", r.ERROR = "Error", r.FATAL = "Fatal", r))(_ || {}), k = /* @__PURE__ */ ((r) => (r.DEFAULT = "Default", r.API = "Api", r))(k || {}), V = /* @__PURE__ */ ((r) => (r.NOTHING = "Nothing", r.IN_MEMORY_AUTO = "InMemoryAuto", r.SOURCE_CODE_MANUAL = "SourceCodeManual", r.SOURCE_CODE_AUTO = "SourceCodeAuto", r))(V || {}), x = /* @__PURE__ */ ((r) => (r.EQUALS = "Equals", r.NOT_EQUALS = "NotEquals", r.CONTAINS = "Contains", r.NOT_CONTAINS = "NotContains", r.LESS_THAN = "LessThan", r.LESS_THAN_EQUAL_TO = "LessThanEqualTo", r.GREATER_THAN = "GreaterThan", r.GREATER_THAN_EQUAL_TO = "GreaterThanEqualTo", r))(x || {}), G = /* @__PURE__ */ ((r) => (r.OUT_OF_DATE = "OutOfDate", r.CURRENT = "Current", r.UNKNOWN = "Unknown", r))(G || {}), W = /* @__PURE__ */ ((r) => (r.ENABLED = "Enabled", r.DISABLED = "Disabled", r))(W || {}), H = /* @__PURE__ */ ((r) => (r.UNKNOWN = "Unknown", r.BOOT = "Boot", r.INSTALL = "Install", r.UPGRADE = "Upgrade", r.RUN = "Run", r.BOOT_FAILED = "BootFailed", r))(H || {}), M = /* @__PURE__ */ ((r) => (r.BACKOFFICE_DEVELOPMENT = "BackofficeDevelopment", r.DEVELOPMENT = "Development", r.PRODUCTION = "Production", r))(M || {}), q = /* @__PURE__ */ ((r) => (r.SUCCESS = "Success", r.WARNING = "Warning", r.ERROR = "Error", r.INFO = "Info", r))(q || {}), $ = /* @__PURE__ */ ((r) => (r.MINIMAL = "Minimal", r.BASIC = "Basic", r.DETAILED = "Detailed", r))($ || {}), z = /* @__PURE__ */ ((r) => (r.STRING = "String", r.DATE_TIME = "DateTime", r.INTEGER = "Integer", r))(z || {}), Q = /* @__PURE__ */ ((r) => (r.SUCCESS = "Success", r.NOT_FOUND = "NotFound", r.USER_NOT_FOUND = "UserNotFound", r.ALREADY_EXISTS = "AlreadyExists", r))(Q || {}), Y = /* @__PURE__ */ ((r) => (r.DEFAULT = "Default", r.API = "Api", r))(Y || {}), K = /* @__PURE__ */ ((r) => (r.USER_NAME = "UserName", r.LANGUAGE = "Language", r.NAME = "Name", r.EMAIL = "Email", r.ID = "Id", r.CREATE_DATE = "CreateDate", r.UPDATE_DATE = "UpdateDate", r.IS_APPROVED = "IsApproved", r.IS_LOCKED_OUT = "IsLockedOut", r.LAST_LOGIN_DATE = "LastLoginDate", r))(K || {}), J = /* @__PURE__ */ ((r) => (r.ACTIVE = "Active", r.DISABLED = "Disabled", r.LOCKED_OUT = "LockedOut", r.INVITED = "Invited", r.INACTIVE = "Inactive", r.ALL = "All", r))(J || {}), X = async (r, e) => {
-  let a = typeof e == "function" ? await e(r) : e;
-  if (a) return r.scheme === "bearer" ? `Bearer ${a}` : r.scheme === "basic" ? `Basic ${btoa(a)}` : a;
-}, I = (r, e, a) => {
-  typeof a == "string" || a instanceof Blob ? r.append(e, a) : r.append(e, JSON.stringify(a));
-}, Z = { bodySerializer: (r) => {
-  let e = new FormData();
-  return Object.entries(r).forEach(([a, u]) => {
-    u != null && (Array.isArray(u) ? u.forEach((i) => I(e, a, i)) : I(e, a, u));
-  }), e;
-} }, ee = { bodySerializer: (r) => JSON.stringify(r, (e, a) => typeof a == "bigint" ? a.toString() : a) }, te = (r) => {
+var Q = /* @__PURE__ */ ((r) => (r.NEW = "New", r.SAVE = "Save", r.SAVE_VARIANT = "SaveVariant", r.OPEN = "Open", r.DELETE = "Delete", r.PUBLISH = "Publish", r.PUBLISH_VARIANT = "PublishVariant", r.SEND_TO_PUBLISH = "SendToPublish", r.SEND_TO_PUBLISH_VARIANT = "SendToPublishVariant", r.UNPUBLISH = "Unpublish", r.UNPUBLISH_VARIANT = "UnpublishVariant", r.MOVE = "Move", r.COPY = "Copy", r.ASSIGN_DOMAIN = "AssignDomain", r.PUBLIC_ACCESS = "PublicAccess", r.SORT = "Sort", r.NOTIFY = "Notify", r.SYSTEM = "System", r.ROLL_BACK = "RollBack", r.PACKAGER_INSTALL = "PackagerInstall", r.PACKAGER_UNINSTALL = "PackagerUninstall", r.CUSTOM = "Custom", r.CONTENT_VERSION_PREVENT_CLEANUP = "ContentVersionPreventCleanup", r.CONTENT_VERSION_ENABLE_CLEANUP = "ContentVersionEnableCleanup", r))(Q || {}), Y = /* @__PURE__ */ ((r) => (r.COMPOSITION = "Composition", r.INHERITANCE = "Inheritance", r))(Y || {}), J = /* @__PURE__ */ ((r) => (r.TRUE = "True", r.FALSE = "False", r.FALSE_WITH_HELP_TEXT = "FalseWithHelpText", r))(J || {}), K = /* @__PURE__ */ ((r) => (r.ASCENDING = "Ascending", r.DESCENDING = "Descending", r))(K || {}), X = /* @__PURE__ */ ((r) => (r.NOT_CREATED = "NotCreated", r.DRAFT = "Draft", r.PUBLISHED = "Published", r.PUBLISHED_PENDING_CHANGES = "PublishedPendingChanges", r.TRASHED = "Trashed", r))(X || {}), Z = /* @__PURE__ */ ((r) => (r.DEFAULT = "Default", r.INFO = "Info", r.ERROR = "Error", r.SUCCESS = "Success", r.WARNING = "Warning", r))(Z || {}), ee = /* @__PURE__ */ ((r) => (r.HEALTHY = "Healthy", r.UNHEALTHY = "Unhealthy", r.REBUILDING = "Rebuilding", r.CORRUPT = "Corrupt", r))(ee || {}), te = /* @__PURE__ */ ((r) => (r.CROP = "Crop", r.MAX = "Max", r.STRETCH = "Stretch", r.PAD = "Pad", r.BOX_PAD = "BoxPad", r.MIN = "Min", r))(te || {}), re = /* @__PURE__ */ ((r) => (r.VERBOSE = "Verbose", r.DEBUG = "Debug", r.INFORMATION = "Information", r.WARNING = "Warning", r.ERROR = "Error", r.FATAL = "Fatal", r))(re || {}), ae = /* @__PURE__ */ ((r) => (r.DEFAULT = "Default", r.API = "Api", r))(ae || {}), ce = /* @__PURE__ */ ((r) => (r.NOTHING = "Nothing", r.IN_MEMORY_AUTO = "InMemoryAuto", r.SOURCE_CODE_MANUAL = "SourceCodeManual", r.SOURCE_CODE_AUTO = "SourceCodeAuto", r))(ce || {}), ne = /* @__PURE__ */ ((r) => (r.EQUALS = "Equals", r.NOT_EQUALS = "NotEquals", r.CONTAINS = "Contains", r.NOT_CONTAINS = "NotContains", r.LESS_THAN = "LessThan", r.LESS_THAN_EQUAL_TO = "LessThanEqualTo", r.GREATER_THAN = "GreaterThan", r.GREATER_THAN_EQUAL_TO = "GreaterThanEqualTo", r))(ne || {}), ie = /* @__PURE__ */ ((r) => (r.OUT_OF_DATE = "OutOfDate", r.CURRENT = "Current", r.UNKNOWN = "Unknown", r))(ie || {}), ue = /* @__PURE__ */ ((r) => (r.ENABLED = "Enabled", r.DISABLED = "Disabled", r))(ue || {}), se = /* @__PURE__ */ ((r) => (r.UNKNOWN = "Unknown", r.BOOT = "Boot", r.INSTALL = "Install", r.UPGRADE = "Upgrade", r.RUN = "Run", r.BOOT_FAILED = "BootFailed", r))(se || {}), me = /* @__PURE__ */ ((r) => (r.BACKOFFICE_DEVELOPMENT = "BackofficeDevelopment", r.DEVELOPMENT = "Development", r.PRODUCTION = "Production", r))(me || {}), pe = /* @__PURE__ */ ((r) => (r.SUCCESS = "Success", r.WARNING = "Warning", r.ERROR = "Error", r.INFO = "Info", r))(pe || {}), le = /* @__PURE__ */ ((r) => (r.MINIMAL = "Minimal", r.BASIC = "Basic", r.DETAILED = "Detailed", r))(le || {}), ye = /* @__PURE__ */ ((r) => (r.STRING = "String", r.DATE_TIME = "DateTime", r.INTEGER = "Integer", r))(ye || {}), he = /* @__PURE__ */ ((r) => (r.SUCCESS = "Success", r.NOT_FOUND = "NotFound", r.USER_NOT_FOUND = "UserNotFound", r.ALREADY_EXISTS = "AlreadyExists", r))(he || {}), de = /* @__PURE__ */ ((r) => (r.DEFAULT = "Default", r.API = "Api", r))(de || {}), ge = /* @__PURE__ */ ((r) => (r.USER_NAME = "UserName", r.LANGUAGE = "Language", r.NAME = "Name", r.EMAIL = "Email", r.ID = "Id", r.CREATE_DATE = "CreateDate", r.UPDATE_DATE = "UpdateDate", r.IS_APPROVED = "IsApproved", r.IS_LOCKED_OUT = "IsLockedOut", r.LAST_LOGIN_DATE = "LastLoginDate", r))(ge || {}), be = /* @__PURE__ */ ((r) => (r.ACTIVE = "Active", r.DISABLED = "Disabled", r.LOCKED_OUT = "LockedOut", r.INVITED = "Invited", r.INACTIVE = "Inactive", r.ALL = "All", r))(be || {});
+const L = (r, e, a) => {
+  typeof a == "string" || a instanceof Blob ? r.append(e, a) : a instanceof Date ? r.append(e, a.toISOString()) : r.append(e, JSON.stringify(a));
+}, oe = {
+  bodySerializer: (r) => {
+    const e = new FormData();
+    return Object.entries(r).forEach(([a, n]) => {
+      n != null && (Array.isArray(n) ? n.forEach((i) => L(e, a, i)) : L(e, a, n));
+    }), e;
+  }
+}, ve = {
+  bodySerializer: (r) => JSON.stringify(
+    r,
+    (e, a) => typeof a == "bigint" ? a.toString() : a
+  )
+}, Te = ({
+  onRequest: r,
+  onSseError: e,
+  onSseEvent: a,
+  responseTransformer: n,
+  responseValidator: i,
+  sseDefaultRetryDelay: p,
+  sseMaxRetryAttempts: m,
+  sseMaxRetryDelay: u,
+  sseSleepFn: s,
+  url: y,
+  ...c
+}) => {
+  let h;
+  const S = s ?? ((l) => new Promise((g) => setTimeout(g, l)));
+  return { stream: async function* () {
+    let l = p ?? 3e3, g = 0;
+    const I = c.signal ?? new AbortController().signal;
+    for (; !I.aborted; ) {
+      g++;
+      const D = c.headers instanceof Headers ? c.headers : new Headers(c.headers);
+      h !== void 0 && D.set("Last-Event-ID", h);
+      try {
+        const C = {
+          redirect: "follow",
+          ...c,
+          body: c.serializedBody,
+          headers: D,
+          signal: I
+        };
+        let v = new Request(y, C);
+        r && (v = await r(y, C));
+        const b = await (c.fetch ?? globalThis.fetch)(v);
+        if (!b.ok)
+          throw new Error(
+            `SSE failed: ${b.status} ${b.statusText}`
+          );
+        if (!b.body) throw new Error("No body in SSE response");
+        const T = b.body.pipeThrough(new TextDecoderStream()).getReader();
+        let w = "";
+        const N = () => {
+          try {
+            T.cancel();
+          } catch {
+          }
+        };
+        I.addEventListener("abort", N);
+        try {
+          for (; ; ) {
+            const { done: M, value: q } = await T.read();
+            if (M) break;
+            w += q;
+            const R = w.split(`
+
+`);
+            w = R.pop() ?? "";
+            for (const W of R) {
+              const $ = W.split(`
+`), j = [];
+              let U;
+              for (const o of $)
+                if (o.startsWith("data:"))
+                  j.push(o.replace(/^data:\s*/, ""));
+                else if (o.startsWith("event:"))
+                  U = o.replace(/^event:\s*/, "");
+                else if (o.startsWith("id:"))
+                  h = o.replace(/^id:\s*/, "");
+                else if (o.startsWith("retry:")) {
+                  const O = Number.parseInt(
+                    o.replace(/^retry:\s*/, ""),
+                    10
+                  );
+                  Number.isNaN(O) || (l = O);
+                }
+              let B, k = !1;
+              if (j.length) {
+                const o = j.join(`
+`);
+                try {
+                  B = JSON.parse(o), k = !0;
+                } catch {
+                  B = o;
+                }
+              }
+              k && (i && await i(B), n && (B = await n(B))), a?.({
+                data: B,
+                event: U,
+                id: h,
+                retry: l
+              }), j.length && (yield B);
+            }
+          }
+        } finally {
+          I.removeEventListener("abort", N), T.releaseLock();
+        }
+        break;
+      } catch (C) {
+        if (e?.(C), m !== void 0 && g >= m)
+          break;
+        const v = Math.min(
+          l * 2 ** (g - 1),
+          u ?? 3e4
+        );
+        await S(v);
+      }
+    }
+  }() };
+}, fe = (r) => {
   switch (r) {
     case "label":
       return ".";
@@ -19,7 +131,7 @@ var w = /* @__PURE__ */ ((r) => (r.NEW = "New", r.SAVE = "Save", r.SAVE_VARIANT 
     default:
       return "&";
   }
-}, re = (r) => {
+}, Ie = (r) => {
   switch (r) {
     case "form":
       return ",";
@@ -30,7 +142,7 @@ var w = /* @__PURE__ */ ((r) => (r.NEW = "New", r.SAVE = "Save", r.SAVE_VARIANT 
     default:
       return ",";
   }
-}, ae = (r) => {
+}, Ce = (r) => {
   switch (r) {
     case "label":
       return ".";
@@ -41,183 +153,456 @@ var w = /* @__PURE__ */ ((r) => (r.NEW = "New", r.SAVE = "Save", r.SAVE_VARIANT 
     default:
       return "&";
   }
-}, B = ({ allowReserved: r, explode: e, name: a, style: u, value: i }) => {
+}, _ = ({
+  allowReserved: r,
+  explode: e,
+  name: a,
+  style: n,
+  value: i
+}) => {
   if (!e) {
-    let n = (r ? i : i.map((s) => encodeURIComponent(s))).join(re(u));
-    switch (u) {
+    const u = (r ? i : i.map((s) => encodeURIComponent(s))).join(Ie(n));
+    switch (n) {
       case "label":
-        return `.${n}`;
+        return `.${u}`;
       case "matrix":
-        return `;${a}=${n}`;
+        return `;${a}=${u}`;
       case "simple":
-        return n;
+        return u;
       default:
-        return `${a}=${n}`;
+        return `${a}=${u}`;
     }
   }
-  let m = te(u), c = i.map((n) => u === "label" || u === "simple" ? r ? n : encodeURIComponent(n) : v({ allowReserved: r, name: a, value: n })).join(m);
-  return u === "label" || u === "matrix" ? m + c : c;
-}, v = ({ allowReserved: r, name: e, value: a }) => {
-  if (a == null) return "";
-  if (typeof a == "object") throw new Error("Deeply-nested arrays/objects aren’t supported. Provide your own `querySerializer()` to handle these.");
+  const p = fe(n), m = i.map((u) => n === "label" || n === "simple" ? r ? u : encodeURIComponent(u) : A({
+    allowReserved: r,
+    name: a,
+    value: u
+  })).join(p);
+  return n === "label" || n === "matrix" ? p + m : m;
+}, A = ({
+  allowReserved: r,
+  name: e,
+  value: a
+}) => {
+  if (a == null)
+    return "";
+  if (typeof a == "object")
+    throw new Error(
+      "Deeply-nested arrays/objects aren’t supported. Provide your own `querySerializer()` to handle these."
+    );
   return `${e}=${r ? a : encodeURIComponent(a)}`;
-}, S = ({ allowReserved: r, explode: e, name: a, style: u, value: i }) => {
-  if (i instanceof Date) return `${a}=${i.toISOString()}`;
-  if (u !== "deepObject" && !e) {
-    let n = [];
-    Object.entries(i).forEach(([h, l]) => {
-      n = [...n, h, r ? l : encodeURIComponent(l)];
+}, x = ({
+  allowReserved: r,
+  explode: e,
+  name: a,
+  style: n,
+  value: i,
+  valueOnly: p
+}) => {
+  if (i instanceof Date)
+    return p ? i.toISOString() : `${a}=${i.toISOString()}`;
+  if (n !== "deepObject" && !e) {
+    let s = [];
+    Object.entries(i).forEach(([c, h]) => {
+      s = [
+        ...s,
+        c,
+        r ? h : encodeURIComponent(h)
+      ];
     });
-    let s = n.join(",");
-    switch (u) {
+    const y = s.join(",");
+    switch (n) {
       case "form":
-        return `${a}=${s}`;
+        return `${a}=${y}`;
       case "label":
-        return `.${s}`;
+        return `.${y}`;
       case "matrix":
-        return `;${a}=${s}`;
+        return `;${a}=${y}`;
       default:
-        return s;
+        return y;
     }
   }
-  let m = ae(u), c = Object.entries(i).map(([n, s]) => v({ allowReserved: r, name: u === "deepObject" ? `${a}[${n}]` : n, value: s })).join(m);
-  return u === "label" || u === "matrix" ? m + c : c;
-}, ce = /\{[^{}]+\}/g, ne = ({ path: r, url: e }) => {
-  let a = e, u = e.match(ce);
-  if (u) for (let i of u) {
-    let m = !1, c = i.substring(1, i.length - 1), n = "simple";
-    c.endsWith("*") && (m = !0, c = c.substring(0, c.length - 1)), c.startsWith(".") ? (c = c.substring(1), n = "label") : c.startsWith(";") && (c = c.substring(1), n = "matrix");
-    let s = r[c];
-    if (s == null) continue;
-    if (Array.isArray(s)) {
-      a = a.replace(i, B({ explode: m, name: c, style: n, value: s }));
-      continue;
+  const m = Ce(n), u = Object.entries(i).map(
+    ([s, y]) => A({
+      allowReserved: r,
+      name: n === "deepObject" ? `${a}[${s}]` : s,
+      value: y
+    })
+  ).join(m);
+  return n === "label" || n === "matrix" ? m + u : u;
+}, Be = /\{[^{}]+\}/g, Se = ({ path: r, url: e }) => {
+  let a = e;
+  const n = e.match(Be);
+  if (n)
+    for (const i of n) {
+      let p = !1, m = i.substring(1, i.length - 1), u = "simple";
+      m.endsWith("*") && (p = !0, m = m.substring(0, m.length - 1)), m.startsWith(".") ? (m = m.substring(1), u = "label") : m.startsWith(";") && (m = m.substring(1), u = "matrix");
+      const s = r[m];
+      if (s == null)
+        continue;
+      if (Array.isArray(s)) {
+        a = a.replace(
+          i,
+          _({ explode: p, name: m, style: u, value: s })
+        );
+        continue;
+      }
+      if (typeof s == "object") {
+        a = a.replace(
+          i,
+          x({
+            explode: p,
+            name: m,
+            style: u,
+            value: s,
+            valueOnly: !0
+          })
+        );
+        continue;
+      }
+      if (u === "matrix") {
+        a = a.replace(
+          i,
+          `;${A({
+            name: m,
+            value: s
+          })}`
+        );
+        continue;
+      }
+      const y = encodeURIComponent(
+        u === "label" ? `.${s}` : s
+      );
+      a = a.replace(i, y);
     }
-    if (typeof s == "object") {
-      a = a.replace(i, S({ explode: m, name: c, style: n, value: s }));
-      continue;
-    }
-    if (n === "matrix") {
-      a = a.replace(i, `;${v({ name: c, value: s })}`);
-      continue;
-    }
-    let h = encodeURIComponent(n === "label" ? `.${s}` : s);
-    a = a.replace(i, h);
-  }
   return a;
-}, D = ({ allowReserved: r, array: e, object: a } = {}) => (u) => {
-  let i = [];
-  if (u && typeof u == "object") for (let m in u) {
-    let c = u[m];
-    if (c != null) {
-      if (Array.isArray(c)) {
-        i = [...i, B({ allowReserved: r, explode: !0, name: m, style: "form", value: c, ...e })];
-        continue;
-      }
-      if (typeof c == "object") {
-        i = [...i, S({ allowReserved: r, explode: !0, name: m, style: "deepObject", value: c, ...a })];
-        continue;
-      }
-      i = [...i, v({ allowReserved: r, name: m, value: c })];
+}, De = ({
+  baseUrl: r,
+  path: e,
+  query: a,
+  querySerializer: n,
+  url: i
+}) => {
+  const p = i.startsWith("/") ? i : `/${i}`;
+  let m = (r ?? "") + p;
+  e && (m = Se({ path: e, url: m }));
+  let u = a ? n(a) : "";
+  return u.startsWith("?") && (u = u.substring(1)), u && (m += `?${u}`), m;
+};
+function Ee(r) {
+  const e = r.body !== void 0;
+  if (e && r.bodySerializer)
+    return "serializedBody" in r ? r.serializedBody !== void 0 && r.serializedBody !== "" ? r.serializedBody : null : r.body !== "" ? r.body : null;
+  if (e)
+    return r.body;
+}
+const je = async (r, e) => {
+  const a = typeof e == "function" ? await e(r) : e;
+  if (a)
+    return r.scheme === "bearer" ? `Bearer ${a}` : r.scheme === "basic" ? `Basic ${btoa(a)}` : a;
+}, G = ({
+  allowReserved: r,
+  array: e,
+  object: a
+} = {}) => (i) => {
+  const p = [];
+  if (i && typeof i == "object")
+    for (const m in i) {
+      const u = i[m];
+      if (u != null)
+        if (Array.isArray(u)) {
+          const s = _({
+            allowReserved: r,
+            explode: !0,
+            name: m,
+            style: "form",
+            value: u,
+            ...e
+          });
+          s && p.push(s);
+        } else if (typeof u == "object") {
+          const s = x({
+            allowReserved: r,
+            explode: !0,
+            name: m,
+            style: "deepObject",
+            value: u,
+            ...a
+          });
+          s && p.push(s);
+        } else {
+          const s = A({
+            allowReserved: r,
+            name: m,
+            value: u
+          });
+          s && p.push(s);
+        }
     }
-  }
-  return i.join("&");
-}, ie = (r) => {
-  if (!r) return "stream";
-  let e = r.split(";")[0]?.trim();
+  return p.join("&");
+}, Ae = (r) => {
+  if (!r)
+    return "stream";
+  const e = r.split(";")[0]?.trim();
   if (e) {
-    if (e.startsWith("application/json") || e.endsWith("+json")) return "json";
-    if (e === "multipart/form-data") return "formData";
-    if (["application/", "audio/", "image/", "video/"].some((a) => e.startsWith(a))) return "blob";
-    if (e.startsWith("text/")) return "text";
+    if (e.startsWith("application/json") || e.endsWith("+json"))
+      return "json";
+    if (e === "multipart/form-data")
+      return "formData";
+    if (["application/", "audio/", "image/", "video/"].some(
+      (a) => e.startsWith(a)
+    ))
+      return "blob";
+    if (e.startsWith("text/"))
+      return "text";
   }
-}, ue = async ({ security: r, ...e }) => {
-  for (let a of r) {
-    let u = await X(a, e.auth);
-    if (!u) continue;
-    let i = a.name ?? "Authorization";
+}, we = (r, e) => e ? !!(r.headers.has(e) || r.query?.[e] || r.headers.get("Cookie")?.includes(`${e}=`)) : !1, Pe = async ({
+  security: r,
+  ...e
+}) => {
+  for (const a of r) {
+    if (we(e, a.name))
+      continue;
+    const n = await je(a, e.auth);
+    if (!n)
+      continue;
+    const i = a.name ?? "Authorization";
     switch (a.in) {
       case "query":
-        e.query || (e.query = {}), e.query[i] = u;
+        e.query || (e.query = {}), e.query[i] = n;
         break;
       case "cookie":
-        e.headers.append("Cookie", `${i}=${u}`);
+        e.headers.append("Cookie", `${i}=${n}`);
         break;
       case "header":
       default:
-        e.headers.set(i, u);
+        e.headers.set(i, n);
         break;
     }
-    return;
   }
-}, C = (r) => me({ baseUrl: r.baseUrl, path: r.path, query: r.query, querySerializer: typeof r.querySerializer == "function" ? r.querySerializer : D(r.querySerializer), url: r.url }), me = ({ baseUrl: r, path: e, query: a, querySerializer: u, url: i }) => {
-  let m = i.startsWith("/") ? i : `/${i}`, c = (r ?? "") + m;
-  e && (c = ne({ path: e, url: c }));
-  let n = a ? u(a) : "";
-  return n.startsWith("?") && (n = n.substring(1)), n && (c += `?${n}`), c;
-}, f = (r, e) => {
-  let a = { ...r, ...e };
-  return a.baseUrl?.endsWith("/") && (a.baseUrl = a.baseUrl.substring(0, a.baseUrl.length - 1)), a.headers = j(r.headers, e.headers), a;
-}, j = (...r) => {
-  let e = new Headers();
-  for (let a of r) {
-    if (!a || typeof a != "object") continue;
-    let u = a instanceof Headers ? a.entries() : Object.entries(a);
-    for (let [i, m] of u) if (m === null) e.delete(i);
-    else if (Array.isArray(m)) for (let c of m) e.append(i, c);
-    else m !== void 0 && e.set(i, typeof m == "object" ? JSON.stringify(m) : m);
+}, F = (r) => De({
+  baseUrl: r.baseUrl,
+  path: r.path,
+  query: r.query,
+  querySerializer: typeof r.querySerializer == "function" ? r.querySerializer : G(r.querySerializer),
+  url: r.url
+}), V = (r, e) => {
+  const a = { ...r, ...e };
+  return a.baseUrl?.endsWith("/") && (a.baseUrl = a.baseUrl.substring(0, a.baseUrl.length - 1)), a.headers = z(r.headers, e.headers), a;
+}, Ne = (r) => {
+  const e = [];
+  return r.forEach((a, n) => {
+    e.push([n, a]);
+  }), e;
+}, z = (...r) => {
+  const e = new Headers();
+  for (const a of r) {
+    if (!a)
+      continue;
+    const n = a instanceof Headers ? Ne(a) : Object.entries(a);
+    for (const [i, p] of n)
+      if (p === null)
+        e.delete(i);
+      else if (Array.isArray(p))
+        for (const m of p)
+          e.append(i, m);
+      else p !== void 0 && e.set(
+        i,
+        typeof p == "object" ? JSON.stringify(p) : p
+      );
   }
   return e;
-}, T = class {
-  _fns;
+};
+class P {
   constructor() {
-    this._fns = [];
+    this.fns = [];
   }
   clear() {
-    this._fns = [];
+    this.fns = [];
   }
-  exists(r) {
-    return this._fns.indexOf(r) !== -1;
+  eject(e) {
+    const a = this.getInterceptorIndex(e);
+    this.fns[a] && (this.fns[a] = null);
   }
-  eject(r) {
-    let e = this._fns.indexOf(r);
-    e !== -1 && (this._fns = [...this._fns.slice(0, e), ...this._fns.slice(e + 1)]);
+  exists(e) {
+    const a = this.getInterceptorIndex(e);
+    return !!this.fns[a];
   }
-  use(r) {
-    this._fns = [...this._fns, r];
+  getInterceptorIndex(e) {
+    return typeof e == "number" ? this.fns[e] ? e : -1 : this.fns.indexOf(e);
   }
-}, se = () => ({ error: new T(), request: new T(), response: new T() }), pe = D({ allowReserved: !1, array: { explode: !0, style: "form" }, object: { explode: !0, style: "deepObject" } }), le = { "Content-Type": "application/json" }, R = (r = {}) => ({ ...ee, headers: le, parseAs: "auto", querySerializer: pe, ...r }), ye = (r = {}) => {
-  let e = f(R(), r), a = () => ({ ...e }), u = (c) => (e = f(e, c), a()), i = se(), m = async (c) => {
-    let n = { ...e, ...c, fetch: c.fetch ?? e.fetch ?? globalThis.fetch, headers: j(e.headers, c.headers) };
-    n.security && await ue({ ...n, security: n.security }), n.body && n.bodySerializer && (n.body = n.bodySerializer(n.body)), (n.body === void 0 || n.body === "") && n.headers.delete("Content-Type");
-    let s = C(n), h = { redirect: "follow", ...n }, l = new Request(s, h);
-    for (let y of i.request._fns) l = await y(l, n);
-    let E = n.fetch, p = await E(l);
-    for (let y of i.response._fns) p = await y(p, l, n);
-    let g = { request: l, response: p };
-    if (p.ok) {
-      if (p.status === 204 || p.headers.get("Content-Length") === "0") return { data: {}, ...g };
-      let y = (n.parseAs === "auto" ? ie(p.headers.get("Content-Type")) : n.parseAs) ?? "json";
-      if (y === "stream") return { data: p.body, ...g };
-      let o = await p[y]();
-      return y === "json" && (n.responseValidator && await n.responseValidator(o), n.responseTransformer && (o = await n.responseTransformer(o))), { data: o, ...g };
+  update(e, a) {
+    const n = this.getInterceptorIndex(e);
+    return this.fns[n] ? (this.fns[n] = a, e) : !1;
+  }
+  use(e) {
+    return this.fns.push(e), this.fns.length - 1;
+  }
+}
+const Re = () => ({
+  error: new P(),
+  request: new P(),
+  response: new P()
+}), Ue = G({
+  allowReserved: !1,
+  array: {
+    explode: !0,
+    style: "form"
+  },
+  object: {
+    explode: !0,
+    style: "deepObject"
+  }
+}), ke = {
+  "Content-Type": "application/json"
+}, H = (r = {}) => ({
+  ...ve,
+  headers: ke,
+  parseAs: "auto",
+  querySerializer: Ue,
+  ...r
+}), Oe = (r = {}) => {
+  let e = V(H(), r);
+  const a = () => ({ ...e }), n = (y) => (e = V(e, y), a()), i = Re(), p = async (y) => {
+    const c = {
+      ...e,
+      ...y,
+      fetch: y.fetch ?? e.fetch ?? globalThis.fetch,
+      headers: z(e.headers, y.headers),
+      serializedBody: void 0
+    };
+    c.security && await Pe({
+      ...c,
+      security: c.security
+    }), c.requestValidator && await c.requestValidator(c), c.body !== void 0 && c.bodySerializer && (c.serializedBody = c.bodySerializer(c.body)), (c.body === void 0 || c.serializedBody === "") && c.headers.delete("Content-Type");
+    const h = F(c);
+    return { opts: c, url: h };
+  }, m = async (y) => {
+    const { opts: c, url: h } = await p(y), S = {
+      redirect: "follow",
+      ...c,
+      body: Ee(c)
+    };
+    let f = new Request(h, S);
+    for (const d of i.request.fns)
+      d && (f = await d(f, c));
+    const E = c.fetch;
+    let l = await E(f);
+    for (const d of i.response.fns)
+      d && (l = await d(l, f, c));
+    const g = {
+      request: f,
+      response: l
+    };
+    if (l.ok) {
+      const d = (c.parseAs === "auto" ? Ae(l.headers.get("Content-Type")) : c.parseAs) ?? "json";
+      if (l.status === 204 || l.headers.get("Content-Length") === "0") {
+        let T;
+        switch (d) {
+          case "arrayBuffer":
+          case "blob":
+          case "text":
+            T = await l[d]();
+            break;
+          case "formData":
+            T = new FormData();
+            break;
+          case "stream":
+            T = l.body;
+            break;
+          case "json":
+          default:
+            T = {};
+            break;
+        }
+        return c.responseStyle === "data" ? T : {
+          data: T,
+          ...g
+        };
+      }
+      let b;
+      switch (d) {
+        case "arrayBuffer":
+        case "blob":
+        case "formData":
+        case "json":
+        case "text":
+          b = await l[d]();
+          break;
+        case "stream":
+          return c.responseStyle === "data" ? l.body : {
+            data: l.body,
+            ...g
+          };
+      }
+      return d === "json" && (c.responseValidator && await c.responseValidator(b), c.responseTransformer && (b = await c.responseTransformer(b))), c.responseStyle === "data" ? b : {
+        data: b,
+        ...g
+      };
     }
-    let b = await p.text();
+    const I = await l.text();
+    let D;
     try {
-      b = JSON.parse(b);
+      D = JSON.parse(I);
     } catch {
     }
-    let d = b;
-    for (let y of i.error._fns) d = await y(b, p, l, n);
-    if (d = d || {}, n.throwOnError) throw d;
-    return { error: d, ...g };
+    const C = D ?? I;
+    let v = C;
+    for (const d of i.error.fns)
+      d && (v = await d(C, l, f, c));
+    if (v = v || {}, c.throwOnError)
+      throw v;
+    return c.responseStyle === "data" ? void 0 : {
+      error: v,
+      ...g
+    };
+  }, u = (y) => (c) => m({ ...c, method: y }), s = (y) => async (c) => {
+    const { opts: h, url: S } = await p(c);
+    return Te({
+      ...h,
+      body: h.body,
+      headers: h.headers,
+      method: y,
+      onRequest: async (f, E) => {
+        let l = new Request(f, E);
+        for (const g of i.request.fns)
+          g && (l = await g(l, h));
+        return l;
+      },
+      url: S
+    });
   };
-  return { buildUrl: C, connect: (c) => m({ ...c, method: "CONNECT" }), delete: (c) => m({ ...c, method: "DELETE" }), get: (c) => m({ ...c, method: "GET" }), getConfig: a, head: (c) => m({ ...c, method: "HEAD" }), interceptors: i, options: (c) => m({ ...c, method: "OPTIONS" }), patch: (c) => m({ ...c, method: "PATCH" }), post: (c) => m({ ...c, method: "POST" }), put: (c) => m({ ...c, method: "PUT" }), request: m, setConfig: u, trace: (c) => m({ ...c, method: "TRACE" }) };
-};
-const t = ye(R({
+  return {
+    buildUrl: F,
+    connect: u("CONNECT"),
+    delete: u("DELETE"),
+    get: u("GET"),
+    getConfig: a,
+    head: u("HEAD"),
+    interceptors: i,
+    options: u("OPTIONS"),
+    patch: u("PATCH"),
+    post: u("POST"),
+    put: u("PUT"),
+    request: m,
+    setConfig: n,
+    sse: {
+      connect: s("CONNECT"),
+      delete: s("DELETE"),
+      get: s("GET"),
+      head: s("HEAD"),
+      options: s("OPTIONS"),
+      patch: s("PATCH"),
+      post: s("POST"),
+      put: s("PUT"),
+      trace: s("TRACE")
+    },
+    trace: u("TRACE")
+  };
+}, t = Oe(H({
   throwOnError: !0
 }));
-class he {
+class Ve {
   static getCulture(e) {
     return (e?.client ?? t).get({
       security: [
@@ -231,7 +616,7 @@ class he {
     });
   }
 }
-class de {
+class _e {
   static postDataType(e) {
     return (e?.client ?? t).post({
       security: [
@@ -284,7 +669,7 @@ class de {
       ...e,
       headers: {
         "Content-Type": "application/json",
-        ...e?.headers
+        ...e.headers
       }
     });
   }
@@ -300,7 +685,7 @@ class de {
       ...e,
       headers: {
         "Content-Type": "application/json",
-        ...e?.headers
+        ...e.headers
       }
     });
   }
@@ -328,7 +713,7 @@ class de {
       ...e,
       headers: {
         "Content-Type": "application/json",
-        ...e?.headers
+        ...e.headers
       }
     });
   }
@@ -423,7 +808,7 @@ class de {
       ...e,
       headers: {
         "Content-Type": "application/json",
-        ...e?.headers
+        ...e.headers
       }
     });
   }
@@ -499,8 +884,20 @@ class de {
       ...e
     });
   }
+  static getTreeDataTypeSiblings(e) {
+    return (e?.client ?? t).get({
+      security: [
+        {
+          scheme: "bearer",
+          type: "http"
+        }
+      ],
+      url: "/umbraco/management/api/v1/tree/data-type/siblings",
+      ...e
+    });
+  }
 }
-class ge {
+class xe {
   static getDictionary(e) {
     return (e?.client ?? t).get({
       security: [
@@ -565,7 +962,7 @@ class ge {
       ...e,
       headers: {
         "Content-Type": "application/json",
-        ...e?.headers
+        ...e.headers
       }
     });
   }
@@ -593,7 +990,7 @@ class ge {
       ...e,
       headers: {
         "Content-Type": "application/json",
-        ...e?.headers
+        ...e.headers
       }
     });
   }
@@ -662,7 +1059,7 @@ class ge {
     });
   }
 }
-class be {
+class Ge {
   static postDocumentBlueprint(e) {
     return (e?.client ?? t).post({
       security: [
@@ -715,7 +1112,7 @@ class be {
       ...e,
       headers: {
         "Content-Type": "application/json",
-        ...e?.headers
+        ...e.headers
       }
     });
   }
@@ -731,7 +1128,7 @@ class be {
       ...e,
       headers: {
         "Content-Type": "application/json",
-        ...e?.headers
+        ...e.headers
       }
     });
   }
@@ -799,7 +1196,7 @@ class be {
       ...e,
       headers: {
         "Content-Type": "application/json",
-        ...e?.headers
+        ...e.headers
       }
     });
   }
@@ -867,8 +1264,20 @@ class be {
       ...e
     });
   }
+  static getTreeDocumentBlueprintSiblings(e) {
+    return (e?.client ?? t).get({
+      security: [
+        {
+          scheme: "bearer",
+          type: "http"
+        }
+      ],
+      url: "/umbraco/management/api/v1/tree/document-blueprint/siblings",
+      ...e
+    });
+  }
 }
-class oe {
+class ze {
   static postDocumentType(e) {
     return (e?.client ?? t).post({
       security: [
@@ -921,7 +1330,7 @@ class oe {
       ...e,
       headers: {
         "Content-Type": "application/json",
-        ...e?.headers
+        ...e.headers
       }
     });
   }
@@ -973,7 +1382,7 @@ class oe {
       ...e,
       headers: {
         "Content-Type": "application/json",
-        ...e?.headers
+        ...e.headers
       }
     });
   }
@@ -1001,7 +1410,7 @@ class oe {
       ...e,
       headers: {
         "Content-Type": "application/json",
-        ...e?.headers
+        ...e.headers
       }
     });
   }
@@ -1017,7 +1426,7 @@ class oe {
       ...e,
       headers: {
         "Content-Type": "application/json",
-        ...e?.headers
+        ...e.headers
       }
     });
   }
@@ -1113,7 +1522,7 @@ class oe {
       ...e,
       headers: {
         "Content-Type": "application/json",
-        ...e?.headers
+        ...e.headers
       }
     });
   }
@@ -1193,8 +1602,20 @@ class oe {
       ...e
     });
   }
+  static getTreeDocumentTypeSiblings(e) {
+    return (e?.client ?? t).get({
+      security: [
+        {
+          scheme: "bearer",
+          type: "http"
+        }
+      ],
+      url: "/umbraco/management/api/v1/tree/document-type/siblings",
+      ...e
+    });
+  }
 }
-class ve {
+class He {
   static getDocumentVersion(e) {
     return (e.client ?? t).get({
       security: [
@@ -1244,7 +1665,30 @@ class ve {
     });
   }
 }
-class Te {
+class Le {
+  static putUmbracoManagementApiV11DocumentByIdValidate11(e) {
+    return (e.client ?? t).put({
+      security: [
+        {
+          scheme: "bearer",
+          type: "http"
+        }
+      ],
+      url: "/umbraco/management/api/v1.1/document/{id}/validate",
+      ...e,
+      headers: {
+        "Content-Type": "application/json",
+        ...e.headers
+      }
+    });
+  }
+}
+class Fe {
+  static {
+    this.documentByIdValidate1Service = Le;
+  }
+}
+class Me {
   static getCollectionDocumentById(e) {
     return (e.client ?? t).get({
       security: [
@@ -1309,7 +1753,7 @@ class Te {
       ...e,
       headers: {
         "Content-Type": "application/json",
-        ...e?.headers
+        ...e.headers
       }
     });
   }
@@ -1325,6 +1769,21 @@ class Te {
       ...e
     });
   }
+  /**
+   * @deprecated
+   */
+  static getDocumentByIdAvailableSegmentOptions(e) {
+    return (e.client ?? t).get({
+      security: [
+        {
+          scheme: "bearer",
+          type: "http"
+        }
+      ],
+      url: "/umbraco/management/api/v1/document/{id}/available-segment-options",
+      ...e
+    });
+  }
   static postDocumentByIdCopy(e) {
     return (e.client ?? t).post({
       security: [
@@ -1337,7 +1796,7 @@ class Te {
       ...e,
       headers: {
         "Content-Type": "application/json",
-        ...e?.headers
+        ...e.headers
       }
     });
   }
@@ -1365,7 +1824,7 @@ class Te {
       ...e,
       headers: {
         "Content-Type": "application/json",
-        ...e?.headers
+        ...e.headers
       }
     });
   }
@@ -1381,7 +1840,7 @@ class Te {
       ...e,
       headers: {
         "Content-Type": "application/json",
-        ...e?.headers
+        ...e.headers
       }
     });
   }
@@ -1421,7 +1880,7 @@ class Te {
       ...e,
       headers: {
         "Content-Type": "application/json",
-        ...e?.headers
+        ...e.headers
       }
     });
   }
@@ -1461,7 +1920,7 @@ class Te {
       ...e,
       headers: {
         "Content-Type": "application/json",
-        ...e?.headers
+        ...e.headers
       }
     });
   }
@@ -1477,7 +1936,7 @@ class Te {
       ...e,
       headers: {
         "Content-Type": "application/json",
-        ...e?.headers
+        ...e.headers
       }
     });
   }
@@ -1493,7 +1952,7 @@ class Te {
       ...e,
       headers: {
         "Content-Type": "application/json",
-        ...e?.headers
+        ...e.headers
       }
     });
   }
@@ -1509,7 +1968,7 @@ class Te {
       ...e,
       headers: {
         "Content-Type": "application/json",
-        ...e?.headers
+        ...e.headers
       }
     });
   }
@@ -1573,23 +2032,7 @@ class Te {
       ...e,
       headers: {
         "Content-Type": "application/json",
-        ...e?.headers
-      }
-    });
-  }
-  static putUmbracoManagementApiV11DocumentByIdValidate11(e) {
-    return (e.client ?? t).put({
-      security: [
-        {
-          scheme: "bearer",
-          type: "http"
-        }
-      ],
-      url: "/umbraco/management/api/v1.1/document/{id}/validate",
-      ...e,
-      headers: {
-        "Content-Type": "application/json",
-        ...e?.headers
+        ...e.headers
       }
     });
   }
@@ -1733,7 +2176,7 @@ class Te {
       ...e,
       headers: {
         "Content-Type": "application/json",
-        ...e?.headers
+        ...e.headers
       }
     });
   }
@@ -1773,6 +2216,18 @@ class Te {
       ...e
     });
   }
+  static getRecycleBinDocumentSiblings(e) {
+    return (e?.client ?? t).get({
+      security: [
+        {
+          scheme: "bearer",
+          type: "http"
+        }
+      ],
+      url: "/umbraco/management/api/v1/recycle-bin/document/siblings",
+      ...e
+    });
+  }
   static getTreeDocumentAncestors(e) {
     return (e?.client ?? t).get({
       security: [
@@ -1809,8 +2264,23 @@ class Te {
       ...e
     });
   }
+  static getTreeDocumentSiblings(e) {
+    return (e?.client ?? t).get({
+      security: [
+        {
+          scheme: "bearer",
+          type: "http"
+        }
+      ],
+      url: "/umbraco/management/api/v1/tree/document/siblings",
+      ...e
+    });
+  }
+  static {
+    this.putUmbracoManagementApiV1Service = Fe;
+  }
 }
-class Ie {
+class qe {
   static postDynamicRootQuery(e) {
     return (e?.client ?? t).post({
       security: [
@@ -1840,7 +2310,7 @@ class Ie {
     });
   }
 }
-class Ce {
+class We {
   static getHealthCheckGroup(e) {
     return (e?.client ?? t).get({
       security: [
@@ -1894,7 +2364,7 @@ class Ce {
     });
   }
 }
-class fe {
+class $e {
   static getHelp(e) {
     return (e?.client ?? t).get({
       security: [
@@ -1908,7 +2378,7 @@ class fe {
     });
   }
 }
-class Be {
+class Qe {
   static getImagingResizeUrls(e) {
     return (e?.client ?? t).get({
       security: [
@@ -1922,7 +2392,7 @@ class Be {
     });
   }
 }
-class Se {
+class Ye {
   static getImportAnalyze(e) {
     return (e?.client ?? t).get({
       security: [
@@ -1936,7 +2406,7 @@ class Se {
     });
   }
 }
-class De {
+class Je {
   static getIndexer(e) {
     return (e?.client ?? t).get({
       security: [
@@ -1974,7 +2444,7 @@ class De {
     });
   }
 }
-class je {
+class Ke {
   static getInstallSettings(e) {
     return (e?.client ?? t).get({
       url: "/umbraco/management/api/v1/install/settings",
@@ -2002,7 +2472,7 @@ class je {
     });
   }
 }
-class Re {
+class Xe {
   static getItemLanguage(e) {
     return (e?.client ?? t).get({
       security: [
@@ -2091,12 +2561,12 @@ class Re {
       ...e,
       headers: {
         "Content-Type": "application/json",
-        ...e?.headers
+        ...e.headers
       }
     });
   }
 }
-class Ee {
+class Ze {
   static getLogViewerLevel(e) {
     return (e?.client ?? t).get({
       security: [
@@ -2210,7 +2680,7 @@ class Ee {
     });
   }
 }
-class we {
+class et {
   static getManifestManifest(e) {
     return (e?.client ?? t).get({
       security: [
@@ -2242,7 +2712,7 @@ class we {
     });
   }
 }
-class Ae {
+class tt {
   static getItemMediaType(e) {
     return (e?.client ?? t).get({
       security: [
@@ -2343,7 +2813,7 @@ class Ae {
       ...e,
       headers: {
         "Content-Type": "application/json",
-        ...e?.headers
+        ...e.headers
       }
     });
   }
@@ -2383,7 +2853,7 @@ class Ae {
       ...e,
       headers: {
         "Content-Type": "application/json",
-        ...e?.headers
+        ...e.headers
       }
     });
   }
@@ -2411,7 +2881,7 @@ class Ae {
       ...e,
       headers: {
         "Content-Type": "application/json",
-        ...e?.headers
+        ...e.headers
       }
     });
   }
@@ -2427,7 +2897,7 @@ class Ae {
       ...e,
       headers: {
         "Content-Type": "application/json",
-        ...e?.headers
+        ...e.headers
       }
     });
   }
@@ -2523,7 +2993,7 @@ class Ae {
       ...e,
       headers: {
         "Content-Type": "application/json",
-        ...e?.headers
+        ...e.headers
       }
     });
   }
@@ -2579,8 +3049,20 @@ class Ae {
       ...e
     });
   }
+  static getTreeMediaTypeSiblings(e) {
+    return (e?.client ?? t).get({
+      security: [
+        {
+          scheme: "bearer",
+          type: "http"
+        }
+      ],
+      url: "/umbraco/management/api/v1/tree/media-type/siblings",
+      ...e
+    });
+  }
 }
-class Pe {
+class rt {
   static getCollectionMedia(e) {
     return (e?.client ?? t).get({
       security: [
@@ -2669,7 +3151,7 @@ class Pe {
       ...e,
       headers: {
         "Content-Type": "application/json",
-        ...e?.headers
+        ...e.headers
       }
     });
   }
@@ -2697,7 +3179,7 @@ class Pe {
       ...e,
       headers: {
         "Content-Type": "application/json",
-        ...e?.headers
+        ...e.headers
       }
     });
   }
@@ -2749,7 +3231,7 @@ class Pe {
       ...e,
       headers: {
         "Content-Type": "application/json",
-        ...e?.headers
+        ...e.headers
       }
     });
   }
@@ -2872,7 +3354,7 @@ class Pe {
       ...e,
       headers: {
         "Content-Type": "application/json",
-        ...e?.headers
+        ...e.headers
       }
     });
   }
@@ -2912,6 +3394,18 @@ class Pe {
       ...e
     });
   }
+  static getRecycleBinMediaSiblings(e) {
+    return (e?.client ?? t).get({
+      security: [
+        {
+          scheme: "bearer",
+          type: "http"
+        }
+      ],
+      url: "/umbraco/management/api/v1/recycle-bin/media/siblings",
+      ...e
+    });
+  }
   static getTreeMediaAncestors(e) {
     return (e?.client ?? t).get({
       security: [
@@ -2948,8 +3442,20 @@ class Pe {
       ...e
     });
   }
+  static getTreeMediaSiblings(e) {
+    return (e?.client ?? t).get({
+      security: [
+        {
+          scheme: "bearer",
+          type: "http"
+        }
+      ],
+      url: "/umbraco/management/api/v1/tree/media/siblings",
+      ...e
+    });
+  }
 }
-class Ne {
+class at {
   static getItemMemberGroup(e) {
     return (e?.client ?? t).get({
       security: [
@@ -3026,7 +3532,7 @@ class Ne {
       ...e,
       headers: {
         "Content-Type": "application/json",
-        ...e?.headers
+        ...e.headers
       }
     });
   }
@@ -3043,7 +3549,7 @@ class Ne {
     });
   }
 }
-class Ue {
+class ct {
   static getItemMemberType(e) {
     return (e?.client ?? t).get({
       security: [
@@ -3120,7 +3626,7 @@ class Ue {
       ...e,
       headers: {
         "Content-Type": "application/json",
-        ...e?.headers
+        ...e.headers
       }
     });
   }
@@ -3188,8 +3694,20 @@ class Ue {
       ...e
     });
   }
+  static getTreeMemberTypeSiblings(e) {
+    return (e?.client ?? t).get({
+      security: [
+        {
+          scheme: "bearer",
+          type: "http"
+        }
+      ],
+      url: "/umbraco/management/api/v1/tree/member-type/siblings",
+      ...e
+    });
+  }
 }
-class Le {
+class nt {
   static getFilterMember(e) {
     return (e?.client ?? t).get({
       security: [
@@ -3278,7 +3796,7 @@ class Le {
       ...e,
       headers: {
         "Content-Type": "application/json",
-        ...e?.headers
+        ...e.headers
       }
     });
   }
@@ -3318,7 +3836,7 @@ class Le {
       ...e,
       headers: {
         "Content-Type": "application/json",
-        ...e?.headers
+        ...e.headers
       }
     });
   }
@@ -3363,7 +3881,7 @@ class Le {
     });
   }
 }
-class Oe {
+class it {
   static postModelsBuilderBuild(e) {
     return (e?.client ?? t).post({
       security: [
@@ -3401,7 +3919,7 @@ class Oe {
     });
   }
 }
-class Fe {
+class ut {
   static getObjectTypes(e) {
     return (e?.client ?? t).get({
       security: [
@@ -3415,7 +3933,7 @@ class Fe {
     });
   }
 }
-class _e {
+class st {
   static getOembedQuery(e) {
     return (e?.client ?? t).get({
       security: [
@@ -3429,7 +3947,7 @@ class _e {
     });
   }
 }
-class ke {
+class mt {
   static postPackageByNameRunMigration(e) {
     return (e.client ?? t).post({
       security: [
@@ -3518,7 +4036,7 @@ class ke {
       ...e,
       headers: {
         "Content-Type": "application/json",
-        ...e?.headers
+        ...e.headers
       }
     });
   }
@@ -3547,7 +4065,7 @@ class ke {
     });
   }
 }
-class Ve {
+class pt {
   static getItemPartialView(e) {
     return (e?.client ?? t).get({
       security: [
@@ -3612,7 +4130,7 @@ class Ve {
       ...e,
       headers: {
         "Content-Type": "application/json",
-        ...e?.headers
+        ...e.headers
       }
     });
   }
@@ -3628,7 +4146,7 @@ class Ve {
       ...e,
       headers: {
         "Content-Type": "application/json",
-        ...e?.headers
+        ...e.headers
       }
     });
   }
@@ -3732,8 +4250,20 @@ class Ve {
       ...e
     });
   }
+  static getTreePartialViewSiblings(e) {
+    return (e?.client ?? t).get({
+      security: [
+        {
+          scheme: "bearer",
+          type: "http"
+        }
+      ],
+      url: "/umbraco/management/api/v1/tree/partial-view/siblings",
+      ...e
+    });
+  }
 }
-class xe {
+class lt {
   static deletePreview(e) {
     return (e?.client ?? t).delete({
       url: "/umbraco/management/api/v1/preview",
@@ -3753,7 +4283,7 @@ class xe {
     });
   }
 }
-class Ge {
+class yt {
   static getProfilingStatus(e) {
     return (e?.client ?? t).get({
       security: [
@@ -3783,7 +4313,7 @@ class Ge {
     });
   }
 }
-class We {
+class ht {
   static getPropertyTypeIsUsed(e) {
     return (e?.client ?? t).get({
       security: [
@@ -3797,7 +4327,7 @@ class We {
     });
   }
 }
-class He {
+class dt {
   static postPublishedCacheRebuild(e) {
     return (e?.client ?? t).post({
       security: [
@@ -3835,7 +4365,7 @@ class He {
     });
   }
 }
-class Me {
+class gt {
   static getRedirectManagement(e) {
     return (e?.client ?? t).get({
       security: [
@@ -3897,7 +4427,7 @@ class Me {
     });
   }
 }
-class qe {
+class bt {
   static getItemRelationType(e) {
     return (e?.client ?? t).get({
       security: [
@@ -3935,7 +4465,7 @@ class qe {
     });
   }
 }
-class $e {
+class ot {
   static getRelationByRelationTypeId(e) {
     return (e.client ?? t).get({
       security: [
@@ -3949,7 +4479,7 @@ class $e {
     });
   }
 }
-class ze {
+class vt {
   static getItemScript(e) {
     return (e?.client ?? t).get({
       security: [
@@ -4014,7 +4544,7 @@ class ze {
       ...e,
       headers: {
         "Content-Type": "application/json",
-        ...e?.headers
+        ...e.headers
       }
     });
   }
@@ -4030,7 +4560,7 @@ class ze {
       ...e,
       headers: {
         "Content-Type": "application/json",
-        ...e?.headers
+        ...e.headers
       }
     });
   }
@@ -4110,8 +4640,20 @@ class ze {
       ...e
     });
   }
+  static getTreeScriptSiblings(e) {
+    return (e?.client ?? t).get({
+      security: [
+        {
+          scheme: "bearer",
+          type: "http"
+        }
+      ],
+      url: "/umbraco/management/api/v1/tree/script/siblings",
+      ...e
+    });
+  }
 }
-class Qe {
+class Tt {
   static getSearcher(e) {
     return (e?.client ?? t).get({
       security: [
@@ -4137,7 +4679,7 @@ class Qe {
     });
   }
 }
-class Ye {
+class ft {
   static getSecurityConfiguration(e) {
     return (e?.client ?? t).get({
       security: [
@@ -4193,7 +4735,7 @@ class Ye {
     });
   }
 }
-class Ke {
+class It {
   static getSegment(e) {
     return (e?.client ?? t).get({
       security: [
@@ -4207,7 +4749,7 @@ class Ke {
     });
   }
 }
-class Je {
+class Ct {
   static getServerConfiguration(e) {
     return (e?.client ?? t).get({
       url: "/umbraco/management/api/v1/server/configuration",
@@ -4257,7 +4799,7 @@ class Je {
     });
   }
 }
-class Xe {
+class Bt {
   static getItemStaticFile(e) {
     return (e?.client ?? t).get({
       security: [
@@ -4307,7 +4849,7 @@ class Xe {
     });
   }
 }
-class Ze {
+class St {
   static getItemStylesheet(e) {
     return (e?.client ?? t).get({
       security: [
@@ -4372,7 +4914,7 @@ class Ze {
       ...e,
       headers: {
         "Content-Type": "application/json",
-        ...e?.headers
+        ...e.headers
       }
     });
   }
@@ -4388,7 +4930,7 @@ class Ze {
       ...e,
       headers: {
         "Content-Type": "application/json",
-        ...e?.headers
+        ...e.headers
       }
     });
   }
@@ -4468,8 +5010,20 @@ class Ze {
       ...e
     });
   }
+  static getTreeStylesheetSiblings(e) {
+    return (e?.client ?? t).get({
+      security: [
+        {
+          scheme: "bearer",
+          type: "http"
+        }
+      ],
+      url: "/umbraco/management/api/v1/tree/stylesheet/siblings",
+      ...e
+    });
+  }
 }
-class et {
+class Dt {
   static getTag(e) {
     return (e?.client ?? t).get({
       security: [
@@ -4483,7 +5037,7 @@ class et {
     });
   }
 }
-class tt {
+class Et {
   static getTelemetry(e) {
     return (e?.client ?? t).get({
       security: [
@@ -4525,7 +5079,7 @@ class tt {
     });
   }
 }
-class rt {
+class jt {
   static getItemTemplate(e) {
     return (e?.client ?? t).get({
       security: [
@@ -4602,7 +5156,7 @@ class rt {
       ...e,
       headers: {
         "Content-Type": "application/json",
-        ...e?.headers
+        ...e.headers
       }
     });
   }
@@ -4682,11 +5236,23 @@ class rt {
       ...e
     });
   }
+  static getTreeTemplateSiblings(e) {
+    return (e?.client ?? t).get({
+      security: [
+        {
+          scheme: "bearer",
+          type: "http"
+        }
+      ],
+      url: "/umbraco/management/api/v1/tree/template/siblings",
+      ...e
+    });
+  }
 }
-class at {
+class At {
   static postTemporaryFile(e) {
     return (e?.client ?? t).post({
-      ...Z,
+      ...oe,
       security: [
         {
           scheme: "bearer",
@@ -4738,7 +5304,7 @@ class at {
     });
   }
 }
-class ct {
+class wt {
   static postUpgradeAuthorize(e) {
     return (e?.client ?? t).post({
       security: [
@@ -4764,7 +5330,7 @@ class ct {
     });
   }
 }
-class nt {
+class Pt {
   static getUserData(e) {
     return (e?.client ?? t).get({
       security: [
@@ -4809,6 +5375,18 @@ class nt {
       }
     });
   }
+  static deleteUserDataById(e) {
+    return (e.client ?? t).delete({
+      security: [
+        {
+          scheme: "bearer",
+          type: "http"
+        }
+      ],
+      url: "/umbraco/management/api/v1/user-data/{id}",
+      ...e
+    });
+  }
   static getUserDataById(e) {
     return (e.client ?? t).get({
       security: [
@@ -4822,7 +5400,7 @@ class nt {
     });
   }
 }
-class it {
+class Nt {
   static getFilterUserGroup(e) {
     return (e?.client ?? t).get({
       security: [
@@ -4927,7 +5505,7 @@ class it {
       ...e,
       headers: {
         "Content-Type": "application/json",
-        ...e?.headers
+        ...e.headers
       }
     });
   }
@@ -4943,7 +5521,7 @@ class it {
       ...e,
       headers: {
         "Content-Type": "application/json",
-        ...e?.headers
+        ...e.headers
       }
     });
   }
@@ -4959,12 +5537,12 @@ class it {
       ...e,
       headers: {
         "Content-Type": "application/json",
-        ...e?.headers
+        ...e.headers
       }
     });
   }
 }
-class ut {
+class Rt {
   static getFilterUser(e) {
     return (e?.client ?? t).get({
       security: [
@@ -5069,7 +5647,7 @@ class ut {
       ...e,
       headers: {
         "Content-Type": "application/json",
-        ...e?.headers
+        ...e.headers
       }
     });
   }
@@ -5121,7 +5699,7 @@ class ut {
       ...e,
       headers: {
         "Content-Type": "application/json",
-        ...e?.headers
+        ...e.headers
       }
     });
   }
@@ -5149,7 +5727,7 @@ class ut {
       ...e,
       headers: {
         "Content-Type": "application/json",
-        ...e?.headers
+        ...e.headers
       }
     });
   }
@@ -5201,7 +5779,7 @@ class ut {
       ...e,
       headers: {
         "Content-Type": "application/json",
-        ...e?.headers
+        ...e.headers
       }
     });
   }
@@ -5277,7 +5855,7 @@ class ut {
       ...e,
       headers: {
         "Content-Type": "application/json",
-        ...e?.headers
+        ...e.headers
       }
     });
   }
@@ -5490,7 +6068,7 @@ class ut {
     });
   }
 }
-class mt {
+class Ut {
   static getItemWebhook(e) {
     return (e?.client ?? t).get({
       security: [
@@ -5567,7 +6145,7 @@ class mt {
       ...e,
       headers: {
         "Content-Type": "application/json",
-        ...e?.headers
+        ...e.headers
       }
     });
   }
@@ -5609,79 +6187,81 @@ class mt {
   }
 }
 export {
-  w as AuditTypeModel,
-  A as CompositionTypeModel,
-  he as CultureService,
-  P as DataTypeChangeModeModel,
-  de as DataTypeService,
-  ge as DictionaryService,
-  N as DirectionModel,
-  be as DocumentBlueprintService,
-  Te as DocumentService,
-  oe as DocumentTypeService,
-  U as DocumentVariantStateModel,
-  ve as DocumentVersionService,
-  Ie as DynamicRootService,
-  L as EventMessageTypeModel,
-  Ce as HealthCheckService,
-  O as HealthStatusModel,
-  fe as HelpService,
-  F as ImageCropModeModel,
-  Be as ImagingService,
-  Se as ImportService,
-  De as IndexerService,
-  je as InstallService,
-  Re as LanguageService,
-  _ as LogLevelModel,
-  Ee as LogViewerService,
-  we as ManifestService,
-  Pe as MediaService,
-  Ae as MediaTypeService,
-  Ne as MemberGroupService,
-  k as MemberKindModel,
-  Le as MemberService,
-  Ue as MemberTypeService,
-  Oe as ModelsBuilderService,
-  V as ModelsModeModel,
-  _e as OEmbedService,
-  Fe as ObjectTypesService,
-  x as OperatorModel,
-  G as OutOfDateTypeModel,
-  ke as PackageService,
-  Ve as PartialViewService,
-  xe as PreviewService,
-  Ge as ProfilingService,
-  We as PropertyTypeService,
-  He as PublishedCacheService,
-  Me as RedirectManagementService,
-  W as RedirectStatusModel,
-  $e as RelationService,
-  qe as RelationTypeService,
-  H as RuntimeLevelModel,
-  M as RuntimeModeModel,
-  ze as ScriptService,
-  Qe as SearcherService,
-  Ye as SecurityService,
-  Ke as SegmentService,
-  Je as ServerService,
-  Xe as StaticFileService,
-  q as StatusResultTypeModel,
-  Ze as StylesheetService,
-  et as TagService,
-  $ as TelemetryLevelModel,
-  tt as TelemetryService,
-  z as TemplateQueryPropertyTypeModel,
-  rt as TemplateService,
-  at as TemporaryFileService,
-  ct as UpgradeService,
-  Q as UserDataOperationStatusModel,
-  nt as UserDataService,
-  it as UserGroupService,
-  Y as UserKindModel,
-  K as UserOrderModel,
-  ut as UserService,
-  J as UserStateModel,
-  mt as WebhookService,
+  Q as AuditTypeModel,
+  Y as CompositionTypeModel,
+  Ve as CultureService,
+  J as DataTypeChangeModeModel,
+  _e as DataTypeService,
+  xe as DictionaryService,
+  K as DirectionModel,
+  Ge as DocumentBlueprintService,
+  Le as DocumentByIdValidate1Service,
+  Me as DocumentService,
+  ze as DocumentTypeService,
+  X as DocumentVariantStateModel,
+  He as DocumentVersionService,
+  qe as DynamicRootService,
+  Z as EventMessageTypeModel,
+  We as HealthCheckService,
+  ee as HealthStatusModel,
+  $e as HelpService,
+  te as ImageCropModeModel,
+  Qe as ImagingService,
+  Ye as ImportService,
+  Je as IndexerService,
+  Ke as InstallService,
+  Xe as LanguageService,
+  re as LogLevelModel,
+  Ze as LogViewerService,
+  et as ManifestService,
+  rt as MediaService,
+  tt as MediaTypeService,
+  at as MemberGroupService,
+  ae as MemberKindModel,
+  nt as MemberService,
+  ct as MemberTypeService,
+  it as ModelsBuilderService,
+  ce as ModelsModeModel,
+  st as OEmbedService,
+  ut as ObjectTypesService,
+  ne as OperatorModel,
+  ie as OutOfDateTypeModel,
+  mt as PackageService,
+  pt as PartialViewService,
+  lt as PreviewService,
+  yt as ProfilingService,
+  ht as PropertyTypeService,
+  dt as PublishedCacheService,
+  Fe as PutUmbracoManagementApiV1Service,
+  gt as RedirectManagementService,
+  ue as RedirectStatusModel,
+  ot as RelationService,
+  bt as RelationTypeService,
+  se as RuntimeLevelModel,
+  me as RuntimeModeModel,
+  vt as ScriptService,
+  Tt as SearcherService,
+  ft as SecurityService,
+  It as SegmentService,
+  Ct as ServerService,
+  Bt as StaticFileService,
+  pe as StatusResultTypeModel,
+  St as StylesheetService,
+  Dt as TagService,
+  le as TelemetryLevelModel,
+  Et as TelemetryService,
+  ye as TemplateQueryPropertyTypeModel,
+  jt as TemplateService,
+  At as TemporaryFileService,
+  wt as UpgradeService,
+  he as UserDataOperationStatusModel,
+  Pt as UserDataService,
+  Nt as UserGroupService,
+  de as UserKindModel,
+  ge as UserOrderModel,
+  Rt as UserService,
+  be as UserStateModel,
+  Ut as WebhookService,
   t as client
 };
 //# sourceMappingURL=index.js.map

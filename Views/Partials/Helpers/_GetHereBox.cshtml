@@ -1,0 +1,26 @@
+@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage   @* <= no generic *@
+
+@{
+    var model = Model as dynamic; // safe cast
+    var mapUrl   = (string)(model?.mapUrl   ?? "https://maps.app.goo.gl/fSNNnDKKBLaJ5yuy8");
+    var busUrl   = (string)(model?.busUrl   ?? "https://www.torshavn.fo/byur-og-ferdsla/vegir-og-ferdsla/bussleidin#pid=5");
+    var imageUrl = (string)(model?.imageUrl ?? "https://maps.app.goo.gl/fSNNnDKKBLaJ5yuy8");
+}
+
+<div class="gethere_box">
+  <h2>Soleiðis finnir tú okkum</h2>
+  <div class="links-holder">
+    <a target="_blank" href="@mapUrl">
+      <!-- your SVGs exactly as before -->
+      <span>VÍS Á KORTI</span>
+    </a>
+    <a target="_blank" href="@busUrl">
+      <!-- bus svg -->
+      <span>BUSSLEIÐIN</span>
+    </a>
+    <a target="_blank" href="@imageUrl">
+      <!-- image svg -->
+      <span>VÍS MYND</span>
+    </a>
+  </div>
+</div>

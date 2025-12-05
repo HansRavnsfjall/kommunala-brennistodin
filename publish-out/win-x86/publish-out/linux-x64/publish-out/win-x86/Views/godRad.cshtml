@@ -1,0 +1,88 @@
+@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage
+@using System.Globalization
+@using Umbraco.Cms.Core.Models.Blocks
+@using Umbraco.Cms.Core.Models.PublishedContent
+@using Umbraco.Cms.Core.Models
+@using Umbraco.Cms.Core.Strings
+@using Umbraco.Extensions
+@using Kob.ViewModels
+
+@{
+    Layout = "master.cshtml";
+    ViewBag.Title = Model?.Name;
+
+    var culture = CultureInfo.CurrentUICulture?.Name;
+
+    // ---- INGRESS: alias "inngangstekstur" (RichText)
+    IHtmlEncodedString? ingress = Model.Value<IHtmlEncodedString?>(
+        "inngangstekstur",
+        culture: culture,
+        fallback: Fallback.ToLanguage
+    );
+
+    // ---- IMAGE: alias "mynd" (optional)
+    MediaWithCrops? heroImage = Model.Value<MediaWithCrops?>(
+        "mynd",
+        culture: culture,
+        fallback: Fallback.ToLanguage
+    );
+
+    // Make safe URL + alt
+    var heroUrl = heroImage?.GetCropUrl() ?? heroImage?.MediaUrl();
+    var heroAlt =
+        heroImage?.Value<string>("altText") ??
+        heroImage?.Value<string>("umbracoAltText") ??
+        Model?.Name;
+}
+
+<!-- THEME HERO -->
+<section class="kb-theme-hero temaHead godRad bg-blush overflow-visible">
+  <div class="container py-5 py-lg-6">
+    <div class="row align-items-center gy-4">
+      <!-- Text -->
+      <div class="col-lg-6">
+        <span class="kb-eyebrow">GÓÐ RÁÐ</span>
+        <h1 class="kb-title mt-2">@Model?.Name</h1>
+
+        @if (ingress is not null)
+        {
+          <div class="kb-lead mt-4 mb-0">
+            @ingress
+          </div>
+        }
+      </div>
+
+      <!-- Image -->
+      <div class="col-lg-6">
+        @if (!string.IsNullOrWhiteSpace(heroUrl))
+        {
+          <div class="kb-img-lift shadow-sm">
+            <img class="img-fluid w-100" src="@heroUrl" alt="@heroAlt" />
+          </div>
+        }
+      </div>
+    </div>
+  </div>
+</section>
+
+@{
+    // Blocklist loading unchanged
+    var blocks = Model.Value<BlockListModel>("modul", culture: culture, fallback: Fallback.ToLanguage);
+    if (blocks == null || !blocks.Any())
+    {
+        blocks = Model.Value<BlockListModel>("modul", culture: culture, fallback: Fallback.ToAncestors);
+    }
+}
+
+@if (blocks != null && blocks.Any())
+{
+    @await Html.PartialAsync(
+        "~/Views/Partials/Helpers/RenderBlockList.cshtml",
+        new BlockListRenderModel
+        {
+            Blocks = blocks,
+            Scope = Model.ContentType.Alias,
+            FallbackView = "~/Views/Partials/blocklist/_Default.cshtml"
+        }
+    )
+}

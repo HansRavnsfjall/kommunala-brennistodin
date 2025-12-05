@@ -36,7 +36,7 @@ function B(r) {
 }
 class e extends T {
   constructor(t, s) {
-    super(t), this.#r = !1, this.#t = [], this.#l = !0, this.#n = 0, this.#s = 0, this.#o = Array(), this.#q = () => {
+    super(t), this.#r = !1, this.#t = [], this.#d = !0, this.#n = 0, this.#s = 0, this.#o = Array(), this.#q = () => {
       if (this.#r === !1 || this.#i)
         return;
       const i = this.#e.containerSelector ? this.#v.shadowRoot.querySelector(this.#e.containerSelector) : this.#v;
@@ -89,7 +89,7 @@ class e extends T {
     }, this.#D = (i) => {
       const n = i.target.closest(this.#e.itemSelector);
       if (!n) return;
-      e.activeElement && e.activeElement !== n && (console.error("drag start ws cancelled due to another drag was still active"), this.#d()), this.#c || (this.#c = x(this.#i));
+      e.activeElement && e.activeElement !== n && (console.error("drag start ws cancelled due to another drag was still active"), this.#l()), this.#c || (this.#c = x(this.#i));
       const a = this.#i.getBoundingClientRect();
       if (this.#i.style.minHeight = a.height + "px", this.#P(n), window.addEventListener("mouseup", this.#a), window.addEventListener("mouseout", this.#a), window.addEventListener("mouseleave", this.#a), window.addEventListener("mousemove", this.#p), e.activeItem = this.getItemOfElement(e.activeElement), !e.activeItem) {
         console.error("Could not find item related to this element.", e.activeElement);
@@ -106,7 +106,7 @@ class e extends T {
       }), e.activeSorter = this, e.dropSorter = this, e.rqaId = requestAnimationFrame(() => {
         e.rqaId = void 0, e.activeDragElement && (e.activeDragElement.style.transform = "");
       }), !0;
-    }, this.#d = (i) => {
+    }, this.#l = (i) => {
       e.originalSorter && i?.dataTransfer != null && i.dataTransfer.dropEffect === "none" ? e.originalSorter.moveItemInModel(
         e.originalIndex ?? 0,
         e.activeSorter
@@ -125,33 +125,33 @@ class e extends T {
         return;
       const a = this.#E ? this.#i.shadowRoot ?? this.#i : this.#i, h = Array.from(a.querySelectorAll(this.#e.itemSelector)), o = this.#i.getBoundingClientRect(), u = [];
       let E = !1;
-      for (const l of h) {
-        const c = l.getBoundingClientRect();
+      for (const d of h) {
+        const c = d.getBoundingClientRect();
         if (this.#s >= c.top && this.#s <= c.bottom) {
-          const g = this.#u(l);
+          const g = this.#u(d);
           if (g) {
             const I = g.getBoundingClientRect();
-            l !== e.activeElement ? u.push({ el: l, dragRect: I }) : E = !0;
+            d !== e.activeElement ? u.push({ el: d, dragRect: I }) : E = !0;
           }
         }
       }
-      let y = 1 / 0, p, d, v = !1;
-      u.forEach((l) => {
-        const c = l.dragRect.left + l.dragRect.width * 0.5, g = Math.abs(this.#n - c);
-        g < y && (p = l.el, d = l.dragRect, y = g, v = this.#n > c);
+      let y = 1 / 0, p, l, v = !1;
+      u.forEach((d) => {
+        const c = d.dragRect.left + d.dragRect.width * 0.5, g = Math.abs(this.#n - c);
+        g < y && (p = d.el, l = d.dragRect, y = g, v = this.#n > c);
       });
       const L = this.#e.getUniqueOfModel(e.activeItem);
-      let f = this.#t.findIndex((l) => this.#e.getUniqueOfModel(l) === L);
+      let f = this.#t.findIndex((d) => this.#e.getUniqueOfModel(d) === L);
       if (f === -1 && (f = null), p) {
         if (p === e.activeElement)
           return;
-        const l = this.getItemOfElement(p);
-        if (!l)
+        const d = this.getItemOfElement(p);
+        if (!d)
           throw new Error("Could not find model of found element");
-        let c = this.#t.indexOf(l);
+        let c = this.#t.indexOf(d);
         if (c === -1 && (c = null), f !== null && c !== null) {
-          const m = Math.max(d.width - i.width, 0);
-          f < c && d.left + m < this.#n ? v = !0 : f > c && d.right - m > this.#n && (v = !1);
+          const m = Math.max(l.width - i.width, 0);
+          f < c && l.left + m < this.#n ? v = !0 : f > c && l.right - m > this.#n && (v = !1);
         }
         const g = this.#e.resolvePlacement ? this.#e.resolvePlacement({
           containerElement: this.#i,
@@ -161,8 +161,8 @@ class e extends T {
           element: e.activeElement,
           elementRect: i,
           relatedElement: p,
-          relatedModel: l,
-          relatedRect: d,
+          relatedModel: d,
+          relatedRect: l,
           relatedIndex: c,
           placeholderIsInThisRow: E,
           horizontalPlaceAfter: v,
@@ -174,19 +174,19 @@ class e extends T {
         let I = !0;
         if (typeof g == "object")
           I = g.verticalDirection ?? !1, v = g.placeAfter;
-        else if (I = g ?? !1, I === !0 && (v = this.#s > d.top + d.height * 0.5, f !== null && c !== null)) {
-          const m = Math.max(d.height - i.height, 0);
-          f < c && this.#s > d.top + m ? v = !0 : f > c && this.#s < d.bottom - m && (v = !1);
+        else if (I = g ?? !1, I === !0 && (v = this.#s > l.top + l.height * 0.5, f !== null && c !== null)) {
+          const m = Math.max(l.height - i.height, 0);
+          f < c && this.#s > l.top + m ? v = !0 : f > c && this.#s < l.bottom - m && (v = !1);
         }
         if (I === !0) {
           let m;
           if (v === !1) {
-            let q = d.left;
+            let q = l.left;
             u.map((w) => {
               w.dragRect.left < q && (q = w.dragRect.left, m = w.el);
             });
           } else {
-            let q = d.right;
+            let q = l.right;
             u.map((w) => {
               w.dragRect.right > q && (q = w.dragRect.right, m = w.el);
             });
@@ -209,8 +209,8 @@ class e extends T {
           c && this.#g(c);
         }
       }
-    }, this.#f = null, this.#h = document.scrollingElement || document.documentElement, this.autoScrollX = 0, this.autoScrollY = 0, this.#L = () => {
-      this.#h.scrollLeft += this.autoScrollX * D, this.#h.scrollTop += this.autoScrollY * D, this.#f = requestAnimationFrame(this.#L);
+    }, this.#f = null, this.#h = document.scrollingElement || document.documentElement, this._autoScrollX = 0, this._autoScrollY = 0, this.#L = () => {
+      this.#h.scrollLeft += this._autoScrollX * D, this.#h.scrollTop += this._autoScrollY * D, this.#f = requestAnimationFrame(this.#L);
     }, this.#v = t, s.identifier ??= Symbol(), s.ignorerSelector ??= "a,img,iframe,input,textarea,select,option", !s.placeholderClass && !s.placeholderAttr && (s.placeholderAttr = "drag-placeholder"), this.#e = s, t.addUmbController(this), this.#m = new MutationObserver((i) => {
       i.forEach((n) => {
         n.addedNodes.forEach((a) => {
@@ -229,7 +229,7 @@ class e extends T {
   #i;
   #E;
   #c;
-  #l;
+  #d;
   #n;
   #s;
   #o;
@@ -248,7 +248,7 @@ class e extends T {
    * @memberof UmbSorterController
    */
   enable() {
-    this.#l || (this.#l = !0, this.#r && requestAnimationFrame(this.#q));
+    this.#d || (this.#d = !0, this.#r && requestAnimationFrame(this.#q));
   }
   /**
    * Disables the sorter, this will prevent any sorting to happen.
@@ -256,7 +256,7 @@ class e extends T {
    * @memberof UmbSorterController
    */
   disable() {
-    this.#l && (this.#l = !1, this.#r && this.#O());
+    this.#d && (this.#d = !1, this.#r && this.#O());
   }
   setModel(t) {
     this.#t = t ?? [];
@@ -276,14 +276,14 @@ class e extends T {
     return this.#t.find((s) => this.#e.getUniqueOfModel(s) === t);
   }
   hostConnected() {
-    this.#r || (this.#r = !0, this.#l && requestAnimationFrame(this.#q));
+    this.#r || (this.#r = !0, this.#d && requestAnimationFrame(this.#q));
   }
   hostDisconnected() {
-    this.#r = !1, this.#l && this.#O();
+    this.#r = !1, this.#d && this.#O();
   }
   #q;
   #O() {
-    if (e.activeSorter === this && (e.activeSorter = void 0, e.activeElement && this.#d()), e.dropSorter === this && (e.dropSorter = void 0), e.lastIndicationSorter === this && (e.lastIndicationSorter = void 0), this.#m.disconnect(), this.#c = null, this.#i) {
+    if (e.activeSorter === this && (e.activeSorter = void 0, e.activeElement && this.#l()), e.dropSorter === this && (e.dropSorter = void 0), e.lastIndicationSorter === this && (e.lastIndicationSorter = void 0), this.#m.disconnect(), this.#c = null, this.#i) {
       const t = this.#E ? this.#i.shadowRoot ?? this.#i : this.#i;
       t.removeEventListener("dragover", this.#R), t.removeEventListener("drop", this.#y), this.#i = void 0;
     }
@@ -329,7 +329,7 @@ class e extends T {
     }
     if (this.#e.ignorerSelector && P(t, this.#e.ignorerSelector), !this.#e.disabledItemSelector || !t.matches(this.#e.disabledItemSelector)) {
       const s = this.#u(t);
-      this.#T(t).addEventListener("mousedown", this.#M), s.draggable = !1, s.addEventListener("dragstart", this.#D), s.addEventListener("dragend", this.#d);
+      this.#T(t).addEventListener("mousedown", this.#M), s.draggable = !1, s.addEventListener("dragstart", this.#D), s.addEventListener("dragend", this.#l);
     }
     if (e.activeItem && this.#F()) {
       const s = this.#e.getUniqueOfElement(t), i = this.#e.getUniqueOfModel(e.activeItem);
@@ -340,7 +340,7 @@ class e extends T {
   destroyItem(t) {
     this.#e.ignorerSelector && F(t, this.#e.ignorerSelector);
     const s = this.#u(t);
-    s.removeEventListener("dragstart", this.#D), s.removeEventListener("dragend", this.#d), this.#T(t).removeEventListener("mousedown", this.#M), s.draggable = !1, this.#o = this.#o.filter((n) => n !== t);
+    s.removeEventListener("dragstart", this.#D), s.removeEventListener("dragend", this.#l), this.#T(t).removeEventListener("mousedown", this.#M), s.draggable = !1, this.#o = this.#o.filter((n) => n !== t);
   }
   #H() {
     this.#e.placeholderClass && e.activeElement?.classList.add(this.#e.placeholderClass), this.#e.placeholderAttr && e.activeElement?.setAttribute(this.#e.placeholderAttr, "");
@@ -358,18 +358,18 @@ class e extends T {
   #M;
   #A;
   #D;
-  #d;
+  #l;
   #p;
   #a;
   #w() {
-    if (this.#W(), this.#z(), this.removeAllowIndication(), e.activeElement && e.activeItem) {
+    if (this.#W(), this.#j(), this.removeAllowIndication(), e.activeElement && e.activeItem) {
       const t = e.activeElement;
       this.#e.onEnd && this.#e.onEnd({
         item: e.activeItem,
         element: t
       });
     }
-    e.activeDragElement && (e.activeDragElement.style.transform = "", e.activeDragElement.draggable = !1, e.activeDragElement.removeEventListener("dragend", this.#d)), this.#Y(), e.rqaId && (cancelAnimationFrame(e.rqaId), e.rqaId = void 0), e.activeItem = void 0, e.activeElement = void 0, e.activeDragElement = void 0, e.activeSorter = void 0, e.dropSorter = void 0, e.originalIndex = void 0, e.originalSorter = void 0, this.#n = 0, this.#s = 0;
+    e.activeDragElement && (e.activeDragElement.style.transform = "", e.activeDragElement.draggable = !1, e.activeDragElement.removeEventListener("dragend", this.#l)), this.#Y(), e.rqaId && (cancelAnimationFrame(e.rqaId), e.rqaId = void 0), e.activeItem = void 0, e.activeElement = void 0, e.activeDragElement = void 0, e.activeSorter = void 0, e.dropSorter = void 0, e.originalIndex = void 0, e.originalSorter = void 0, this.#n = 0, this.#s = 0;
   }
   #W() {
     this.#i && (this.#i.style.minHeight = ""), window.removeEventListener("mouseup", this.#a), window.removeEventListener("mouseout", this.#a), window.removeEventListener("mouseleave", this.#a), window.removeEventListener("mousemove", this.#p);
@@ -381,7 +381,7 @@ class e extends T {
     if (i !== 0 && n !== 0) {
       if (this.#n === i && this.#s === n)
         return;
-      if (this.#n = i, this.#s = n, this.handleAutoScroll(this.#n, this.#s), s) {
+      if (this.#n = i, this.#s = n, this.#z(this.#n, this.#s), s) {
         this.#x();
         return;
       }
@@ -526,7 +526,7 @@ class e extends T {
   }
   #f;
   #h;
-  handleAutoScroll(t, s) {
+  #z(t, s) {
     let i = null;
     this.#c ? (this.#h = this.#c, i = this.#h.getBoundingClientRect()) : (this.#h = document.scrollingElement || document.documentElement, i = {
       top: 0,
@@ -537,10 +537,10 @@ class e extends T {
       width: window.innerWidth
     });
     const n = this.#h.scrollWidth, a = this.#h.scrollHeight, h = i.width < n, o = i.height < a, u = this.#h.scrollLeft, E = this.#h.scrollTop;
-    cancelAnimationFrame(this.#f), (h || o) && (this.autoScrollX = Math.abs(i.right - t) <= R && u + i.width < n ? 1 : Math.abs(i.left - t) <= R && u ? -1 : 0, this.autoScrollY = Math.abs(i.bottom - s) <= R && E + i.height < a ? 1 : Math.abs(i.top - s) <= R && E ? -1 : 0, this.#f = requestAnimationFrame(this.#L));
+    cancelAnimationFrame(this.#f), (h || o) && (this._autoScrollX = Math.abs(i.right - t) <= R && u + i.width < n ? 1 : Math.abs(i.left - t) <= R && u ? -1 : 0, this._autoScrollY = Math.abs(i.bottom - s) <= R && E + i.height < a ? 1 : Math.abs(i.top - s) <= R && E ? -1 : 0, this.#f = requestAnimationFrame(this.#L));
   }
   #L;
-  #z() {
+  #j() {
     cancelAnimationFrame(this.#f), this.#f = null;
   }
   notifyDisallowed() {

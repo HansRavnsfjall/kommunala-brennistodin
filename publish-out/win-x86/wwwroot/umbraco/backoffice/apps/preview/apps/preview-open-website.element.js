@@ -10,7 +10,7 @@ import { UmbLitElement } from '@umbraco-cms/backoffice/lit-element';
 let UmbPreviewOpenWebsiteElement = class UmbPreviewOpenWebsiteElement extends UmbLitElement {
     async #onClick() {
         const previewContext = await this.getContext(UMB_PREVIEW_CONTEXT);
-        previewContext?.openWebsite();
+        await previewContext?.openWebsite();
     }
     render() {
         return html `

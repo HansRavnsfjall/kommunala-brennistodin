@@ -1,0 +1,1 @@
+{"version":3,"file":"constants-D1CA0epN.js","sources":["../../../src/packages/block/block-grid/context/constants.ts"],"sourcesContent":["export const UMB_BLOCK_GRID_DEFAULT_LAYOUT_STYLESHEET = '/umbraco/backoffice/css/umbraco-blockgridlayout.css';\r\n"],"names":["UMB_BLOCK_GRID_DEFAULT_LAYOUT_STYLESHEET"],"mappings":"AAAO,MAAMA,IAA2C;"}

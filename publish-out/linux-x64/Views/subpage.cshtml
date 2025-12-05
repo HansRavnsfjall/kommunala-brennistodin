@@ -1,0 +1,42 @@
+@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage
+@using System.Globalization
+@using Umbraco.Cms.Core.Models.Blocks
+@using Umbraco.Cms.Core.Models.PublishedContent
+@using Kob.ViewModels
+
+@{
+    Layout = "master.cshtml";
+    ViewBag.Title = Model?.Name;
+}
+
+@{
+    var culture = CultureInfo.CurrentUICulture?.Name;
+
+    var blocks = Model.Value<BlockListModel>(
+        "modul",
+        culture: culture,
+        fallback: Fallback.ToLanguage
+    );
+
+    if (blocks == null || !blocks.Any())
+    {
+        blocks = Model.Value<BlockListModel>(
+            "modul",
+            culture: culture,
+            fallback: Fallback.ToAncestors
+        );
+    }
+}
+
+@if (blocks != null && blocks.Any())
+{
+    @await Html.PartialAsync(
+        "~/Views/Partials/Helpers/RenderBlockList.cshtml",
+        new Kob.ViewModels.BlockListRenderModel
+        {
+            Blocks = blocks,
+            Scope = Model.ContentType.Alias,
+            FallbackView = "~/Views/Partials/BlockList/Default.cshtml"
+        }
+    )
+}

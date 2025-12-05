@@ -1,0 +1,83 @@
+﻿@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<Umbraco.Cms.Core.Models.Blocks.BlockListItem>
+@using Umbraco.Cms.Core.Models
+@using Umbraco.Cms.Core.Models.Blocks
+@using Umbraco.Cms.Core.Strings
+@using Umbraco.Extensions
+
+@{
+    var c = Model.Content;
+
+    // Fields
+    var heading = c.Value<string>("yvirskrift");
+    var bodyRte = c.Value<IHtmlEncodedString>("tekstur");
+    var link    = c.Value<Link>("leinki");
+    var img     = c.Value<MediaWithCrops>("mynd");
+
+    // Optimized WebP image (max 2000px wide, q=85, no upscaling)
+    string? imgUrl = img?.GetCropUrl(
+        width: 1000,
+        quality: 85,
+        furtherOptions: "&format=webp&upscale=false"
+    );
+
+    // Position info (passed from helper)
+    var isFirst  = ViewData["BlockIsFirst"] as bool? ?? false;
+    var isLast   = ViewData["BlockIsLast"]  as bool? ?? false;
+    var posClass = (ViewData["BlockPosClass"] as string) ?? string.Empty;
+
+    // Combine section classes
+    var sectionClasses = $"py-3 py-lg-5 theme-alternative {posClass}" +
+                         (isFirst ? " is-first" : "") +
+                         (isLast ? " is-last" : "");
+
+    // Link details
+    var href   = link?.Url ?? string.Empty;
+    var text   = !string.IsNullOrWhiteSpace(link?.Name) ? link!.Name! : "Les meira";
+    var target = link?.Target;
+    var rel    = target == "_blank" ? "noopener noreferrer" : null;
+
+    // --- Dropdown "radfylgja": "Mynd til vinstru" / "Mynd til høgru" ---
+    // Default should now be "Mynd til høgru"
+    var sideRaw   = (c.Value<string>("radfylgja") ?? "Mynd til høgru").Trim();
+    var imageLeft = sideRaw.StartsWith("Mynd til vinstru", StringComparison.OrdinalIgnoreCase); // true only if explicitly left
+
+    // Mobile-first stacking: image first on mobile (order-1), text second (order-2)
+    var imgColOrder = imageLeft ? "order-1 order-md-1" : "order-1 order-md-2";
+    var txtColOrder = imageLeft ? "order-2 order-md-2" : "order-2 order-md-1";
+}
+
+<section class="@sectionClasses">
+  <div class="container editor">
+    <div class="news-band row g-0">
+      <!-- IMAGE: col-12 on mobile (top), col-md-6 on desktop -->
+      @if (!string.IsNullOrWhiteSpace(imgUrl))
+      {
+        <div class="col-12 col-md-6 news-img @imgColOrder">
+          <img src="@imgUrl" alt="@img?.Name" class="img-fluid w-100" />
+        </div>
+      }
+
+      <!-- TEXT: col-12 on mobile (below image), col-md-6 on desktop -->
+      <div class="col-12 col-md-6 copy @txtColOrder">
+        @if (!string.IsNullOrWhiteSpace(heading))
+        {
+          <h3>@heading</h3>
+        }
+
+        @if (bodyRte is not null)
+        {
+          <div class="fw-700 text-muted-600">
+            @bodyRte
+          </div>
+        }
+
+        @if (!string.IsNullOrWhiteSpace(href))
+        {
+          <a href="@href" class="link-more btn" target="@target" rel="@rel">
+            @text
+          </a>
+        }
+      </div>
+    </div>
+  </div>
+</section>

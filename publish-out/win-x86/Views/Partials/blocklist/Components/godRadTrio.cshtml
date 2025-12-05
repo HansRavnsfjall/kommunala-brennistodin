@@ -1,0 +1,69 @@
+@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<Umbraco.Cms.Core.Models.Blocks.BlockListItem>
+@using System.Linq
+@using System.Globalization
+@using Umbraco.Cms.Core.Models
+@using Umbraco.Cms.Core.Models.PublishedContent
+@using Umbraco.Cms.Core.Strings
+@using Umbraco.Extensions
+
+@{
+    var culture = CultureInfo.CurrentUICulture?.Name;
+    var el = Model?.Content;
+
+    // Block heading (on the block itself)
+    var heading = el?.Value<string>("yvirskrift", culture: culture, fallback: Fallback.ToLanguage);
+
+    // Content Picker (multiple) => IEnumerable<IPublishedContent>
+    var picks = el?.Value<IEnumerable<IPublishedContent>>("items", culture: culture, fallback: Fallback.ToLanguage)
+               ?? Enumerable.Empty<IPublishedContent>();
+
+    var items = picks.Take(3).ToList();
+}
+
+@if (items.Any())
+{
+    <section class="py-2 py-lg-4 tips">
+        <div class="container">
+            @if (!string.IsNullOrWhiteSpace(heading))
+            {
+                <h3 class="mb-3">@heading</h3>
+            }
+
+            <div class="row g-4">
+                @foreach (var n in items)
+                {
+                    var title = n?.Name(culture) ?? n?.Name ?? "";
+                    var url   = n?.Url(culture) ?? n?.Url();
+
+                    // Image: expects alias "mynd" on the picked item
+                    MediaWithCrops? media = null;
+                    if (n?.HasProperty("mynd") == true)
+                    {
+                        media = n.Value<MediaWithCrops>("mynd", culture: culture, fallback: Fallback.ToLanguage);
+                    }
+                    var imgUrl = media?.Url() ?? "/images/dummy-bilur.jpg";
+
+                    // Optional teaser (if present on the picked item)
+                    IHtmlEncodedString? intro = null;
+                    if (n?.HasProperty("inngangstekstur") == true)
+                    {
+                        intro = n.Value<IHtmlEncodedString>("inngangstekstur", culture: culture, fallback: Fallback.ToLanguage);
+                    }
+
+                    <div class="col-md-4">
+                        <a href="@url" class="tip-card d-block text-decoration-none text-reset">
+                            <div class="img">
+                                <img src="@imgUrl" alt="@title" class="w-100" />
+                            </div>
+                            <h5>@title</h5>
+                            @if (intro is not null)
+                            {
+                                <p>@intro</p>
+                            }
+                        </a>
+                    </div>
+                }
+            </div>
+        </div>
+    </section>
+}

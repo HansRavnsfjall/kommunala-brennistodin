@@ -1,0 +1,153 @@
+﻿@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage
+@using System.Globalization
+@using Umbraco.Cms.Core.Models
+@using Umbraco.Cms.Core.Models.PublishedContent
+@using Umbraco.Cms.Core.Strings
+@using Umbraco.Extensions
+
+@{
+    Layout = "master.cshtml";
+
+    // ===== Query / paging =====
+    int pageSize = 15; // TESTING
+    int page = 1;
+    var q = Context?.Request?.Query;
+    if (q != null && int.TryParse(q["page"], out var parsed) && parsed > 0) page = parsed;
+
+    // ===== Fetch children =====
+    var all = Model
+        .ChildrenOfType("tidindi")
+        .Where(x => x.IsPublished())
+        .OrderByDescending(x => x.Value<DateTime?>("dagfesting") ?? x.CreateDate)
+        .ToList();
+
+    var total = all.Count;
+    var totalPages = Math.Max(1, (int)Math.Ceiling(total / (double)pageSize));
+    if (page > totalPages) page = totalPages;
+    var items = all.Skip((page - 1) * pageSize).Take(pageSize).ToList();
+
+    string BaseUrl() => Model.Url();
+    string PageUrl(int p) => p <= 1 ? BaseUrl() : $"{BaseUrl()}?page={p}";
+
+    string ImgAlt(IPublishedContent? m) =>
+        m?.Value<string>("altText") ?? m?.Name ?? "";
+
+    string DateLabel(IPublishedContent c)
+    {
+        var d  = c.Value<DateTime?>("dagfesting") ?? c.CreateDate;
+        var fo = CultureInfo.GetCultureInfo("fo-FO");
+        return d.ToString("dd. MMMM yyyy", fo).ToUpper(fo);
+    }
+}
+
+<section class="news-list">
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-12 col-lg-8">
+
+        @if (!items.Any())
+        {
+            <p class="text-muted">Eingi tíðindi at vísa enn.</p>
+        }
+        else
+        {
+            @foreach (var n in items)
+            {
+                var itemImg = n.Value<MediaWithCrops>("mynd");
+
+                // WebP 500px thumbnail
+                var thumb = itemImg?.GetCropUrl(
+                    width: 500,
+                    quality: 85,
+                    furtherOptions: "&format=webp&upscale=false"
+                ) ?? itemImg?.Url();
+
+                var title = n.Value<string>("yvirskrift") ?? n.Name;
+                var intro = n.Value<IHtmlEncodedString>("inngangstekstur");
+
+                <article class="news-row">
+                  <div class="row g-4 align-items-start">
+                    <!-- Image -->
+                    <div class="col-12 col-md-4">
+                      @if (!string.IsNullOrWhiteSpace(thumb))
+                      {
+                        <a href="@n.Url()" class="d-block">
+                          <img src="@thumb"
+                               alt="@ImgAlt(itemImg)"
+                               class="w-100 h-100 object-fit-cover aspect-16-9" />
+                        </a>
+                      }
+                    </div>
+
+                    <!-- Copy -->
+                    <div class="col-12 col-md-8">
+                      <div class="small text-muted fw-semibold mb-1">@DateLabel(@n)</div>
+                      <h2 class="h3 font600 mb-2">
+                        <a class="news-title-link text-decoration-none" href="@n.Url()">@title</a>
+                      </h2>
+
+                      @if (intro != null && !string.IsNullOrWhiteSpace(intro.ToHtmlString()))
+                      {
+                        <div class="more-news-text font300">@intro</div>
+                      }
+                    </div>
+                  </div>
+                </article>
+            }
+        }
+
+        @* Pagination block unchanged from your original *@
+        @if (totalPages > 1)
+        {
+          <nav class="news-pagination my-5" aria-label="pagination">
+            <ul class="list-unstyled d-flex gap-3 justify-content-center align-items-center m-0">
+              <!-- Prev -->
+              <li>
+                @if (page > 1)
+                {
+                  <a class="pagelink arrow" href="@PageUrl(page - 1)" aria-label="Fyrra síða">
+                    <!-- svg omitted for brevity -->
+                  </a>
+                }
+                else
+                {
+                  <span class="pagelink arrow disabled">
+                    <!-- svg omitted for brevity -->
+                  </span>
+                }
+              </li>
+
+              @for (int p = 1; p <= totalPages; p++)
+              {
+                var isCurrent = (p == page);
+                <li>
+                  @if (isCurrent)
+                  { <span class="page-dot current" aria-current="page">@p</span> }
+                  else
+                  { <a class="page-dot" href="@PageUrl(p)">@p</a> }
+                </li>
+              }
+
+              <!-- Next -->
+              <li>
+                @if (page < totalPages)
+                {
+                  <a class="pagelink arrow" href="@PageUrl(page + 1)" aria-label="Næsta síða">
+                    <!-- svg omitted for brevity -->
+                  </a>
+                }
+                else
+                {
+                  <span class="pagelink arrow disabled">
+                    <!-- svg omitted for brevity -->
+                  </span>
+                }
+              </li>
+            </ul>
+          </nav>
+        }
+
+      </div>
+    </div>
+  </div>
+</section>

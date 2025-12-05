@@ -1,24 +1,59 @@
-import { U as V, c as Z, d as k, f as ee, g as te, a as re, e as ie, j as se, b as ne, h as oe, i as ae } from "../sort-children-of-modal.token-CXKQZTL5.js";
-import { U as ue, a as le } from "../tree-picker-modal.token-CxLbH2eO.js";
-import { tryExecute as a } from "@umbraco-cms/backoffice/resources";
-import { UmbRepositoryBase as O } from "@umbraco-cms/backoffice/repository";
-import { of as p } from "@umbraco-cms/backoffice/external/rxjs";
-import { UmbStoreBase as U } from "@umbraco-cms/backoffice/store";
-import { UmbArrayState as I, createObservablePart as v } from "@umbraco-cms/backoffice/observable-api";
-import { UmbDefaultTreeElement as pe } from "../default-tree.element-Bpzs0ILI.js";
-import { UmbDefaultTreeContext as he } from "../default-tree.context-tDNpHXIy.js";
-import { U as Ee } from "../default-tree.context-token-C7a9fWg9.js";
-import { UmbDuplicateToEntityAction as ye } from "../duplicate-to.action-BktSnwKo.js";
-import { UmbReloadTreeItemChildrenEntityAction as be } from "../reload-tree-item-children.action-C0Xp9rFl.js";
-import { c as Ue, b as Ie, U as ve, a as Ae } from "../tree-item-element-base-Dc0PseYz.js";
-import { UmbSortChildrenOfEntityAction as De } from "../sort-children-of.action-BAzYR5i_.js";
-import { UmbSortChildrenOfModalElement as Ce, UmbSortChildrenOfModalElement as Re } from "../sort-children-of-modal.element-Cs83_Yer.js";
-import { property as h, customElement as _, nothing as A, html as S } from "@umbraco-cms/backoffice/external/lit";
-import { UmbExtensionElementAndApiSlotElementBase as c, umbExtensionsRegistry as E } from "@umbraco-cms/backoffice/extension-registry";
-import { UmbDefaultTreeItemContext as Me } from "../tree-item-default.context-D1DGStAT.js";
-import { UmbDefaultTreeItemElement as Pe } from "../tree-item-default.element-BGQE9dyg.js";
-import { UmbLitElement as D } from "@umbraco-cms/backoffice/lit-element";
-class Y {
+import { css as v, customElement as u, html as y, property as g } from "@umbraco-cms/backoffice/external/lit";
+import { UmbLitElement as T } from "@umbraco-cms/backoffice/lit-element";
+import { U as oe, c as ne, d as ae, h as me, i as ue, a as le, e as ce, j as pe, b as _e, f as he, g as de } from "../update-folder.action-COxnl6zu.js";
+import { U as be, a as Ee } from "../tree-picker-modal.token-CxLbH2eO.js";
+import { tryExecute as l } from "@umbraco-cms/backoffice/resources";
+import { UmbRepositoryBase as D } from "@umbraco-cms/backoffice/repository";
+import { of as f } from "@umbraco-cms/backoffice/external/rxjs";
+import { UmbDeprecation as A } from "@umbraco-cms/backoffice/utils";
+import { UmbStoreBase as S } from "@umbraco-cms/backoffice/store";
+import { UmbArrayState as x, createObservablePart as M } from "@umbraco-cms/backoffice/observable-api";
+import { UmbDefaultTreeElement as ye } from "../default-tree.element-fgMsmaPG.js";
+import { UmbDefaultTreeContext as Oe } from "../default-tree.context-Be9CM-3y.js";
+import { U as we } from "../default-tree.context-token-C7a9fWg9.js";
+import { UmbDuplicateToEntityAction as ge } from "../duplicate-to.action-DRm4yyqh.js";
+import { UmbReloadTreeItemChildrenEntityAction as Ae } from "../reload-tree-item-children.action-C0Xp9rFl.js";
+import { c as xe, b as Me, U as Ce, a as Re } from "../tree-item-element-base-mu8pGzwR.js";
+import { UmbSortChildrenOfEntityAction as Be } from "../sort-children-of.action-ibpnREXq.js";
+import { UmbSortChildrenOfModalElement as qe, UmbSortChildrenOfModalElement as Fe } from "../sort-children-of-modal.element-Cs83_Yer.js";
+import { UmbTextStyles as C } from "@umbraco-cms/backoffice/style";
+import { UmbExtensionElementAndApiSlotElementBase as O, umbExtensionsRegistry as R } from "@umbraco-cms/backoffice/extension-registry";
+import { UmbDefaultTreeItemContext as ze } from "../tree-item-default.context-C4ufWM7q.js";
+import { UmbDefaultTreeItemElement as ke } from "../tree-item-default.element-C_yOdFx9.js";
+import { UmbMenuItemTreeDefaultElement as Ke } from "../tree-menu-item.element-D3-R3-95.js";
+var P = Object.getOwnPropertyDescriptor, B = (i, e, t, r) => {
+  for (var s = r > 1 ? void 0 : r ? P(e, t) : e, o = i.length - 1, n; o >= 0; o--)
+    (n = i[o]) && (s = n(s) || s);
+  return s;
+};
+let c = class extends T {
+  render() {
+    return y`<uui-button
+			data-mark="tree:load-more"
+			id="load-more"
+			look="secondary"
+			.label=${this.localize.term("actions_loadMore")}></uui-button>`;
+  }
+};
+c.styles = v`
+		:host {
+			position: relative;
+			display: block;
+			padding-left: var(--uui-size-space-3);
+			margin-right: var(--uui-size-space-2);
+			margin-bottom: var(--uui-size-layout-2);
+			margin-left: calc(var(--uui-menu-item-indent, 0) * var(--uui-size-4));
+		}
+		uui-button {
+			width: 100%;
+			height: var(--uui-size---uui-size-layout-3);
+			--uui-box-border-radius: calc(var(--uui-border-radius) * 2);
+		}
+	`;
+c = B([
+  u("umb-tree-load-more-button")
+], c);
+class ee {
   #e;
   #r;
   #i;
@@ -40,10 +75,10 @@ class Y {
    * @memberof UmbTreeServerDataSourceBase
    */
   async getRootItems(e) {
-    const { data: t, error: r } = await a(this.#e, this.#r(e));
+    const { data: t, error: r } = await l(this.#e, this.#r(e));
     if (t) {
-      const i = t?.items.map((n) => this.#t(n));
-      return { data: { total: t.total, items: i } };
+      const s = t?.items.map((o) => this.#t(o));
+      return { data: { total: t.total, items: s } };
     }
     return { error: r };
   }
@@ -55,10 +90,10 @@ class Y {
    */
   async getChildrenOf(e) {
     if (e.parent.unique === void 0) throw new Error("Parent unique is missing");
-    const { data: t, error: r } = await a(this.#e, this.#i(e));
+    const { data: t, error: r } = await l(this.#e, this.#i(e));
     if (t) {
-      const i = t?.items.map((n) => this.#t(n));
-      return { data: { total: t.total, items: i } };
+      const s = t?.items.map((o) => this.#t(o));
+      return { data: { total: t.total, items: s } };
     }
     return { error: r };
   }
@@ -70,23 +105,27 @@ class Y {
    */
   async getAncestorsOf(e) {
     if (!e.treeItem.entityType) throw new Error("Parent unique is missing");
-    const { data: t, error: r } = await a(this.#e, this.#s(e));
-    return t ? { data: t?.map((n) => this.#t(n)) } : { error: r };
+    const { data: t, error: r } = await l(this.#e, this.#s(e));
+    return t ? { data: t?.map((o) => this.#t(o)) } : { error: r };
   }
 }
-class z extends O {
+class te extends D {
   /**
    * Creates an instance of UmbTreeRepositoryBase.
    * @param {UmbControllerHost} host - The controller host for this controller to be appended to
-   * @param {UmbTreeDataSourceConstructor<TreeItemType>} treeSourceConstructor
-   * @param {(string | UmbContextToken<any, any>)} treeStoreContextAlias
+   * @param {UmbTreeDataSourceConstructor<TreeItemType>} treeSourceConstructor - The constructor for the tree data source
+   * @param {(string | UmbContextToken<any, any> | undefined)} treeStoreContextAlias - The context alias for the tree store, if any
    * @memberof UmbTreeRepositoryBase
    */
   constructor(e, t, r) {
-    super(e), this._treeSource = new t(this), this._init = this.consumeContext(r, (i) => {
-      this._treeStore = i;
+    super(e), this._treeSource = new t(this), r ? (r.toString().startsWith("Umb") === !1 && new A({
+      deprecated: `TreeRepository "${this.constructor.name}" is using a tree store context with alias "${r.toString()}".`,
+      removeInVersion: "18.0.0",
+      solution: "You do not need to supply a tree store context alias, as the tree repository will be queried each time it is needed."
+    }).warn(), this._init = this.consumeContext(r, (s) => {
+      this._treeStore = s;
     }).asPromise({ preventTimeout: !0 }).catch(() => {
-    });
+    })) : this._init = Promise.resolve();
   }
   /**
    * Requests root items of a tree
@@ -97,7 +136,13 @@ class z extends O {
   async requestTreeRootItems(e) {
     await this._init;
     const { data: t, error: r } = await this._treeSource.getRootItems(e);
-    return this._treeStore ? (t && this._treeStore.appendItems(t.items), { data: t, error: r, asObservable: () => this._treeStore.rootItems }) : {};
+    return this._treeStore ? (t && this._treeStore.appendItems(t.items), { data: t, error: r, asObservable: () => this._treeStore?.rootItems }) : {
+      data: t,
+      error: r,
+      // Return an observable that does not emit any items, since the store is not available
+      asObservable: () => {
+      }
+    };
   }
   /**
    * Requests tree items of a given parent
@@ -112,7 +157,13 @@ class z extends O {
     if (e.parent.entityType === null) throw new Error("Parent entity type is missing");
     await this._init;
     const { data: t, error: r } = await this._treeSource.getChildrenOf(e);
-    return this._treeStore ? (t && this._treeStore.appendItems(t.items), { data: t, error: r, asObservable: () => this._treeStore.childrenOf(e.parent.unique) }) : {};
+    return this._treeStore ? (t && this._treeStore.appendItems(t.items), { data: t, error: r, asObservable: () => this._treeStore?.childrenOf(e.parent.unique) }) : {
+      data: t,
+      error: r,
+      // Return an observable that does not emit any items, since the store is not available
+      asObservable: () => {
+      }
+    };
   }
   /**
    * Requests ancestors of a given item
@@ -130,24 +181,26 @@ class z extends O {
    * Returns a promise with an observable of tree root items
    * @returns {*}
    * @memberof UmbTreeRepositoryBase
+   * @deprecated Use `requestTreeRootItems` instead. This method requires the tree store to be available, which is not always the case. It will be removed in Umbraco 18.
    */
   async rootTreeItems() {
-    return await this._init, this._treeStore ? this._treeStore.rootItems : p([]);
+    return await this._init, this._treeStore?.rootItems ?? f([]);
   }
   /**
    * Returns a promise with an observable of children items of a given parent
    * @param {(string | null)} parentUnique
    * @returns {*}
    * @memberof UmbTreeRepositoryBase
+   * @deprecated Use `requestTreeItemsOf` instead. This method requires the tree store to be available, which is not always the case. It will be removed in Umbraco 18.
    */
   async treeItemsOf(e) {
     if (e === void 0) throw new Error("Parent unique is missing");
-    return await this._init, this._treeStore ? this._treeStore.childrenOf(e) : p([]);
+    return await this._init, this._treeStore?.childrenOf(e) ?? f([]);
   }
 }
-class G extends U {
+class re extends S {
   constructor(e, t) {
-    super(e, t, new I([], (r) => r.unique)), this.rootItems = this._data.asObservablePart((r) => r.filter((i) => i.parent.unique === null));
+    super(e, t, new x([], (r) => r.unique)), this.rootItems = this._data.asObservablePart((r) => r.filter((s) => s.parent.unique === null));
   }
   /**
    * Returns an observable to observe the children of a given parent
@@ -159,22 +212,48 @@ class G extends U {
     return this._data.asObservablePart((t) => t.filter((r) => r.parent.unique === e));
   }
 }
-var w = Object.defineProperty, C = Object.getOwnPropertyDescriptor, T = (s) => {
-  throw TypeError(s);
-}, y = (s, e, t, r) => {
-  for (var i = r > 1 ? void 0 : r ? C(e, t) : e, n = s.length - 1, o; n >= 0; n--)
-    (o = s[n]) && (i = (r ? o(e, t, i) : o(i)) || i);
-  return r && i && w(e, t, i), i;
-}, R = (s, e, t) => e.has(s) || T("Cannot " + t), x = (s, e, t) => e.has(s) ? T("Cannot add the same private member more than once") : e instanceof WeakSet ? e.add(s) : e.set(s, t), M = (s, e, t) => (R(s, e, "access private method"), t), m, d;
-let u = class extends c {
+var L = Object.getOwnPropertyDescriptor, q = (i, e, t, r) => {
+  for (var s = r > 1 ? void 0 : r ? L(e, t) : e, o = i.length - 1, n; o >= 0; o--)
+    (n = i[o]) && (s = n(s) || s);
+  return s;
+};
+let p = class extends T {
+  render() {
+    return y`<umb-workspace-editor>
+			<umb-icon id="icon" slot="header" name="icon-folder"></umb-icon>
+			<umb-workspace-header-name-editable slot="header"></umb-workspace-header-name-editable>
+		</umb-workspace-editor>`;
+  }
+};
+p.styles = [
+  C,
+  v`
+			#icon {
+				display: inline-block;
+				font-size: var(--uui-size-6);
+				margin-right: var(--uui-size-space-4);
+			}
+		`
+];
+p = q([
+  u("umb-folder-workspace-editor")
+], p);
+var F = Object.defineProperty, N = Object.getOwnPropertyDescriptor, U = (i) => {
+  throw TypeError(i);
+}, w = (i, e, t, r) => {
+  for (var s = r > 1 ? void 0 : r ? N(e, t) : e, o = i.length - 1, n; o >= 0; o--)
+    (n = i[o]) && (s = (r ? n(e, t, s) : n(s)) || s);
+  return r && s && F(e, t, s), s;
+}, d = (i, e, t) => e.has(i) || U("Cannot " + t), m = (i, e, t) => (d(i, e, "read from private field"), t ? t.call(i) : e.get(i)), b = (i, e, t) => e.has(i) ? U("Cannot add the same private member more than once") : e instanceof WeakSet ? e.add(i) : e.set(i, t), z = (i, e, t, r) => (d(i, e, "write to private field"), e.set(i, t), t), $ = (i, e, t) => (d(i, e, "access private method"), t), a, _, I;
+let h = class extends O {
   constructor() {
-    super(...arguments), x(this, m);
+    super(...arguments), b(this, _), b(this, a);
   }
   get entityType() {
-    return this._entityType;
+    return m(this, a);
   }
-  set entityType(s) {
-    this._entityType = s, M(this, m, d).call(this);
+  set entityType(i) {
+    z(this, a, i), $(this, _, I).call(this);
   }
   getExtensionType() {
     return "treeItem";
@@ -183,15 +262,16 @@ let u = class extends c {
     return "umb-default-tree-item";
   }
 };
-m = /* @__PURE__ */ new WeakSet();
-d = function() {
-  if (!this._entityType) return;
-  const s = (e) => this._entityType ? e.forEntityTypes.includes(this._entityType) : !1;
+a = /* @__PURE__ */ new WeakMap();
+_ = /* @__PURE__ */ new WeakSet();
+I = function() {
+  if (!m(this, a)) return;
+  const i = (e) => m(this, a) ? e.forEntityTypes.includes(m(this, a)) : !1;
   this.observe(
     // TODO: what should we do if there are multiple tree items for an entity type?
     // This method gets all extensions based on a type, then filters them based on the entity type. and then we get the alias of the first one [NL]
-    v(
-      E.byTypeAndFilter(this.getExtensionType(), s),
+    M(
+      R.byTypeAndFilter(this.getExtensionType(), i),
       (e) => e[0]?.alias
     ),
     (e) => {
@@ -200,55 +280,18 @@ d = function() {
     "umbObserveAlias"
   );
 };
-y([
-  h({ type: String, reflect: !0 })
-], u.prototype, "entityType", 1);
-u = y([
-  _("umb-tree-item")
-], u);
-var g = Object.defineProperty, P = Object.getOwnPropertyDescriptor, b = (s, e, t, r) => {
-  for (var i = r > 1 ? void 0 : r ? P(e, t) : e, n = s.length - 1, o; n >= 0; n--)
-    (o = s[n]) && (i = (r ? o(e, t, i) : o(i)) || i);
-  return r && i && g(e, t, i), i;
+w([
+  g({ type: String, reflect: !0 })
+], h.prototype, "entityType", 1);
+h = w([
+  u("umb-tree-item")
+], h);
+var k = Object.getOwnPropertyDescriptor, W = (i, e, t, r) => {
+  for (var s = r > 1 ? void 0 : r ? k(e, t) : e, o = i.length - 1, n; o >= 0; o--)
+    (n = i[o]) && (s = n(s) || s);
+  return s;
 };
-const B = {
-  type: "kind",
-  alias: "Umb.Kind.Tree",
-  matchKind: "tree",
-  matchType: "menuItem",
-  manifest: {
-    type: "menuItem",
-    elementName: "umb-menu-item-tree-default"
-  }
-};
-E.register(B);
-let l = class extends D {
-  render() {
-    return this.manifest ? S`
-					<umb-tree
-						alias=${this.manifest?.meta.treeAlias}
-						.props=${{
-      hideTreeRoot: this.manifest?.meta.hideTreeRoot === !0,
-      selectionConfiguration: {
-        selectable: !1,
-        multiple: !1
-      }
-    }}></umb-tree>
-				` : A;
-  }
-};
-b([
-  h({ type: Object })
-], l.prototype, "manifest", 2);
-l = b([
-  _("umb-menu-item-tree-default")
-], l);
-var L = Object.getOwnPropertyDescriptor, q = (s, e, t, r) => {
-  for (var i = r > 1 ? void 0 : r ? L(e, t) : e, n = s.length - 1, o; n >= 0; n--)
-    (o = s[n]) && (i = o(i) || i);
-  return i;
-};
-let f = class extends c {
+let E = class extends O {
   getExtensionType() {
     return "tree";
   }
@@ -258,43 +301,48 @@ let f = class extends c {
   getSelection() {
     return this._element?.getSelection?.() ?? [];
   }
+  getExpansion() {
+    return this._element?.getExpansion?.() ?? [];
+  }
 };
-f = q([
-  _("umb-tree")
-], f);
+E = W([
+  u("umb-tree")
+], E);
 export {
-  V as UMB_DUPLICATE_TO_MODAL,
-  Z as UMB_DUPLICATE_TO_MODAL_ALIAS,
-  k as UMB_ENTITY_ACTION_SORT_CHILDREN_OF_KIND_MANIFEST,
-  ee as UMB_FOLDER_CREATE_MODAL,
-  te as UMB_FOLDER_UPDATE_MODAL,
-  re as UMB_SORT_CHILDREN_OF_MODAL,
-  ie as UMB_SORT_CHILDREN_OF_MODAL_ALIAS,
-  Ee as UMB_TREE_CONTEXT,
-  Ue as UMB_TREE_ITEM_CONTEXT,
-  se as UMB_TREE_ITEM_DEFAULT_KIND_MANIFEST,
-  ue as UMB_TREE_PICKER_MODAL,
-  le as UMB_TREE_PICKER_MODAL_ALIAS,
-  ne as UmbCreateFolderEntityAction,
-  he as UmbDefaultTreeContext,
-  pe as UmbDefaultTreeElement,
-  Me as UmbDefaultTreeItemContext,
-  Pe as UmbDefaultTreeItemElement,
-  oe as UmbDeleteFolderEntityAction,
-  ye as UmbDuplicateToEntityAction,
-  l as UmbMenuItemTreeDefaultElement,
-  be as UmbReloadTreeItemChildrenEntityAction,
-  Ie as UmbRequestReloadTreeItemChildrenEvent,
-  De as UmbSortChildrenOfEntityAction,
-  Ce as UmbSortChildrenOfModalElement,
-  f as UmbTreeElement,
-  ve as UmbTreeItemContextBase,
-  u as UmbTreeItemElement,
-  Ae as UmbTreeItemElementBase,
-  z as UmbTreeRepositoryBase,
-  Y as UmbTreeServerDataSourceBase,
-  G as UmbUniqueTreeStore,
-  ae as UmbUpdateFolderEntityAction,
-  Re as element
+  oe as UMB_DUPLICATE_TO_MODAL,
+  ne as UMB_DUPLICATE_TO_MODAL_ALIAS,
+  ae as UMB_ENTITY_ACTION_SORT_CHILDREN_OF_KIND_MANIFEST,
+  me as UMB_FOLDER_CREATE_MODAL,
+  ue as UMB_FOLDER_UPDATE_MODAL,
+  le as UMB_SORT_CHILDREN_OF_MODAL,
+  ce as UMB_SORT_CHILDREN_OF_MODAL_ALIAS,
+  we as UMB_TREE_CONTEXT,
+  xe as UMB_TREE_ITEM_CONTEXT,
+  pe as UMB_TREE_ITEM_DEFAULT_KIND_MANIFEST,
+  be as UMB_TREE_PICKER_MODAL,
+  Ee as UMB_TREE_PICKER_MODAL_ALIAS,
+  _e as UmbCreateFolderEntityAction,
+  Oe as UmbDefaultTreeContext,
+  ye as UmbDefaultTreeElement,
+  ze as UmbDefaultTreeItemContext,
+  ke as UmbDefaultTreeItemElement,
+  he as UmbDeleteFolderEntityAction,
+  ge as UmbDuplicateToEntityAction,
+  p as UmbFolderWorkspaceEditorElement,
+  Ke as UmbMenuItemTreeDefaultElement,
+  Ae as UmbReloadTreeItemChildrenEntityAction,
+  Me as UmbRequestReloadTreeItemChildrenEvent,
+  Be as UmbSortChildrenOfEntityAction,
+  qe as UmbSortChildrenOfModalElement,
+  E as UmbTreeElement,
+  Ce as UmbTreeItemContextBase,
+  h as UmbTreeItemElement,
+  Re as UmbTreeItemElementBase,
+  c as UmbTreeLoadMoreButtonElement,
+  te as UmbTreeRepositoryBase,
+  ee as UmbTreeServerDataSourceBase,
+  re as UmbUniqueTreeStore,
+  de as UmbUpdateFolderEntityAction,
+  Fe as element
 };
 //# sourceMappingURL=index.js.map

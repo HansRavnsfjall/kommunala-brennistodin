@@ -1,0 +1,85 @@
+﻿@using System
+@using System.Linq
+@using Umbraco.Cms.Core.Models.Blocks
+@using Umbraco.Cms.Core.Strings
+@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<BlockListItem>
+
+@{
+    var c = Model.Content;
+
+    // Top fields on the accordion block
+    var heading = c.Value<string>("yvirskrift");
+    var introRte = c.Value<IHtmlEncodedString>("tekstur");
+
+    // Nested block list: harmonikaListi (items alias: ossElement with fields yvriskrift, tekstur)
+    var items = c.Value<BlockListModel>("harmonikaListi");
+
+    // Position flags/classes from your RenderBlockList helper
+    var isFirst  = ViewData["BlockIsFirst"] as bool? ?? false;
+    var isLast   = ViewData["BlockIsLast"]  as bool? ?? false;
+    var posClass = (ViewData["BlockPosClass"] as string) ?? string.Empty;
+
+    var sectionClasses = $"accordion {posClass}" + (isFirst ? " is-first" : "") + (isLast ? " is-last" : "");
+
+    // Unique id seed for this accordion instance
+    var accId = "acc_" + Guid.NewGuid().ToString("N");
+}
+
+<section class="@sectionClasses kidsfaq">
+  <div class="container editor">
+    <div class="row">
+      <div class="col-md-6">
+        <h3 class="bornspyrja">@heading</h3>
+      </div>
+      <div class="col-md-6">
+
+       
+
+        <div class="custom-accordion accordion" id="@accId">
+          @if (items != null && items.Any())
+          {
+              var i = 0;
+              foreach (var it in items)
+              {
+                  var itemTitle = it.Content.Value<string>("yvirskrift");         // note: yvriskrift (per your spec)
+                  var itemBody  = it.Content.Value<IHtmlEncodedString>("tekstur"); // RTE body
+                  var hId = $"{accId}_h_{i}";
+                  var cId = $"{accId}_c_{i}";
+
+                  <div class="accordion-item">
+                    <h2 class="accordion-header" id="@hId">
+                      <button class="accordion-button collapsed"
+                              type="button"
+                              data-bs-toggle="collapse"
+                              data-bs-target="#@cId"
+                              aria-expanded="false"
+                              aria-controls="@cId">
+                        @(!string.IsNullOrWhiteSpace(itemTitle) ? itemTitle : $"Punkt {i + 1}")
+                      </button>
+                    </h2>
+                    <div id="@cId"
+                         class="accordion-collapse collapse"
+                         aria-labelledby="@hId"
+                         data-bs-parent="#@accId">
+                      <div class="accordion-body">
+                        @if (itemBody is not null)
+                        {
+                            @itemBody
+                        }
+                      </div>
+                    </div>
+                  </div>
+
+                  i++;
+              }
+          }
+          else
+          {
+              <div class="text-muted">Eingi punktir í hesi harmoniku enn.</div>
+          }
+        </div>
+
+      </div>
+    </div>
+  </div>
+</section>

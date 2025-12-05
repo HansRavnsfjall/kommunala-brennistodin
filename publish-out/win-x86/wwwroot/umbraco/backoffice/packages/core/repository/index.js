@@ -1,12 +1,12 @@
 import { UmbControllerBase as u } from "@umbraco-cms/backoffice/class-api";
-import { createExtensionApi as y, UmbExtensionApiInitializer as m } from "@umbraco-cms/backoffice/extension-api";
+import { createExtensionApi as v, UmbExtensionApiInitializer as l } from "@umbraco-cms/backoffice/extension-api";
 import { umbExtensionsRegistry as p } from "@umbraco-cms/backoffice/extension-registry";
-import { of as v } from "@umbraco-cms/backoffice/external/rxjs";
-import { tryExecute as b } from "@umbraco-cms/backoffice/resources";
+import { of as b } from "@umbraco-cms/backoffice/external/rxjs";
+import { tryExecute as g } from "@umbraco-cms/backoffice/resources";
 import { UmbArrayState as d } from "@umbraco-cms/backoffice/observable-api";
-import { UMB_ACTION_EVENT_CONTEXT as l } from "@umbraco-cms/backoffice/action";
+import { UMB_ACTION_EVENT_CONTEXT as f } from "@umbraco-cms/backoffice/action";
 import { UmbEntityUpdatedEvent as c } from "@umbraco-cms/backoffice/entity-action";
-import { UmbDeprecation as g } from "@umbraco-cms/backoffice/utils";
+import { UmbDeprecation as m } from "@umbraco-cms/backoffice/utils";
 const q = "Umb.ManagementApi";
 class E extends u {
   #e = /* @__PURE__ */ new Map();
@@ -20,7 +20,7 @@ class E extends u {
       return;
     if (this.#e.has(t.alias))
       return this.#e.get(t.alias);
-    const i = await y(this, t);
+    const i = await v(this, t);
     if (i) {
       if (!i.map)
         throw new Error("Data Mapping does not have a map method.");
@@ -79,9 +79,9 @@ class T extends u {
     });
   }
 }
-class f extends u {
+class w extends u {
 }
-class A extends f {
+class A extends w {
   #e;
   #t;
   constructor(e, s, t) {
@@ -94,7 +94,7 @@ class A extends f {
   }
   /**
    * Creates a scaffold
-   * @param {Partial<DetailModelType>} [preset]
+   * @param {UmbDeepPartialObject<DetailModelType>} [preset]
    * @returns {*}
    * @memberof UmbDetailRepositoryBase
    */
@@ -114,7 +114,7 @@ class A extends f {
     return s && this.#t?.append(s), {
       data: s,
       error: t,
-      asObservable: () => this.#t.byUnique(e)
+      asObservable: () => this.#t?.byUnique(e)
     };
   }
   /**
@@ -169,7 +169,7 @@ class A extends f {
     this.#t = void 0, this.detailDataSource = void 0, super.destroy();
   }
 }
-class P extends f {
+class P extends w {
   #e;
   constructor(e, s, t) {
     super(e), this.#e = new s(e), this._init = this.consumeContext(t, (i) => {
@@ -188,10 +188,13 @@ class P extends f {
     try {
       await this._init;
     } catch {
-      return {};
+      return {
+        asObservable: () => {
+        }
+      };
     }
     const { data: s, error: t } = await this.#e.getItems(e);
-    return this._itemStore ? (s && this._itemStore.appendItems(s), { data: s, error: t, asObservable: () => this._itemStore.items(e) }) : {};
+    return s && this._itemStore?.appendItems(s), { data: s, error: t, asObservable: () => this._itemStore?.items(e) };
   }
   /**
    * Returns a promise with an observable of the items for the given uniques
@@ -205,7 +208,7 @@ class P extends f {
     } catch {
       return;
     }
-    return this._itemStore ? this._itemStore.items(e) : v([]);
+    return this._itemStore ? this._itemStore.items(e) : b([]);
   }
 }
 class C extends u {
@@ -229,7 +232,7 @@ class C extends u {
   async getItems(e) {
     if (!this.#e) throw new Error("getItems is not implemented");
     if (!e) throw new Error("Uniques are missing");
-    const { data: s, error: t } = await b(this, this.#e(e));
+    const { data: s, error: t } = await g(this, this.#e(e));
     return { data: this._getMappedItems(s), error: t };
   }
   _getMappedItems(e) {
@@ -255,7 +258,7 @@ class k extends u {
     }, this.#s.sortBy((t, i) => {
       const r = this.getUniques(), n = r.indexOf(t.unique), a = r.indexOf(i.unique);
       return n - a;
-    }), typeof s == "string" ? this.#e = new m(
+    }), typeof s == "string" ? this.#e = new l(
       this,
       p,
       s,
@@ -269,10 +272,10 @@ class k extends u {
         const i = this.#s.getValue().filter((r) => !t.includes(r.unique)).map((r) => r.unique);
         this.#i.remove(i), this.#s.remove(i), i.forEach((r) => {
           this.removeUmbControllerByAlias("observeEntry_" + r);
-        }), this.#n();
+        }), this.#n(t);
       },
       null
-    ), this.consumeContext(l, (t) => {
+    ), this.consumeContext(f, (t) => {
       this.#t?.removeEventListener(
         c.TYPE,
         this.#o
@@ -329,12 +332,12 @@ class k extends u {
    */
   addEntry(e) {
     const s = e.unique;
-    this.#i.appendOne({
+    this.#s.appendOne(e), this.#r.appendOne(s), this.#i.appendOne({
       state: {
         type: "success"
       },
       unique: s
-    }), this.#s.appendOne(e), this.#r.appendOne(s);
+    });
   }
   /**
    * Get all entries in the manager
@@ -353,9 +356,10 @@ class k extends u {
   entryByUnique(e) {
     return this.#s.asObservablePart((s) => s.find((t) => t.unique === e));
   }
-  async #n() {
+  async #n(e) {
+    if (!e?.length) return;
     if (await this.#e, !this.repository) throw new Error("Repository is not initialized");
-    this.getUniques().filter((t) => !this.#i.getValue().find((r) => r.unique === t)).forEach((t) => {
+    e.filter((t) => !this.#i.getValue().find((r) => r.unique === t)).forEach((t) => {
       this.#h(t);
     });
   }
@@ -420,11 +424,11 @@ class L extends u {
       if (n.length === 0) return;
       const a = n.find((o) => this.#e(o) === r);
       a && this.#o(a.unique);
-    }, this.#e = t ? (i) => (new g({
+    }, this.#e = t ? (i) => (new m({
       deprecated: "The getUniqueMethod parameter.",
       removeInVersion: "17.0.0",
       solution: "The required unique property on the item will be used instead."
-    }).warn(), t(i)) : (i) => i.unique, this.#t = new m(
+    }).warn(), t(i)) : (i) => i.unique, this.#t = new l(
       this,
       p,
       s,
@@ -436,14 +440,18 @@ class L extends u {
       this.uniques,
       (i) => {
         if (i.length === 0) {
-          this.#n.setValue([]);
+          this.#n.setValue([]), this.#a.setValue([]);
           return;
         }
-        const r = this.#n.getValue();
-        i.length === r.length && i.every((n) => r.find((a) => this.#e(a) === n)) ? this.#n.setValue(this.#d(r)) : this.#h();
+        const r = this.#a.getValue();
+        if (i.length === r.length && i.every((n) => r.find((a) => a.unique === n))) {
+          const n = this.#n.getValue();
+          this.#n.setValue(this.#d(n)), this.#a.setValue(this.#c(r));
+        } else
+          this.#h();
       },
       null
-    ), this.consumeContext(l, (i) => {
+    ), this.consumeContext(f, (i) => {
       this.#s?.removeEventListener(
         c.TYPE,
         this.#u
@@ -476,6 +484,17 @@ class L extends u {
   itemByUnique(e) {
     return this.#n.asObservablePart((s) => s.find((t) => this.#e(t) === e));
   }
+  /**
+   * @deprecated - This is resolved by setUniques, no need to update statuses.
+   * @param unique {string} - The unique identifier of the item to remove the status of.
+   */
+  removeStatus(e) {
+    new m({
+      removeInVersion: "18.0.0",
+      deprecated: "removeStatus",
+      solution: "Statuses are removed automatically when setting uniques"
+    }).warn(), this.#a.filter((s) => s.unique !== e);
+  }
   async getItemByUnique(e) {
     const s = this.observe(this.itemByUnique(e), () => {
     }, null), t = await s.asPromise();
@@ -485,6 +504,7 @@ class L extends u {
     if (await this.#t, !this.repository) throw new Error("Repository is not initialized");
     const e = this.getUniques();
     this.#a.setValue(
+      // No need to do sorting here as we just got the unique in the right order above.
       e.map((n) => ({
         state: {
           type: "loading"
@@ -497,7 +517,7 @@ class L extends u {
     const { asObservable: t, data: i, error: r } = await s;
     if (this.#r === s) {
       if (r) {
-        this.#a.append(
+        this.#a.replace(
           e.map((n) => ({
             state: {
               type: "error",
@@ -510,9 +530,9 @@ class L extends u {
       }
       if (i) {
         const n = e.filter(
-          (o) => !i.find((w) => this.#e(w) === o)
+          (o) => !i.find((y) => this.#e(y) === o)
         ), a = e.filter((o) => !n.includes(o));
-        this.#n.remove(n), this.#a.append([
+        this.#n.remove(n), this.#a.replace([
           ...n.map(
             (o) => ({
               state: {
@@ -544,12 +564,11 @@ class L extends u {
   async #o(e) {
     if (await this.#t, !this.repository) throw new Error("Repository is not initialized");
     const { data: s, error: t } = await this.repository.requestItems([e]);
-    if (t && this.#a.appendOne({
+    if (t && this.#a.updateOne(e, {
       state: {
         type: "error",
         error: "#general_notFound"
-      },
-      unique: e
+      }
     }), s) {
       const i = this.getItems(), r = i.find((n) => this.#e(n) === e);
       if (r) {
@@ -559,9 +578,19 @@ class L extends u {
     }
   }
   #d(e) {
+    if (!e) return [];
     const s = this.getUniques();
     return [...e].sort((t, i) => {
       const r = s.indexOf(this.#e(t) ?? ""), n = s.indexOf(this.#e(i) ?? "");
+      return r - n;
+    });
+  }
+  /** Just needed for the deprecation implementation to work, do not bring this into 17.0 [NL] */
+  #c(e) {
+    if (!e) return [];
+    const s = this.getUniques();
+    return [...e].sort((t, i) => {
+      const r = s.indexOf(t.unique ?? ""), n = s.indexOf(i.unique ?? "");
       return r - n;
     });
   }
@@ -581,7 +610,7 @@ export {
   P as UmbItemRepositoryBase,
   C as UmbItemServerDataSourceBase,
   T as UmbManagementApiDataMapper,
-  f as UmbRepositoryBase,
+  w as UmbRepositoryBase,
   k as UmbRepositoryDetailsManager,
   L as UmbRepositoryItemsManager
 };

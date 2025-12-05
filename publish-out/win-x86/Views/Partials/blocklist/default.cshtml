@@ -1,13 +1,12 @@
-@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<Umbraco.Cms.Core.Models.Blocks.BlockListModel>
-@{
-    if (Model?.Any() != true) { return; }
-}
-<div class="umb-block-list">
-    @foreach (var block in Model)
-    {
-        if (block?.ContentUdi == null) { continue; }
-        var data = block.Content;
+@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<Umbraco.Cms.Core.Models.Blocks.BlockListItem>
+@using Umbraco.Extensions
 
-        @await Html.PartialAsync("blocklist/Components/" + data.ContentType.Alias, block)
-    }
+@{
+    var alias = Model?.Content?.ContentType?.Alias ?? "(null)";
+}
+
+<div style="border:2px dashed #f66; padding:12px; margin:12px 0;">
+  <strong>BlockList Default.cshtml fallback</strong><br/>
+  Alias: <code>@alias</code><br/>
+  Has property <code>boxes</code>? <code>@(Model?.Content?.HasProperty("boxes") == true ? "yes" : "no")</code>
 </div>

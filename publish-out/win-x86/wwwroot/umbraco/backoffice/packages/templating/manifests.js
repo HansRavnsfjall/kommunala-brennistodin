@@ -1,22 +1,24 @@
-import { UMB_SETTINGS_SECTION_ALIAS as s } from "@umbraco-cms/backoffice/settings";
-import { a as n, U as m, b as r, l as p, n as l, o as c, p as T, e as o, f as E, q as A, r as y } from "./manifests-DcuSN-5b.js";
-import { c as t, b as _ } from "./template-item.store.context-token-rCTaUJ7s.js";
+import { UMB_SECTION_ALIAS_CONDITION_ALIAS as c, UMB_SECTION_USER_PERMISSION_CONDITION_ALIAS as T } from "@umbraco-cms/backoffice/section";
+import { UMB_SETTINGS_SECTION_ALIAS as r } from "@umbraco-cms/backoffice/settings";
+import { a as p, U as E, c as A, m as y, b as n, o as _, p as S, q as d, f as l, g as I, r as u, s as U } from "./manifests-DjOjofE0.js";
+import { c as t, b as f } from "./template-item.store.context-token-rCTaUJ7s.js";
 import { UMB_WORKSPACE_CONDITION_ALIAS as e } from "@umbraco-cms/backoffice/workspace";
 import "@umbraco-cms/backoffice/tree";
 import "@umbraco-cms/backoffice/external/backend-api";
-import { UMB_SECTION_USER_PERMISSION_CONDITION_ALIAS as S } from "@umbraco-cms/backoffice/section";
-import { g as d, j as I, c as u, q as U, r as b, s as M, t as f } from "./manifests-CkeJWkpV.js";
+import { h as M, c as s, k as b, d as P, r as k, s as L, t as O, u as R } from "./manifests-EJ-JBi2P.js";
+import { b as h } from "./stylesheet-picker-modal.token-C6nznOkG.js";
+import "@umbraco-cms/backoffice/management-api";
 import "@umbraco-cms/backoffice/server-file-system";
-import "@umbraco-cms/backoffice/resources";
-import { b as P } from "./stylesheet-picker-modal.token-CeSiGQ35.js";
+import "@umbraco-cms/backoffice/class-api";
 import "@umbraco-cms/backoffice/repository";
+import "@umbraco-cms/backoffice/resources";
 import "@umbraco-cms/backoffice/store";
 import "@umbraco-cms/backoffice/id";
-import { a, b as i, U as R } from "./entity-CA4W0tlV.js";
-import { U as O, c as h, m as L, g as k, h as C } from "./manifests-B32FKMGR.js";
-import { f as B, p as $, q as w, o as g, r as Y } from "./partial-view-workspace.context-token-DmMOFZmM.js";
-import { k as W, d as D, U as V, e as F, f as N, x, y as H, z as q } from "./manifests-cHFy6NXv.js";
-const j = [
+import { a, b as i, U as B } from "./entity-CA4W0tlV.js";
+import { c as o, U as C, d as w, m as $, h as g, i as Y } from "./manifests-FJr77TTX.js";
+import { i as W, c as D, d as N, b as V, r as F } from "./partial-view-workspace.context-token-DXd6FPys.js";
+import { k as x, d as m, U as H, e as j, f as v, x as G, y as q, z } from "./manifests-CH0eoEje.js";
+const K = [
   {
     type: "menu",
     alias: "Umb.Menu.Templating",
@@ -34,19 +36,19 @@ const j = [
     },
     conditions: [
       {
-        alias: "Umb.Condition.SectionAlias",
-        match: s
+        alias: c,
+        match: r
       }
     ]
   }
-], v = [
+], Q = [
   {
     type: "condition",
     name: "Template Allow Delete Action Condition",
-    alias: n,
+    alias: p,
     api: () => import("./template-allow-delete-action.condition-LL-k9ZfA.js")
   }
-], G = [...v], z = [
+], J = [...Q], X = [
   {
     type: "entityAction",
     kind: "default",
@@ -54,10 +56,10 @@ const j = [
     name: "Create Template Entity Action",
     weight: 1200,
     api: () => import("./create.action-CDGJniyn.js"),
-    forEntityTypes: [t, _],
+    forEntityTypes: [t, f],
     meta: {
       icon: "icon-add",
-      label: "#actions_create",
+      label: "#actions_createFor",
       additionalOptions: !0
     }
   },
@@ -68,30 +70,34 @@ const j = [
     name: "Delete Template Entity Action",
     forEntityTypes: [t],
     meta: {
-      detailRepositoryAlias: r,
-      itemRepositoryAlias: m
+      detailRepositoryAlias: A,
+      itemRepositoryAlias: E
     },
-    conditions: [{ alias: n }]
+    conditions: [{ alias: p }]
   }
-], K = [
+], Z = [
   {
     type: "menuItem",
     kind: "tree",
-    alias: "Umb.MenuItem.Templates",
+    alias: n,
     name: "Templates Menu Item",
     weight: 40,
     meta: {
       label: "Templates",
       entityType: "template",
-      treeAlias: p,
+      treeAlias: y,
       menus: ["Umb.Menu.Templating"]
     }
   },
   {
     type: "workspaceContext",
+    kind: "menuStructure",
     name: "Template Menu Structure Workspace Context",
     alias: "Umb.Context.Template.Menu.Structure",
-    api: () => import("./template-menu-structure.context-CEiLQHBF.js"),
+    api: () => import("./template-menu-structure.context-wmSuvADQ.js"),
+    meta: {
+      menuItemAlias: n
+    },
     conditions: [
       {
         alias: e,
@@ -111,34 +117,34 @@ const j = [
       }
     ]
   }
-], Q = [
+], ee = [
   {
     type: "modal",
     alias: "Umb.Modal.Template.QueryBuilder",
     name: "Template query builder",
     element: () => import("./query-builder-modal.element-qTGID1LR.js")
   }
-], J = [...l, ...c, ...T], X = [
+], te = [..._, ...S, ...d], ae = [
   {
     name: "Template Global Search",
-    alias: E,
+    alias: I,
     type: "globalSearch",
     weight: 200,
     meta: {
       label: "Templates",
-      searchProviderAlias: o
+      searchProviderAlias: l
     },
     conditions: [
       {
-        alias: S,
-        match: s
+        alias: T,
+        match: r
       }
     ]
   }
-], Z = [
+], ie = [
   {
     name: "Template Search Provider",
-    alias: o,
+    alias: l,
     type: "searchProvider",
     api: () => import("./template.search-provider-DYB5KjvR.js"),
     weight: 100,
@@ -152,34 +158,44 @@ const j = [
     type: "searchResultItem",
     forEntityTypes: [t]
   },
-  ...X
-], ee = [
-  ...G,
-  ...z,
-  ...K,
-  ...Q,
+  ...ae
+], ne = [
   ...J,
+  ...X,
   ...Z,
-  ...A,
-  ...y
-], te = [
+  ...ee,
+  ...te,
+  ...ie,
+  ...u,
+  ...U,
+  {
+    name: "Template Backoffice Entry Point",
+    alias: "Umb.EntryPoint.Template",
+    type: "backofficeEntryPoint",
+    js: () => import("./entry-point-Cc1wq0mJ.js")
+  }
+], se = [
   {
     type: "menuItem",
     kind: "tree",
-    alias: "Umb.MenuItem.Stylesheets",
+    alias: s,
     name: "Stylesheets Menu Item",
     weight: 20,
     meta: {
       label: "Stylesheets",
-      treeAlias: d,
+      treeAlias: M,
       menus: ["Umb.Menu.Templating"]
     }
   },
   {
     type: "workspaceContext",
+    kind: "menuStructure",
     name: "Stylesheet Menu Structure Workspace Context",
     alias: "Umb.Context.Stylesheet.Menu.Structure",
-    api: () => import("./stylesheet-menu-structure.context-Ds7IqcKJ.js"),
+    api: () => import("./stylesheet-menu-structure.context-BPPzcKsd.js"),
+    meta: {
+      menuItemAlias: s
+    },
     conditions: [
       {
         alias: e,
@@ -199,12 +215,12 @@ const j = [
       }
     ]
   }
-], ae = {
+], oe = {
   type: "modal",
   alias: "Umb.Modal.Stylesheet.CreateOptions",
   name: "Stylesheet Create Options Modal",
-  element: () => import("./stylesheet-create-options-modal.element-jSu8r5E3.js")
-}, ie = {
+  element: () => import("./stylesheet-create-options-modal.element-AHFX7BiW.js")
+}, me = {
   type: "entityAction",
   kind: "create",
   alias: "Umb.EntityAction.Stylesheet.Create",
@@ -217,7 +233,7 @@ const j = [
     additionalOptions: !0,
     headline: "#create_createUnder #treeHeaders_documentTypes"
   }
-}, se = [
+}, re = [
   {
     type: "entityCreateOptionAction",
     alias: "Umb.EntityCreateOptionAction.Stylesheet.Default",
@@ -240,24 +256,24 @@ const j = [
       icon: "icon-folder",
       label: "#create_folder",
       description: "#create_folderDescription",
-      folderRepositoryAlias: I
+      folderRepositoryAlias: b
     }
   }
-], ne = [ae, ie, ...se], oe = [
+], pe = [oe, me, ...re], le = [
   {
     type: "entityAction",
     kind: "delete",
     alias: "Umb.EntityAction.Stylesheet.Delete",
     name: "Delete Stylesheet Entity Action",
-    forEntityTypes: [R],
+    forEntityTypes: [B],
     meta: {
-      detailRepositoryAlias: u,
-      itemRepositoryAlias: P
+      detailRepositoryAlias: P,
+      itemRepositoryAlias: h
     }
   },
-  ...ne,
-  ...U
-], me = {
+  ...pe,
+  ...k
+], ce = {
   type: "propertyEditorUi",
   alias: "Umb.PropertyEditorUi.StylesheetPicker",
   name: "Stylesheet Picker Property Editor UI",
@@ -267,31 +283,41 @@ const j = [
     icon: "icon-document",
     group: "common"
   }
-}, re = [me], pe = [
-  ...b,
-  ...te,
-  ...M,
-  ...f,
-  ...oe,
-  ...re
-], le = [
+}, Te = [ce], Ee = [
+  ...L,
+  ...se,
+  ...O,
+  ...R,
+  ...le,
+  ...Te,
+  {
+    name: "Stylesheet Backoffice Entry Point",
+    alias: "Umb.EntryPoint.Stylesheet",
+    type: "backofficeEntryPoint",
+    js: () => import("./entry-point-KezsHgVp.js")
+  }
+], Ae = [
   {
     type: "menuItem",
     kind: "tree",
-    alias: "Umb.MenuItem.PartialView",
+    alias: o,
     name: "Partial View Menu Item",
     weight: 40,
     meta: {
       label: "Partial Views",
-      treeAlias: B,
+      treeAlias: W,
       menus: ["Umb.Menu.Templating"]
     }
   },
   {
     type: "workspaceContext",
+    kind: "menuStructure",
     name: "Partial View Menu Structure Workspace Context",
     alias: "Umb.Context.PartialView.Menu.Structure",
-    api: () => import("./partial-view-menu-structure.context-DluvYor0.js"),
+    api: () => import("./partial-view-menu-structure.context-C9YfmfY6.js"),
+    meta: {
+      menuItemAlias: o
+    },
     conditions: [
       {
         alias: e,
@@ -311,18 +337,18 @@ const j = [
       }
     ]
   }
-], ce = [
+], ye = [
   {
     type: "entityAction",
     kind: "default",
     alias: "Umb.EntityAction.PartialView.CreateOptions",
     name: "Partial View Create Options Entity Action",
     weight: 1200,
-    api: () => import("./create.action-73j1iYwZ.js"),
-    forEntityTypes: [$, w],
+    api: () => import("./create.action-DhSl3Uon.js"),
+    forEntityTypes: [D, N],
     meta: {
       icon: "icon-add",
-      label: "#actions_create",
+      label: "#actions_createFor",
       additionalOptions: !0
     }
   },
@@ -330,7 +356,7 @@ const j = [
     type: "modal",
     alias: "Umb.Modal.PartialView.CreateOptions",
     name: "Partial View Create Options Modal",
-    element: () => import("./partial-view-create-options-modal.element-jsBY-Flu.js")
+    element: () => import("./partial-view-create-options-modal.element-DtQGi_h2.js")
   },
   {
     type: "modal",
@@ -338,44 +364,54 @@ const j = [
     name: "Create Partial View From Snippet Modal",
     js: () => import("./create-from-snippet-modal-jmullPcy.js")
   }
-], Te = [
+], _e = [
   {
     type: "entityAction",
     kind: "delete",
     alias: "Umb.EntityAction.PartialView.Delete",
     name: "Delete Partial View Entity Action",
-    forEntityTypes: [g],
+    forEntityTypes: [V],
     meta: {
-      detailRepositoryAlias: h,
-      itemRepositoryAlias: O
+      detailRepositoryAlias: w,
+      itemRepositoryAlias: C
     }
   },
-  ...ce,
-  ...L
-], Ee = [
-  ...k,
-  ...le,
+  ...ye,
+  ...$
+], Se = [
+  ...g,
+  ...Ae,
+  ...F,
+  ..._e,
   ...Y,
-  ...Te,
-  ...C
-], Ae = [
+  {
+    name: "Partial View Backoffice Entry Point",
+    alias: "Umb.EntryPoint.Partial View",
+    type: "backofficeEntryPoint",
+    js: () => import("./entry-point-B-7UvxVJ.js")
+  }
+], de = [
   {
     type: "menuItem",
     kind: "tree",
-    alias: D,
+    alias: m,
     name: "Scripts Menu Item",
     weight: 10,
     meta: {
       label: "Scripts",
-      treeAlias: W,
+      treeAlias: x,
       menus: ["Umb.Menu.Templating"]
     }
   },
   {
     type: "workspaceContext",
+    kind: "menuStructure",
     name: "Script Menu Structure Workspace Context",
     alias: "Umb.Context.Script.Menu.Structure",
-    api: () => import("./script-menu-structure.context-BO7DrzGD.js"),
+    api: () => import("./script-menu-structure.context-D0_FRXVi.js"),
+    meta: {
+      menuItemAlias: m
+    },
     conditions: [
       {
         alias: e,
@@ -395,12 +431,12 @@ const j = [
       }
     ]
   }
-], ye = [
+], Ie = [
   {
     type: "repository",
-    alias: V,
+    alias: H,
     name: "Script Item Repository",
-    api: () => import("./script-item.repository-D73yZhQ0.js")
+    api: () => import("./script-item.repository-DTVY3YBu.js")
   },
   {
     type: "itemStore",
@@ -408,27 +444,33 @@ const j = [
     name: "Script Item Store",
     api: () => import("./script-item.store-B_Fp3Sg6.js")
   }
-], _e = [
+], ue = [
   {
     type: "repository",
-    alias: F,
+    alias: j,
     name: "Script Detail Repository",
-    api: () => import("./script-detail.repository-rCDnl-Wx.js")
+    api: () => import("./script-detail.repository-BTaA0TCB.js")
   },
   {
     type: "store",
-    alias: N,
+    alias: v,
     name: "Script Detail Store",
-    api: () => import("./script-detail.store-CpP7qB0C.js")
+    api: () => import("./script-detail.store-UHYVh22h.js")
   },
-  ...ye
-], Se = [
-  ...x,
-  ...Ae,
-  ..._e,
-  ...H,
-  ...q
-], de = [
+  ...Ie
+], Ue = [
+  ...G,
+  ...de,
+  ...ue,
+  ...q,
+  ...z,
+  {
+    name: "Script Backoffice Entry Point",
+    alias: "Umb.EntryPoint.Script",
+    type: "backofficeEntryPoint",
+    js: () => import("./entry-point-OPUaSqkD.js")
+  }
+], fe = [
   {
     type: "modal",
     alias: "Umb.Modal.TemplatingItemPicker",
@@ -447,15 +489,15 @@ const j = [
     name: "Templating Page Field Builder Modal",
     element: () => import("./templating-page-field-builder-modal.element-uWRtSSXU.js")
   }
-], We = [
-  ...j,
-  ...ee,
-  ...pe,
+], He = [
+  ...K,
+  ...ne,
   ...Ee,
-  ...de,
-  ...Se
+  ...Se,
+  ...fe,
+  ...Ue
 ];
 export {
-  We as manifests
+  He as manifests
 };
 //# sourceMappingURL=manifests.js.map

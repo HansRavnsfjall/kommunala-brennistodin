@@ -1,0 +1,122 @@
+﻿@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<Umbraco.Cms.Core.Models.Blocks.BlockListItem>
+
+@using System.Globalization
+@using Microsoft.AspNetCore.Html
+@using Umbraco.Cms.Core.Models
+@using Umbraco.Cms.Core.Models.Blocks
+@using Umbraco.Cms.Core.Models.PublishedContent
+@using Umbraco.Extensions
+
+@{
+    var culture = CultureInfo.CurrentUICulture?.Name;
+    var content = Model.Content;
+
+    var heading = content.Value<string>(
+        "yvirskrift",
+        culture: culture,
+        fallback: Fallback.ToLanguage
+    ) ?? string.Empty;
+
+    var body = content.Value<IHtmlEncodedString>(
+        "tekstur",
+        culture: culture,
+        fallback: Fallback.ToLanguage
+    );
+
+    // URL pickers – SINGLE Link
+    var printLink = content.Value<Link>(
+        "leinkiTIlPrent",   // adjust alias if it's spelled differently
+        culture: culture,
+        fallback: Fallback.ToLanguage
+    );
+
+    var screenLink = content.Value<Link>(
+        "leinkiTilSkyggja",
+        culture: culture,
+        fallback: Fallback.ToLanguage
+    );
+
+    // Image on the right
+    var image = content.Value<MediaWithCrops>(
+        "mynd",
+        culture: culture,
+        fallback: Fallback.ToLanguage
+    );
+}
+
+<section class="section-download-icons py-4 py-lg-5">
+    <div class="container">
+        <div class="row align-items-center">
+            <!-- LEFT COLUMN -->
+            <div class="col-lg-5">
+                @if (!string.IsNullOrWhiteSpace(heading))
+                {
+                    <h2 class="download-icons-heading mb-3 myndatekinHead">
+                        @heading
+                    </h2>
+                }
+
+                @if (body != null)
+                {
+                    <div class="download-icons-body mb-4 just-p">
+                        @body
+                    </div>
+                }
+
+                <ul class="download-icons-list list-unstyled m-0">
+                    @if (printLink != null && !string.IsNullOrWhiteSpace(printLink.Url))
+                    {
+                        <li class="download-icons-item d-flex align-items-center">
+                            <a href="@printLink.Url"
+                               target="@(string.IsNullOrWhiteSpace(printLink.Target) ? "_self" : printLink.Target)"
+                               class="download-icons-link">
+                                Myndatekin PDF (Til prent)
+                            </a>
+                            <span>
+                                <svg xmlns="http://www.w3.org/2000/svg" width="43" height="43" viewBox="0 0 43 43" fill="none">
+  <path d="M21.5003 28.6665L12.542 19.7082L15.0503 17.1103L19.7087 21.7686V7.1665H23.292V21.7686L27.9503 17.1103L30.4587 19.7082L21.5003 28.6665ZM10.7503 35.8332C9.76491 35.8332 8.92133 35.4823 8.2196 34.7806C7.51786 34.0788 7.16699 33.2353 7.16699 32.2498V26.8748H10.7503V32.2498H32.2503V26.8748H35.8337V32.2498C35.8337 33.2353 35.4828 34.0788 34.7811 34.7806C34.0793 35.4823 33.2357 35.8332 32.2503 35.8332H10.7503Z" fill="#4B7019"/>
+</svg>
+                            </span>
+                        </li>
+                    }
+
+                    @if (screenLink != null && !string.IsNullOrWhiteSpace(screenLink.Url))
+                    {
+                        <li class="download-icons-item d-flex align-items-center">
+                            <a href="@screenLink.Url"
+                               target="@(string.IsNullOrWhiteSpace(screenLink.Target) ? "_self" : screenLink.Target)"
+                               class="download-icons-link">
+                                Myndatekin PNG (Til skíggja)
+                            </a>
+                            <span>
+                                <svg xmlns="http://www.w3.org/2000/svg" width="43" height="43" viewBox="0 0 43 43" fill="none">
+  <path d="M21.5003 28.6665L12.542 19.7082L15.0503 17.1103L19.7087 21.7686V7.1665H23.292V21.7686L27.9503 17.1103L30.4587 19.7082L21.5003 28.6665ZM10.7503 35.8332C9.76491 35.8332 8.92133 35.4823 8.2196 34.7806C7.51786 34.0788 7.16699 33.2353 7.16699 32.2498V26.8748H10.7503V32.2498H32.2503V26.8748H35.8337V32.2498C35.8337 33.2353 35.4828 34.0788 34.7811 34.7806C34.0793 35.4823 33.2357 35.8332 32.2503 35.8332H10.7503Z" fill="#4B7019"/>
+</svg>
+                            </span>
+                        </li>
+                    }
+                </ul>
+            </div>
+
+            <!-- RIGHT COLUMN -->
+            <div class="col-lg-7 mt-4 mt-lg-0">
+                @if (image != null)
+                {
+                    <div class="download-icons-image-wrapper text-lg-end text-center">
+                        <img src="@image.Url()"
+                             alt="@image.Name"
+                             class="download-icons-image img-fluid" />
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Font Awesome 6 CDN -->
+<link rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+      integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIv7O8ZJwYBfF5LGV7k1Jp2Lgo/1aXK8V+CP0P4fFZ8Kg=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer" />
+

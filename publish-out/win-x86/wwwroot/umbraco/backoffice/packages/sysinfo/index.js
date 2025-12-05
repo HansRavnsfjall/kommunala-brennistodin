@@ -1,5 +1,5 @@
 import { UmbModalToken as o } from "@umbraco-cms/backoffice/modal";
-import { U as a } from "./sysinfo.repository-50SHjqQ7.js";
+import { U as a } from "./sysinfo.repository-DMVmqqA5.js";
 const m = new o("Umb.Modal.NewVersion", {
   modal: {
     type: "dialog",

@@ -3,7 +3,7 @@ const o = [
     type: "modal",
     alias: "Umb.Modal.Sysinfo",
     name: "Sysinfo Modal",
-    js: () => import("./sysinfo.element-CavrgrNX.js")
+    js: () => import("./sysinfo.element-v1jm3AGN.js")
   },
   {
     type: "modal",

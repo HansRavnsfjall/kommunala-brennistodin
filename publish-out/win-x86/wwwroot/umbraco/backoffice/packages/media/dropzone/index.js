@@ -1,7 +1,7 @@
 import { UmbTemporaryFileManager as P, TemporaryFileStatus as w } from "@umbraco-cms/backoffice/temporary-file";
 import { UmbObjectState as A, UmbArrayState as F } from "@umbraco-cms/backoffice/observable-api";
 import { UmbControllerBase as L } from "@umbraco-cms/backoffice/class-api";
-import { UmbId as b } from "@umbraco-cms/backoffice/id";
+import { UmbId as v } from "@umbraco-cms/backoffice/id";
 import { ifDefined as T, html as n, nothing as x, repeat as U, when as c, css as N, property as h, query as D, state as R, customElement as S } from "@umbraco-cms/backoffice/external/lit";
 import { UmbLitElement as q } from "@umbraco-cms/backoffice/lit-element";
 import { UmbTextStyles as M } from "@umbraco-cms/backoffice/style";
@@ -15,22 +15,22 @@ class B extends L {
       for (const i of r) {
         const p = {
           file: i,
-          temporaryUnique: b.new(),
+          temporaryUnique: v.new(),
           abortController: new AbortController(),
-          onProgress: (O) => this.#s(v, O)
-        }, v = {
-          unique: b.new(),
+          onProgress: (O) => this.#s(b, O)
+        }, b = {
+          unique: v.new(),
           parentUnique: o,
           status: a.WAITING,
           progress: 0,
           temporaryFile: p
         };
         p.abortController?.signal.addEventListener("abort", () => {
-          this._updateStatus(v, a.CANCELLED);
-        }), s.push(v);
+          this._updateStatus(b, a.CANCELLED);
+        }), s.push(b);
       }
       for (const i of t) {
-        const p = b.new();
+        const p = v.new();
         s.push({
           unique: p,
           parentUnique: o,
@@ -108,13 +108,13 @@ class E extends Event {
     super(E.TYPE, { bubbles: !1, composed: !1, cancelable: !1, ...r }), this.items = t;
   }
 }
-var G = Object.defineProperty, V = Object.getOwnPropertyDescriptor, I = (e) => {
+var G = Object.defineProperty, V = Object.getOwnPropertyDescriptor, C = (e) => {
   throw TypeError(e);
 }, u = (e, t, r, o) => {
   for (var s = o > 1 ? void 0 : o ? V(t, r) : t, i = e.length - 1, p; i >= 0; i--)
     (p = e[i]) && (s = (o ? p(t, r, s) : p(s)) || s);
   return o && s && G(t, r, s), s;
-}, C = (e, t, r) => t.has(e) || I("Cannot " + r), g = (e, t, r) => (C(e, t, "read from private field"), r ? r.call(e) : t.get(e)), Y = (e, t, r) => t.has(e) ? I("Cannot add the same private member more than once") : t instanceof WeakSet ? t.add(e) : t.set(e, r), m = (e, t, r) => (C(e, t, "access private method"), r), d, f, _, $, z;
+}, I = (e, t, r) => t.has(e) || C("Cannot " + r), g = (e, t, r) => (I(e, t, "read from private field"), r ? r.call(e) : t.get(e)), Y = (e, t, r) => t.has(e) ? C("Cannot add the same private member more than once") : t instanceof WeakSet ? t.add(e) : t.set(e, r), m = (e, t, r) => (I(e, t, "access private method"), r), d, f, _, $, z;
 let l = class extends k(
   q
 ) {
@@ -182,7 +182,8 @@ let l = class extends k(
 					compact
 					@click=${m(this, d, z)}
 					label=${this.localize.term("content_uploadClear")}>
-					<uui-icon name="icon-trash"></uui-icon>${this.localize.term("content_uploadClear")}
+					<uui-icon name="icon-trash"></uui-icon>
+					<umb-localize key="content_uploadClear">Clear file(s)</umb-localize>
 				</uui-button>
 			</div>
 		` : x;

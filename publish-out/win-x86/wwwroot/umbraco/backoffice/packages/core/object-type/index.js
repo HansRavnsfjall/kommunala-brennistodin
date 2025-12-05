@@ -1,4 +1,4 @@
-import { ObjectTypesService as _ } from "@umbraco-cms/backoffice/external/backend-api";
+import { ObjectTypesService as m } from "@umbraco-cms/backoffice/external/backend-api";
 import { UmbControllerBase as y } from "@umbraco-cms/backoffice/class-api";
 import { tryExecute as d } from "@umbraco-cms/backoffice/resources";
 import { html as f, query as E, property as w, state as O, customElement as C } from "@umbraco-cms/backoffice/external/lit";
@@ -10,7 +10,7 @@ class T extends y {
     super(e), this.#e = e;
   }
   async #t() {
-    return d(this.#e, _.getObjectTypes({}));
+    return d(this.#e, m.getObjectTypes({}));
   }
   async read() {
     const { data: e, error: r } = await this.#t();
@@ -23,7 +23,7 @@ var b = Object.defineProperty, x = Object.getOwnPropertyDescriptor, v = (t) => {
   for (var s = n > 1 ? void 0 : n ? x(e, r) : e, p = t.length - 1, c; p >= 0; p--)
     (c = t[p]) && (s = (n ? c(e, r, s) : c(s)) || s);
   return n && s && b(e, r, s), s;
-}, l = (t, e, r) => e.has(t) || v("Cannot " + r), P = (t, e, r) => (l(t, e, "read from private field"), r ? r.call(t) : e.get(t)), h = (t, e, r) => e.has(t) ? v("Cannot add the same private member more than once") : e instanceof WeakSet ? e.add(t) : e.set(t, r), S = (t, e, r, n) => (l(t, e, "write to private field"), e.set(t, r), r), j = (t, e, r) => (l(t, e, "access private method"), r), a, u, m;
+}, l = (t, e, r) => e.has(t) || v("Cannot " + r), P = (t, e, r) => (l(t, e, "read from private field"), r ? r.call(t) : e.get(t)), h = (t, e, r) => e.has(t) ? v("Cannot add the same private member more than once") : e instanceof WeakSet ? e.add(t) : e.set(t, r), S = (t, e, r, n) => (l(t, e, "write to private field"), e.set(t, r), r), j = (t, e, r) => (l(t, e, "access private method"), r), a, u, _;
 let o = class extends U(g, "") {
   constructor() {
     super(), h(this, u), this._options = [], h(this, a), S(this, a, new T(this)), P(this, a).read().then(({ data: t }) => {
@@ -31,26 +31,26 @@ let o = class extends U(g, "") {
     });
   }
   set value(t) {
-    this.select.value = t;
+    this._select.value = t;
   }
   get value() {
-    return this.select.value;
+    return this._select.value;
   }
   getFormElement() {
   }
   render() {
-    return f`<uui-select .options=${this._options} @change=${j(this, u, m)}></uui-select> `;
+    return f`<uui-select .options=${this._options} @change=${j(this, u, _)}></uui-select> `;
   }
 };
 a = /* @__PURE__ */ new WeakMap();
 u = /* @__PURE__ */ new WeakSet();
-m = function() {
+_ = function() {
   this.dispatchEvent(new CustomEvent("change"));
 };
 o.styles = [];
 i([
   E("uui-select")
-], o.prototype, "select", 2);
+], o.prototype, "_select", 2);
 i([
   w()
 ], o.prototype, "value", 1);

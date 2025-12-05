@@ -1,5 +1,6 @@
-import { UMB_SETTINGS_SECTION_ALIAS as e } from "@umbraco-cms/backoffice/settings";
-const a = [
+import { UMB_SECTION_ALIAS_CONDITION_ALIAS as e } from "@umbraco-cms/backoffice/section";
+import { UMB_SETTINGS_SECTION_ALIAS as a } from "@umbraco-cms/backoffice/settings";
+const m = [
   {
     type: "modal",
     alias: "Umb.Modal.Examine.FieldsSettings",
@@ -12,7 +13,7 @@ const a = [
     name: "Examine Field Viewer Modal",
     element: () => import("./examine-fields-viewer-modal.element-DFfxehs1.js")
   }
-], m = [...a], i = [
+], t = [...m], o = [
   {
     type: "headerApp",
     alias: "Umb.HeaderApp.Search",
@@ -35,7 +36,7 @@ const a = [
     type: "dashboard",
     alias: "Umb.Dashboard.ExamineManagement",
     name: "Examine Management Dashboard",
-    element: () => import("./dashboard-examine-management.element-CCvs3t6h.js"),
+    element: () => import("./dashboard-examine-management.element-DO1LSIL6.js"),
     weight: 400,
     meta: {
       label: "#dashboardTabs_settingsExamine",
@@ -43,14 +44,14 @@ const a = [
     },
     conditions: [
       {
-        alias: "Umb.Condition.SectionAlias",
-        match: e
+        alias: e,
+        match: a
       }
     ]
   },
-  ...m
+  ...t
 ];
 export {
-  i as manifests
+  o as manifests
 };
 //# sourceMappingURL=manifests.js.map

@@ -8,10 +8,12 @@ import { UMB_BACKOFFICE_CONTEXT } from '../backoffice.context.js';
 import { css, html, customElement, state, repeat, ifDefined } from '@umbraco-cms/backoffice/external/lit';
 import { UmbLitElement } from '@umbraco-cms/backoffice/lit-element';
 let UmbBackofficeHeaderSectionsElement = class UmbBackofficeHeaderSectionsElement extends UmbLitElement {
+    #sectionPathMap;
     constructor() {
         super();
         this._sections = [];
         this._currentSectionAlias = '';
+        this.#sectionPathMap = new Map();
         this.consumeContext(UMB_BACKOFFICE_CONTEXT, (backofficeContext) => {
             this._backofficeContext = backofficeContext;
             this._observeSections();
@@ -34,17 +36,58 @@ let UmbBackofficeHeaderSectionsElement = class UmbBackofficeHeaderSectionsElemen
             this._currentSectionAlias = currentSectionAlias || '';
         }, 'observeCurrentSection');
     }
+    #getSectionName(section) {
+        return section.manifest?.meta.label ? this.localize.string(section.manifest?.meta.label) : section.manifest?.name;
+    }
+    #getSectionPath(manifest) {
+        return `section/${manifest?.meta.pathname}`;
+    }
+    #onSectionClick(event, manifest) {
+        // Let the browser handle the click if the Ctrl or Meta key is pressed
+        if (event.ctrlKey || event.metaKey) {
+            return;
+        }
+        event.stopPropagation();
+        event.preventDefault();
+        // Store the current path for the section so we can redirect to it next time the section is visited
+        if (this._currentSectionAlias) {
+            const currentPath = window.location.pathname;
+            this.#sectionPathMap.set(this._currentSectionAlias, currentPath);
+        }
+        if (!manifest) {
+            throw new Error('Section manifest is missing');
+        }
+        const clickedSectionAlias = manifest.alias;
+        // If preventUrlRetention is set to true then go to the section root.
+        // Or if the clicked section is the current active one, then navigate to the section root
+        if (manifest?.meta.preventUrlRetention === true || this._currentSectionAlias === clickedSectionAlias) {
+            const sectionPath = this.#getSectionPath(manifest);
+            history.pushState(null, '', sectionPath);
+            return;
+        }
+        // Check if we have a stored path for the clicked section
+        if (this.#sectionPathMap.has(clickedSectionAlias)) {
+            const storedPath = this.#sectionPathMap.get(clickedSectionAlias);
+            history.pushState(null, '', storedPath);
+        }
+        else {
+            // Nothing stored, so we navigate to the regular section path
+            const sectionPath = this.#getSectionPath(manifest);
+            history.pushState(null, '', sectionPath);
+        }
+    }
     render() {
         return html `
 			<uui-tab-group id="tabs" data-mark="section-links">
 				${repeat(this._sections, (section) => section.alias, (section) => html `
 						<uui-tab
 							?active="${this._currentSectionAlias === section.alias}"
-							href="${`section/${section.manifest?.meta.pathname}`}"
-							label="${ifDefined(section.manifest?.meta.label
-            ? this.localize.string(section.manifest?.meta.label)
-            : section.manifest?.name)}"
-							data-mark="section-link:${section.alias}"></uui-tab>
+							@click=${(event) => this.#onSectionClick(event, section.manifest)}
+							href="${this.#getSectionPath(section.manifest)}"
+							label="${ifDefined(this.#getSectionName(section))}"
+							data-mark="section-link:${section.alias}"
+							>${this.#getSectionName(section)}</uui-tab
+						>
 					`)}
 			</uui-tab-group>
 		`;

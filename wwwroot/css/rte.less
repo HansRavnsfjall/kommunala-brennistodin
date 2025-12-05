@@ -1,0 +1,35 @@
+/* /wwwroot/css/rte.css */
+
+/* Load your font (all weights) */
+@import url('https://fonts.googleapis.com/css2?family=Alexandria:ital,wght@0,100..900;1,100..900&display=swap');
+
+/* Target the Tiptap editor in backoffice */
+umb-property-editor-ui-tiptap .ProseMirror {
+  font-family: "Alexandria", system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+  font-size: 16px;
+  line-height: 1.7;
+  color: #222;
+  padding: 1rem 0; /* visual comfort while editing */
+}
+
+/* Headings inside the editor */
+umb-property-editor-ui-tiptap .ProseMirror h1,
+umb-property-editor-ui-tiptap .ProseMirror h2,
+umb-property-editor-ui-tiptap .ProseMirror h3,
+umb-property-editor-ui-tiptap .ProseMirror h4,
+umb-property-editor-ui-tiptap .ProseMirror h5,
+umb-property-editor-ui-tiptap .ProseMirror h6 {
+  font-family: "Alexandria", sans-serif;
+  font-weight: 700;
+  line-height: 1.3;
+  margin: 1.2em 0 .5em;
+}
+
+/* Paragraphs, links, lists, quotes */
+umb-property-editor-ui-tiptap .ProseMirror p { margin: 0 0 1em; }
+umb-property-editor-ui-tiptap .ProseMirror a { text-decoration: underline; }
+umb-property-editor-ui-tiptap .ProseMirror ul,
+umb-property-editor-ui-tiptap .ProseMirror ol { padding-left: 1.5em; margin: 0 0 1em; }
+umb-property-editor-ui-tiptap .ProseMirror blockquote {
+  border-left: 4px solid #ccc; padding-left: 1em; color: #555; font-style: italic;
+}

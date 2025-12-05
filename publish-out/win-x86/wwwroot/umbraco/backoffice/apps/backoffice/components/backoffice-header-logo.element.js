@@ -47,7 +47,12 @@ let UmbBackofficeHeaderLogoElement = class UmbBackofficeHeaderLogoElement extend
     }
     render() {
         return html `
-			<uui-button id="header-logo-button" look="primary" label="Logo" compact popovertarget="logo-popover">
+			<uui-button
+				id="header-logo-button"
+				look="primary"
+				label=${this.localize.term('buttons_viewSystemDetails')}
+				compact
+				popovertarget="logo-popover">
 				<umb-app-logo id="header-logo" loading="eager" override-theme="umb-dark-theme"></umb-app-logo>
 			</uui-button>
 			<uui-popover-container id="logo-popover" placement="bottom-start">

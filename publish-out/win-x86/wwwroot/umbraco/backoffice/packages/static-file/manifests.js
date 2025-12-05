@@ -1,5 +1,5 @@
-import { U as e, a as i, c as t, d as a, e as T, g as _, h as o, i as r, f as s } from "./constants-CwKQXLDb.js";
-const I = {
+import { U as e, a as i, c as t, d as a, e as o, g as r, h as s, i as T, f as _ } from "./constants-CwKQXLDb.js";
+const E = {
   type: "propertyEditorUi",
   alias: "Umb.PropertyEditorUi.StaticFilePicker",
   name: "Static File Picker Property Editor UI",
@@ -9,12 +9,12 @@ const I = {
     icon: "icon-document",
     group: "common"
   }
-}, E = [I], S = [
+}, I = [E], m = [
   {
     type: "repository",
     alias: e,
     name: "Static File Item Repository",
-    api: () => import("./static-file-item.repository-_iOtXCez.js")
+    api: () => import("./static-file-item.repository-CfuPxuI9.js")
   },
   {
     type: "itemStore",
@@ -22,12 +22,12 @@ const I = {
     name: "Static File Item Store",
     api: () => import("./static-file-item.store-Binjae-Q.js")
   }
-], m = [...S], p = [
+], S = [...m], n = [
   {
     type: "repository",
     alias: t,
     name: "Static File Tree Repository",
-    api: () => import("./static-file-tree.repository-JI93vq_w.js")
+    api: () => import("./static-file-tree.repository-x9X8q9I8.js")
   },
   {
     type: "treeStore",
@@ -38,7 +38,7 @@ const I = {
   {
     type: "tree",
     kind: "default",
-    alias: T,
+    alias: o,
     name: "Static File Tree",
     meta: {
       repositoryAlias: t
@@ -47,14 +47,20 @@ const I = {
   {
     type: "treeItem",
     kind: "default",
-    alias: s,
+    alias: _,
     name: "Static File Tree Item",
-    forEntityTypes: [_, o, r]
+    forEntityTypes: [r, s, T]
   }
 ], c = [
-  ...E,
-  ...p,
-  ...m
+  ...I,
+  ...n,
+  ...S,
+  {
+    name: "Static File Backoffice Entry Point",
+    alias: "Umb.EntryPoint.StaticFile",
+    type: "backofficeEntryPoint",
+    js: () => import("./entry-point-CUP9W9PG.js")
+  }
 ];
 export {
   c as manifests

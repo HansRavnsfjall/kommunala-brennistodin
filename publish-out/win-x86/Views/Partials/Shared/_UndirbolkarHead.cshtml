@@ -1,0 +1,146 @@
+﻿@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage
+@using Umbraco.Cms.Core.Models.PublishedContent
+@using Umbraco.Extensions
+
+@{
+    // Current node and whether we should "lift" info from its parent
+    var current = Model as IPublishedContent;
+    bool isLutur = string.Equals(current?.ContentType?.Alias, "luturSkiljing", StringComparison.OrdinalIgnoreCase);
+
+    // The source for title/color/icon:
+    // - if current is "luturSkiljing" => use its parent (either "bolkurSkiljivegleiding" or "undirbolkur")
+    // - otherwise => use the current node itself (same behavior as before)
+    var parent = current?.Parent;
+    var source = isLutur ? parent : current;
+
+    // ----- Content fields -----
+    // Color comes from the *composition* on the source ("standardTekstir" -> alias "litur"),
+    // but in Umbraco you just read the property by alias.
+    var bgColor = source?.Value<string>("litur")?.Trim();
+    if (string.IsNullOrWhiteSpace(bgColor)) { bgColor = "#d81e24"; } // sensible red fallback
+
+    // Icon/piktogram: use parent's "ikon" when lifting; otherwise original "piktogram" on current
+    IPublishedContent? pikt = isLutur
+        ? source?.Value<IPublishedContent>("piktogram")
+        : current?.Value<IPublishedContent>("piktogram");
+
+    // Title: parent's name when lifting, otherwise current name
+  
+    // Original logic
+    var rawTitle = (isLutur ? source?.Name : current?.Name) ?? string.Empty;
+
+    // Let editor type [br] in the name => turn into <wbr> for controlled breaks
+    var titleText = rawTitle.Replace("[br]", "<wbr>");
+
+    // Back link: always go to the parent of the current page (your original behavior)
+    var parentUrl = parent?.Url() ?? "/";
+}
+
+<style>
+  /* keep it local to this component */
+  .ub-topbar { background-color: @bgColor; }
+  .ub-topbar .back-link svg { width: 22px; height: 22px; }
+  .ub-topbar .search-wrap { position: relative; }
+  .ub-topbar .search-input {
+      background:#fff; border:0; border-radius:9999px;
+      padding-left:1.25rem; padding-right:3rem; height:56px;
+      box-shadow:none;
+  }
+  .ub-topbar .search-btn {
+      position:absolute; right:.5rem; top:50%; transform:translateY(-50%);
+      border:0; background:transparent; padding:.25rem .5rem;
+      line-height:1; display:flex; align-items:center; justify-content:center;
+  }
+  .ub-topbar .title { color:#fff; font-weight:700; text-align:right; }
+  .ub-topbar .pikt { max-height:46px; width:auto; margin-left:.5rem; }
+  @@media (max-width: 767.98px){
+    .ub-topbar .title { text-align:left; margin-top:.75rem; }
+    .ub-topbar .right-col { justify-content:flex-start !important; }
+  }
+</style>
+
+<section class="ub-topbar py-3">
+  <div class="container">
+    <div class="row align-items-center g-3">
+      <!-- Back to overview -->
+      <div class="col-12 flex-col col-xl-3">
+        <a href="@parentUrl" class="back-link d-inline-flex align-items-center text-white text-decoration-none fw-semibold">
+          <!-- left arrow (inline SVG so it’s always visible on colored bg) -->
+          <svg xmlns="http://www.w3.org/2000/svg" width="25" height="23" viewBox="0 0 25 23" fill="none">
+<path d="M0.43934 9.98528C-0.146447 10.5711 -0.146447 11.5208 0.43934 12.1066L9.98528 21.6525C10.5711 22.2383 11.5208 22.2383 12.1066 21.6525C12.6924 21.0668 12.6924 20.117 12.1066 19.5312L3.62132 11.0459L12.1066 2.56066C12.6924 1.97488 12.6924 1.02513 12.1066 0.439343C11.5208 -0.146443 10.5711 -0.146444 9.98528 0.439343L0.43934 9.98528ZM1.5 11.0459L1.5 12.5459L24.5 12.5459L24.5 11.0459L24.5 9.54595L1.5 9.54594L1.5 11.0459Z" fill="white"/>
+</svg>
+          <span class="ms-2 back-text-hidemobile">Aftur til yvirlit</span>
+        
+        </a>  <div class="title-icon-target"></div>
+      </div>
+
+      <!-- Search -->
+      <div class="col-12 col-xl-6 text-center">
+        <div class="search-wrap mx-auto" method="get">
+          <input class="form-control  sort-search search-input" type="search" name="q" placeholder="Skriva leitiorð" aria-label="Leit">
+          <button class="search-btn" type="submit" aria-label="Leita">
+            <!-- magnifying glass -->
+            <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" width="26" height="26">
+              <circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="2"/>
+              <path d="M20 20L16.65 16.65" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+            </svg>
+          </button>
+        </div>
+      </div>
+
+      <!-- Title + Icon -->
+      <div class="col-12 col-xl-3 d-flex right-col align-items-center justify-content-md-end title-icon">
+        <div class="title h4 mb-0">@Html.Raw(titleText)</div>
+        @if (pikt != null)
+        {
+            <img class="pikt" src="@pikt.Url()" alt="" />
+        }
+      </div>
+    </div>
+  </div>
+</section>
+      
+      
+<section class="sort-search-result">
+</section>
+
+<!-- Hidden template used when no results -->
+<template id="sort-noresult-template">
+  @await Html.PartialAsync("~/Views/Partials/Shared/_SearchSuggestForm.cshtml")
+</template>
+
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+
+    const source = document.querySelector(".title-icon");
+    const target = document.querySelector(".title-icon-target");
+
+    if (!source || !target) return;
+
+    // Save original children as a DocumentFragment (keeps nodes intact)
+    const originalContent = document.createDocumentFragment();
+    [...source.childNodes].forEach(n => originalContent.appendChild(n));
+
+    // Clone the fragment for restoring later
+    const originalBackup = originalContent.cloneNode(true);
+
+    function moveContent() {
+        const isMobile = window.matchMedia("(max-width: 1198px)").matches;
+
+        if (isMobile) {
+            // Move children into target (no duplicates)
+            if (target.childNodes.length === 0) {
+                target.appendChild(originalContent.cloneNode(true));
+            }
+        } else {
+            // Restore original content to source (desktop)
+            if (source.childNodes.length === 0) {
+                source.appendChild(originalBackup.cloneNode(true));
+            }
+        }
+    }
+
+    moveContent();                        // Run on load
+    window.addEventListener("resize", moveContent);  // Run when resizing
+});
+</script>

@@ -54,7 +54,7 @@ let UmbPreviewElement = class UmbPreviewElement extends UmbLitElement {
 						src=${this._previewUrl}
 						title="Page preview"
 						@load=${this.#onIFrameLoad}
-						sandbox="allow-scripts allow-same-origin"></iframe>
+						sandbox="allow-scripts allow-same-origin allow-forms"></iframe>
 				</div>
 			</div>
 			<div id="menu">

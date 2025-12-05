@@ -1,0 +1,69 @@
+@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<Umbraco.Cms.Core.Models.Blocks.BlockListItem>
+@using System.Globalization
+@using Microsoft.AspNetCore.Mvc.ViewEngines
+@using Umbraco.Cms.Core.Models.Blocks
+@using Umbraco.Cms.Core.Models.PublishedContent
+@using Umbraco.Extensions
+@inject ICompositeViewEngine ViewEngine
+
+@{
+    // Your global source (from your master quick-dump)
+    var GlobalPageKey = Guid.Parse("409f2e13-404d-4040-a120-341581f55942");
+    const string GlobalList = "modul";
+
+    string ComponentPath(string a) => $"~/Views/Partials/BlockList/Components/{a}.cshtml";
+    const string FallbackPath = "~/Views/Partials/BlockList/Default.cshtml";
+    bool ViewExists(string p) => ViewEngine.GetView(null, p, isMainPage:false).Success;
+
+    var culture = CultureInfo.CurrentUICulture?.Name;
+    var element = Model?.Content;
+
+    if (element is null)
+    {
+        <div style="color:#a00">globalBlockReference: element null</div>;
+        return;
+    }
+
+    var keyString = element.Value<string>("targetKey", culture: culture, fallback: Fallback.ToLanguage);
+    if (string.IsNullOrWhiteSpace(keyString) || !Guid.TryParse(keyString, out var targetKey))
+    {
+        <div style="color:#a00">globalBlockReference: invalid targetKey</div>;
+        return;
+    }
+
+    var globalPage = Umbraco.Content(GlobalPageKey);
+    var globalList = globalPage?.Value<BlockListModel>(GlobalList, culture: culture, fallback: Fallback.ToLanguage);
+
+    if (globalList is null || globalList.Count == 0)
+    {
+        <div style="color:#a00">globalBlockReference: global list empty</div>;
+        return;
+    }
+
+    var resolved = globalList.FirstOrDefault(b => b.Content?.Key == targetKey);
+    if (resolved is null)
+    {
+        <div style="color:#a00">globalBlockReference: no block for key @targetKey</div>;
+        return;
+    }
+
+    var alias = resolved.Content?.ContentType?.Alias ?? "(null)";
+    var viewPath = ComponentPath(alias);
+}
+
+<div style="background:#e6f7ff;border:1px solid #91d5ff;padding:6px;margin:.5rem 0;font-size:.85rem">
+  <strong>globalBlockReference:</strong> alias=<code>@alias</code>
+  &nbsp;|&nbsp; try=<code>@viewPath</code>
+  &nbsp;|&nbsp; exists=<code>@(ViewExists(viewPath))</code>
+</div>
+
+@{
+    if (ViewExists(viewPath))
+    {
+        @await Html.PartialAsync(viewPath, resolved)  // pass the BlockListItem
+    }
+    else
+    {
+        @await Html.PartialAsync(FallbackPath, resolved)
+    }
+}

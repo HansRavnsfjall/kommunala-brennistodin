@@ -1,0 +1,163 @@
+@using System
+@using System.Linq
+@using System.Web
+@using System.Globalization
+@using Umbraco.Cms.Core.Models
+@using Umbraco.Cms.Core.Models.Blocks
+@using Umbraco.Cms.Core.Models.PublishedContent
+@using Umbraco.Cms.Core.Strings
+@using Umbraco.Extensions
+@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<BlockListItem>
+
+@{
+    var culture = CultureInfo.CurrentUICulture?.Name;
+
+    // ----- Aliases (exact as you gave) -----
+    var content      = Model.Content;
+    var preHeading   = content.Value<string>("temayvrskrift", culture: culture, fallback: Fallback.ToLanguage);
+    var heading      = content.Value<string>("yvirskrift", culture: culture, fallback: Fallback.ToLanguage);
+    var body         = content.Value<IHtmlEncodedString>("inngangstekstur", culture: culture, fallback: Fallback.ToLanguage);
+    var poster       = content.Value<MediaWithCrops>("mynd", culture: culture, fallback: Fallback.ToLanguage);
+    var vimeoUrlRaw  = content.Value<string>("vimeoLeinki", culture: culture, fallback: Fallback.ToLanguage);
+
+    string? posterUrl = poster?.MediaUrl();
+
+    // ---- Vimeo URL normalizer: handles vimeo.com/{id}/{hash}, vimeo.com/{id}?h=..., player.vimeo.com/video/{id}?h=... ----
+    string? BuildVimeoBackgroundUrl(string? url)
+    {
+        if (string.IsNullOrWhiteSpace(url)) return null;
+
+        try
+        {
+            var uri = new Uri(url);
+
+            // If it's already a player URL and has an ID, keep its h if present and add background params.
+            bool isPlayer = uri.Host.Contains("player.vimeo.com", StringComparison.OrdinalIgnoreCase);
+            var path = uri.AbsolutePath.Trim('/'); // e.g. "1129100487/271cd34cdb" or "video/1129100487"
+            var parts = path.Split(new[]{'/'}, StringSplitOptions.RemoveEmptyEntries);
+
+            // Extract numeric ID (first numeric-looking segment)
+            string? id = parts.FirstOrDefault(p => long.TryParse(p, out _));
+
+            // Extract hash priority: query ?h=..., else path segment after ID if present and not numeric
+            var qs = HttpUtility.ParseQueryString(uri.Query);
+            string? hash = qs.Get("h");
+
+            if (string.IsNullOrWhiteSpace(hash) && !string.IsNullOrWhiteSpace(id))
+            {
+                var idIndex = Array.IndexOf(parts, id);
+                if (idIndex >= 0 && idIndex + 1 < parts.Length)
+                {
+                    var maybeHash = parts[idIndex + 1];
+                    // Common Vimeo hashes are hex-ish and not "video"
+                    if (!long.TryParse(maybeHash, out _) && !maybeHash.Equals("video", StringComparison.OrdinalIgnoreCase))
+                    {
+                        hash = maybeHash;
+                    }
+                }
+            }
+
+            if (string.IsNullOrWhiteSpace(id))
+                return null;
+
+            var baseUrl = $"https://player.vimeo.com/video/{id}";
+            var hPart   = string.IsNullOrWhiteSpace(hash) ? "" : $"&h={HttpUtility.UrlEncode(hash)}";
+
+            // Vimeo background mode params
+            return $"{baseUrl}?background=1&autoplay=1&muted=1&loop=1&title=0&byline=0&portrait=0{hPart}";
+        }
+        catch
+        {
+            return null;
+        }
+    }
+
+    var vimeoEmbedUrl = BuildVimeoBackgroundUrl(vimeoUrlRaw);
+
+    var heroClasses     = "hero position-relative overflow-hidden";
+    var heroWrapClasses = "hero-wrap position-relative d-flex align-items-center";
+}
+
+<section class="@heroClasses" style="min-height:80vh">
+  <!-- Background layer -->
+  <div class="hero-img position-absolute top-0 start-0 w-100 h-100">
+    @if (!string.IsNullOrWhiteSpace(vimeoEmbedUrl))
+    {
+        <!-- Vimeo background (supports hashed links) -->
+        <div class="vimeo-wrapper">
+          <iframe
+            src="@vimeoEmbedUrl"
+            frameborder="0"
+            allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share"
+            referrerpolicy="strict-origin-when-cross-origin"
+            class="vimeo-bg-video"
+            title="Background video"
+          ></iframe>
+        </div>
+        <script src="https://player.vimeo.com/api/player.js"></script>
+
+        @* Optional poster behind video while it initializes *@
+        @if (!string.IsNullOrWhiteSpace(posterUrl))
+        {
+            <div class="hero-fallback-img" style="background-image:url('@posterUrl');"></div>
+        }
+    }
+    else if (!string.IsNullOrWhiteSpace(posterUrl))
+    {
+        <!-- Static image background -->
+        <div class="hero-fallback-img" style="background-image:url('@posterUrl');"></div>
+    }
+  </div>
+
+  <!-- Foreground content -->
+  <div class="@heroWrapClasses">
+    <div class="container py-5">
+      @if (!string.IsNullOrWhiteSpace(preHeading))
+      {
+        <span class="badge-yellow d-inline-block mb-2">@preHeading</span>
+      }
+
+      @if (!string.IsNullOrWhiteSpace(heading))
+      {
+        <h1 class="lh-tight display-4 fw-bold">@heading</h1>
+      }
+
+      @if (body != null && !string.IsNullOrWhiteSpace(body.ToString()))
+      {
+        <div class="lead mb-0">@body</div>
+      }
+    </div>
+  </div>
+</section>
+
+<style>
+/* Scoped styles for this block */
+
+.hero { position: relative; color: #fff; }
+.hero-img { z-index: 0; overflow: hidden; }
+
+/* Static image layer */
+.hero-fallback-img {
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+/* Vimeo cover technique (no overlay) */
+.vimeo-wrapper { position: absolute; inset: 0; }
+.vimeo-bg-video {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 100vw;
+  height: 56.25vw; /* 9/16 of width */
+  min-width: 100%;
+  min-height: 100%;
+  transform: translate(-50%, -50%);
+  pointer-events: none; /* clicks go through to content */
+}
+
+.hero-wrap { z-index: 1; position: relative; }
+</style>

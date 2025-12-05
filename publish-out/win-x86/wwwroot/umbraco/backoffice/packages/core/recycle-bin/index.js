@@ -1,20 +1,19 @@
-import { b as u, d as f, c as y, U as A, a as B } from "../bulk-trash.action.kind-CdpI7m0a.js";
-import { U as i } from "../is-trashed.entity-context-token-DtToyMNh.js";
-import { U as l } from "../restore-from-recycle-bin-modal.token-Dfw4-Cxp.js";
-import { UmbTrashEntityAction as S } from "../trash.action-KXZi2vhG.js";
-import { U as b } from "../trash.event-D1yYlRYJ.js";
-import { UmbRestoreFromRecycleBinEntityAction as C } from "../restore-from-recycle-bin.action-BcDOWexc.js";
+import { b as A, d as u, c as B, U as y, a as R } from "../bulk-trash.action.kind-9Ooy_hJp.js";
+import { U as o } from "../is-trashed.entity-context-token-DtToyMNh.js";
+import { U as f } from "../restore-from-recycle-bin-modal.token-Dfw4-Cxp.js";
+import { UmbTrashEntityAction as l } from "../trash.action-KXZi2vhG.js";
+import { U as x } from "../trash.event-D1yYlRYJ.js";
+import { UmbRestoreFromRecycleBinEntityAction as M } from "../restore-from-recycle-bin.action-wPNxL7Dj.js";
 import { UmbEmptyRecycleBinEntityAction as D } from "../empty-recycle-bin.action-CL03sClh.js";
-import { UmbTrashEntityBulkAction as Y, UmbTrashEntityBulkAction as q } from "../bulk-trash.action-CT1ona5L.js";
-import { UMB_NOTIFICATION_CONTEXT as o } from "@umbraco-cms/backoffice/notification";
+import { UmbTrashEntityBulkAction as g, UmbTrashEntityBulkAction as H } from "../bulk-trash.action-Dv4483Cg.js";
+import { UMB_NOTIFICATION_CONTEXT as i } from "@umbraco-cms/backoffice/notification";
 import { UmbRepositoryBase as a } from "@umbraco-cms/backoffice/repository";
 import { UmbContextBase as n } from "@umbraco-cms/backoffice/class-api";
-import { UmbBooleanState as c } from "@umbraco-cms/backoffice/observable-api";
-class p extends a {
+import { UmbBooleanState as T } from "@umbraco-cms/backoffice/observable-api";
+class E extends a {
   #t;
   #e;
   #s;
-  #r;
   /**
    * Creates an instance of UmbRecycleBinRepositoryBase.
    * @param {UmbControllerHost} host - The controller host for this controller to be appended to
@@ -22,7 +21,7 @@ class p extends a {
    * @memberof UmbRecycleBinRepositoryBase
    */
   constructor(t, e) {
-    super(t), this.#t = new e(this), this.consumeContext(o, (s) => {
+    super(t), this.#t = new e(this), this.consumeContext(i, (s) => {
       this.#e = s;
     });
   }
@@ -33,13 +32,7 @@ class p extends a {
    * @memberof UmbRecycleBinRepositoryBase
    */
   async requestTrash(t) {
-    const { error: e } = await this.#t.trash(t);
-    if (!e) {
-      this.#s?.close();
-      const s = { data: { message: "Trashed" } };
-      this.#s = this.#e?.peek("positive", s);
-    }
-    return { error: e };
+    return this.#t.trash(t);
   }
   /**
    * Requests to restore an item.
@@ -50,9 +43,9 @@ class p extends a {
   async requestRestore(t) {
     const { error: e } = await this.#t.restore(t);
     if (!e) {
-      this.#r?.close();
+      this.#s?.close();
       const s = { data: { message: "Restored" } };
-      this.#r = this.#e?.peek("positive", s);
+      this.#s = this.#e?.peek("positive", s);
     }
     return { error: e };
   }
@@ -62,11 +55,6 @@ class p extends a {
    * @memberof UmbRecycleBinRepositoryBase
    */
   async requestEmpty() {
-    const { error: t } = await this.#t.empty();
-    if (!t) {
-      const e = { data: { message: "Recycle Bin Emptied" } };
-      this.#e?.peek("positive", e);
-    }
     return this.#t.empty();
   }
   /**
@@ -79,9 +67,9 @@ class p extends a {
     return this.#t.getOriginalParent(t);
   }
 }
-class E extends n {
+class N extends n {
   constructor(t) {
-    super(t, i), this.#t = new c(!1), this.isTrashed = this.#t.asObservable();
+    super(t, o), this.#t = new T(!1), this.isTrashed = this.#t.asObservable();
   }
   #t;
   /**
@@ -102,20 +90,20 @@ class E extends n {
   }
 }
 export {
-  u as UMB_ENTITY_ACTION_TRASH_KIND_MANIFEST,
-  f as UMB_ENTITY_BULK_ACTION_TRASH_KIND,
-  y as UMB_ENTITY_BULK_ACTION_TRASH_KIND_MANIFEST,
-  A as UMB_ENTITY_IS_NOT_TRASHED_CONDITION_ALIAS,
-  B as UMB_ENTITY_IS_TRASHED_CONDITION_ALIAS,
-  i as UMB_IS_TRASHED_ENTITY_CONTEXT,
-  l as UMB_RESTORE_FROM_RECYCLE_BIN_MODAL,
+  A as UMB_ENTITY_ACTION_TRASH_KIND_MANIFEST,
+  u as UMB_ENTITY_BULK_ACTION_TRASH_KIND,
+  B as UMB_ENTITY_BULK_ACTION_TRASH_KIND_MANIFEST,
+  y as UMB_ENTITY_IS_NOT_TRASHED_CONDITION_ALIAS,
+  R as UMB_ENTITY_IS_TRASHED_CONDITION_ALIAS,
+  o as UMB_IS_TRASHED_ENTITY_CONTEXT,
+  f as UMB_RESTORE_FROM_RECYCLE_BIN_MODAL,
   D as UmbEmptyRecycleBinEntityAction,
-  b as UmbEntityTrashedEvent,
-  E as UmbIsTrashedEntityContext,
-  p as UmbRecycleBinRepositoryBase,
-  C as UmbRestoreFromRecycleBinEntityAction,
-  S as UmbTrashEntityAction,
-  Y as UmbTrashEntityBulkAction,
-  q as api
+  x as UmbEntityTrashedEvent,
+  N as UmbIsTrashedEntityContext,
+  E as UmbRecycleBinRepositoryBase,
+  M as UmbRestoreFromRecycleBinEntityAction,
+  l as UmbTrashEntityAction,
+  g as UmbTrashEntityBulkAction,
+  H as api
 };
 //# sourceMappingURL=index.js.map

@@ -1,0 +1,59 @@
+﻿@using Umbraco.Cms.Core.Models
+@using Umbraco.Cms.Core.Models.PublishedContent
+@using Umbraco.Extensions
+@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<Umbraco.Cms.Core.Models.Blocks.BlockListItem>
+
+@{
+    var c = Model?.Content; 
+    if (c == null) { return; }
+
+    var media   = c.Value<MediaWithCrops>("image");
+    var caption = c.Value<string>("caption");
+    var align   = (c.Value<string>("align") ?? "left").ToLowerInvariant();
+    var width   = (c.Value<string>("width") ?? "m").ToLowerInvariant();
+
+    var alignClass = align switch {
+        "right" => "inline-img--right",
+        "full"  => "inline-img--full",
+        _       => "inline-img--left"
+    };
+
+    var widthClass = width switch {
+        "s" => "inline-img--s",
+        "l" => "inline-img--l",
+        _   => "inline-img--m"
+    };
+
+    var alt = !string.IsNullOrWhiteSpace(caption)
+        ? caption
+        : media?.Content?.Name ?? "image";
+
+    // Optional link support
+    var link = c.Value<Link>("link");
+
+    // Force WebP output
+    Func<IHtmlContent> renderImg = () => new HtmlString(
+        $"<img src=\"{media?.GetCropUrl(furtherOptions: "&format=webp&upscale=false")}\" alt=\"{alt}\" loading=\"lazy\" />"
+    );
+}
+
+@if (media != null)
+{
+<figure class="inline-img @alignClass @widthClass">
+    @if (link != null && !string.IsNullOrWhiteSpace(link.Url))
+    {
+        <a href="@link.Url" @(link.Target == "_blank" ? "target=\"_blank\" rel=\"noopener\"" : "")>
+            @renderImg()
+        </a>
+    }
+    else
+    {
+        @renderImg()
+    }
+
+    @if (!string.IsNullOrWhiteSpace(caption))
+    {
+        <figcaption class="visually-hidden">@caption</figcaption>
+    }
+</figure>
+}

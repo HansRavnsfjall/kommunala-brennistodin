@@ -56,7 +56,7 @@ const o = [
     type: "propertyEditorUi",
     alias: "Umb.PropertyEditorUi.Tags",
     name: "Tags Property Editor UI",
-    element: () => import("./property-editor-ui-tags.element-3ylvOOwm.js"),
+    element: () => import("./property-editor-ui-tags.element-5BP_2OsG.js"),
     meta: {
       label: "Tags",
       propertyEditorSchemaAlias: "Umbraco.Tags",

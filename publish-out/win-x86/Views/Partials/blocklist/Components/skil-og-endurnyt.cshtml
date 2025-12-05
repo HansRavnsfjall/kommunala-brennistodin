@@ -1,0 +1,174 @@
+@* Views/Partials/BlockList/Components/skil-og-endurnyt.cshtml *@
+@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<Umbraco.Cms.Core.Models.Blocks.BlockListItem>
+@using System.Globalization
+@using Umbraco.Cms.Core.Models
+@using Umbraco.Cms.Core.Models.Blocks
+@using Umbraco.Cms.Core.Models.PublishedContent
+@using Umbraco.Extensions
+
+@{
+    var culture = CultureInfo.CurrentUICulture?.Name;
+    var el = Model?.Content;
+
+    // --- LEFT (already done) ---
+    var heading = el?.Value<string>("yvirskrift_skiljing", culture: culture, fallback: Fallback.ToLanguage)
+                 ?? "Soleiðis skilur tú <br/> títt burturkast";
+
+    IHtmlEncodedString? bodyHtml = el?.Value<IHtmlEncodedString>("tekstur_skiljing", culture: culture, fallback: Fallback.ToLanguage);
+    var bodyText = el?.Value<string>("tekstur_skiljing", culture: culture, fallback: Fallback.ToLanguage);
+    var hasRte = bodyHtml != null;
+
+    var link = el?.Value<Link>("leinki_skiljing", culture: culture, fallback: Fallback.ToLanguage);
+    string SafeHeading(string h) => string.IsNullOrWhiteSpace(h) ? "Soleiðis skilur tú <br/> títt burturkast" : h;
+    var btnText = link?.Name.NullOrWhiteSpaceAsNull() ?? "Royn skiljiskjáttuna";
+    var btnUrl  = link?.Url;
+    var btnTarget = link?.Target.NullOrWhiteSpaceAsNull() ?? "_self";
+
+    // --- RIGHT (new) ---
+    // yvirskrift : TextString
+    var hoursHeading = el?.Value<string>("yvirskrift", culture: culture, fallback: Fallback.ToLanguage)
+                     ?? "Endurnýtslan á Hjalla";
+
+    // upplatingartidir : BlockList of alias "upplatingartid" with properties "tekstur" and "tid"
+    var times = el?.Value<BlockListModel>("upplatingartidir", culture: culture, fallback: Fallback.ToLanguage)
+            ?? new BlockListModel(new List<BlockListItem>());
+
+    // leinki : Link
+    var moreLink = el?.Value<Link>("leinki", culture: culture, fallback: Fallback.ToLanguage);
+    var moreText = moreLink?.Name.NullOrWhiteSpaceAsNull();
+    var moreUrl  = moreLink?.Url;
+    var moreTarget = moreLink?.Target.NullOrWhiteSpaceAsNull() ?? "_self";
+}
+
+<!-- ===== Intro / Hours / Accordion ===== -->
+<section class="py-4 py-lg-5 front-skilji-upplating">
+  <div class="container">
+    <div class="row gx-lg-5 g-4 align-items-start">
+      <div class="col-lg-6">
+        <div class="intro-card">
+          <h2>@Html.Raw(SafeHeading(heading))</h2>
+
+          @if (hasRte)
+          {
+              <div class="fw-700 text-muted-600 mb-3">
+                @bodyHtml
+              </div>
+          }
+          else
+          {
+              <p class="fw-700 text-muted-600 mb-3">@bodyText</p>
+          }
+
+          @if (!string.IsNullOrWhiteSpace(btnUrl))
+          {
+              <a class="btn btn-cta" href="@btnUrl" target="@btnTarget" rel="@(btnTarget == "_blank" ? "noopener" : null)">@btnText</a>
+          }
+          else
+          {
+              <button class="btn btn-cta" disabled>@btnText</button>
+          }
+        </div>
+      </div>
+
+      <!-- RIGHT COLUMN -->
+      <div class="col-lg-6">
+        <div class="hours-card">
+          <h5>@hoursHeading</h5>
+
+          @if (times.Any())
+          {
+              foreach (var item in times)
+              {
+                  var c = item.Content;
+                  var rowLabel = c?.Value<string>("tekstur", culture: culture, fallback: Fallback.ToLanguage);
+                  var rowTime  = c?.Value<string>("tid",     culture: culture, fallback: Fallback.ToLanguage);
+
+                  if (!string.IsNullOrWhiteSpace(rowLabel) || !string.IsNullOrWhiteSpace(rowTime))
+                  {
+                      <div class="hours-row">
+                          @rowLabel
+                          @if (!string.IsNullOrWhiteSpace(rowTime))
+                          {
+                              <span class="time">@rowTime</span>
+                          }
+                      </div>
+                  }
+              }
+          }
+          else
+          {
+              <!-- optional fallback when no rows configured -->
+              <div class="hours-row">Mánadag – Hósdag <span class="time">08:00 – 17:00</span></div>
+              <div class="hours-row">Fríggjadag – Leygardag <span class="time">10:00 – 17:00</span></div>
+              <div class="hours-row">Sunnudag <span class="time">Stongt</span></div>
+          }
+        </div>
+
+        @if (!string.IsNullOrWhiteSpace(moreUrl))
+        {
+            <a href="@moreUrl" target="@moreTarget" rel="@(moreTarget == "_blank" ? "noopener" : null)" class="link-more">
+              @(moreText ?? "Meira um endurnýtsluna")
+              <svg class="arr" xmlns="http://www.w3.org/2000/svg" width="25" height="23" viewBox="0 0 25 23" fill="none">
+  <path d="M24.0607 12.1066C24.6464 11.5208 24.6464 10.5711 24.0607 9.9853L14.5147 0.439359C13.9289 -0.146428 12.9792 -0.146428 12.3934 0.439359C11.8076 1.02515 11.8076 1.97489 12.3934 2.56068L20.8787 11.046L12.3934 19.5312C11.8076 20.117 11.8076 21.0668 12.3934 21.6526C12.9792 22.2383 13.9289 22.2383 14.5147 21.6526L24.0607 12.1066ZM0 11.046L-1.31134e-07 12.546L23 12.546L23 11.046L23 9.54596L1.31134e-07 9.54596L0 11.046Z" fill="#CAA86C"/>
+</svg>
+            </a>
+        }
+
+        <div class="accordion district-acc" id="distAcc">
+        <!-- insert loop from blocklist of alias "endurnytslurListi" that loops blocks of alias "endurnytsla" and creates a classname "accordion-item" that has the structure from below, for each endurnytsla-->
+          <div class="accordion-item">
+            <h2 class="accordion-header" id="h1">
+              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#c1">
+                <!-- insert alias "yvirskrift" -->Endurnýtslan í Kollafirði
+              </button>
+            </h2>
+            <div id="c1" class="accordion-collapse collapse" data-bs-parent="#distAcc">
+              <div class="accordion-body pt-0">
+              <!-- loop through blocklist of alias "upplatingartid" that loops through blocks of alias "upplatingartid" and populate each "hour-row" with alias "tekstur" and alias "tid" for each "upplatingartid" -->
+                <div class="hours-row">Mánadag – Hósdag <span class="time">08:00 – 17:00</span></div>
+                <div class="hours-row">Fríggjadag – Leygardag <span class="time">10:00 – 17:00</span></div>
+                <div class="hours-row">Sunnudag <span class="time">Stongt</span></div>
+
+
+                <!-- insert a link like the following based on value from alias "leinki" from block alias "endurnytsla"  maintain the svg-->  <a href="" target="" class="link-more">
+            Meira um endurnýtsluna
+              <svg class="arr" viewBox="0 0 24 24"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+            </a>
+              </div>
+            </div>
+          </div>
+
+          <div class="accordion-item">
+            <h2 class="accordion-header" id="h2">
+              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#c2">
+                Endurnýtslan í Norðoy
+              </button>
+            </h2>
+            <div id="c2" class="accordion-collapse collapse" data-bs-parent="#distAcc">
+              <div class="accordion-body pt-0">
+                <div class="hours-row">Mánadag – Hósdag <span class="time">08:00 – 17:00</span></div>
+                <div class="hours-row">Fríggjadag – Leygardag <span class="time">10:00 – 17:00</span></div>
+                <div class="hours-row">Sunnudag <span class="time">Stongt</span></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="accordion-item">
+            <h2 class="accordion-header" id="h3">
+              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#c3">
+                Endurnýtslan í Hesti
+              </button>
+            </h2>
+            <div id="c3" class="accordion-collapse collapse" data-bs-parent="#distAcc">
+              <div class="accordion-body pt-0">
+                <div class="hours-row">Mánadag – Hósdag <span class="time">08:00 – 17:00</span></div>
+                <div class="hours-row">Fríggjadag – Leygardag <span class="time">10:00 – 17:00</span></div>
+                <div class="hours-row">Sunnudag <span class="time">Stongt</span></div>
+              </div>
+            </div>
+          </div>
+        </div> <!-- /accordion -->
+      </div> <!-- /col-lg-6 -->
+    </div>
+  </div>
+</section>

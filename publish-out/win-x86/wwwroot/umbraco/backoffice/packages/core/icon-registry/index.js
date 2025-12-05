@@ -1,5 +1,5 @@
 import { UmbModalToken as o } from "@umbraco-cms/backoffice/modal";
-import { UmbIconPickerModalElement as a } from "../icon-picker-modal.element-D2NHsvG3.js";
+import { UmbIconPickerModalElement as a } from "../icon-picker-modal.element-HOn83zQK.js";
 import { U as i } from "../icon-registry.context-token-DEouUoS2.js";
 import { a as s, U as I, U as c } from "../icon-registry.context-NDQLtx6D.js";
 const m = new o(

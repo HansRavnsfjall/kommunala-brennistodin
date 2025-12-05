@@ -1,5 +1,5 @@
 import { U as E, a, b as o } from "../constants-CH_iDk6H.js";
-import { UmbPackageRepository as O } from "../package.repository-DyWS8t6-.js";
+import { UmbPackageRepository as O } from "../package.repository-Cg-nPSQY.js";
 export {
   E as UMB_PACKAGE_REPOSITORY_ALIAS,
   a as UMB_PACKAGE_STORE_ALIAS,

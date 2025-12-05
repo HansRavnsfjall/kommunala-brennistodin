@@ -1,0 +1,176 @@
+﻿@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage
+@using System.Globalization
+@using Umbraco.Cms.Core.Models
+@using Umbraco.Cms.Core.Models.PublishedContent
+@using Umbraco.Cms.Core.Strings
+@using Umbraco.Extensions
+
+@{
+    Layout = "master.cshtml";
+    var culture = CultureInfo.CurrentUICulture?.Name;
+
+    // === fields
+    var title   = Model.Value<string>("yvirskrift", culture: culture, fallback: Fallback.ToLanguage) ?? Model.Name;
+    var body    = Model.Value<IHtmlEncodedString>("tekstur", culture: culture, fallback: Fallback.ToLanguage);
+    var ingress = Model.Value<IHtmlEncodedString>("inngangstekstur", culture: culture, fallback: Fallback.ToLanguage);
+    var image   = Model.Value<IPublishedContent>("mynd", culture: culture);
+
+    // multi-url picker (safe)
+    var ctaLinks = Model.Value<IEnumerable<Link>>("leinki", culture: culture);
+    var ctaLink  = ctaLinks?.FirstOrDefault();
+
+    // relations
+    var parent      = Model.Parent;                   // tidindamappa
+    var parentName  = parent?.Name ?? "TÍÐINDI";
+    var parentUrl   = parent?.Url() ?? "#";
+
+    // latest 3 excluding current
+    IEnumerable<IPublishedContent> latest = Enumerable.Empty<IPublishedContent>();
+    if (parent != null)
+    {
+        latest = parent
+            .ChildrenOfType("tidindi")
+            .Where(x => x.IsPublished() && x.Key != Model.Key)
+            .OrderByDescending(x => x.Value<DateTime?>("dagfesting") ?? x.CreateDate)
+            .Take(3)
+            .ToArray();
+    }
+
+    string ImgUrl(IPublishedContent? m) => m?.Url() ?? "";
+    string ImgAlt(IPublishedContent? m) => m?.Value<string>("altText") ?? m?.Name ?? "";
+}
+
+<section class="news-detail">
+
+    <!-- ===== Hero image ===== -->
+    @if (image != null)
+    {
+        <div class="ratio ratio-21x9 mb-4">
+            <img src="@ImgUrl(image)" alt="@ImgAlt(image)" class="w-100 h-100 object-fit-cover" />
+        </div>
+    }
+
+    <!-- ===== Two-column layout ===== -->
+    <div class="container">
+        <div class="row align-items-start g-4">
+            <!-- Left: text -->
+            <div class="col-12 col-lg-8">
+                <div class="d-flex align-items-center justify-content-between mb-2">
+                    <span class="text-uppercase small text-muted fw-semibold">@parentName</span>
+                </div>
+
+                <h1 class="mb-3">@title</h1>
+
+                @if (ingress != null && !string.IsNullOrWhiteSpace(ingress.ToHtmlString()))
+                {
+                    <div class="lead text-muted mb-4">@ingress</div>
+                }
+
+                <article class="mb-4">
+                    @if (body != null) { @body }
+                </article>
+            </div>
+
+            <!-- Right: square CTA (always reserved space) -->
+            <aside class="col-12 col-lg-4">
+                <div class="cta-square-wrap">
+                    @if (ctaLink != null && !string.IsNullOrWhiteSpace(ctaLink.Url))
+                    {
+                        <a href="@ctaLink.Url"
+                           target="@ctaLink.Target"
+                           class="cta-square text-decoration-none">
+                            <span class="cta-square__label">
+                                @(!string.IsNullOrWhiteSpace(ctaLink.Name) ? ctaLink.Name : "Leinkja")
+                            </span>
+                        </a>
+                    }
+                    else
+                    {
+                        <div class="cta-square empty"></div>
+                    }
+                </div>
+            </aside>
+        </div>
+    </div>
+
+    <!-- ===== Bottom: 3 latest ===== -->
+    @if (latest.Any())
+    {
+        <div class="container">
+            <h2 class="h4 text-center mb-4">Onnur tíðindi</h2>
+
+            <div class="row g-4">
+                @foreach (var item in latest)
+                {
+                    var itemImg   = item.Value<IPublishedContent>("mynd", culture: culture);
+                    var itemTitle = item.Value<string>("yvirskrift", culture: culture, fallback: Fallback.ToLanguage) ?? item.Name;
+                    var itemIntro = item.Value<IHtmlEncodedString>("inngangstekstur", culture: culture, fallback: Fallback.ToLanguage);
+
+                    <div class="col-12 col-md-4">
+                        <a class="card h-100 text-decoration-none" href="@item.Url()">
+                            @if (itemImg != null)
+                            {
+                                <div class="ratio ratio-16x9">
+                                    <img src="@ImgUrl(itemImg)" alt="@ImgAlt(itemImg)" class="card-img-top object-fit-cover" />
+                                </div>
+                            }
+                            <div class="card-body">
+                                <h3 class="h6 card-title mb-2">@itemTitle</h3>
+                                @if (itemIntro != null && !string.IsNullOrWhiteSpace(itemIntro.ToHtmlString()))
+                                {
+                                    <p class="card-text small text-muted">@itemIntro</p>
+                                }
+                            </div>
+                        </a>
+                    </div>
+                }
+            </div>
+
+            <div class="text-center my-4">
+                <a href="@parentUrl" class="btn btn-link">Vís øll tíðindi <span aria-hidden="true">→</span></a>
+            </div>
+        </div>
+    }
+</section>
+
+<style>
+    .object-fit-cover { object-fit: cover; }
+    .ratio-21x9 { --bs-aspect-ratio: calc(100% * 9 / 21); }
+
+    /* Right column square CTA */
+    .cta-square-wrap {
+        display: flex;
+        justify-content: center;
+        align-items: flex-start;
+    }
+
+    .cta-square {
+        display: grid;
+        place-items: center;
+        aspect-ratio: 1 / 1;
+        width: 100%;
+        max-width: 14rem;
+        border: 2px solid currentColor;
+        border-radius: .5rem;
+        padding: 1rem;
+        font-weight: 700;
+        text-align: center;
+    }
+
+    .cta-square.empty {
+        border: none;
+        background: transparent;
+        aspect-ratio: 1 / 1;
+        width: 100%;
+        max-width: 14rem;
+    }
+
+    .cta-square__label {
+        line-height: 1.2;
+        display: inline-block;
+    }
+
+    @@media (min-width: 992px) {
+        .cta-square-wrap { justify-content: flex-start; }
+    }
+</style>

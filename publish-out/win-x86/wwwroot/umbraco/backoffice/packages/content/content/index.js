@@ -1,33 +1,85 @@
-import { U as le } from "../content-collection-workspace.context-token-BliQa7Cu.js";
-import { b as pe, a as de, c as ce, c as me, U as ye } from "../property-type-based-property.element-BMqRIO7K.js";
-import { U as _e, b as ve, a as we } from "../sort-children-of-content-modal.token-DYwtOc5Y.js";
-import { U as F } from "../content-workspace.context-token-BMs4lY7q.js";
-import { UmbControllerBase as A, UmbContextBase as L } from "@umbraco-cms/backoffice/class-api";
-import { createExtensionApi as W } from "@umbraco-cms/backoffice/extension-api";
-import { umbExtensionsRegistry as G } from "@umbraco-cms/backoffice/extension-registry";
-import { UmbVariantId as p, umbVariantObjectCompare as C, UmbVariantContext as $ } from "@umbraco-cms/backoffice/variant";
-import { property as X, state as v, customElement as j, nothing as T, html as Y } from "@umbraco-cms/backoffice/external/lit";
-import { UmbLitElement as H } from "@umbraco-cms/backoffice/lit-element";
-import { UMB_PROPERTY_DATASET_CONTEXT as q, UmbVariantPropertyGuardManager as P, UmbPropertyValuePresetVariantBuilderController as K } from "@umbraco-cms/backoffice/property";
-import { UmbDataPathPropertyValueQuery as N, umbScopeMapperForJsonPaths as S, UmbValidationPropertyPathTranslationController as Q, umbQueryMapperForJsonPaths as z, UmbDataPathVariantQuery as R, UmbServerModelValidatorContext as J, UmbValidationController as Z, UMB_VALIDATION_CONTEXT as tt, UMB_VALIDATION_EMPTY_LOCALIZATION_KEY as et } from "@umbraco-cms/backoffice/validation";
-import { UmbEntityWorkspaceDataManager as rt, UmbEntityDetailWorkspaceContextBase as at, UmbWorkspaceSplitViewManager as it } from "@umbraco-cms/backoffice/workspace";
-import { appendToFrozenArray as M, jsonStringComparison as E, UmbBasicState as st, UmbBooleanState as nt, mergeObservables as V, createObservablePart as ot, classEqualMemoization as ut, UmbObjectState as lt, UmbArrayState as I } from "@umbraco-cms/backoffice/observable-api";
-import { UmbContextToken as ht } from "@umbraco-cms/backoffice/context-api";
-import { UmbRoutePathAddendumContext as pt } from "@umbraco-cms/backoffice/router";
-import { UmbContentTypeStructureManager as dt } from "@umbraco-cms/backoffice/content-type";
-import { UmbReadOnlyVariantGuardManager as ct, UmbDeprecation as mt } from "@umbraco-cms/backoffice/utils";
-import { UmbDataTypeItemRepositoryManager as yt, UmbDataTypeDetailRepository as ft } from "@umbraco-cms/backoffice/data-type";
-import { UmbLanguageCollectionRepository as _t } from "@umbraco-cms/backoffice/language";
-import { map as vt, firstValueFrom as wt } from "@umbraco-cms/backoffice/external/rxjs";
-import { umbOpenModal as gt } from "@umbraco-cms/backoffice/modal";
-import { UMB_ACTION_EVENT_CONTEXT as U } from "@umbraco-cms/backoffice/action";
-import { UmbRequestReloadChildrenOfEntityEvent as Ct, UmbRequestReloadStructureForEntityEvent as Vt, UmbEntityUpdatedEvent as bt } from "@umbraco-cms/backoffice/entity-action";
-import { UmbSegmentCollectionRepository as Ot } from "@umbraco-cms/backoffice/segment";
-const re = "Umb.Condition.Workspace.ContentHasProperties", ae = "Umb.Section.Content";
-function B(l, t) {
-  return l.culture === t.culture && l.segment === t.segment;
+import { U as _e } from "../content-collection-workspace.context-token-BkMq2Z0s.js";
+import { UmbObjectState as b, UmbBooleanState as R, appendToFrozenArray as x, jsonStringComparison as E, UmbBasicState as X, mergeObservables as T, createObservablePart as H, classEqualMemoization as Y, UmbArrayState as I, observeMultiple as K } from "@umbraco-cms/backoffice/observable-api";
+import { UmbControllerBase as C, UmbContextBase as z } from "@umbraco-cms/backoffice/class-api";
+import { UmbDataTypeDetailRepository as k, UmbDataTypeItemRepositoryManager as Q } from "@umbraco-cms/backoffice/data-type";
+import { UmbPropertyEditorConfigCollection as J } from "@umbraco-cms/backoffice/property-editor";
+import { b as Ce, a as Ve, c as be, c as Te, U as Oe } from "../property-type-based-property.element-BMqRIO7K.js";
+import { U as Se, b as Ee, a as Ie } from "../sort-children-of-content-modal.token-DYwtOc5Y.js";
+import { U as Z } from "../content-workspace.context-token-BMs4lY7q.js";
+import { createExtensionApi as tt } from "@umbraco-cms/backoffice/extension-api";
+import { umbExtensionsRegistry as et } from "@umbraco-cms/backoffice/extension-registry";
+import { UmbVariantId as c, umbVariantObjectCompare as O, UmbVariantContext as at } from "@umbraco-cms/backoffice/variant";
+import { property as rt, state as w, customElement as it, nothing as V, html as st } from "@umbraco-cms/backoffice/external/lit";
+import { UmbLitElement as nt } from "@umbraco-cms/backoffice/lit-element";
+import { UMB_PROPERTY_DATASET_CONTEXT as F, UmbVariantPropertyGuardManager as U, UmbPropertyValuePresetVariantBuilderController as ot } from "@umbraco-cms/backoffice/property";
+import { UmbDataPathPropertyValueQuery as W, umbScopeMapperForJsonPaths as B, UmbValidationPropertyPathTranslationController as ut, umbQueryMapperForJsonPaths as lt, UmbDataPathVariantQuery as L, extractJsonQueryProps as ht, UmbServerModelValidatorContext as ct, UmbValidationController as dt, UMB_VALIDATION_CONTEXT as pt, UMB_VALIDATION_EMPTY_LOCALIZATION_KEY as mt } from "@umbraco-cms/backoffice/validation";
+import { UMB_CURRENT_USER_CONTEXT as yt } from "@umbraco-cms/backoffice/current-user";
+import { UmbEntityWorkspaceDataManager as ft, UmbEntityDetailWorkspaceContextBase as vt, UmbWorkspaceSplitViewManager as wt } from "@umbraco-cms/backoffice/workspace";
+import { UmbContextToken as _t } from "@umbraco-cms/backoffice/context-api";
+import { UmbRoutePathAddendumContext as gt } from "@umbraco-cms/backoffice/router";
+import { map as Ct, firstValueFrom as D } from "@umbraco-cms/backoffice/external/rxjs";
+import { umbOpenModal as Vt } from "@umbraco-cms/backoffice/modal";
+import { UmbContentTypeStructureManager as bt } from "@umbraco-cms/backoffice/content-type";
+import { UmbReadOnlyVariantGuardManager as Tt, UmbDeprecation as Ot } from "@umbraco-cms/backoffice/utils";
+import { UmbRequestReloadStructureForEntityEvent as A, UmbRequestReloadChildrenOfEntityEvent as Pt, UmbEntityUpdatedEvent as St } from "@umbraco-cms/backoffice/entity-action";
+import { UmbLanguageCollectionRepository as Et } from "@umbraco-cms/backoffice/language";
+import { UmbSegmentCollectionRepository as It } from "@umbraco-cms/backoffice/segment";
+import { UMB_ACTION_EVENT_CONTEXT as q } from "@umbraco-cms/backoffice/action";
+class Ut extends C {
+  constructor(t, e, i) {
+    super(t), this.#a = new b(void 0), this.collectionConfig = this.#a.asObservable(), this.#r = new b(void 0), this.manifestOverrides = this.#r.asObservable(), this.#i = new R(!1), this.hasCollection = this.#i.asObservable(), this.#s = new k(this), this.#t = t, this.#e = i, this.observe(
+      i ? e.ownerContentType : void 0,
+      async (a) => {
+        this.#i.setValue(!!a?.collection);
+        const r = a?.collection?.unique;
+        r && (this.#s.requestByUnique(r), this.observe(
+          await this.#s.byUnique(r),
+          (s) => {
+            this.#n(s);
+          },
+          "_observeConfigDataType"
+        ));
+      },
+      null
+    );
+  }
+  #t;
+  #e;
+  #a;
+  #r;
+  #i;
+  #s;
+  getCollectionAlias() {
+    return this.#e;
+  }
+  #n(t) {
+    if (!t) {
+      this.#a.setValue(void 0), this.#r.setValue(void 0);
+      return;
+    }
+    const e = new J(t.values), i = Number(e.getValueByAlias("pageSize"));
+    this.#a.setValue({
+      unique: this.#t.getUnique(),
+      layouts: e?.getValueByAlias("layouts"),
+      orderBy: e?.getValueByAlias("orderBy") ?? "updateDate",
+      orderDirection: e?.getValueByAlias("orderDirection") ?? "asc",
+      pageSize: isNaN(i) ? 50 : i,
+      userDefinedProperties: e?.getValueByAlias("includeProperties")
+    });
+    const a = {
+      alias: "Umb.WorkspaceView.Content.Collection",
+      meta: {}
+    }, r = e?.getValueByAlias("icon");
+    r && r !== "" && (a.meta.icon = r);
+    const s = e?.getValueByAlias("tabName");
+    s && s !== "" && (a.meta.label = s), e?.getValueByAlias("showContentFirst") === !0 && (a.weight = 150), this.#r.setValue(a);
+  }
 }
-class w extends A {
+const de = "Umb.Condition.Workspace.ContentHasProperties", pe = "Umb.Section.Content";
+function N(u, t) {
+  return u.culture === t.culture && u.segment === t.segment;
+}
+class _ extends C {
   /**
    * Merges content variant data based on selected variants and variants to store.
    * @param {UmbContentLikeDetailModel | undefined} persistedData - The persisted content variant data.
@@ -36,18 +88,18 @@ class w extends A {
    * @param {Array<UmbVariantId>} variantsToStore - The variants to store, we sometimes have additional variants that we like to process. This is typically the invariant variant, which we do not want to have as part of the variants data therefore a difference.
    * @returns {Promise<UmbContentLikeDetailModel>} - A promise that resolves to the merged content variant data.
    */
-  async process(t, e, a, r) {
-    const i = { ...e };
-    return i.values = await this.#t(
+  async process(t, e, i, a) {
+    const r = { ...e };
+    return r.values = await this.#t(
       t?.values,
       e.values,
-      r
-    ), e.variants && (i.variants = this.#r(
+      a
+    ), e.variants && (r.variants = this.#a(
       t?.variants,
       e.variants,
-      a,
-      B
-    )), this.destroy(), i;
+      i,
+      N
+    )), this.destroy(), r;
   }
   /**
    * Builds and saves values based on selected variants and variants to store.
@@ -56,24 +108,24 @@ class w extends A {
    * @param {Array<UmbVariantId>}variantsToStore - The variants to store.
    * @returns {Promise<Array<UmbPotentialContentValueModel>>} - A promise that resolves to the saved values.
    */
-  async #t(t, e, a) {
-    const r = [...t ?? [], ...e ?? []].filter(
-      (i, s, n) => s === n.findIndex((u) => u.alias === i.alias && u.culture === i.culture && u.segment === i.segment)
+  async #t(t, e, i) {
+    const a = [...t ?? [], ...e ?? []].filter(
+      (r, s, n) => s === n.findIndex((o) => o.alias === r.alias && o.culture === r.culture && o.segment === r.segment)
     );
     return (await Promise.all(
-      r.map((i) => {
+      a.map((r) => {
         const s = t?.find(
-          (n) => n.alias === i.alias && n.culture === i.culture && n.segment === i.segment
+          (n) => n.alias === r.alias && n.culture === r.culture && n.segment === r.segment
         );
-        if (a.some((n) => n.equal(p.CreateFromPartial(i)))) {
+        if (i.some((n) => n.equal(c.CreateFromPartial(r)))) {
           const n = e?.find(
-            (u) => u.alias === i.alias && u.culture === i.culture && u.segment === i.segment
+            (o) => o.alias === r.alias && o.culture === r.culture && o.segment === r.segment
           );
-          return this.#e(s, n, a);
+          return this.#e(s, n, i);
         } else
           return Promise.resolve(s);
       })
-    )).filter((i) => i !== void 0);
+    )).filter((r) => r !== void 0);
   }
   /**
    * Builds and saves a value based on selected variants and variants to store.
@@ -82,48 +134,48 @@ class w extends A {
    * @param {Array<UmbVariantId>} variantsToStore - The variants to store.
    * @returns {Promise<UmbPotentialContentValueModel | undefined>} A promise that resolves to the saved value.
    */
-  async #e(t, e, a) {
-    const r = e?.editorAlias ?? t?.editorAlias;
-    if (!r)
-      return console.error(`Editor alias not found for ${r}`, e, t), e;
+  async #e(t, e, i) {
+    const a = e?.editorAlias ?? t?.editorAlias;
+    if (!a)
+      return console.error(`Editor alias not found for ${a}`, e, t), e;
     if (!e)
       return;
-    const i = G.getByTypeAndFilter(
+    const r = et.getByTypeAndFilter(
       "propertyValueResolver",
       // TODO: Remove depcrated filter in v.17 [NL]
-      (u) => u.forEditorAlias === r || u.meta?.editorAlias === r
+      (o) => o.forEditorAlias === a || o.meta?.editorAlias === a
     )[0];
-    if (!i)
+    if (!r)
       return e;
-    const s = await W(this, i);
+    const s = await tt(this, r);
     if (!s)
       return e;
-    s.manifest = i;
+    s.manifest = r;
     let n = e;
     if (s.processValues) {
-      const u = [];
-      t && await s.processValues(t, async (o) => {
-        u.push(o);
+      const o = [];
+      t && await s.processValues(t, async (l) => {
+        o.push(l);
       });
-      let d = 0;
-      n = await s.processValues(n, async (o) => {
-        const h = u[d++];
-        return await this.#t(h, o, a);
+      let p = 0;
+      n = await s.processValues(n, async (l) => {
+        const h = o[p++];
+        return await this.#t(h, l, i);
       }) ?? n;
     }
     if (s.processVariants) {
-      const u = [];
-      t && await s.processVariants(t, async (o) => {
-        u.push(o);
+      const o = [];
+      t && await s.processVariants(t, async (l) => {
+        o.push(l);
       });
-      let d = 0;
-      n = await s.processVariants(n, async (o) => {
-        const h = u[d++];
-        return await this.#r(
+      let p = 0;
+      n = await s.processVariants(n, async (l) => {
+        const h = o[p++];
+        return await this.#a(
           h,
-          o,
-          a,
-          s.compareVariants ?? B
+          l,
+          i,
+          s.compareVariants ?? N
         );
       }) ?? n;
     }
@@ -137,43 +189,47 @@ class w extends A {
    * @param {(UmbVariantDataModel, UmbVariantDataModel) => boolean} compare - The compare method, which compares the unique properties of the variants.
    * @returns {UmbVariantDataModel[]} A new array of variants.
    */
-  #r(t, e, a, r) {
+  #a(t, e, i, a) {
     return [...t ?? [], ...e ?? []].filter(
-      (s, n, u) => n === u.findIndex((d) => r(d, s))
+      (s, n, o) => n === o.findIndex((p) => a(p, s))
     ).map((s) => {
-      const n = t?.find((u) => r(u, s));
-      return a.some((u) => u.compare(s)) ? e?.find((d) => r(d, s)) : n;
+      const n = t?.find((o) => a(o, s));
+      return i.some((o) => o.compare(s)) ? e?.find((p) => a(p, s)) : n;
     }).filter((s) => s !== void 0);
   }
 }
-var Tt = Object.defineProperty, Pt = Object.getOwnPropertyDescriptor, x = (l) => {
-  throw TypeError(l);
-}, f = (l, t, e, a) => {
-  for (var r = a > 1 ? void 0 : a ? Pt(t, e) : t, i = l.length - 1, s; i >= 0; i--)
-    (s = l[i]) && (r = (a ? s(t, e, r) : s(r)) || r);
-  return a && r && Tt(t, e, r), r;
-}, St = (l, t, e) => t.has(l) || x("Cannot " + e), Et = (l, t, e) => t.has(l) ? x("Cannot add the same private member more than once") : t instanceof WeakSet ? t.add(l) : t.set(l, e), b = (l, t, e) => (St(l, t, "access private method"), e), g, O, k;
-let y = class extends H {
+var Bt = Object.defineProperty, Dt = Object.getOwnPropertyDescriptor, $ = (u) => {
+  throw TypeError(u);
+}, f = (u, t, e, i) => {
+  for (var a = i > 1 ? void 0 : i ? Dt(t, e) : t, r = u.length - 1, s; r >= 0; r--)
+    (s = u[r]) && (a = (i ? s(t, e, a) : s(a)) || a);
+  return i && a && Bt(t, e, a), a;
+}, At = (u, t, e) => t.has(u) || $("Cannot " + e), qt = (u, t, e) => t.has(u) ? $("Cannot add the same private member more than once") : t instanceof WeakSet ? t.add(u) : t.set(u, e), P = (u, t, e) => (At(u, t, "access private method"), e), g, S, G;
+let y = class extends nt {
   constructor() {
-    super(), Et(this, g), this.consumeContext(q, (l) => {
-      this._datasetVariantId = l?.getVariantId();
-    }), this.consumeContext(F, async (l) => {
-      this._workspaceContext = l, b(this, g, O).call(this);
+    super(), qt(this, g), this._hasAccessToSensitiveData = !1, this.consumeContext(F, (u) => {
+      this._datasetVariantId = u?.getVariantId();
+    }), this.consumeContext(Z, async (u) => {
+      this._workspaceContext = u, P(this, g, S).call(this);
+    }), this.consumeContext(yt, (u) => {
+      this.observe(u?.hasAccessToSensitiveData, (t) => {
+        this._hasAccessToSensitiveData = t === !0;
+      });
     });
   }
   get alias() {
     return this._alias;
   }
-  set alias(l) {
-    this._alias = l, b(this, g, O).call(this);
+  set alias(u) {
+    this._alias = u, P(this, g, S).call(this);
   }
-  willUpdate(l) {
-    if (super.willUpdate(l), (l.has("_propertyType") || l.has("_datasetVariantId") || l.has("_workspaceContext")) && this._datasetVariantId && this._propertyType && this._workspaceContext) {
-      const t = new p(
+  willUpdate(u) {
+    if (super.willUpdate(u), (u.has("_propertyType") || u.has("_datasetVariantId") || u.has("_workspaceContext")) && this._datasetVariantId && this._propertyType && this._workspaceContext) {
+      const t = new c(
         this._propertyType.variesByCulture ? this._datasetVariantId.culture : null,
         this._propertyType.variesBySegment ? this._datasetVariantId.segment : null
       );
-      this._dataPath = `$.values[${N({
+      this._dataPath = `$.values[${W({
         alias: this._propertyType.alias,
         culture: t.culture,
         segment: t.segment
@@ -181,7 +237,7 @@ let y = class extends H {
         this._workspaceContext.propertyWriteGuard.isPermittedForVariantAndProperty(
           t,
           this._propertyType,
-          t
+          this._datasetVariantId
         ),
         (e) => {
           this._writeable = e;
@@ -191,27 +247,27 @@ let y = class extends H {
     }
   }
   render() {
-    return this._viewable ? !this._dataPath || this._writeable === void 0 ? T : Y`<umb-property-type-based-property
+    return this._viewable ? !this._dataPath || this._writeable === void 0 ? V : !this._hasAccessToSensitiveData && this._propertyType?.isSensitive ? V : st`<umb-property-type-based-property
 			data-path=${this._dataPath}
 			.property=${this._propertyType}
-			?readonly=${!this._writeable}></umb-property-type-based-property>` : T;
+			?readonly=${!this._writeable}></umb-property-type-based-property>` : V;
   }
 };
 g = /* @__PURE__ */ new WeakSet();
-O = async function() {
-  !this._alias || !this._workspaceContext || this.observe(await this._workspaceContext?.structure.propertyStructureByAlias(this._alias), (l) => {
-    this._propertyType = l, b(this, g, k).call(this);
+S = async function() {
+  !this._alias || !this._workspaceContext || this.observe(await this._workspaceContext?.structure.propertyStructureByAlias(this._alias), (u) => {
+    this._propertyType = u, P(this, g, G).call(this);
   });
 };
-k = function() {
+G = function() {
   if (!this._workspaceContext || !this._propertyType || !this._datasetVariantId) return;
-  const l = new p(
+  const u = new c(
     this._propertyType.variesByCulture ? this._datasetVariantId.culture : null,
     this._propertyType.variesBySegment ? this._datasetVariantId.segment : null
   );
   this.observe(
     this._workspaceContext.propertyViewGuard.isPermittedForVariantAndProperty(
-      l,
+      u,
       this._propertyType,
       this._datasetVariantId
     ),
@@ -222,33 +278,36 @@ k = function() {
   );
 };
 f([
-  X({ type: String, attribute: "alias" })
+  rt({ type: String, attribute: "alias" })
 ], y.prototype, "alias", 1);
 f([
-  v()
+  w()
 ], y.prototype, "_datasetVariantId", 2);
 f([
-  v()
+  w()
 ], y.prototype, "_dataPath", 2);
 f([
-  v()
+  w()
 ], y.prototype, "_viewable", 2);
 f([
-  v()
+  w()
 ], y.prototype, "_writeable", 2);
 f([
-  v()
+  w()
 ], y.prototype, "_workspaceContext", 2);
 f([
-  v()
+  w()
 ], y.prototype, "_propertyType", 2);
+f([
+  w()
+], y.prototype, "_hasAccessToSensitiveData", 2);
 y = f([
-  j("umb-content-workspace-property")
+  it("umb-content-workspace-property")
 ], y);
-function D(l, t) {
-  return l.alias === t.alias && C(l, t);
+function M(u, t) {
+  return u.alias === t.alias && O(u, t);
 }
-class It extends rt {
+class Nt extends ft {
   constructor() {
     super(...arguments), this.#t = 0, this.finishPropertyValueChange = () => {
       this.#t--, this.#e();
@@ -256,11 +315,11 @@ class It extends rt {
   }
   _sortCurrentData(t, e) {
     e = super._sortCurrentData(t, e);
-    const a = t.values;
-    return a && e.values ? {
+    const i = t.values;
+    return i && e.values ? {
       ...e,
-      values: [...e.values].sort(function(r, i) {
-        return a.findIndex((s) => D(s, r)) - a.findIndex((s) => D(s, i));
+      values: [...e.values].sort(function(a, r) {
+        return i.findIndex((s) => M(s, a)) - i.findIndex((s) => M(s, r));
       })
     } : e;
   }
@@ -281,30 +340,31 @@ class It extends rt {
     this._varies = t;
   }
   async constructData(t) {
-    const e = p.CreateInvariant();
-    let a = [e];
-    if (this._varies === !1 ? t = [e] : a = [...t, e], this._variesBySegment === !0) {
-      const s = this.getCurrent().values.map((n) => n.segment);
-      a = [
-        ...a,
-        ...s.flatMap((n) => a.map((u) => u.toSegment(n)))
+    const e = c.CreateInvariant();
+    let i = [e];
+    this._varies === !1 ? t = [e] : i = [...t, e];
+    const a = this.getCurrent();
+    if (!a) throw new Error("Current data is missing");
+    if (this._variesBySegment === !0) {
+      const s = a.values.map((n) => n.segment).filter((n) => n);
+      i = [
+        ...i,
+        ...s.flatMap((n) => i.map((o) => o.toSegment(n)))
       ], t = [
         ...t,
-        ...s.flatMap((n) => t.map((u) => u.toSegment(n)))
+        ...s.flatMap((n) => t.map((o) => o.toSegment(n)))
       ];
     }
-    const r = this.getCurrent();
-    if (!r) throw new Error("Current data is missing");
-    const i = this.getPersisted();
-    return await new w(this).process(
-      i,
+    const r = this.getPersisted();
+    return await new _(this).process(
       r,
+      a,
       t,
-      a
+      i
     );
   }
 }
-class Ut extends It {
+class Mt extends Nt {
   //
   //#repository;
   #t;
@@ -313,11 +373,11 @@ class Ut extends It {
   }
   _sortCurrentData(t, e) {
     e = super._sortCurrentData(t, e);
-    const a = t.variants;
-    return a && e.variants ? {
+    const i = t.variants;
+    return i && e.variants ? {
       ...e,
-      variants: [...e.variants].sort(function(r, i) {
-        return a.findIndex((s) => C(s, r)) - a.findIndex((s) => C(s, i));
+      variants: [...e.variants].sort(function(a, r) {
+        return i.findIndex((s) => O(s, a)) - i.findIndex((s) => O(s, r));
       })
     } : e;
   }
@@ -341,81 +401,81 @@ class Ut extends It {
       return;
     }
     if (this._variesBySegment === !0) {
-      t.isInvariant() ? this.#r(e) : this.#e(t, e);
+      t.isInvariant() ? this.#a(e) : this.#e(t, e);
       return;
     }
     if (this._varies === !1) {
-      this.#r(e);
+      this.#a(e);
       return;
     }
     throw new Error("Varies by culture is missing");
   }
   #e(t, e) {
-    const a = this.getCurrent();
-    if (!a) throw new Error("Data is missing");
+    const i = this.getCurrent();
+    if (!i) throw new Error("Data is missing");
     t.isSegmentInvariant() || (e = { ...e, name: "Segment" });
-    const r = a.variants.find((s) => t.compare(s)), i = M(
-      a.variants,
+    const a = i.variants.find((s) => t.compare(s)), r = x(
+      i.variants,
       {
         ...this.#t,
         ...t.toObject(),
-        ...r,
+        ...a,
         ...e
       },
       (s) => t.compare(s)
     );
-    this.updateCurrent({ variants: i });
+    this.updateCurrent({ variants: r });
   }
-  #r(t) {
+  #a(t) {
     const e = this.getCurrent();
     if (!e) throw new Error("Data is missing");
-    const a = p.CreateInvariant(), r = e.variants.find((s) => a.compare(s)), i = [
+    const i = c.CreateInvariant(), a = e.variants.find((s) => i.compare(s)), r = [
       {
         ...this.#t,
-        ...a.toObject(),
-        ...r,
+        ...i.toObject(),
+        ...a,
         ...t
       }
     ];
-    this.updateCurrent({ variants: i });
+    this.updateCurrent({ variants: r });
   }
   getChangedVariants() {
     const t = this.getPersisted(), e = this.getCurrent();
     if (!e) throw new Error("Current data is missing");
-    const a = e?.variants.map((i) => {
-      const s = t?.variants.find((n) => p.Create(i).compare(n));
+    const i = e?.variants.map((r) => {
+      const s = t?.variants.find((n) => c.Create(r).compare(n));
       return {
-        culture: i.culture,
-        segment: i.segment,
-        equal: s ? E(i, s) : !1
+        culture: r.culture,
+        segment: r.segment,
+        equal: s ? E(r, s) : !1
       };
-    }), r = e?.values.map((i) => {
-      const s = t?.values.find((n) => p.Create(i).compare(n));
+    }), a = e?.values.map((r) => {
+      const s = t?.values.find((n) => c.Create(r).compare(n));
       return {
-        culture: i.culture,
-        segment: i.segment,
-        equal: s ? E(i, s) : !1
+        culture: r.culture,
+        segment: r.segment,
+        equal: s ? E(r, s) : !1
       };
     });
-    return a?.concat(r ?? []).filter((i) => i.equal === !1).map((i) => new p(i.culture, i.segment)) ?? [];
+    return i?.concat(a ?? []).filter((r) => r.equal === !1).map((r) => new c(r.culture, r.segment)) ?? [];
   }
 }
-const Bt = (l) => l.IS_CONTENT === !0, ie = new ht("UmbPropertyDatasetContext", void 0, Bt);
-class Dt extends L {
-  constructor(t, e, a) {
-    super(t, q), this.#a = new st([]), this._propertyVariantIdMap = this.#a.asObservable(), this._readOnly = new nt(!1), this.readOnly = this._readOnly.asObservable(), this.#i = new $(this).inherit(), this._dataOwner = e, this.#t = a ?? p.CreateInvariant(), this.#i.setVariantId(this.#t), this.#e = new Promise((r) => {
-      this.#r = r;
+const Rt = (u) => u.IS_CONTENT === !0, me = new _t("UmbPropertyDatasetContext", void 0, Rt);
+class xt extends z {
+  constructor(t, e, i) {
+    super(t, F), this.#r = new X([]), this._propertyVariantIdMap = this.#r.asObservable(), this._readOnly = new R(!1), this.readOnly = this._readOnly.asObservable(), this.#i = new at(this).inherit(), this._dataOwner = e, this.#t = i ?? c.CreateInvariant(), this.#i.setVariantId(this.#t), this.#e = new Promise((a) => {
+      this.#a = a;
     }), this.observe(
       this._dataOwner.readOnlyGuard.isPermittedForVariant(this.#t),
-      (r) => {
-        this._readOnly.setValue(r);
+      (a) => {
+        this._readOnly.setValue(a);
       },
       null
     ), this.observe(
       this._dataOwner.structure.contentTypeProperties,
-      (r) => {
-        const i = r.map((s) => ({ alias: s.alias, variantId: this.#s(s) }));
-        this.#a.setValue(i), this.#r && (this.#r(), this.#r = void 0, this.#e = void 0);
+      (a) => {
+        const r = a.map((s) => ({ alias: s.alias, variantId: this.#s(s) }));
+        this.#r.setValue(r), this.#a && (this.#a(), this.#a = void 0, this.#e = void 0);
       },
       null
     );
@@ -425,8 +485,8 @@ class Dt extends L {
     return this.#t;
   }
   #e;
-  #r;
   #a;
+  #r;
   #i;
   getEntityType() {
     return this._dataOwner.getEntityType();
@@ -438,7 +498,7 @@ class Dt extends L {
     return this._readOnly.getValue();
   }
   #s(t) {
-    return p.Create({
+    return c.Create({
       culture: t.variesByCulture ? this.#t.culture : null,
       segment: t.variesBySegment ? this.#t.segment : null
     });
@@ -446,23 +506,23 @@ class Dt extends L {
   #n;
   // Should it be possible to get the properties as a list of property aliases?
   get properties() {
-    return this.#n || (this.#n = V(
+    return this.#n || (this.#n = T(
       [this._propertyVariantIdMap, this._dataOwner.values],
       this.#o
     )), this.#n;
   }
   #o([t, e]) {
-    const a = [];
+    const i = [];
     if (e)
-      for (const r of t) {
-        const i = e.find((s) => r.alias === s.alias && r.variantId.compare(s));
-        i && a.push(i);
+      for (const a of t) {
+        const r = e.find((s) => a.alias === s.alias && a.variantId.compare(s));
+        r && i.push(r);
       }
-    return a;
+    return i;
   }
   async getProperties() {
     return await this.#e, this.#o([
-      this.#a.getValue(),
+      this.#r.getValue(),
       this._dataOwner.getValues()
     ]);
   }
@@ -473,10 +533,10 @@ class Dt extends L {
    * @description Get an Observable for the variant id of this property.
    */
   async propertyVariantId(t) {
-    return ot(
+    return H(
       this._propertyVariantIdMap,
-      (e) => e.find((a) => a.alias === t)?.variantId,
-      ut
+      (e) => e.find((i) => i.alias === t)?.variantId,
+      Y
     );
   }
   /**
@@ -486,9 +546,9 @@ class Dt extends L {
    * @description Get an Observable for the value of this property.
    */
   async propertyValueByAlias(t) {
-    return await this._dataOwner.isLoaded(), await this.#e, V(
+    return await this._dataOwner.isLoaded(), await this.#e, T(
       [await this.propertyVariantId(t), this._dataOwner.values],
-      ([e, a]) => e ? a?.find((r) => r?.alias === t && e.compare(r))?.value : void 0
+      ([e, i]) => e ? i?.find((a) => a?.alias === t && e.compare(a))?.value : void 0
     );
   }
   // TODO: Refactor: Not used currently, but should investigate if we can implement this, to spare some energy.
@@ -503,8 +563,8 @@ class Dt extends L {
    * @returns {Promise<unknown>} - A promise that resolves once the value has been set.
    * @description Get the value of this property.
    */
-  setPropertyValueByVariant(t, e, a) {
-    return this._dataOwner.setPropertyValue(t, e, a);
+  setPropertyValueByVariant(t, e, i) {
+    return this._dataOwner.setPropertyValue(t, e, i);
   }
   /**
    * @function setPropertyValue
@@ -515,19 +575,19 @@ class Dt extends L {
    */
   async setPropertyValue(t, e) {
     this._dataOwner.initiatePropertyValueChange(), await this.#e;
-    const a = this.#a.getValue().find((r) => r.alias === t)?.variantId;
-    a && await this._dataOwner.setPropertyValue(t, await e, a), this._dataOwner.finishPropertyValueChange();
+    const i = this.#r.getValue().find((a) => a.alias === t)?.variantId;
+    i && await this._dataOwner.setPropertyValue(t, await e, i), this._dataOwner.finishPropertyValueChange();
   }
   destroy() {
-    super.destroy(), this.#a?.destroy(), this.#a = void 0;
+    super.destroy(), this.#r?.destroy(), this.#r = void 0;
   }
 }
-class se extends Dt {
-  constructor(t, e, a) {
-    super(t, e, a), this.#t = new pt(this), this.#e = new lt(void 0), this.currentVariant = this.#e.asObservable(), this.name = this.#e.asObservablePart((r) => r?.name), this.culture = this.#e.asObservablePart((r) => r?.culture), this.segment = this.#e.asObservablePart((r) => r?.segment), this.IS_CONTENT = !0, this.#t.setAddendum(a ? a.toString() : ""), this.observe(
+class ye extends xt {
+  constructor(t, e, i) {
+    super(t, e, i), this.#t = new gt(this), this.#e = new b(void 0), this.currentVariant = this.#e.asObservable(), this.name = this.#e.asObservablePart((a) => a?.name), this.culture = this.#e.asObservablePart((a) => a?.culture), this.segment = this.#e.asObservablePart((a) => a?.segment), this.IS_CONTENT = !0, this.#t.setAddendum(i ? i.toString() : ""), this.observe(
       this._dataOwner.variantById(this.getVariantId()),
-      async (r) => {
-        r && this.#e.setValue(r);
+      async (a) => {
+        a && this.#e.setValue(a);
       },
       null
     );
@@ -548,122 +608,198 @@ class se extends Dt {
     return this._dataOwner.getVariant(this.getVariantId());
   }
 }
-class At extends A {
+class kt extends C {
   async translate(t, e) {
-    return t = await S(t, "$.values", async (a) => await new Q(this).translateProperties(a, e.values, N)), t = await S(t, "$.variants", async (a) => await z(a, e.variants, (r) => R(r))), t;
+    return t = await B(t, "$.values", async (i) => await new ut(this).translateProperties(i, e.values, W)), t = await B(t, "$.variants", async (i) => await lt(i, e.variants, (a) => L(a))), t;
   }
 }
-class ne extends at {
+class Ft extends C {
+  /*workspace.hints.addOne({
+  		unique: 'exampleHintFromToggleAction',
+  		path: ['Umb.WorkspaceView.Document.Edit'],
+  		text: 'Hi',
+  		color: 'invalid',
+  		weight: 100,
+  	});
+  
+  	TODO:
+  	* Maintaine structural awareness of all Properties.
+  	* Observe validation messages for all Properties, and turn them into Hints as fitting.
+  	*/
+  #t = /* @__PURE__ */ new Set();
+  #e = [];
+  constructor(t, e, i, a, r = ["Umb.WorkspaceView.Document.Edit"]) {
+    super(t), this.observe(e.contentTypeMergedContainers, (s) => {
+      this.#e = s;
+    }), this.observe(i.messages.messagesOfPathAndDescendant("$.values"), (s) => {
+      s.forEach((n) => {
+        if (this.#t.has(n.key)) return;
+        const o = Wt(n.path);
+        if (!o) return;
+        const p = ht(o), l = p.alias, h = c.CreateFromPartial(p);
+        e.getPropertyStructureByAlias(l).then((d) => {
+          if (!d) return;
+          let m = [];
+          if (d.container) {
+            const v = this.#e.find((j) => j.ids.includes(d.container.id));
+            if (v)
+              m = v.path;
+            else
+              throw new Error(
+                `Could not find the declared container of id "${d.container.id}" for property with alias: "${d.alias}"`
+              );
+          }
+          a.addOne({
+            unique: n.key,
+            path: [...r, ...m],
+            text: "!",
+            /*label: message.body,*/
+            color: "invalid",
+            weight: 1e3,
+            variantId: h
+          }), this.#t.add(n.key);
+        });
+      }), this.#t.forEach((n) => {
+        s.some((o) => o.key === n) || (this.#t.delete(n), a.removeOne(n));
+      });
+    });
+  }
+}
+function Wt(u) {
+  const t = u.indexOf("[");
+  if (t === -1) return null;
+  const e = u.indexOf("]", t + 1);
+  return e === -1 ? null : u.substring(t + 1, e);
+}
+class fe extends vt {
   constructor(t, e) {
-    super(t, e), this.IS_CONTENT_WORKSPACE_CONTEXT = !0, this.readOnlyGuard = new ct(this), this.propertyViewGuard = new P(this), this.propertyWriteGuard = new P(this), this._data = new Ut(this), this.data = this._data.current, this.values = this._data.createObservablePartOfCurrent((r) => r?.values), this.variants = this._data.createObservablePartOfCurrent((r) => r?.variants ?? []), this.persistedData = this._data.persisted, this.#t = new yt(this), this.splitView = new it(), this.#i = new _t(this), this.#s = new I([], (r) => r.unique), this.languages = this.#s.asObservable(), this.#n = new Ot(this), this.#o = new I([], (r) => r.unique), this._segments = this.#o.asObservable(), this._variantOptionsFilter = (r) => !0, this.#u = [], this.#l = new J(this), this.finishPropertyValueChange = () => {
+    super(t, e), this.IS_CONTENT_WORKSPACE_CONTEXT = !0, this.readOnlyGuard = new Tt(this), this.propertyViewGuard = new U(this), this.propertyWriteGuard = new U(this), this._data = new Mt(this), this.data = this._data.current, this.values = this._data.createObservablePartOfCurrent((a) => a?.values), this.variants = this._data.createObservablePartOfCurrent((a) => a?.variants ?? []), this.persistedData = this._data.persisted, this.#t = new Q(this), this.splitView = new wt(), this.#i = new Et(this), this.#s = new I([], (a) => a.unique), this.languages = this.#s.asObservable(), this.#n = new It(this), this.#o = new I([], (a) => a.unique), this._segments = this.#o.asObservable(), this._variantOptionsFilter = (a) => !0, this.#u = [], this.#l = new ct(this), this.finishPropertyValueChange = () => {
       this._data.finishPropertyValueChange();
-    }, this._saveableVariantsFilter = (r) => this.readOnlyGuard.getIsPermittedForVariant(p.Create(r)) === !1, this.propertyViewGuard.fallbackToPermitted(), this.propertyWriteGuard.fallbackToPermitted(), this.#l.addPathTranslator(At), this._data.setVariantScaffold(e.contentVariantScaffold), this.#d = e.saveModalToken, this.#y = e.contentTypePropertyName;
-    const a = new e.contentTypeDetailRepository(this);
-    this.#h = e.contentValidationRepository, this.#c = e.skipValidationOnSubmit ? !e.skipValidationOnSubmit : !0, this.#m = e.ignoreValidationResultOnSubmit ?? !1, this.structure = new dt(this, a), this.variesByCulture = this.structure.ownerContentTypeObservablePart((r) => r?.variesByCulture), this.variesBySegment = this.structure.ownerContentTypeObservablePart((r) => r?.variesBySegment), this.varies = this.structure.ownerContentTypeObservablePart(
-      (r) => r ? r.variesByCulture || r.variesBySegment : void 0
-    ), this.variantOptions = V(
+    }, this._saveableVariantsFilter = (a) => this.readOnlyGuard.getIsPermittedForVariant(c.Create(a)) === !1, this.propertyViewGuard.fallbackToPermitted(), this.propertyWriteGuard.fallbackToPermitted(), this.#l.addPathTranslator(kt), this._data.setVariantScaffold(e.contentVariantScaffold), this.#d = e.saveModalToken, this.#p = e.contentTypePropertyName;
+    const i = new e.contentTypeDetailRepository(this);
+    this.#h = e.contentValidationRepository, this.#m = e.skipValidationOnSubmit ? !e.skipValidationOnSubmit : !0, this.#y = e.ignoreValidationResultOnSubmit ?? !1, this.structure = new bt(this, i), this.variesByCulture = this.structure.ownerContentTypeObservablePart((a) => a?.variesByCulture), this.variesBySegment = this.structure.ownerContentTypeObservablePart((a) => a?.variesBySegment), this.varies = this.structure.ownerContentTypeObservablePart(
+      (a) => a ? a.variesByCulture || a.variesBySegment : void 0
+    ), this.collection = new Ut(
+      this,
+      this.structure,
+      e.collectionAlias
+    ), new Ft(
+      this,
+      this.structure,
+      this.validationContext,
+      this.view.hints
+    ), this.variantOptions = T(
       [this.variesByCulture, this.variesBySegment, this.variants, this.languages, this._segments],
-      ([r, i, s, n, u]) => {
-        if ((r || i) === void 0)
+      ([a, r, s, n, o]) => {
+        if ((a || r) === void 0)
           return [];
-        if (!(r || i))
+        if (!(a || r))
           return [
             {
-              variant: s.find((o) => new p(o.culture, o.segment).isInvariant()),
-              language: n.find((o) => o.isDefault),
+              variant: s.find((l) => new c(l.culture, l.segment).isInvariant()),
+              language: n.find((l) => l.isDefault),
               culture: null,
               segment: null,
-              unique: new p().toString()
+              unique: new c().toString()
             }
           ];
-        if (r && !i)
-          return n.map((o) => ({
-            variant: s.find((h) => h.culture === o.unique),
-            language: o,
-            culture: o.unique,
+        if (a && !r)
+          return n.map((l) => ({
+            variant: s.find((h) => h.culture === l.unique),
+            language: l,
+            culture: l.unique,
             segment: null,
-            unique: new p(o.unique).toString()
+            unique: new c(l.unique).toString()
           }));
-        if (!r && i) {
-          const o = {
-            variant: s.find((c) => new p(c.culture, c.segment).isInvariant()),
-            language: n.find((c) => c.isDefault),
+        if (!a && r) {
+          const l = {
+            variant: s.find((d) => new c(d.culture, d.segment).isInvariant()),
+            language: n.find((d) => d.isDefault),
             culture: null,
             segment: null,
-            unique: new p().toString()
-          }, h = u.map((c) => ({
-            variant: s.find((m) => m.culture === null && m.segment === c.unique),
+            unique: new c().toString()
+          }, h = o.map((d) => ({
+            variant: s.find((m) => m.culture === null && m.segment === d.unique),
             language: n.find((m) => m.isDefault),
-            segmentInfo: c,
+            segmentInfo: d,
             culture: null,
-            segment: c.unique,
-            unique: new p(null, c.unique).toString()
+            segment: d.unique,
+            unique: new c(null, d.unique).toString()
           }));
-          return [o, ...h];
+          return [l, ...h];
         }
-        return r && i ? n.flatMap((o) => {
+        return a && r ? n.flatMap((l) => {
           const h = {
-            variant: s.find((m) => m.culture === o.unique),
-            language: o,
-            culture: o.unique,
+            variant: s.find((m) => m.culture === l.unique),
+            language: l,
+            culture: l.unique,
             segment: null,
-            unique: new p(o.unique).toString()
-          }, c = u.map((m) => ({
-            variant: s.find((_) => _.culture === o.unique && _.segment === m.unique),
-            language: o,
+            unique: new c(l.unique).toString()
+          }, d = o.map((m) => ({
+            variant: s.find((v) => v.culture === l.unique && v.segment === m.unique),
+            language: l,
             segmentInfo: m,
-            culture: o.unique,
+            culture: l.unique,
             segment: m.unique,
-            unique: new p(o.unique, m.unique).toString()
+            unique: new c(l.unique, m.unique).toString()
           }));
-          return [h, ...c];
+          return [h, ...d];
         }) : [];
       }
-    ).pipe(vt((r) => r.filter((i) => this._variantOptionsFilter(i)))), this.observe(
+    ).pipe(Ct((a) => a.filter((r) => this._variantOptionsFilter(r)))), this.observe(
       this.variantOptions,
-      (r) => {
-        r.forEach((i) => {
-          if (this.#u.filter((n) => {
-            const u = n.getVariantId();
-            if (u)
-              return u.culture === i.culture && u.segment === i.segment;
+      (a) => {
+        a.forEach((r) => {
+          if (!this.#u.some((n) => {
+            const o = n.getVariantId();
+            if (o)
+              return o.culture === r.culture && o.segment === r.segment;
           })) {
-            const n = new Z(this);
-            n.inheritFrom(this.validationContext, "$"), n.setVariantId(p.Create(i)), n.autoReport(), this.#u.push(n);
+            const n = new dt(this);
+            n.inheritFrom(this.validationContext, "$"), n.setVariantId(c.Create(r)), n.autoReport(), this.#u.push(n);
           }
         });
       },
       null
     ), this.observe(
+      K([this.splitView.activeVariantByIndex(0), this.variants]),
+      ([a, r]) => {
+        const s = r.find(
+          (n) => n.culture === a?.culture && n.segment === a?.segment
+        )?.name;
+        this.view.setTitle(s);
+      },
+      null
+    ), this.observe(
       this.varies,
-      (r) => {
-        this._data.setVaries(r), this.#e = r;
+      (a) => {
+        this._data.setVaries(a), this.#e = a;
       },
       null
     ), this.observe(
       this.variesByCulture,
-      (r) => {
-        this._data.setVariesByCulture(r), this.#r = r;
+      (a) => {
+        this._data.setVariesByCulture(a), this.#a = a;
       },
       null
     ), this.observe(
       this.variesBySegment,
-      (r) => {
-        this._data.setVariesBySegment(r), this.#a = r;
+      (a) => {
+        this._data.setVariesBySegment(a), this.#r = a;
       },
       null
     ), this.observe(
       this.structure.contentTypeDataTypeUniques,
-      (r) => {
-        this.#t.setUniques(r);
+      (a) => {
+        this.#t.setUniques(a);
       },
       null
     ), this.loadLanguages(), this.#f();
   }
   #t;
   #e;
-  #r;
   #a;
+  #r;
   #i;
   #s;
   #n;
@@ -672,13 +808,13 @@ class ne extends at {
   getVariantValidationContext(t) {
     return this.#u.find((e) => e.getVariantId()?.compare(t));
   }
-  #c;
   #m;
+  #y;
   #l;
   #h;
-  #p;
+  #c;
   #d;
-  #y;
+  #p;
   async loadLanguages() {
     const { data: t } = await this.#i.requestCollection({});
     this.#s.setValue(t?.items ?? []);
@@ -687,36 +823,45 @@ class ne extends at {
     const { data: t } = await this.#n.requestCollection({});
     this.#o.setValue(t?.items ?? []);
   }
-  async _scaffoldProcessData(t) {
-    await this.structure.loadType(t[this.#y].unique);
-    const e = this.#s.getValue().map((o) => o.unique);
+  /**
+   * @deprecated Call `_processIncomingData` instead. `_scaffoldProcessData` will be removed in v.18.
+   */
+  _scaffoldProcessData(t) {
+    return this._processIncomingData(t);
+  }
+  async _processIncomingData(t) {
+    const e = t[this.#p].unique;
+    if (!e)
+      throw new Error(`Could not find content type unique on property '${this.#p}'`);
+    await this.structure.loadType(e);
+    const i = this.#s.getValue().map((l) => l.unique);
     this.structure.variesBySegment && console.warn("Segments are not yet implemented for preset");
-    const a = this.structure.variesBySegment ? [] : void 0, r = new ft(this), i = await this.structure.getContentTypeProperties(), s = await Promise.all(
-      i.map(async (o) => {
-        const h = (await r.requestByUnique(o.dataType.unique)).data;
+    const a = this.structure.variesBySegment ? [] : void 0, r = new k(this), s = await this.structure.getContentTypeProperties(), n = await Promise.all(
+      s.map(async (l) => {
+        const h = (await r.requestByUnique(l.dataType.unique)).data;
         if (!h)
-          throw new Error(`DataType of "${o.dataType.unique}" not found.`);
+          throw new Error(`DataType of "${l.dataType.unique}" not found.`);
         if (!h.editorUiAlias)
-          throw new Error(`DataType of "${o.dataType.unique}" did not have a editorUiAlias.`);
+          throw new Error(`DataType of "${l.dataType.unique}" did not have a editorUiAlias.`);
         return {
-          alias: o.alias,
+          alias: l.alias,
           propertyEditorUiAlias: h.editorUiAlias,
           propertyEditorSchemaAlias: h.editorAlias,
           config: h.values,
           typeArgs: {
-            variesByCulture: o.variesByCulture,
-            variesBySegment: o.variesBySegment
+            variesByCulture: l.variesByCulture,
+            variesBySegment: l.variesBySegment
           }
         };
       })
-    ), n = new K(this);
-    n.setCultures(e), a && n.setSegments(a);
-    const u = await n.create(s), d = [...t.values];
-    for (let o = 0; o < u.length; o++) {
-      const h = u[o], c = p.Create(h), m = d.findIndex((_) => _.alias === h.alias && c.compare(_));
-      m > -1 ? d[m] = h : d.push(h);
-    }
-    return t.values = d, t;
+    ), o = new ot(this);
+    o.setCultures(i), a && o.setSegments(a), o.setValues(t.values);
+    const p = await o.create(n, {
+      entityType: this.getEntityType(),
+      entityUnique: t.unique,
+      entityTypeUnique: e
+    });
+    return { ...t, values: p };
   }
   /**
    * Get the name of a variant
@@ -727,7 +872,7 @@ class ne extends at {
   getName(t) {
     const e = this._data.getCurrent()?.variants;
     if (e)
-      return t ? e.find((a) => t.compare(a))?.name : e[0]?.name;
+      return t ? e.find((i) => t.compare(i))?.name : e[0]?.name;
   }
   /**
    * Set the name of a variant
@@ -736,7 +881,7 @@ class ne extends at {
    * @memberof UmbContentDetailWorkspaceContextBase
    */
   setName(t, e) {
-    this._data.updateVariantData(e ?? p.CreateInvariant(), { name: t });
+    this._data.updateVariantData(e ?? c.CreateInvariant(), { name: t });
   }
   /**
    * Get an observable for the name of a variant
@@ -746,7 +891,7 @@ class ne extends at {
    */
   name(t) {
     return this._data.createObservablePartOfCurrent(
-      (e) => e?.variants?.find((a) => t?.compare(a))?.name ?? ""
+      (e) => e?.variants?.find((i) => t?.compare(i))?.name ?? ""
     );
   }
   /* Variants */
@@ -756,7 +901,7 @@ class ne extends at {
    * @memberof UmbContentDetailWorkspaceContextBase
    */
   getVariesByCulture() {
-    return this.#r;
+    return this.#a;
   }
   /**
    * Get whether the content varies by segment
@@ -764,7 +909,7 @@ class ne extends at {
    * @memberof UmbContentDetailWorkspaceContextBase
    */
   getVariesBySegment() {
-    return this.#a;
+    return this.#r;
   }
   /**
    * Get whether the content varies
@@ -781,7 +926,7 @@ class ne extends at {
    * @memberof UmbContentDetailWorkspaceContextBase
    */
   variantById(t) {
-    return this._data.createObservablePartOfCurrent((e) => e?.variants?.find((a) => t.compare(a)));
+    return this._data.createObservablePartOfCurrent((e) => e?.variants?.find((i) => t.compare(i)));
   }
   /**
    * Get the variant by the given variantId
@@ -822,7 +967,7 @@ class ne extends at {
    */
   async propertyValueByAlias(t, e) {
     return this._data.createObservablePartOfCurrent(
-      (a) => a?.values?.find((r) => r?.alias === t && (e ? e.compare(r) : !0))?.value
+      (i) => i?.values?.find((a) => a?.alias === t && (e ? e.compare(a) : !0))?.value
     );
   }
   /**
@@ -832,10 +977,10 @@ class ne extends at {
    * @returns {ReturnType | undefined} The value or undefined if not set or found.
    */
   getPropertyValue(t, e) {
-    const a = this._data.getCurrent();
-    if (a)
-      return a.values?.find(
-        (i) => i.alias === t && (e ? e.compare(i) : !0)
+    const i = this._data.getCurrent();
+    if (i)
+      return i.values?.find(
+        (r) => r.alias === t && (e ? e.compare(r) : !0)
       )?.value;
   }
   /**
@@ -846,30 +991,35 @@ class ne extends at {
    * @param {UmbVariantId} [variantId] - The variant id of the property
    * @memberof UmbContentDetailWorkspaceContextBase
    */
-  async setPropertyValue(t, e, a) {
-    this.initiatePropertyValueChange(), a ??= p.CreateInvariant();
-    const r = await this.structure.getPropertyStructureByAlias(t);
-    if (!r)
+  async setPropertyValue(t, e, i) {
+    this.initiatePropertyValueChange(), i ??= c.CreateInvariant();
+    const a = await this.structure.getPropertyStructureByAlias(t);
+    if (!a)
       throw new Error(`Property alias "${t}" not found.`);
-    const i = (await this.#t.getItemByUnique(r.dataType.unique)).propertyEditorSchemaAlias;
-    if (!i)
-      throw new Error(`Editor Alias of "${r.dataType.unique}" not found.`);
+    const r = (await this.#t.getItemByUnique(a.dataType.unique)).propertyEditorSchemaAlias;
+    if (!r)
+      throw new Error(`Editor Alias of "${a.dataType.unique}" not found.`);
     const s = {
-      editorAlias: i,
+      editorAlias: r,
       // Be aware that this solution is a bit magical, and based on a naming convention.
       // We might want to make this more flexible at some point and get the entityType from somewhere instead of constructing it here.
       entityType: `${this.getEntityType()}-property-value`,
-      ...a.toObject(),
+      ...i.toObject(),
       alias: t,
       value: e
     }, n = this.getData();
     if (n) {
-      const u = M(
+      const o = x(
         n.values ?? [],
         s,
-        (d) => d.alias === t && a.compare(d)
+        (p) => p.alias === t && i.compare(p)
       );
-      this._data.updateCurrent({ values: u }), this._data.ensureVariantData(a);
+      if (this._data.updateCurrent({ values: o }), this.getVariesByCulture() && a.variesByCulture === !1 && a.variesBySegment === !0) {
+        const p = await D(this.variantOptions);
+        for (const l of p)
+          l.segment === i.segment && this._data.ensureVariantData(c.Create(l));
+      } else
+        this._data.ensureVariantData(i);
     }
     this.finishPropertyValueChange();
   }
@@ -885,12 +1035,12 @@ class ne extends at {
     return this._data.getChangedVariants();
   }
   async _determineVariantOptions() {
-    const t = (await wt(this.variantOptions)).filter((h) => h.segment === null), a = this.splitView.getActiveVariants().map((h) => p.Create(h)), r = this._data.getChangedVariants(), i = [...a, ...r], s = i.filter((h) => h.segment !== null).map((h) => h.toSegmentInvariant()), d = [...i, ...s].filter(
+    const t = (await D(this.variantOptions)).filter((h) => h.segment === null), i = this.splitView.getActiveVariants().map((h) => c.Create(h)), a = this._data.getChangedVariants(), r = [...i, ...a], s = r.filter((h) => h.segment !== null).map((h) => h.toSegmentInvariant()), p = [...r, ...s].filter(
       (h) => this.readOnlyGuard.getIsPermittedForVariant(h) === !1
-    ).map((h) => h.toString()).filter((h, c, m) => m.indexOf(h) === c), o = [...new Set(d)];
+    ).map((h) => h.toString()).filter((h, d, m) => m.indexOf(h) === d), l = [...new Set(p)];
     return {
       options: t,
-      selected: o
+      selected: l
     };
   }
   /* validation */
@@ -902,7 +1052,7 @@ class ne extends at {
    * @memberof UmbContentDetailWorkspaceContextBase
    */
   async _runMandatoryValidationForSaveData(t, e = []) {
-    new mt({
+    new Ot({
       removeInVersion: "17",
       deprecated: "_runMandatoryValidationForSaveData",
       solution: "Use the public runMandatoryValidationForSaveData instead."
@@ -914,19 +1064,19 @@ class ne extends at {
    * @memberof UmbContentDetailWorkspaceContextBase
    */
   async runMandatoryValidationForSaveData(t, e = []) {
-    if (this.getVariesByCulture() && (e = e.filter((i) => !i.isCultureInvariant())), e.filter((i) => !t.variants.some((s) => i.compare(s))).length > 0)
+    if (this.getVariesByCulture() && (e = e.filter((r) => !r.isCultureInvariant())), e.filter((r) => !t.variants.some((s) => r.compare(s))).length > 0)
       throw new Error("One or more selected variants have not been created");
-    const r = t.variants.filter((i) => !i.name);
-    if (r.length > 0) {
-      const i = await this.getContext(tt);
-      throw i ? (r.forEach((s) => {
-        i.messages.addMessage(
+    const a = t.variants.filter((r) => !r.name);
+    if (a.length > 0) {
+      const r = await this.getContext(pt);
+      throw r ? (a.forEach((s) => {
+        r.messages.addMessage(
           "client",
-          `$.variants[${R(s)}].name`,
-          et
+          `$.variants[${L(s)}].name`,
+          mt
         );
       }), new Error(
-        "All variants must have a name, these variants are missing a name: " + r.map((s) => (s.culture ?? "invariant") + "_" + (s.segment ?? "")).join(", ")
+        "All variants must have a name, these variants are missing a name: " + a.map((s) => (s.culture ?? "invariant") + "_" + (s.segment ?? "")).join(", ")
       )) : new Error("Validation context is missing");
     }
   }
@@ -938,17 +1088,17 @@ class ne extends at {
    */
   async askServerToValidate(t, e) {
     if (this.#h)
-      if (this.#p ??= new this.#h(this), this.getIsNew()) {
-        const a = this._internal_getCreateUnderParent();
-        if (!a) throw new Error("Parent is not set");
+      if (this.#c ??= new this.#h(this), this.getIsNew()) {
+        const i = this._internal_getCreateUnderParent();
+        if (!i) throw new Error("Parent is not set");
         await this.#l.askServerForValidation(
           t,
-          this.#p.validateCreate(t, a.unique)
+          this.#c.validateCreate(t, i.unique)
         );
       } else
         await this.#l.askServerForValidation(
           t,
-          this.#p.validateSave(t, e)
+          this.#c.validateSave(t, e)
         );
   }
   /**
@@ -963,7 +1113,7 @@ class ne extends at {
   }
   /**
    * Request a save of the workspace, in the case of Document Workspaces the validation does not need to be valid for this to be saved.
-   * @returns {Promise<void>} a promise which resolves once it has been completed.
+   * @returns {Promise<void>} A promise which resolves once it has been completed.
    */
   requestSave() {
     return this._handleSave();
@@ -983,34 +1133,37 @@ class ne extends at {
   async _handleSave() {
     if (!this.getData())
       throw new Error("Data is missing");
-    const { options: e, selected: a } = await this._determineVariantOptions();
-    let r = [];
+    const { options: e, selected: i } = await this._determineVariantOptions();
+    let a = [];
     if (e.length === 0)
       throw new Error("No variants are available");
     if (e.length === 1)
-      r.push(p.Create(e[0]));
+      a.push(c.Create(e[0]));
     else if (this.#d) {
-      const s = await gt(this, this.#d, {
+      const s = await Vt(this, this.#d, {
         data: {
           options: e,
           pickableFilter: this._saveableVariantsFilter
         },
-        value: { selection: a }
+        value: { selection: i }
       }).catch(() => {
       });
-      if (!s?.selection.length) return;
-      r = s?.selection.map((n) => p.FromString(n)) ?? [];
+      if (!s?.selection.length)
+        return Promise.reject("Cannot save without selecting at least one variant.");
+      a = s?.selection.map((n) => c.FromString(n)) ?? [];
     } else
-      r = a.map((s) => p.FromString(s));
-    const i = await this.constructSaveData(r);
-    if (await this.runMandatoryValidationForSaveData(i, r), this.#c) {
-      if (await this.askServerToValidate(i, r), await this._validateAndLog().then(
+      a = i.map((s) => c.FromString(s));
+    const r = await this.constructSaveData(a);
+    if (await this.runMandatoryValidationForSaveData(r, a), this.#m)
+      if (await this.askServerToValidate(r, a), await this._validateAndLog().then(
         () => !0,
         () => !1
-      ) || this.#m)
-        return this.performCreateOrUpdate(r, i);
-    } else
-      await this.performCreateOrUpdate(r, i);
+      ) || this.#y)
+        await this.performCreateOrUpdate(a, r);
+      else
+        return Promise.reject("Validation issues prevent saving");
+    else
+      await this.performCreateOrUpdate(a, r);
   }
   /**
    * Perform the create or update of the content
@@ -1030,68 +1183,73 @@ class ne extends at {
    * @memberof UmbContentDetailWorkspaceContextBase
    */
   async performCreateOrUpdate(t, e) {
-    this.getIsNew() ? await this.#_(t, e) : await this.#v(t, e);
-  }
-  async #_(t, e) {
-    if (!this._detailRepository) throw new Error("Detail repository is not set");
-    const a = this._internal_getCreateUnderParent();
-    if (!a) throw new Error("Parent is not set");
-    const { data: r, error: i } = await this._detailRepository.create(e, a.unique);
-    if (!r || i)
-      throw new Error("Error creating content");
-    const s = [...t, p.CreateInvariant()], n = this._data.getCurrent(), u = await new w(this).process(
-      n,
-      r,
-      t,
-      s
-    );
-    this._data.setPersisted(u);
-    const d = this._data.getCurrent(), o = await new w(this).process(
-      d,
-      r,
-      t,
-      s
-    );
-    this._data.setCurrent(o), this.setIsNew(!1);
-    const h = await this.getContext(U);
-    if (!h)
-      throw new Error("Event context is missing");
-    const c = new Ct({
-      entityType: a.entityType,
-      unique: a.unique
-    });
-    h.dispatchEvent(c);
+    this.getIsNew() ? await this.#v(t, e) : await this.#w(t, e);
   }
   async #v(t, e) {
     if (!this._detailRepository) throw new Error("Detail repository is not set");
-    const { data: a, error: r } = await this._detailRepository.save(e);
+    const i = this._internal_getCreateUnderParent();
+    if (!i) throw new Error("Parent is not set");
+    const { data: a, error: r } = await this._detailRepository.create(e, i.unique);
     if (!a || r)
-      throw new Error("Error saving content");
-    const i = [...t, p.CreateInvariant()], s = this._data.getCurrent(), n = await new w(this).process(
-      s,
+      throw new Error("Error creating content");
+    const s = [...t, c.CreateInvariant()], n = this._data.getCurrent(), o = await new _(this).process(
+      n,
       a,
       t,
-      i
+      s
+    );
+    this._data.setPersisted(o);
+    const p = this._data.getCurrent(), l = await new _(this).process(
+      p,
+      a,
+      t,
+      s
+    );
+    this._data.setCurrent(l), this.setIsNew(!1);
+    const h = await this.getContext(q);
+    if (!h)
+      throw new Error("Event context is missing");
+    const d = new A({
+      entityType: i.entityType,
+      unique: i.unique
+    });
+    h.dispatchEvent(d);
+    const m = new Pt({
+      entityType: i.entityType,
+      unique: i.unique
+    });
+    h.dispatchEvent(m);
+  }
+  async #w(t, e) {
+    if (!this._detailRepository) throw new Error("Detail repository is not set");
+    const { data: i, error: a } = await this._detailRepository.save(e);
+    if (!i || a)
+      throw new Error("Error saving content");
+    const r = [...t, c.CreateInvariant()], s = this._data.getCurrent(), n = await new _(this).process(
+      s,
+      i,
+      t,
+      r
     );
     this._data.setPersisted(n);
-    const u = this._data.getCurrent(), d = await new w(this).process(
-      u,
-      a,
+    const o = this._data.getCurrent(), p = await new _(this).process(
+      o,
+      i,
       t,
-      i
+      r
     );
-    this._data.setCurrent(d);
-    const o = this.getUnique(), h = this.getEntityType(), c = await this.getContext(U);
-    if (!c)
+    this._data.setCurrent(p);
+    const l = this.getUnique(), h = this.getEntityType(), d = await this.getContext(q);
+    if (!d)
       throw new Error("Event context is missing");
-    const m = new Vt({ unique: o, entityType: h });
-    c.dispatchEvent(m);
-    const _ = new bt({
-      unique: o,
+    const m = new A({ unique: l, entityType: h });
+    d.dispatchEvent(m);
+    const v = new St({
+      unique: l,
       entityType: h,
       eventUnique: this._workspaceEventUnique
     });
-    c.dispatchEvent(_);
+    d.dispatchEvent(v);
   }
   resetState() {
     super.resetState(), this.structure.clear(), this.readOnlyGuard.clearRules(), this.propertyViewGuard.clearRules(), this.propertyWriteGuard.clearRules(), this.propertyViewGuard.fallbackToPermitted(), this.propertyWriteGuard.fallbackToPermitted();
@@ -1101,26 +1259,28 @@ class ne extends at {
   }
 }
 export {
-  Bt as IsContentPropertyDatasetContext,
-  le as UMB_CONTENT_COLLECTION_WORKSPACE_CONTEXT,
-  re as UMB_CONTENT_HAS_PROPERTIES_WORKSPACE_CONDITION,
-  pe as UMB_CONTENT_PROPERTY_CONTEXT,
-  ie as UMB_CONTENT_PROPERTY_DATASET_CONTEXT,
-  ae as UMB_CONTENT_SECTION_ALIAS,
-  F as UMB_CONTENT_WORKSPACE_CONTEXT,
-  de as UMB_PROPERTY_TYPE_BASED_PROPERTY_CONTEXT,
-  _e as UMB_SORT_CHILDREN_OF_CONTENT_MODAL,
-  ve as UMB_SORT_CHILDREN_OF_CONTENT_MODAL_ALIAS,
-  we as UMB_WORKSPACE_HAS_CONTENT_COLLECTION_CONDITION_ALIAS,
-  ne as UmbContentDetailWorkspaceContextBase,
-  ce as UmbContentPropertyContext,
-  se as UmbContentPropertyDatasetContext,
-  Ut as UmbContentWorkspaceDataManager,
+  Rt as IsContentPropertyDatasetContext,
+  _e as UMB_CONTENT_COLLECTION_WORKSPACE_CONTEXT,
+  de as UMB_CONTENT_HAS_PROPERTIES_WORKSPACE_CONDITION,
+  Ce as UMB_CONTENT_PROPERTY_CONTEXT,
+  me as UMB_CONTENT_PROPERTY_DATASET_CONTEXT,
+  pe as UMB_CONTENT_SECTION_ALIAS,
+  Z as UMB_CONTENT_WORKSPACE_CONTEXT,
+  Ve as UMB_PROPERTY_TYPE_BASED_PROPERTY_CONTEXT,
+  Se as UMB_SORT_CHILDREN_OF_CONTENT_MODAL,
+  Ee as UMB_SORT_CHILDREN_OF_CONTENT_MODAL_ALIAS,
+  Ie as UMB_WORKSPACE_HAS_CONTENT_COLLECTION_CONDITION_ALIAS,
+  Ut as UmbContentCollectionManager,
+  fe as UmbContentDetailWorkspaceContextBase,
+  be as UmbContentPropertyContext,
+  ye as UmbContentPropertyDatasetContext,
+  Ft as UmbContentValidationToHintsManager,
+  Mt as UmbContentWorkspaceDataManager,
   y as UmbContentWorkspacePropertyElement,
-  Dt as UmbElementPropertyDatasetContext,
-  It as UmbElementWorkspaceDataManager,
-  w as UmbMergeContentVariantDataController,
-  me as UmbPropertyTypeBasedPropertyContext,
-  ye as UmbPropertyTypeBasedPropertyElement
+  xt as UmbElementPropertyDatasetContext,
+  Nt as UmbElementWorkspaceDataManager,
+  _ as UmbMergeContentVariantDataController,
+  Te as UmbPropertyTypeBasedPropertyContext,
+  Oe as UmbPropertyTypeBasedPropertyElement
 };
 //# sourceMappingURL=index.js.map

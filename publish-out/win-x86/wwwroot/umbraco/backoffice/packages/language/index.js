@@ -8,7 +8,7 @@ import { UmbLitElement as x } from "@umbraco-cms/backoffice/lit-element";
 import { UmbSorterController as B } from "@umbraco-cms/backoffice/sorter";
 import { UUIFormControlMixin as w } from "@umbraco-cms/backoffice/external/uui";
 import { UmbLanguageDetailRepository as Le } from "./language-detail.repository-B-DILFxF.js";
-import { UmbLanguageItemRepository as Te } from "./language-item.repository-R0RHQ4z3.js";
+import { UmbLanguageItemRepository as Te } from "./language-item.repository-CCdsna_d.js";
 import { UmbLanguageCollectionRepository as Ge } from "./language-collection.repository-GzJNHJc2.js";
 import { UmbAppLanguageContext as Ie } from "./app-language.context-DwkHp6Yy.js";
 class W extends I {

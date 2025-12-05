@@ -7,6 +7,7 @@ export default {
         changeDataType: 'Datentyp ändern',
         copy: 'Kopieren',
         create: 'Neu',
+        createFor: (name) => (name ? `Neu erstellen für ${name}` : 'Neu'),
         export: 'Exportieren',
         createPackage: 'Neues Paket',
         createGroup: 'Neue Gruppe',
@@ -52,6 +53,7 @@ export default {
         unlock: 'Freigeben',
         createblueprint: 'Inhaltsvorlage anlegen',
         resendInvite: 'Einladung erneut versenden',
+        viewActionsFor: (name) => (name ? `Aktionen anzeigen für ${name}` : 'Aktionen anzeigen'),
     },
     actionCategories: {
         content: 'Inhalt',
@@ -258,7 +260,7 @@ export default {
         notCreated: 'Nicht angelegt',
         updateDate: 'Zuletzt bearbeitet am',
         updateDateDesc: 'Letzter Änderungszeitpunkt des Dokuments',
-        uploadClear: 'Datei entfernen',
+        uploadClear: 'Datei(en) entfernen',
         uploadClearImageContext: 'Klicke hier um das das Bild vom Medienelement zu entfernen.',
         uploadClearFileContext: 'Klicke hier um das das Bild vom Medienelement zu entfernen.',
         urls: 'Link zum Dokument',
@@ -316,6 +318,24 @@ export default {
         createdBlueprintMessage: "Inhaltsvorlage von '%0%' wurde erzeugt",
         duplicateBlueprintMessage: 'Eine gleichnamige Inhaltsvorlage ist bereits vorhanden',
         blueprintDescription: 'Eine Inhaltsvorlage ist vordefinierter Inhalt,\n      den ein Redakteur als Basis für neuen Inhalt verwenden kann\n    ',
+    },
+    entityDetail: {
+        notFoundTitle: (entityType) => {
+            const entityName = entityType ?? 'Element';
+            return `${entityName} nicht gefunden`;
+        },
+        notFoundDescription: (entityType) => {
+            const entityName = entityType ?? 'element';
+            return `Der angeforderte ${entityName} konnte nicht gefunden werden. Bitte überprüfen Sie die URL und versuchen Sie es erneut.`;
+        },
+        forbiddenTitle: (entityType) => {
+            const entityName = entityType ?? 'Element';
+            return `${entityName} nicht verfügbar`;
+        },
+        forbiddenDescription: (entityType) => {
+            const entityName = entityType ?? 'dieses Element';
+            return `Sie haben keine Berechtigung, auf ${entityName} zuzugreifen. Bitte wenden Sie sich an Ihren Administrator, um Unterstützung zu erhalten.`;
+        },
     },
     media: {
         clickToUpload: 'Für Upload klicken',
@@ -689,6 +709,7 @@ export default {
         design: 'Design',
         dictionary: 'Wörterbuch',
         dimensions: 'Abmessungen',
+        dividerPosition: (value) => `Trenner bei ${value}%`,
         discard: 'Verwerfen',
         down: 'nach unten',
         download: 'Herunterladen',
@@ -919,6 +940,12 @@ export default {
     lockout: {
         lockoutWillOccur: 'Sie haben keine Tätigkeiten mehr durchgeführt und werden automatisch abgemeldet in',
         renewSession: 'Erneuern Sie, um Ihre Arbeit zu speichern ...',
+    },
+    timeout: {
+        warningHeadline: 'Warnung: Ihre Sitzung läuft bald ab',
+        warningText: 'Ihre Sitzung ist bald abgelaufen und Sie werden in <strong>{0} Sekunden</strong> abgemeldet.',
+        warningLogoutAction: 'Abmelden',
+        warningContinueAction: 'Eingeloggt bleiben',
     },
     login: {
         greeting0: 'Willkommen',
@@ -1777,6 +1804,7 @@ export default {
         openBackofficeSearch: 'Back-Office Suche öffnen',
         openCloseBackofficeHelp: 'Back-Office Hilfe öffnen / schliessen',
         openCloseBackofficeProfileOptions: 'Ihre Profil-Einstellungen öffnen / schliessen',
+        profileOptions: 'Profil-Einstellungen',
     },
     logViewer: {
         selectAllLogLevelFilters: 'Wählen Sie Alle',
@@ -1825,5 +1853,11 @@ export default {
     treeSearch: {
         searchResult: 'Element zurückgegeben',
         searchResults: 'Elemente zurückgegeben',
+    },
+    routing: {
+        routeNotFoundTitle: 'Seite wurde nicht gefunden',
+        routeNotFoundDescription: 'Die angeforderte Seite konnte nicht gefunden werden. Bitte überprüfen Sie die URL und versuchen Sie es erneut.',
+        routeForbiddenTitle: 'Zugriff verweigert',
+        routeForbiddenDescription: 'Sie haben keine Berechtigung, auf diese Seite zuzugreifen. Bitte wenden Sie sich an Ihren Administrator, um Unterstützung zu erhalten.',
     },
 };

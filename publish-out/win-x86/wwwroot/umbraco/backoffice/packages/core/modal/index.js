@@ -1,5 +1,5 @@
-import { U as r } from "../modal-manager.context-CIirlzRD.js";
-import { b as x, a as O, c as w } from "../modal-manager.context-CIirlzRD.js";
+import { U as r } from "../modal-manager.context-B1sl36Ce.js";
+import { b as x, a as O, c as w } from "../modal-manager.context-B1sl36Ce.js";
 import { UmbControllerBase as l } from "@umbraco-cms/backoffice/class-api";
 import { U as a } from "../modal-token-wEQqBBXI.js";
 import { UmbConfirmModalElement as u } from "../confirm-modal.element-COhIMOef.js";

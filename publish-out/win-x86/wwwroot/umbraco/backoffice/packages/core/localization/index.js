@@ -1,10 +1,10 @@
-import { css as C, property as n, state as E, customElement as g, when as H, unsafeHTML as M, html as h, nothing as q } from "@umbraco-cms/backoffice/external/lit";
+import { css as E, property as n, state as $, customElement as g, when as H, unsafeHTML as M, html as h, nothing as q } from "@umbraco-cms/backoffice/external/lit";
 import { escapeHTML as G } from "@umbraco-cms/backoffice/utils";
 import { UmbLitElement as _ } from "@umbraco-cms/backoffice/lit-element";
 import { filter as A, distinctUntilChanged as S, switchMap as j, map as J, from as Z, catchError as K, of as Q } from "@umbraco-cms/backoffice/external/rxjs";
 import { loadManifestPlainJs as X, hasDefaultExport as Y } from "@umbraco-cms/backoffice/extension-api";
 import { umbExtensionsRegistry as I } from "@umbraco-cms/backoffice/extension-registry";
-import { UMB_DEFAULT_LOCALIZATION_CULTURE as U, umbLocalizationManager as N } from "@umbraco-cms/backoffice/localization-api";
+import { UMB_DEFAULT_LOCALIZATION_CULTURE as b, umbLocalizationManager as N } from "@umbraco-cms/backoffice/localization-api";
 import { UmbStringState as k } from "@umbraco-cms/backoffice/observable-api";
 import { UmbChangeEvent as tt } from "@umbraco-cms/backoffice/event";
 import { UmbFormControlMixin as et } from "@umbraco-cms/backoffice/validation";
@@ -30,7 +30,7 @@ let m = class extends _ {
   }
 };
 m.styles = [
-  C`
+  E`
 			:host {
 				display: contents;
 			}
@@ -46,14 +46,14 @@ y([
   n({ type: Boolean })
 ], m.prototype, "debug", 2);
 y([
-  E()
+  $()
 ], m.prototype, "text", 1);
 m = y([
   g("umb-localize")
 ], m);
 var at = Object.defineProperty, ot = Object.getOwnPropertyDescriptor, V = (s) => {
   throw TypeError(s);
-}, $ = (s, t, r, e) => {
+}, z = (s, t, r, e) => {
   for (var a = e > 1 ? void 0 : e ? ot(t, r) : t, o = s.length - 1, i; o >= 0; o--)
     (i = s[o]) && (a = (e ? i(t, r, a) : i(a)) || a);
   return e && a && at(t, r, a), a;
@@ -81,25 +81,25 @@ F = function() {
   this.title = s;
 };
 f.styles = [
-  C`
+  E`
 			:host {
 				display: contents;
 			}
 		`
 ];
-$([
+z([
   n({ type: String })
 ], f.prototype, "date", 2);
-$([
+z([
   n({ type: Object })
 ], f.prototype, "options", 2);
-$([
+z([
   n({ type: Boolean })
 ], f.prototype, "skipDuration", 2);
-f = $([
+f = z([
   g("umb-localize-date")
 ], f);
-var ut = Object.defineProperty, ct = Object.getOwnPropertyDescriptor, z = (s, t, r, e) => {
+var ut = Object.defineProperty, ct = Object.getOwnPropertyDescriptor, O = (s, t, r, e) => {
   for (var a = e > 1 ? void 0 : e ? ct(t, r) : t, o = s.length - 1, i; o >= 0; o--)
     (i = s[o]) && (a = (e ? i(t, r, a) : i(a)) || a);
   return e && a && ut(t, r, a), a;
@@ -113,22 +113,22 @@ let v = class extends _ {
   }
 };
 v.styles = [
-  C`
+  E`
 			:host {
 				display: contents;
 			}
 		`
 ];
-z([
+O([
   n()
 ], v.prototype, "number", 2);
-z([
+O([
   n()
 ], v.prototype, "options", 2);
-z([
-  E()
+O([
+  $()
 ], v.prototype, "text", 1);
-v = z([
+v = O([
   g("umb-localize-number")
 ], v);
 var pt = Object.defineProperty, ht = Object.getOwnPropertyDescriptor, w = (s, t, r, e) => {
@@ -148,7 +148,7 @@ let d = class extends _ {
   }
 };
 d.styles = [
-  C`
+  E`
 			:host {
 				display: contents;
 			}
@@ -164,7 +164,7 @@ w([
   n()
 ], d.prototype, "unit", 2);
 w([
-  E()
+  $()
 ], d.prototype, "text", 1);
 d = w([
   g("umb-localize-relative-time")
@@ -176,7 +176,7 @@ function B(s, t, r) {
 class mt {
   constructor(t) {
     this.#t = new k(
-      document.documentElement.lang !== "" ? document.documentElement.lang : U
+      document.documentElement.lang !== "" ? document.documentElement.lang : b
     ), this.currentLanguage = this.#t.asObservable(), this.#r = async (e) => {
       const a = {};
       if (e.meta.localizations)
@@ -230,7 +230,7 @@ class mt {
       // Catch any errors that occur while loading the translations
       // This is important to ensure that the observable does not error out and stop the subscription
       K((e) => (console.error("Error loading translations:", e), Q([])))
-    ).subscribe();
+    ).subscribe(), this.loadLanguage(b);
   }
   #t;
   /**
@@ -284,12 +284,12 @@ var dt = Object.defineProperty, ft = Object.getOwnPropertyDescriptor, R = (s) =>
   for (var a = e > 1 ? void 0 : e ? ft(t, r) : t, o = s.length - 1, i; o >= 0; o--)
     (i = s[o]) && (a = (e ? i(t, r, a) : i(a)) || a);
   return e && a && dt(t, r, a), a;
-}, T = (s, t, r) => t.has(s) || R("Cannot " + r), c = (s, t, r) => (T(s, t, "read from private field"), r ? r.call(s) : t.get(s)), O = (s, t, r) => t.has(s) ? R("Cannot add the same private member more than once") : t instanceof WeakSet ? t.add(s) : t.set(s, r), b = (s, t, r, e) => (T(s, t, "write to private field"), t.set(s, r), r), vt = (s, t, r) => (T(s, t, "access private method"), r), u, p, P, W;
-let L = class extends et(
+}, T = (s, t, r) => t.has(s) || R("Cannot " + r), c = (s, t, r) => (T(s, t, "read from private field"), r ? r.call(s) : t.get(s)), U = (s, t, r) => t.has(s) ? R("Cannot add the same private member more than once") : t instanceof WeakSet ? t.add(s) : t.set(s, r), L = (s, t, r, e) => (T(s, t, "write to private field"), t.set(s, r), r), vt = (s, t, r) => (T(s, t, "access private method"), r), u, p, P, W;
+let C = class extends et(
   _
 ) {
   constructor() {
-    super(), O(this, P), O(this, u), O(this, p), this._options = [], this.observe(
+    super(), U(this, P), U(this, u), U(this, p), this._options = [], this.observe(
       I.byType("localization"),
       (s) => {
         const t = s.filter((e) => !!e.meta.culture).map((e) => {
@@ -323,9 +323,9 @@ let L = class extends et(
   }
   firstUpdated(s) {
     if (super.firstUpdated(s), this.value && !this._options.find((r) => r.value === this.value)) {
-      b(this, u, this.value);
+      L(this, u, this.value);
       const r = new Intl.Locale(this.value);
-      r.language ? this._options.find((a) => a.value === r.language) ? this.value = r.language : (b(this, p, r.language), this.value = U) : this.value = U;
+      r.language ? this._options.find((a) => a.value === r.language) ? this.value = r.language : (L(this, p, r.language), this.value = b) : this.value = b;
     }
     this.addFormControlElement(this.shadowRoot.querySelector("uui-select")), this.checkValidity();
   }
@@ -342,20 +342,20 @@ u = /* @__PURE__ */ new WeakMap();
 p = /* @__PURE__ */ new WeakMap();
 P = /* @__PURE__ */ new WeakSet();
 W = function(s) {
-  b(this, u, void 0), b(this, p, void 0), this.value = s.target.value.toString(), this.dispatchEvent(new tt());
+  L(this, u, void 0), L(this, p, void 0), this.value = s.target.value.toString(), this.dispatchEvent(new tt());
 };
 x([
-  E()
-], L.prototype, "_options", 2);
+  $()
+], C.prototype, "_options", 2);
 x([
   n({ type: String })
-], L.prototype, "value", 1);
-L = x([
+], C.prototype, "value", 1);
+C = x([
   g("umb-ui-culture-input")
-], L);
+], C);
 export {
   mt as UmbLocalizationRegistry,
-  L as UmbUiCultureInputElement,
+  C as UmbUiCultureInputElement,
   Ot as umbLocalizationRegistry
 };
 //# sourceMappingURL=index.js.map

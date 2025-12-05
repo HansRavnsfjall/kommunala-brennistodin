@@ -1,0 +1,163 @@
+﻿@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage
+@using System.IO
+@using Microsoft.AspNetCore.Html
+@using Umbraco.Cms.Core.Models
+@using Umbraco.Cms.Core.Models.PublishedContent
+@using Umbraco.Cms.Core.Strings
+@using Umbraco.Extensions
+
+@inject Umbraco.Cms.Core.Routing.IPublishedUrlProvider PublishedUrlProvider
+
+@{
+    Layout = "master.cshtml";
+
+    // === Fields
+    var title = Model.Value<string>("yvirskrift") ?? Model.Name;
+    var body  = Model.Value<IHtmlEncodedString>("tekstur");
+    var dateValue = Model.Value<DateTime?>("dagfesting");
+    var formattedDate = dateValue?.ToString("dd. MMMM yyyy");
+
+    var ingress = Model.Value<IHtmlEncodedString>("inngangstekstur");
+    var image   = Model.Value<MediaWithCrops>("mynd");
+
+    // HERO IMAGE – WebP 1500px
+    var big = image?.GetCropUrl(
+        width: 1500,
+        quality: 85,
+        furtherOptions: "&format=webp&upscale=false"
+    ) ?? image?.Url();
+
+    string ImgAlt(IPublishedContent? m) =>
+        m?.Value<string>("altText") ?? m?.Name ?? "";
+
+    // CTA link
+    var ctaLinks = Model.Value<IEnumerable<Link>>("leinki");
+    var ctaLink  = ctaLinks?.FirstOrDefault();
+
+    // Parent (tidindamappa)
+    var parent     = Model.Parent;
+    var parentName = parent?.Name ?? "TÍÐINDI";
+    var parentUrl  = parent?.Url() ?? "#";
+
+    // Latest 3 articles (excluding current)
+    IEnumerable<IPublishedContent> latest = Enumerable.Empty<IPublishedContent>();
+    if (parent != null)
+    {
+        latest = parent
+            .ChildrenOfType("tidindi")
+            .Where(x => x.IsPublished() && x.Key != Model.Key)
+            .OrderByDescending(x => x.Value<DateTime?>("dagfesting") ?? x.CreateDate)
+            .Take(3)
+            .ToArray();
+    }
+
+    // Helper for ToHtmlString
+    string? ToStringOrNull(IHtmlContent? content)
+    {
+        if (content is null) return null;
+        using var writer = new StringWriter();
+        content.WriteTo(writer, System.Text.Encodings.Web.HtmlEncoder.Default);
+        return writer.ToString();
+    }
+}
+
+<section class="news-detail">
+
+    <!-- Hero Image -->
+    @if (!string.IsNullOrWhiteSpace(big))
+    {
+        <div class="container">
+          <div class="row">
+            <div class="col-lg-8 col-12">
+                <div class="newcat">@parentName</div>
+                <h1 class="news-heading">@title</h1>
+
+                <div class="news-date">
+                    @formattedDate
+                </div>
+
+                <img src="@big" alt="@ImgAlt(image)" class="w-100 h-auto object-fit-cover" />
+            </div>
+          </div>
+        </div>
+    }
+
+    <!-- Two-column layout -->
+    <div class="container">
+        <div class="row align-items-start g-4">
+
+            <!-- Left column -->
+            <div class="col-12 col-lg-8">
+                @if (ingress != null && !string.IsNullOrWhiteSpace(ingress.ToHtmlString()))
+                {
+                    <div class="news-intro editor">@ingress</div>
+                }
+
+                <div class="editor news-body">
+                    @if (body != null) { @body }
+                </div>
+            </div>
+
+            
+
+        </div>
+    </div>
+
+    <!-- Latest articles -->
+    @if (latest.Any())
+    {
+        <div class="container more-news-3">
+            <h2>Onnur tíðindi</h2>
+
+            <div class="row g-4">
+
+                @foreach (var item in latest)
+                {
+                    var itemImg = item.Value<MediaWithCrops>("mynd");
+
+                    // Thumbnail also WebP but scaled to 1500px max
+                    var thumb = itemImg?.GetCropUrl(
+                        width: 1500,
+                        quality: 85,
+                        furtherOptions: "&format=webp&upscale=false"
+                    ) ?? itemImg?.Url();
+
+                    var itemTitle = item.Value<string>("yvirskrift") ?? item.Name;
+                    var itemIntro = item.Value<IHtmlEncodedString>("inngangstekstur");
+
+                    <div class="col-12 col-md-4">
+                        <a class="more-news h-100 text-decoration-none" href="@item.Url()">
+
+                            <div>
+                                <img src="@thumb" alt="@ImgAlt(itemImg)" class="card-img-top object-fit-cover" />
+                            </div>
+
+                            <div class="more-news-body">
+                                <h3>@itemTitle</h3>
+
+                                @if (itemIntro != null && !string.IsNullOrWhiteSpace(itemIntro.ToHtmlString()))
+                                {
+                                    <div class="more-news-text">@itemIntro</div>
+                                }
+                            </div>
+
+                        </a>
+                    </div>
+                }
+
+            </div>
+
+            <div class="text-center all-news-link-mobile my-4">
+                <a href="/tidindi/" class="btn more-news-btn btn-link">
+                    Vís øll tíðindi
+                    <span aria-hidden="true">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="25" height="23" viewBox="0 0 25 23" fill="none">
+                            <path d="M24.0607 12.1066C24.6464 11.5208 24.6464 10.571 24.0607 9.98524L14.5147 0.439298C13.9289 -0.146489 12.9792 -0.146489 12.3934 0.439298C11.8076 1.02508 11.8076 1.97483 12.3934 2.56062L20.8787 11.0459L12.3934 19.5312C11.8076 20.117 11.8076 21.0667 12.3934 21.6525C12.9792 22.2383 13.9289 22.2383 14.5147 21.6525L24.0607 12.1066ZM0 11.0459L0 12.5459L23 12.5459L23 11.0459L23 9.5459L0 9.5459L0 11.0459Z" fill="#4B7019"/>
+                        </svg>
+                    </span>
+                </a>
+            </div>
+
+        </div>
+    }
+</section>

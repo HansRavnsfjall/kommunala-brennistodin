@@ -1,65 +1,74 @@
+﻿@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<BlockListItem>
 @using Umbraco.Cms.Core.Models
-@using Umbraco.Cms.Core.Models.Blocks
+@using Umbraco.Cms.Core.Models.PublishedContent
 @using Umbraco.Cms.Core.Strings
 @using Umbraco.Extensions
-@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<BlockListItem>
 
 @{
-    var c = Model.Content;
+    var el = Model?.Content;
 
-    // Fields
-    var heading = c.Value<string>("yvirskrift");
-    var bodyRte = c.Value<IHtmlEncodedString>("tekstur");
-    var link    = c.Value<Link>("leinki");
-    var img     = c.Value<MediaWithCrops>("mynd");
+    // Picked tema page
+    var temaPage = el?.Value<IPublishedContent>("temaPicker");
+    if (temaPage is null) { return; }
 
-    // Position info (passed from helper)
-    var isFirst  = ViewData["BlockIsFirst"] as bool? ?? false;
-    var isLast   = ViewData["BlockIsLast"]  as bool? ?? false;
-    var posClass = (ViewData["BlockPosClass"] as string) ?? string.Empty;
+    var url   = temaPage.Url();
+    var title = temaPage.Name ?? string.Empty;
 
-    // Combine section classes
-    var sectionClasses = $"py-3 py-lg-5 theme-alternative {posClass}" +
-                         (isFirst ? " is-first" : "") +
-                         (isLast ? " is-last" : "");
+    IHtmlEncodedString? ingress = temaPage.Value<IHtmlEncodedString?>("inngangstekstur");
 
-    // Link details
-    var href   = link?.Url ?? string.Empty;
-    var text   = !string.IsNullOrWhiteSpace(link?.Name) ? link!.Name! : "Les meira";
-    var target = link?.Target;
-    var rel    = target == "_blank" ? "noopener noreferrer" : null;
+    MediaWithCrops? heroImage = temaPage.Value<MediaWithCrops?>("mynd");
+
+    // Optimized WebP image (max 2000px wide, q=85, no upscaling)
+    string? imgUrl = heroImage?.GetCropUrl(
+        width: 1000,
+        quality: 85,
+        furtherOptions: "&format=webp&upscale=false"
+    );
+
+    var imgAlt = heroImage?.Value<string>("altText")
+             ?? heroImage?.Value<string>("umbracoAltText")
+             ?? title;
+
+    // --- Dropdown "radfylgja": "Mynd til vinstru" (default) / "Mynd til høgru" ---
+    var sideRaw = (el.Value<string>("radfylgja") ?? "Mynd til vinstru").Trim();
+    var imageLeft = !sideRaw.StartsWith("Mynd til høgru", StringComparison.OrdinalIgnoreCase); // default to left unless explicitly "høgru"
+
+    // Mobile-first stacking: image first, text second.
+    var imgColOrder = imageLeft ? "order-1 order-md-1" : "order-1 order-md-2";
+    var txtColOrder = imageLeft ? "order-2 order-md-2" : "order-2 order-md-1";
 }
 
-<section class="@sectionClasses">
+<!-- ===== Theme block ===== -->
+<section class="py-4 py-lg-5">
   <div class="container">
-    <div class="news-band row g-0">
-      <div class="col-md-6 copy">
-        @if (!string.IsNullOrWhiteSpace(heading))
+    <div class="theme-wrap row g-0">
+      <!-- IMAGE: col-12 on mobile, col-md-6 on desktop; always first on mobile -->
+      <div class="theme-img col-12 col-md-6 @imgColOrder">
+        @if (!string.IsNullOrWhiteSpace(imgUrl))
         {
-            <h3>@heading</h3>
-        }
-
-        @if (bodyRte is not null)
-        {
-            <div class="fw-700 text-muted-600">
-                @bodyRte
-            </div>
-        }
-
-        @if (!string.IsNullOrWhiteSpace(href))
-        {
-            <a href="@href" class="link-more btn" target="@target" rel="@rel">
-                @text
-            </a>
+          <a href="@url" aria-label="@title">
+            <img src="@imgUrl" alt="@imgAlt" />
+          </a>
         }
       </div>
 
-      @if (img is not null)
-      {
-          <div class="col-md-6 news-img">
-              <img src="@img.Url()" alt="@img.Name" class="img-fluid w-100" />
-          </div>
-      }
+      <!-- TEXT: col-12 on mobile, col-md-6 on desktop; second on mobile -->
+      <div class="theme-panel col-12 col-lg-6 @txtColOrder">
+        <small>TEMA</small>
+        <h3>@title</h3>
+
+        @if (ingress is not null)
+        {
+          <div class="fw-700 text-muted-600">@ingress</div>
+        }
+
+        <a class="link-more stretched-link" href="@url">
+          Les meira
+          <svg xmlns="http://www.w3.org/2000/svg" width="25" height="23" viewBox="0 0 25 23" fill="none">
+            <path d="M24.0607 12.1066C24.6464 11.5208 24.6464 10.571 24.0607 9.98524L14.5147 0.439298C13.9289 -0.146489 12.9792 -0.146489 12.3934 0.439298C11.8076 1.02508 11.8076 1.97483 12.3934 2.56062L20.8787 11.0459L12.3934 19.5312C11.8076 20.117 11.8076 21.0667 12.3934 21.6525C12.9792 22.2383 13.9289 22.2383 14.5147 21.6525L24.0607 12.1066ZM0 11.0459L-1.31134e-07 12.5459L23 12.5459L23 11.0459L23 9.5459L1.31134e-07 9.5459L0 11.0459Z" fill="#814D4B"/>
+          </svg>
+        </a>
+      </div>
     </div>
   </div>
 </section>

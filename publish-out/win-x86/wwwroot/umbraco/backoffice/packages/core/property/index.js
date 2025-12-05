@@ -1,17 +1,34 @@
-import { e as O, U as S, g as M, b as T, f as N, h as D, c as L, a as x, d as F, i as Y } from "../unsupported-property.element-BTNx3nHS.js";
-import { U as G, a as $ } from "../constants-mZK85u7C.js";
-import { UmbGuardManagerBase as A } from "@umbraco-cms/backoffice/utils";
+import { a as y } from "../unsupported-property.element-B5lv0dQj.js";
+import { f as q, U as D, c as N, g as T, h as F, d as L, b as Y, e as k, i as $ } from "../unsupported-property.element-B5lv0dQj.js";
+import { U as X, a as H } from "../constants-mZK85u7C.js";
+import { UmbValueValidator as p } from "@umbraco-cms/backoffice/validation";
+import { UmbGuardManagerBase as h } from "@umbraco-cms/backoffice/utils";
 import { UmbControllerBase as P } from "@umbraco-cms/backoffice/class-api";
-import { createExtensionApi as f } from "@umbraco-cms/backoffice/extension-api";
+import { createExtensionApi as c } from "@umbraco-cms/backoffice/extension-api";
 import { umbExtensionsRegistry as d } from "@umbraco-cms/backoffice/extension-registry";
-import { U as c } from "../variant-id.class-CbSg1vyg.js";
-const b = {
-  block: ["Umbraco.ImageCropper", "Umbraco.UploadField"]
+import { U as A } from "../variant-id.class-DtPIPk7p.js";
+const C = {
+  block: ["Umbraco.ImageCropper"]
 };
-function m(i, e) {
-  return i.propertyType?.unique === e.unique || i.propertyType === void 0;
+class B extends p {
+  //
+  #e;
+  constructor(e, t) {
+    super(e, t), this.#e = t.propertyAlias, this.consumeContext(y, async (s) => {
+      this.observe(
+        await s?.propertyValueByAlias(this.#e),
+        (r) => {
+          this.value = r;
+        },
+        "observeDatasetValue"
+      );
+    });
+  }
 }
-class v extends A {
+function f(l, e) {
+  return l.propertyType?.unique === e.unique || l.propertyType === void 0;
+}
+class R extends h {
   /**
    * Checks if the property is permitted for the given property type
    * @param {UmbReferenceByUnique} propertyType
@@ -31,13 +48,13 @@ class v extends A {
     return this.#e(this.getRules(), e);
   }
   #e(e, t) {
-    return e.filter((r) => r.permitted === !1).some((r) => m(r, t)) ? !1 : e.filter((r) => r.permitted === !0).some((r) => m(r, t)) ? !0 : this._fallback;
+    return e.filter((s) => s.permitted === !1).some((s) => f(s, t)) ? !1 : e.filter((s) => s.permitted === !0).some((s) => f(s, t)) ? !0 : this._fallback;
   }
 }
-function h(i, e, t, r) {
-  return (i.variantId === void 0 || i.variantId.culture === e.culture) && (i.propertyType === void 0 || i.propertyType.unique === t.unique) && (i.datasetVariantId === void 0 || i.datasetVariantId.culture === r.culture);
+function m(l, e, t, s) {
+  return (l.variantId === void 0 || l.variantId.culture === e.culture) && (l.propertyType === void 0 || l.propertyType.unique === t.unique) && (l.datasetVariantId === void 0 || l.datasetVariantId.culture === s.culture);
 }
-class g extends A {
+class S extends h {
   /**
    * Checks if the variant and propertyType is permitted.
    * @param {UmbVariantId} variantId - The variant id to check.
@@ -46,9 +63,9 @@ class g extends A {
    * @returns {Observable<boolean>} - Returns an observable that emits true if the variant and propertyType is permitted, false otherwise.
    * @memberof UmbVariantPropertyGuardManager
    */
-  isPermittedForVariantAndProperty(e, t, r) {
+  isPermittedForVariantAndProperty(e, t, s) {
     return this._rules.asObservablePart(
-      (s) => this.#e(s, e, t, r)
+      (r) => this.#e(r, e, t, s)
     );
   }
   /**
@@ -59,14 +76,14 @@ class g extends A {
    * @returns {boolean} - Returns true if the variant and propertyType is permitted, false otherwise.
    * @memberof UmbVariantPropertyGuardManager
    */
-  getIsPermittedForVariantAndProperty(e, t, r) {
-    return this.#e(this._rules.getValue(), e, t, r);
+  getIsPermittedForVariantAndProperty(e, t, s) {
+    return this.#e(this._rules.getValue(), e, t, s);
   }
-  #e(e, t, r, s) {
-    return e.filter((a) => a.permitted === !1).some((a) => h(a, t, r, s)) ? !1 : e.filter((a) => a.permitted === !0).some((a) => h(a, t, r, s)) ? !0 : this._fallback;
+  #e(e, t, s, r) {
+    return e.filter((a) => a.permitted === !1).some((a) => m(a, t, s, r)) ? !1 : e.filter((a) => a.permitted === !0).some((a) => m(a, t, s, r)) ? !0 : this._fallback;
   }
 }
-class C extends P {
+class I extends P {
   /**
    * Clones the property data.
    * @param {UmbPropertyValueDataPotentiallyWithEditorAlias} property - The property data.
@@ -84,20 +101,20 @@ class C extends P {
     const t = e.editorAlias;
     if (!t)
       return console.error(`Editor alias not found for ${e.alias}`), e;
-    const r = d.getByTypeAndFilter(
+    const s = d.getByTypeAndFilter(
       "propertyValueCloner",
-      (n) => n.forEditorAlias === t
+      (i) => i.forEditorAlias === t
     )[0];
-    if (!r)
-      return e;
-    const s = await f(this, r);
     if (!s)
       return e;
-    s.manifest = r;
+    const r = await c(this, s);
+    if (!r)
+      return e;
+    r.manifest = s;
     let a = e;
-    if (s.cloneValue) {
-      const n = await s.cloneValue(e.value);
-      n && (a = { ...e, value: n });
+    if (r.cloneValue) {
+      const i = await r.cloneValue(e.value);
+      i && (a = { ...e, value: i });
     }
     return a;
   }
@@ -105,71 +122,94 @@ class C extends P {
     const t = e.editorAlias;
     if (!t)
       return e;
-    const r = d.getByTypeAndFilter(
+    const s = d.getByTypeAndFilter(
       "propertyValueResolver",
       // TODO: Remove depcrated filter option in v.17 [NL]
       (a) => a.forEditorAlias === t || a.meta?.editorAlias === t
     )[0];
-    if (!r)
+    if (!s)
       return e;
-    const s = await f(this, r);
-    return s ? (s.manifest = r, s.processValues ? await s.processValues(e, async (a) => await Promise.all(
+    const r = await c(this, s);
+    return r ? (r.manifest = s, r.processValues ? await r.processValues(e, async (a) => await Promise.all(
       a.map(async (o) => await this.#e(o) ?? o)
     )) ?? e : e) : e;
   }
 }
-const E = Object.freeze({});
-class p extends P {
+class V extends P {
+  #e;
+  setValues(e) {
+    this._existingValues = e;
+  }
   /**
    * Clones the property data.
    * @param {UmbPropertyValueDataPotentiallyWithEditorAlias} propertyTypes - Data about the properties to make a preset for.
+   * @param createArgs
    * @returns {Promise<UmbPropertyValueDataPotentiallyWithEditorAlias>} - A promise that resolves to the cloned property data.
    */
-  async create(e) {
-    const r = (await Promise.all(e.map(this.#e))).flatMap((s) => s);
+  async create(e, t) {
+    this.#e = {
+      entityType: t?.entityType ?? "needs to be parsed to the UmbPropertyValuePresetBuilderController, this is not present because of a custom legacy implementation",
+      entityUnique: t?.entityUnique ?? "needs to be parsed to the UmbPropertyValuePresetBuilderController, this is not present because of a custom legacy implementation",
+      entityTypeUnique: t?.entityTypeUnique
+    }, (!t?.entityUnique || !t?.entityType) && console.warn(
+      "entityUnique or entityType was not provided for UmbPropertyValuePresetBuilderController.create in the second argument. This will be required in v.17.0 and must be provided when calling create()."
+    );
+    const r = (await Promise.all(e.map(this.#t))).flatMap((a) => a);
     return this.destroy(), r;
   }
-  #e = async (e) => {
-    const t = e.propertyEditorSchemaAlias, r = e.propertyEditorUiAlias;
-    if (!r)
+  #t = async (e) => {
+    const t = e.propertyEditorSchemaAlias, s = e.propertyEditorUiAlias;
+    if (!s)
       throw new Error(`propertyEditorUiAlias was not defined in ${e}`);
-    let s;
-    t && r ? s = (l) => l.forPropertyEditorSchemaAlias === t || l.forPropertyEditorUiAlias === r : s = (l) => l.forPropertyEditorUiAlias === r;
-    const a = d.getByTypeAndFilter("propertyValuePreset", s), n = (await Promise.all(
+    let r;
+    t && s ? r = (n) => n.forPropertyEditorSchemaAlias === t || n.forPropertyEditorUiAlias === s : r = (n) => n.forPropertyEditorUiAlias === s;
+    const a = d.getByTypeAndFilter("propertyValuePreset", r), i = (await Promise.all(
       a.map(
-        (l) => f(this, l).then((u) => (u && (u.manifest = u), u))
+        (n) => c(this, n).then((u) => (u && (u.manifest = u), u))
       )
-    )).filter((l) => l !== void 0), o = await this._generatePropertyValues(n, e);
-    for (const l of n)
-      l.destroy();
+    )).filter((n) => n !== void 0), o = await this._generatePropertyValues(i, e);
+    for (const n of i)
+      n.destroy();
     return o;
   };
   async _generatePropertyValues(e, t) {
-    const r = await this._generatePropertyValue(e, t, E);
+    const s = {
+      value: this._existingValues?.find((a) => a.alias === t.alias)?.value
+    }, r = await this._generatePropertyValue(e, t, s);
     return r ? [r] : [];
   }
-  async _generatePropertyValue(e, t, r) {
-    let s;
-    for (const a of e) {
-      if (!a.processValue)
-        throw new Error(`'processValue()' method is not defined in the api: ${a.constructor.name}`);
-      s = await a.processValue(s, t.config, t.typeArgs, r);
+  async _generatePropertyValue(e, t, s) {
+    let r = s.value;
+    if (r === void 0) {
+      const a = {
+        ...this.#e,
+        alias: t.alias,
+        propertyEditorUiAlias: t.propertyEditorUiAlias,
+        propertyEditorSchemaAlias: t.propertyEditorSchemaAlias,
+        ...s
+      };
+      for (const i of e) {
+        if (!i.processValue)
+          throw new Error(`'processValue()' method is not defined in the api: ${i.constructor.name}`);
+        r = await i.processValue(r, t.config, t.typeArgs, a);
+      }
     }
-    if (s !== void 0)
+    if (r !== void 0)
       return t.propertyEditorSchemaAlias ? {
         editorAlias: t.propertyEditorSchemaAlias,
         alias: t.alias,
-        value: s
+        value: r
       } : {
         alias: t.alias,
-        value: s
+        value: r
       };
   }
 }
-class B extends p {
+class O extends V {
   #e = [];
   // Always declare the default segment (null)
   #t = [null];
+  // TODO: We properly need to break this, as Engage needs to control which Segments are available for each culture, maybe investigate the option to go about a new option to just parse options.? Break in v.17.0 [NL]
   setCultures(e) {
     this.#e = e;
   }
@@ -177,58 +217,76 @@ class B extends p {
     this.#t = [null, ...e];
   }
   async _generatePropertyValues(e, t) {
-    const r = [];
+    const s = [];
     if (t.typeArgs.variesBySegment && t.typeArgs.variesByCulture) {
       if (this.#e.length === 0)
         throw new Error("Cultures must be set when varying by culture.");
-      for (const s of this.#e)
+      for (const r of this.#e)
         for (const a of this.#t) {
-          const n = await this._generatePropertyValue(e, t, {
-            variantId: new c(s, a)
-          });
-          n && (n.culture = s, n.segment = a, r.push(n));
+          const i = await this._generatePropertyValue(
+            e,
+            t,
+            this.#r(t.alias, r, a)
+          );
+          i && (i.culture = r, i.segment = a, s.push(i));
         }
     } else if (t.typeArgs.variesByCulture) {
       if (this.#e.length === 0)
         throw new Error("Cultures must be set when varying by culture.");
-      for (const s of this.#e) {
-        const a = await this._generatePropertyValue(e, t, {
-          variantId: new c(s)
-        });
-        a && (a.culture = s, a.segment = null, r.push(a));
+      for (const r of this.#e) {
+        const a = await this._generatePropertyValue(
+          e,
+          t,
+          this.#r(t.alias, r, null)
+        );
+        a && (a.culture = r, a.segment = null, s.push(a));
       }
     } else if (t.typeArgs.variesBySegment)
-      for (const s of this.#t) {
-        const a = await this._generatePropertyValue(e, t, {
-          variantId: new c(null, s)
-        });
-        a && (a.culture = null, a.segment = s, r.push(a));
+      for (const r of this.#t) {
+        const a = await this._generatePropertyValue(
+          e,
+          t,
+          this.#r(t.alias, null, r)
+        );
+        a && (a.culture = null, a.segment = r, s.push(a));
       }
     else {
-      const s = await this._generatePropertyValue(e, t, {});
-      s && (s.culture = null, s.segment = null, r.push(s));
+      const r = await this._generatePropertyValue(
+        e,
+        t,
+        this.#r(t.alias, null, null)
+      );
+      r && (r.culture = null, r.segment = null, s.push(r));
     }
-    return r;
+    return s;
+  }
+  #r(e, t, s) {
+    const r = new A(t, s);
+    return {
+      variantId: r,
+      value: this._existingValues?.find((i) => i.alias === e && r.compare(i))?.value
+    };
   }
 }
 export {
-  O as UMB_NAMEABLE_PROPERTY_DATASET_CONTEXT,
-  S as UMB_PROPERTY_CONTEXT,
-  M as UMB_PROPERTY_DATASET_CONTEXT,
-  G as UMB_PROPERTY_HAS_VALUE_CONDITION_ALIAS,
-  b as UMB_UNSUPPORTED_EDITOR_SCHEMA_ALIASES,
-  $ as UMB_WRITABLE_PROPERTY_CONDITION_ALIAS,
-  T as UmbPropertyContext,
-  N as UmbPropertyDatasetContextBase,
-  D as UmbPropertyDatasetElement,
+  q as UMB_NAMEABLE_PROPERTY_DATASET_CONTEXT,
+  D as UMB_PROPERTY_CONTEXT,
+  y as UMB_PROPERTY_DATASET_CONTEXT,
+  X as UMB_PROPERTY_HAS_VALUE_CONDITION_ALIAS,
+  C as UMB_UNSUPPORTED_EDITOR_SCHEMA_ALIASES,
+  H as UMB_WRITABLE_PROPERTY_CONDITION_ALIAS,
+  N as UmbPropertyContext,
+  T as UmbPropertyDatasetContextBase,
+  F as UmbPropertyDatasetElement,
+  B as UmbPropertyDatasetPropertyValidator,
   L as UmbPropertyElement,
-  v as UmbPropertyGuardManager,
-  x as UmbPropertyLayoutElement,
-  C as UmbPropertyValueCloneController,
-  p as UmbPropertyValuePresetBuilderController,
-  B as UmbPropertyValuePresetVariantBuilderController,
-  F as UmbUnsupportedPropertyElement,
-  g as UmbVariantPropertyGuardManager,
-  Y as isNameablePropertyDatasetContext
+  R as UmbPropertyGuardManager,
+  Y as UmbPropertyLayoutElement,
+  I as UmbPropertyValueCloneController,
+  V as UmbPropertyValuePresetBuilderController,
+  O as UmbPropertyValuePresetVariantBuilderController,
+  k as UmbUnsupportedPropertyElement,
+  S as UmbVariantPropertyGuardManager,
+  $ as isNameablePropertyDatasetContext
 };
 //# sourceMappingURL=index.js.map

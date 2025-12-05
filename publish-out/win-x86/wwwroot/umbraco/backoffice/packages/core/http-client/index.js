@@ -1,5 +1,9 @@
-import { client as i } from "@umbraco-cms/backoffice/external/backend-api";
+import { client as t } from "@umbraco-cms/backoffice/external/backend-api";
+import { client as l } from "@umbraco-cms/backoffice/external/backend-api";
+t.setConfig({
+  credentials: "include"
+});
 export {
-  i as umbHttpClient
+  l as umbHttpClient
 };
 //# sourceMappingURL=index.js.map

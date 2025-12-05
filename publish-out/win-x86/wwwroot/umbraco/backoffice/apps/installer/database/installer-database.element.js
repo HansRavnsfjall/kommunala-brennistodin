@@ -7,7 +7,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 import { UMB_INSTALLER_CONTEXT } from '../installer.context.js';
 import { css, html, nothing, customElement, property, query, state } from '@umbraco-cms/backoffice/external/lit';
 import { InstallService } from '@umbraco-cms/backoffice/external/backend-api';
-import { UmbLitElement } from '@umbraco-cms/backoffice/lit-element';
+import { umbFocus, UmbLitElement } from '@umbraco-cms/backoffice/lit-element';
 import { tryExecute, UmbApiError } from '@umbraco-cms/backoffice/resources';
 let UmbInstallerDatabaseElement = class UmbInstallerDatabaseElement extends UmbLitElement {
     constructor() {
@@ -86,6 +86,7 @@ let UmbInstallerDatabaseElement = class UmbInstallerDatabaseElement extends UmbL
 		<uui-form-layout-item>
 			<uui-label for="server" slot="label" required>Server address</uui-label>
 			<uui-input
+				${umbFocus()}
 				type="text"
 				id="server"
 				name="server"
@@ -100,6 +101,7 @@ let UmbInstallerDatabaseElement = class UmbInstallerDatabaseElement extends UmbL
         this._renderDatabaseName = (value) => html ` <uui-form-layout-item>
 			<uui-label for="database-name" slot="label" required>Database Name</uui-label>
 			<uui-input
+				${umbFocus()}
 				type="text"
 				.value=${value}
 				id="database-name"
@@ -113,20 +115,8 @@ let UmbInstallerDatabaseElement = class UmbInstallerDatabaseElement extends UmbL
         this._renderCredentials = () => html `
 		<h2 class="uui-h4">Credentials</h2>
 		<hr />
-		<uui-form-layout-item>
-			<uui-checkbox
-				name="useIntegratedAuthentication"
-				label="Use integrated authentication"
-				@change=${this._handleChange}
-				.checked=${this.databaseFormData.useIntegratedAuthentication || false}></uui-checkbox>
-		</uui-form-layout-item>
-		<uui-form-layout-item>
-			<uui-checkbox
-				name="trustServerCertificate"
-				label="Trust the database certificate"
-				@change=${this._handleChange}
-				.checked=${this.databaseFormData.trustServerCertificate || false}></uui-checkbox>
-		</uui-form-layout-item>
+		${this._renderIntegratedAuthentication()}
+		${this._renderTrustDatabaseCertificate()}
 
 			${!this.databaseFormData.useIntegratedAuthentication
             ? html ` <uui-form-layout-item>
@@ -283,6 +273,34 @@ let UmbInstallerDatabaseElement = class UmbInstallerDatabaseElement extends UmbL
             result.push(this._renderCredentials());
         }
         return result;
+    }
+    _renderIntegratedAuthentication() {
+        if (this._selectedDatabase?.supportsIntegratedAuthentication) {
+            return html `<uui-form-layout-item>
+				<uui-checkbox
+					name="useIntegratedAuthentication"
+					label="Use integrated authentication"
+					@change=${this._handleChange}
+					.checked=${this.databaseFormData.useIntegratedAuthentication || false}></uui-checkbox>
+			</uui-form-layout-item>`;
+        }
+        else {
+            return null;
+        }
+    }
+    _renderTrustDatabaseCertificate() {
+        if (this._selectedDatabase?.supportsTrustServerCertificate) {
+            return html `<uui-form-layout-item>
+				<uui-checkbox
+					name="trustServerCertificate"
+					label="Trust the database certificate"
+					@change=${this._handleChange}
+					.checked=${this.databaseFormData.trustServerCertificate || false}></uui-checkbox>
+			</uui-form-layout-item>`;
+        }
+        else {
+            return null;
+        }
     }
     render() {
         return html ` <div id="container" class="uui-text" data-test="installer-database">

@@ -1,0 +1,135 @@
+@* /Views/Partials/Shared/_SearchSuggestForm.cshtml *@
+@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage
+@using Umbraco.Extensions
+@using Umbraco.Forms.Core.Services
+@using Umbraco.Forms.Web.Models
+@inject IFormService FormService
+
+@{
+    var formGuid = Guid.Parse("6a796bd7-5bd5-4fef-b57c-160bd7b89d80");
+    var form = FormService.Get(formGuid);
+}
+
+<section class="no-results py-5">
+    <div class="container text-center">
+        <h1 class="display-4 display-md-3 fw-semibold mb-4">
+            Tíanverri einki úrslit funnið
+        </h1>
+        <p class="lead mb-5 mx-auto no-results-lead">
+            Um tú hevur uppskot til onkran lut, sum tú heldur eigur at vera í Skiljivegleiðingini,
+            so ert tú vælkomin at skriva hann í teigin niðanfyri og senda til okkum
+        </p>
+        <div class="form-shell mx-auto">
+            @if (form != null)
+            {
+                @await Component.InvokeAsync("RenderForm", new { formId = form.Id })
+            }
+        </div>
+    </div>
+</section>
+
+<style>
+    /* --- Layout + typography to match the screenshot --- */
+    .no-results .no-results-lead {
+        max-width: 62rem;
+        line-height: 1.45;
+    }
+
+    /* Put the single text field and the submit button on one line,
+       with the button as a flush right block */
+    .no-results .form-shell {
+        max-width: 1040px;
+    }
+
+    /* Umbraco Forms general wrappers */
+    .no-results form.umbraco-forms-form {
+        display: flex;
+        align-items: stretch;
+        gap: 0;
+        flex-wrap: nowrap;
+    }
+
+    /* Hide the field label (we use placeholder) and remove default gaps */
+    .no-results .umbraco-forms-field,
+    .no-results .umbraco-forms-fieldset {
+        margin: 0;
+        padding: 0;
+        border: 0;
+        width: 100%;
+    }
+
+    .no-results .umbraco-forms-label {
+        display: none;
+    }
+
+    /* Make the text input huge and left half of the bar */
+    .no-results .umbraco-forms-form input[type="text"],
+    .no-results .umbraco-forms-form input[type="search"],
+    .no-results .umbraco-forms-form input[type="email"],
+    .no-results .umbraco-forms-form input[type="tel"] {
+        flex: 1 1 auto;
+        height: 76px;
+        font-size: 1.75rem; /* big placeholder like in the shot */
+        padding: 1rem 1.25rem;
+        border: 1px solid #D0D0D0;
+        border-right: 0; /* joined with the button */
+        border-radius: 0;
+        outline: none;
+        box-shadow: none;
+    }
+
+    .no-results .umbraco-forms-form input::placeholder {
+        color: #B3B3B3;
+    }
+
+    /* Submit button as solid green block on the right */
+    .no-results .umbraco-forms-form input[type="submit"],
+    .no-results .umbraco-forms-form button[type="submit"] {
+        flex: 0 0 260px; /* width of the right block */
+        height: 76px;
+        border-radius: 0;
+        border: 1px solid #D0D0D0;
+        border-left: 0; /* joins the input */
+        background: #4B6727; /* match your green */
+        color: #fff;
+        font-size: 2rem;
+        font-weight: 600;
+        line-height: 1;
+        letter-spacing: .01em;
+    }
+
+    /* Remove extra margins Umbraco Forms may add */
+    .no-results .umbraco-forms-container,
+    .no-results .umbraco-forms-form,
+    .no-results .umbraco-forms-form .umbraco-forms-field {
+        margin: 0 !important;
+    }
+
+    /* Validation message placement */
+    .no-results .umbraco-forms-validation-summary,
+    .no-results .umbraco-forms-field .field-validation-error {
+        text-align: left;
+        margin-top: .5rem;
+    }
+
+    /* Mobile: stack input and button */
+    @@media (max-width: 768px) {
+        .no-results form.umbraco-forms-form {
+            flex-direction: column;
+        }
+
+        .no-results .umbraco-forms-form input[type="text"],
+        .no-results .umbraco-forms-form input[type="search"],
+        .no-results .umbraco-forms-form input[type="email"],
+        .no-results .umbraco-forms-form input[type="tel"] {
+            border-right: 1px solid #D0D0D0;
+            margin-bottom: .75rem;
+        }
+
+        .no-results .umbraco-forms-form input[type="submit"],
+        .no-results .umbraco-forms-form button[type="submit"] {
+            flex-basis: auto;
+            width: 100%;
+        }
+    }
+</style>

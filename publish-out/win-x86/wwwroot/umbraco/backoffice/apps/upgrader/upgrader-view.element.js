@@ -15,7 +15,7 @@ let UmbUpgraderViewElement = class UmbUpgraderViewElement extends LitElement {
         this.fetching = false;
         this.upgrading = false;
         this.errorMessage = '';
-        this._handleSubmit = async (e) => {
+        this.#handleSubmit = async (e) => {
             e.preventDefault();
             this.dispatchEvent(new CustomEvent('onAuthorizeUpgrade', { detail: e, bubbles: true }));
         };
@@ -50,7 +50,7 @@ let UmbUpgraderViewElement = class UmbUpgraderViewElement extends LitElement {
 
 				<p>Simply click <strong>continue</strong> below to be guided through the rest of the upgrade.</p>
 
-				<form id="authorizeUpgradeForm" @submit=${this._handleSubmit}>
+				<form id="authorizeUpgradeForm" @submit=${this.#handleSubmit}>
 					<p>
 						<uui-button
 							data-test="continue-button"
@@ -75,6 +75,7 @@ let UmbUpgraderViewElement = class UmbUpgraderViewElement extends LitElement {
     render() {
         return html ` ${this.fetching ? html `<div class="center"><uui-loader></uui-loader></div>` : this._renderLayout()} `;
     }
+    #handleSubmit;
     static { this.styles = [
         css `
 			.center {

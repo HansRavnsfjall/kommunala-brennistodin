@@ -1,24 +1,24 @@
-import { U as oe } from "../modal-token-wEQqBBXI.js";
-import { U as re } from "../path-pattern.class-Dg95YGLM.js";
-import { U as ae } from "../manifests-CG-Q4ypE.js";
-import { c as St, a as Et, b as Ot } from "../manifests-CG-Q4ypE.js";
-import { UmbPickerInputContext as le } from "@umbraco-cms/backoffice/picker-input";
-import { html as a, css as b, property as f, state as h, customElement as _, nothing as E, repeat as pe, LitElement as ue, ref as he } from "@umbraco-cms/backoffice/external/lit";
-import { UmbLitElement as $ } from "@umbraco-cms/backoffice/lit-element";
-import { splitStringToArray as ce, aliasToPath as me } from "@umbraco-cms/backoffice/utils";
-import { UmbFormControlMixin as de } from "@umbraco-cms/backoffice/validation";
-import { UUIRefElement as H } from "@umbraco-cms/backoffice/external/uui";
-import { UmbElementMixin as be } from "@umbraco-cms/backoffice/element-api";
-import { UmbTextStyles as M } from "@umbraco-cms/backoffice/style";
-import { umbExtensionsRegistry as T } from "@umbraco-cms/backoffice/extension-registry";
-import { UmbExtensionsElementInitializer as fe, UmbExtensionsManifestInitializer as _e, createExtensionApi as ve, createExtensionElement as ye } from "@umbraco-cms/backoffice/extension-api";
-import { UMB_MARK_ATTRIBUTE_NAME as K } from "@umbraco-cms/backoffice/const";
-import { UmbContextToken as xe } from "@umbraco-cms/backoffice/context-api";
-import { UmbContextBase as ge } from "@umbraco-cms/backoffice/class-api";
-import { UmbBooleanState as we, UmbStringState as A, observeMultiple as Se } from "@umbraco-cms/backoffice/observable-api";
-import { UmbContextProxyController as Ee } from "@umbraco-cms/backoffice/context-proxy";
-import { UmbParentEntityContext as Oe } from "@umbraco-cms/backoffice/entity";
-const $e = new oe(
+import { U as se } from "../modal-token-wEQqBBXI.js";
+import { U as ne } from "../path-pattern.class-Dg95YGLM.js";
+import { U as oe, a as re } from "../manifests-DF6A9HCG.js";
+import { b as mt, c as dt } from "../manifests-DF6A9HCG.js";
+import { UmbPickerInputContext as ae } from "@umbraco-cms/backoffice/picker-input";
+import { html as h, css as g, property as v, state as d, customElement as w, nothing as O, repeat as le, ref as he } from "@umbraco-cms/backoffice/external/lit";
+import { UmbLitElement as C } from "@umbraco-cms/backoffice/lit-element";
+import { splitStringToArray as pe, aliasToPath as ue } from "@umbraco-cms/backoffice/utils";
+import { UmbFormControlMixin as ce } from "@umbraco-cms/backoffice/validation";
+import { UUIRefElement as q } from "@umbraco-cms/backoffice/external/uui";
+import { UmbElementMixin as me } from "@umbraco-cms/backoffice/element-api";
+import { UmbContextBase as W } from "@umbraco-cms/backoffice/class-api";
+import { UmbExtensionsApiInitializer as de, UmbExtensionsElementInitializer as be, UmbExtensionsManifestInitializer as _e, createExtensionApi as fe, createExtensionElement as ve } from "@umbraco-cms/backoffice/extension-api";
+import { umbExtensionsRegistry as A } from "@umbraco-cms/backoffice/extension-registry";
+import { UmbStringState as y, UmbBooleanState as xe, observeMultiple as ye } from "@umbraco-cms/backoffice/observable-api";
+import { UmbViewContext as ge } from "@umbraco-cms/backoffice/view";
+import { UmbTextStyles as D } from "@umbraco-cms/backoffice/style";
+import { UMB_MARK_ATTRIBUTE_NAME as k } from "@umbraco-cms/backoffice/const";
+import { UmbContextToken as we } from "@umbraco-cms/backoffice/context-api";
+import { UmbContextProxyController as Se } from "@umbraco-cms/backoffice/context-proxy";
+const Oe = new se(
   "Umb.Modal.SectionPicker",
   {
     modal: {
@@ -26,53 +26,53 @@ const $e = new oe(
       size: "small"
     }
   }
-), xt = new re("section/:sectionName");
-class Ce extends le {
+), pt = new ne("section/:sectionName");
+class Ce extends ae {
   constructor(t) {
-    super(t, ae, $e);
+    super(t, oe, Oe);
   }
 }
-var Pe = Object.defineProperty, Ue = Object.getOwnPropertyDescriptor, j = (e) => {
+var Ee = Object.defineProperty, Ue = Object.getOwnPropertyDescriptor, L = (e) => {
   throw TypeError(e);
-}, g = (e, t, s, n) => {
-  for (var i = n > 1 ? void 0 : n ? Ue(t, s) : t, o = e.length - 1, r; o >= 0; o--)
-    (r = e[o]) && (i = (n ? r(t, s, i) : r(i)) || i);
-  return n && i && Pe(t, s, i), i;
-}, Me = (e, t, s) => t.has(e) || j("Cannot " + s), p = (e, t, s) => (Me(e, t, "read from private field"), s ? s.call(e) : t.get(e)), Te = (e, t, s) => t.has(e) ? j("Cannot add the same private member more than once") : t instanceof WeakSet ? t.add(e) : t.set(e, s), l;
-let m = class extends de(
-  $
+}, x = (e, t, i, n) => {
+  for (var s = n > 1 ? void 0 : n ? Ue(t, i) : t, o = e.length - 1, r; o >= 0; o--)
+    (r = e[o]) && (s = (n ? r(t, i, s) : r(s)) || s);
+  return n && s && Ee(t, i, s), s;
+}, Me = (e, t, i) => t.has(e) || L("Cannot " + i), l = (e, t, i) => (Me(e, t, "read from private field"), i ? i.call(e) : t.get(e)), Pe = (e, t, i) => t.has(e) ? L("Cannot add the same private member more than once") : t instanceof WeakSet ? t.add(e) : t.set(e, i), a;
+let c = class extends ce(
+  C
 ) {
   constructor() {
-    super(), this.minMessage = "This field need more items", this.maxMessage = "This field exceeds the allowed amount of items", Te(this, l, new Ce(this)), this.addValidator(
+    super(), this.minMessage = "This field need more items", this.maxMessage = "This field exceeds the allowed amount of items", Pe(this, a, new Ce(this)), this.addValidator(
       "rangeUnderflow",
       () => this.minMessage,
-      () => !!this.min && p(this, l).getSelection().length < this.min
+      () => !!this.min && l(this, a).getSelection().length < this.min
     ), this.addValidator(
       "rangeOverflow",
       () => this.maxMessage,
-      () => !!this.max && p(this, l).getSelection().length > this.max
-    ), this.observe(p(this, l).selection, (e) => this.value = e.join(",")), this.observe(p(this, l).selectedItems, (e) => this._items = e);
+      () => !!this.max && l(this, a).getSelection().length > this.max
+    ), this.observe(l(this, a).selection, (e) => this.value = e.join(",")), this.observe(l(this, a).selectedItems, (e) => this._items = e);
   }
   set min(e) {
-    p(this, l).min = e;
+    l(this, a).min = e;
   }
   get min() {
-    return p(this, l).min;
+    return l(this, a).min;
   }
   set max(e) {
-    p(this, l).max = e;
+    l(this, a).max = e;
   }
   get max() {
-    return p(this, l).max;
+    return l(this, a).max;
   }
   set selection(e) {
-    p(this, l).setSelection(e);
+    l(this, a).setSelection(e);
   }
   get selection() {
-    return p(this, l).getSelection();
+    return l(this, a).getSelection();
   }
   set value(e) {
-    this.selection = ce(e);
+    this.selection = pe(e);
   }
   get value() {
     return this.selection.length > 0 ? this.selection.join(",") : void 0;
@@ -80,63 +80,63 @@ let m = class extends de(
   getFormElement() {
   }
   render() {
-    return a`
+    return h`
 			<uui-ref-list>${this._items?.map((e) => this._renderItem(e))}</uui-ref-list>
 			<uui-button
 				id="btn-add"
 				look="placeholder"
-				@click=${() => p(this, l).openPicker()}
+				@click=${() => l(this, a).openPicker()}
 				label=${this.localize.term("general_choose")}></uui-button>
 		`;
   }
   _renderItem(e) {
     if (e.unique)
-      return a` <umb-ref-section .item=${e}>
+      return h` <umb-ref-section .item=${e}>
 			<uui-action-bar slot="actions">
-				<uui-button @click=${() => p(this, l).requestRemoveItem(e.unique)} label="Remove ${e.name}"
+				<uui-button @click=${() => l(this, a).requestRemoveItem(e.unique)} label="Remove ${e.name}"
 					>Remove</uui-button
 				>
 			</uui-action-bar>
 		</umb-ref-section>`;
   }
 };
-l = /* @__PURE__ */ new WeakMap();
-m.styles = [
-  b`
+a = /* @__PURE__ */ new WeakMap();
+c.styles = [
+  g`
 			#btn-add {
 				width: 100%;
 			}
 		`
 ];
-g([
-  f({ type: Number })
-], m.prototype, "min", 1);
-g([
-  f({ type: String, attribute: "min-message" })
-], m.prototype, "minMessage", 2);
-g([
-  f({ type: Number })
-], m.prototype, "max", 1);
-g([
-  f({ type: String, attribute: "min-message" })
-], m.prototype, "maxMessage", 2);
-g([
-  f({ type: String })
-], m.prototype, "value", 1);
-g([
-  h()
-], m.prototype, "_items", 2);
-m = g([
-  _("umb-input-section")
-], m);
-var Ae = Object.defineProperty, Ie = Object.getOwnPropertyDescriptor, L = (e, t, s, n) => {
-  for (var i = n > 1 ? void 0 : n ? Ie(t, s) : t, o = e.length - 1, r; o >= 0; o--)
-    (r = e[o]) && (i = (n ? r(t, s, i) : r(i)) || i);
-  return n && i && Ae(t, s, i), i;
+x([
+  v({ type: Number })
+], c.prototype, "min", 1);
+x([
+  v({ type: String, attribute: "min-message" })
+], c.prototype, "minMessage", 2);
+x([
+  v({ type: Number })
+], c.prototype, "max", 1);
+x([
+  v({ type: String, attribute: "min-message" })
+], c.prototype, "maxMessage", 2);
+x([
+  v({ type: String })
+], c.prototype, "value", 1);
+x([
+  d()
+], c.prototype, "_items", 2);
+c = x([
+  w("umb-input-section")
+], c);
+var $e = Object.defineProperty, Ie = Object.getOwnPropertyDescriptor, G = (e, t, i, n) => {
+  for (var s = n > 1 ? void 0 : n ? Ie(t, i) : t, o = e.length - 1, r; o >= 0; o--)
+    (r = e[o]) && (s = (n ? r(t, i, s) : r(s)) || s);
+  return n && s && $e(t, i, s), s;
 };
-let U = class extends be(H) {
+let M = class extends me(q) {
   render() {
-    return a`
+    return h`
 			<div id="info">
 				<div id="name">${this.item?.meta.label ? this.localize.string(this.item.meta.label) : this.item?.name}</div>
 			</div>
@@ -145,35 +145,67 @@ let U = class extends be(H) {
 		`;
   }
 };
-U.styles = [
-  ...H.styles,
-  b`
+M.styles = [
+  ...q.styles,
+  g`
 			#name {
 				font-weight: 700;
 			}
 		`
 ];
-L([
-  f({ type: Object, attribute: !1 })
-], U.prototype, "item", 2);
-U = L([
-  _("umb-ref-section")
-], U);
-var ze = Object.defineProperty, De = Object.getOwnPropertyDescriptor, k = (e) => {
+G([
+  v({ type: Object, attribute: !1 })
+], M.prototype, "item", 2);
+M = G([
+  w("umb-ref-section")
+], M);
+class Te extends W {
+  constructor(t) {
+    super(t, re), this.#t = new y(void 0), this.#e = new y(void 0), this.#i = new y(void 0), this.alias = this.#t.asObservable(), this.pathname = this.#e.asObservable(), this.label = this.#i.asObservable(), this.#n = new ge(this, null), this.#o();
+  }
+  #t;
+  #e;
+  #i;
+  #n;
+  #s;
+  setManifest(t) {
+    this.#t.setValue(t?.alias), this.#e.setValue(t?.meta?.pathname);
+    const i = t ? t.meta?.label || t.name : void 0;
+    this.#i.setValue(i), this.#n.setTitle(i);
+  }
+  getPathname() {
+    return this.#e.getValue();
+  }
+  #o() {
+    this.#s && this.#s.destroy(), this.#s = new de(
+      this,
+      A,
+      "sectionContext",
+      [],
+      void 0
+    );
+  }
+}
+class Ae extends Te {
+  constructor(t) {
+    super(t);
+  }
+}
+var De = Object.defineProperty, Ne = Object.getOwnPropertyDescriptor, H = (e) => {
   throw TypeError(e);
-}, C = (e, t, s, n) => {
-  for (var i = n > 1 ? void 0 : n ? De(t, s) : t, o = e.length - 1, r; o >= 0; o--)
-    (r = e[o]) && (i = (n ? r(t, s, i) : r(i)) || i);
-  return n && i && ze(t, s, i), i;
-}, qe = (e, t, s) => t.has(e) || k("Cannot " + s), Re = (e, t, s) => t.has(e) ? k("Cannot add the same private member more than once") : t instanceof WeakSet ? t.add(e) : t.set(e, s), I = (e, t, s) => (qe(e, t, "access private method"), s), S, F, G, X;
-let y = class extends $ {
+}, E = (e, t, i, n) => {
+  for (var s = n > 1 ? void 0 : n ? Ne(t, i) : t, o = e.length - 1, r; o >= 0; o--)
+    (r = e[o]) && (s = (n ? r(t, i, s) : r(s)) || s);
+  return n && s && De(t, i, s), s;
+}, j = (e, t, i) => t.has(e) || H("Cannot " + i), Re = (e, t, i) => (j(e, t, "read from private field"), i ? i.call(e) : t.get(e)), z = (e, t, i) => t.has(e) ? H("Cannot add the same private member more than once") : t instanceof WeakSet ? t.add(e) : t.set(e, i), P = (e, t, i) => (j(e, t, "access private method"), i), $, S, F, K, X;
+let _ = class extends C {
   constructor() {
-    super(), Re(this, S), this._splitPanelPosition = "300px", new fe(this, T, "sectionSidebarApp", null, (t) => {
-      const s = this._sidebarApps;
+    super(), z(this, S), this._splitPanelPosition = "300px", z(this, $, new Ae(this)), new be(this, A, "sectionSidebarApp", null, (t) => {
+      const i = this._sidebarApps;
       t.forEach((n) => {
-        n.component?.setAttribute(K, "section-sidebar:" + n.manifest.alias);
-      }), this._sidebarApps = t, this.requestUpdate("_sidebarApps", s);
-    }), I(this, S, F).call(this);
+        n.component?.setAttribute(k, "section-sidebar:" + n.manifest.alias);
+      }), this._sidebarApps = t, this.requestUpdate("_sidebarApps", i);
+    }), P(this, S, F).call(this);
     const e = localStorage.getItem("umb-split-panel-position");
     e && (this._splitPanelPosition = e);
   }
@@ -182,67 +214,68 @@ let y = class extends $ {
   }
   set manifest(e) {
     const t = this._manifest;
-    t !== e && (this._manifest = e, this.requestUpdate("manifest", t));
+    t !== e && (this._manifest = e, Re(this, $).setManifest(e), this.requestUpdate("manifest", t));
   }
   render() {
-    return a`
+    return h`
 			<umb-split-panel
 				lock="start"
 				snap="300px"
-				@position-changed=${I(this, S, X)}
+				@position-changed=${P(this, S, X)}
 				.position=${this._splitPanelPosition}>
-				${this._sidebarApps && this._sidebarApps.length > 0 ? a`
+				${this._sidebarApps && this._sidebarApps.length > 0 ? h`
 							<!-- TODO: these extensions should be combined into one type: sectionSidebarApp with a "subtype" -->
 							<umb-section-sidebar slot="start">
-								${pe(
+								${le(
       this._sidebarApps,
       (e) => e.alias,
       (e) => e.component
     )}
 							</umb-section-sidebar>
-						` : E}
+						` : O}
 				<umb-section-main slot="end">
-					${this._routes && this._routes.length > 0 ? a`<umb-router-slot id="router-slot" .routes=${this._routes}></umb-router-slot>` : E}
+					${this._routes && this._routes.length > 0 ? h`<umb-router-slot id="router-slot" .routes=${this._routes}></umb-router-slot>` : O}
 					<slot></slot>
 				</umb-section-main>
 			</umb-split-panel>
 		`;
   }
 };
+$ = /* @__PURE__ */ new WeakMap();
 S = /* @__PURE__ */ new WeakSet();
 F = function() {
   new _e(
     this,
-    T,
+    A,
     "sectionRoute",
     null,
     async (e) => {
-      const t = e.filter((i) => i.manifest.element);
-      if (e.filter((i) => !i.manifest.element).length > 0)
+      const t = e.filter((s) => s.manifest.element);
+      if (e.filter((s) => !s.manifest.element).length > 0)
         throw new Error("sectionRoute extensions must have an element");
       const n = await Promise.all(
-        t.map(async (i) => {
-          const o = await ve(this, i.manifest);
-          return o && (o.manifest = i.manifest), {
-            path: o?.getPath?.() || i.manifest.meta?.path || me(i.manifest.alias),
-            component: () => ye(i.manifest),
-            setup: (r, ne) => {
-              o?.setup?.(r, ne);
+        t.map(async (s) => {
+          const o = await fe(this, s.manifest);
+          return o && (o.manifest = s.manifest), {
+            path: o?.getPath?.() || s.manifest.meta?.path || ue(s.manifest.alias),
+            component: () => ve(s.manifest),
+            setup: (r, ie) => {
+              o?.setup?.(r, ie);
             }
           };
         })
       );
-      I(this, S, G).call(this, n);
+      P(this, S, K).call(this, n);
     },
     "umbRouteExtensionApisInitializer"
   );
 };
-G = function(e) {
+K = function(e) {
   this._routes = [
     ...e,
     {
       path: "**",
-      component: () => import("../section-main-views.element-C4OUdIT5.js"),
+      component: () => import("../section-main-views.element-BH3UTh7O.js"),
       setup: (t) => {
         t.sectionAlias = this.manifest?.alias;
       }
@@ -253,9 +286,9 @@ X = function(e) {
   const t = e.detail.position;
   localStorage.setItem("umb-split-panel-position", t.toString());
 };
-y.styles = [
-  M,
-  b`
+_.styles = [
+  D,
+  g`
 			:host {
 				flex: 1 1 auto;
 				height: 100%;
@@ -275,38 +308,38 @@ y.styles = [
 			}
 		`
 ];
-C([
-  f({ type: Object, attribute: !1 })
-], y.prototype, "manifest", 1);
-C([
-  h()
-], y.prototype, "_routes", 2);
-C([
-  h()
-], y.prototype, "_sidebarApps", 2);
-C([
-  h()
-], y.prototype, "_splitPanelPosition", 2);
-y = C([
-  _("umb-section-default")
-], y);
-var Ne = Object.getOwnPropertyDescriptor, We = (e, t, s, n) => {
-  for (var i = n > 1 ? void 0 : n ? Ne(t, s) : t, o = e.length - 1, r; o >= 0; o--)
-    (r = e[o]) && (i = r(i) || i);
-  return i;
+E([
+  v({ type: Object, attribute: !1 })
+], _.prototype, "manifest", 1);
+E([
+  d()
+], _.prototype, "_routes", 2);
+E([
+  d()
+], _.prototype, "_sidebarApps", 2);
+E([
+  d()
+], _.prototype, "_splitPanelPosition", 2);
+_ = E([
+  w("umb-section-default")
+], _);
+var Ve = Object.getOwnPropertyDescriptor, ze = (e, t, i, n) => {
+  for (var s = n > 1 ? void 0 : n ? Ve(t, i) : t, o = e.length - 1, r; o >= 0; o--)
+    (r = e[o]) && (s = r(s) || s);
+  return s;
 };
-let z = class extends ue {
+let I = class extends C {
   render() {
-    return a`
+    return h`
 			<main>
 				<slot></slot>
 			</main>
 		`;
   }
 };
-z.styles = [
-  M,
-  b`
+I.styles = [
+  D,
+  g`
 			:host {
 				flex: 1 1 auto;
 				height: 100%;
@@ -321,48 +354,48 @@ z.styles = [
 			}
 		`
 ];
-z = We([
-  _("umb-section-main")
-], z);
-class Be extends ge {
+I = ze([
+  w("umb-section-main")
+], I);
+class Be extends W {
   constructor(t) {
-    super(t, R), this.#e = new we(!1), this.contextMenuIsOpen = this.#e.asObservable(), this.#t = new A(void 0), this.entityType = this.#t.asObservable(), this.#i = new A(void 0), this.unique = this.#i.asObservable(), this.#s = new A(void 0), this.headline = this.#s.asObservable(), this.#n = void 0;
+    super(t, N), this.#t = new xe(!1), this.contextMenuIsOpen = this.#t.asObservable(), this.#e = new y(void 0), this.entityType = this.#e.asObservable(), this.#i = new y(void 0), this.unique = this.#i.asObservable(), this.#n = new y(void 0), this.headline = this.#n.asObservable(), this.#s = void 0;
   }
-  #e;
   #t;
+  #e;
   #i;
-  #s;
   #n;
-  toggleContextMenu(t, s) {
-    this.openContextMenu(t, s);
+  #s;
+  toggleContextMenu(t, i) {
+    this.openContextMenu(t, i);
   }
   // TODO: we wont get notified about tree item name changes because we don't have a subscription
   // we need to figure out how we best can handle this when we only know the entity and unique id
-  openContextMenu(t, s) {
-    this.#t.setValue(s.entityType), this.#i.setValue(s.unique), this.#s.setValue(s.headline), this.#e.setValue(!0), this.#n = t;
+  openContextMenu(t, i) {
+    this.#e.setValue(i.entityType), this.#i.setValue(i.unique), this.#n.setValue(i.headline), this.#t.setValue(!0), this.#s = t;
   }
   closeContextMenu() {
-    this.#e.setValue(!1), this.#t.setValue(void 0), this.#i.setValue(void 0), this.#s.setValue(void 0), this.#n = void 0;
+    this.#t.setValue(!1), this.#e.setValue(void 0), this.#i.setValue(void 0), this.#n.setValue(void 0), this.#s = void 0;
   }
   getContextElement() {
-    return this.#n;
+    return this.#s;
   }
 }
-const R = new xe("UmbSectionSidebarContext");
-var Ve = Object.getOwnPropertyDescriptor, He = (e, t, s, n) => {
-  for (var i = n > 1 ? void 0 : n ? Ve(t, s) : t, o = e.length - 1, r; o >= 0; o--)
-    (r = e[o]) && (i = r(i) || i);
-  return i;
+const N = new we("UmbSectionSidebarContext");
+var qe = Object.getOwnPropertyDescriptor, We = (e, t, i, n) => {
+  for (var s = n > 1 ? void 0 : n ? qe(t, i) : t, o = e.length - 1, r; o >= 0; o--)
+    (r = e[o]) && (s = r(s) || s);
+  return s;
 };
-let D = class extends $ {
+let T = class extends C {
   constructor() {
     super(), new Be(this);
   }
   firstUpdated(e) {
-    super.firstUpdated(e), this.setAttribute(K, "section-sidebar");
+    super.firstUpdated(e), this.setAttribute(k, "section-sidebar");
   }
   render() {
-    return a`
+    return h`
 			<umb-section-sidebar-context-menu>
 				<uui-scroll-container id="scroll-container">
 					<slot></slot>
@@ -371,8 +404,8 @@ let D = class extends $ {
 		`;
   }
 };
-D.styles = [
-  b`
+T.styles = [
+  g`
 			:host {
 				flex: 0 0 var(--umb-section-sidebar-width);
 				background-color: var(--uui-color-surface);
@@ -392,75 +425,75 @@ D.styles = [
 			}
 		`
 ];
-D = He([
-  _("umb-section-sidebar")
-], D);
-var Ke = Object.defineProperty, je = Object.getOwnPropertyDescriptor, Y = (e) => {
+T = We([
+  w("umb-section-sidebar")
+], T);
+var ke = Object.defineProperty, Le = Object.getOwnPropertyDescriptor, Y = (e) => {
   throw TypeError(e);
-}, P = (e, t, s, n) => {
-  for (var i = n > 1 ? void 0 : n ? je(t, s) : t, o = e.length - 1, r; o >= 0; o--)
-    (r = e[o]) && (i = (n ? r(t, s, i) : r(i)) || i);
-  return n && i && Ke(t, s, i), i;
-}, N = (e, t, s) => t.has(e) || Y("Cannot " + s), d = (e, t, s) => (N(e, t, "read from private field"), t.get(e)), V = (e, t, s) => t.has(e) ? Y("Cannot add the same private member more than once") : t instanceof WeakSet ? t.add(e) : t.set(e, s), Le = (e, t, s, n) => (N(e, t, "write to private field"), t.set(e, s), s), v = (e, t, s) => (N(e, t, "access private method"), s), u, c, J, W, Q, Z, ee, te;
-let x = class extends $ {
+}, U = (e, t, i, n) => {
+  for (var s = n > 1 ? void 0 : n ? Le(t, i) : t, o = e.length - 1, r; o >= 0; o--)
+    (r = e[o]) && (s = (n ? r(t, i, s) : r(s)) || s);
+  return n && s && ke(t, i, s), s;
+}, R = (e, t, i) => t.has(e) || Y("Cannot " + i), m = (e, t, i) => (R(e, t, "read from private field"), t.get(e)), B = (e, t, i) => t.has(e) ? Y("Cannot add the same private member more than once") : t instanceof WeakSet ? t.add(e) : t.set(e, i), Ge = (e, t, i, n) => (R(e, t, "write to private field"), t.set(e, i), i), b = (e, t, i) => (R(e, t, "access private method"), i), p, u, J, V, Q, Z, ee, te;
+let f = class extends C {
   constructor() {
-    super(), V(this, c), V(this, u), this._isOpen = !1, this.consumeContext(R, (e) => {
-      Le(this, u, e), v(this, c, J).call(this), d(this, u) ? (this.observe(d(this, u).contextMenuIsOpen, (t) => this._isOpen = t, "_observeContextMenuIsOpen"), this.observe(d(this, u).headline, (t) => this._headline = t, "_observeHeadline")) : (this.removeUmbControllerByAlias("_observeContextMenuIsOpen"), this.removeUmbControllerByAlias("_observeHeadline"));
+    super(), B(this, u), B(this, p), this._isOpen = !1, this.consumeContext(N, (e) => {
+      Ge(this, p, e), b(this, u, J).call(this), m(this, p) ? (this.observe(m(this, p).contextMenuIsOpen, (t) => this._isOpen = t, "_observeContextMenuIsOpen"), this.observe(m(this, p).headline, (t) => this._headline = t, "_observeHeadline")) : (this.removeUmbControllerByAlias("_observeContextMenuIsOpen"), this.removeUmbControllerByAlias("_observeHeadline"));
     });
   }
   render() {
-    return a`
-			${v(this, c, ee).call(this)}
+    return h`
+			${b(this, u, ee).call(this)}
 			<div id="relative-wrapper">
 				<slot></slot>
-				${v(this, c, te).call(this)}
+				${b(this, u, te).call(this)}
 			</div>
 		`;
   }
 };
-u = /* @__PURE__ */ new WeakMap();
-c = /* @__PURE__ */ new WeakSet();
+p = /* @__PURE__ */ new WeakMap();
+u = /* @__PURE__ */ new WeakSet();
 J = function() {
-  if (!d(this, u)) {
+  if (!m(this, p)) {
     this.removeUmbControllerByAlias("_observeEntityModel");
     return;
   }
   this.observe(
-    Se([d(this, u).unique, d(this, u).entityType]),
+    ye([m(this, p).unique, m(this, p).entityType]),
     (e) => {
       this._unique = e[0], this._entityType = e[1];
     },
     "_observeEntityModel"
   );
 };
-W = function() {
-  d(this, u)?.closeContextMenu();
+V = function() {
+  m(this, p)?.closeContextMenu();
 };
 Q = function(e) {
-  e.stopPropagation(), v(this, c, W).call(this);
+  e.stopPropagation(), b(this, u, V).call(this);
 };
 Z = function(e) {
-  new Ee(
+  new Se(
     this,
     e,
-    () => d(this, u)?.getContextElement()
-  ).setIgnoreContextAliases([R.contextAlias]);
+    () => m(this, p)?.getContextElement()
+  ).setIgnoreContextAliases([N.contextAlias]);
 };
 ee = function() {
-  return this._isOpen ? a`<div id="backdrop" @click=${v(this, c, W)}></div>` : E;
+  return this._isOpen ? h`<div id="backdrop" @click=${b(this, u, V)}></div>` : O;
 };
 te = function() {
-  return this._isOpen && this._unique !== void 0 && this._entityType ? a`<uui-scroll-container id="action-modal" ${he(v(this, c, Z))}>
-					${this._headline ? a`<h3>${this.localize.string(this._headline)}</h3>` : E}
+  return this._isOpen && this._unique !== void 0 && this._entityType ? h`<uui-scroll-container id="action-modal" ${he(b(this, u, Z))}>
+					${this._headline ? h`<h3>${this.localize.string(this._headline)}</h3>` : O}
 					<umb-entity-action-list
-						@action-executed=${v(this, c, Q)}
+						@action-executed=${b(this, u, Q)}
 						.entityType=${this._entityType}
 						.unique=${this._unique}></umb-entity-action-list>
-				</uui-scroll-container>` : E;
+				</uui-scroll-container>` : O;
 };
-x.styles = [
-  M,
-  b`
+f.styles = [
+  D,
+  g`
 			:host {
 				display: block;
 				width: 100%;
@@ -511,148 +544,38 @@ x.styles = [
 			}
 		`
 ];
-P([
-  h()
-], x.prototype, "_isOpen", 2);
-P([
-  h()
-], x.prototype, "_entityType", 2);
-P([
-  h()
-], x.prototype, "_unique", 2);
-P([
-  h()
-], x.prototype, "_headline", 2);
-x = P([
-  _("umb-section-sidebar-context-menu")
-], x);
-var ke = Object.defineProperty, Fe = Object.getOwnPropertyDescriptor, ie = (e, t, s, n) => {
-  for (var i = n > 1 ? void 0 : n ? Fe(t, s) : t, o = e.length - 1, r; o >= 0; o--)
-    (r = e[o]) && (i = (n ? r(t, s, i) : r(i)) || i);
-  return n && i && ke(t, s, i), i;
-};
-const Ge = {
-  type: "kind",
-  alias: "Umb.Kind.SectionSidebarAppMenu",
-  matchKind: "menu",
-  matchType: "sectionSidebarApp",
-  manifest: {
-    type: "sectionSidebarApp",
-    elementName: "umb-section-sidebar-menu"
-  }
-};
-T.register(Ge);
-let w = class extends $ {
-  renderHeader() {
-    return a`<h3>${this.localize.string(this.manifest?.meta?.label ?? "")}</h3>`;
-  }
-  render() {
-    return a`
-			${this.renderHeader()}
-			<umb-extension-slot
-				type="menu"
-				.filter="${(e) => e.alias === this.manifest?.meta?.menu}"
-				default-element="umb-menu"></umb-extension-slot>
-		`;
-  }
-};
-w.styles = [
-  M,
-  b`
-			h3 {
-				margin: var(--uui-size-5) 0;
-				padding: var(--uui-size-4) var(--uui-size-8);
-				font-size: 14px;
-			}
-		`
-];
-ie([
-  f({ type: Object, attribute: !1 })
-], w.prototype, "manifest", 2);
-w = ie([
-  _("umb-section-sidebar-menu")
-], w);
-var Xe = Object.defineProperty, Ye = Object.getOwnPropertyDescriptor, se = (e) => {
-  throw TypeError(e);
-}, B = (e, t, s, n) => {
-  for (var i = n > 1 ? void 0 : n ? Ye(t, s) : t, o = e.length - 1, r; o >= 0; o--)
-    (r = e[o]) && (i = (n ? r(t, s, i) : r(i)) || i);
-  return n && i && Xe(t, s, i), i;
-}, Je = (e, t, s) => t.has(e) || se("Cannot " + s), Qe = (e, t, s) => (Je(e, t, "read from private field"), s ? s.call(e) : t.get(e)), Ze = (e, t, s) => t.has(e) ? se("Cannot add the same private member more than once") : t instanceof WeakSet ? t.add(e) : t.set(e, s), q;
-const et = {
-  type: "kind",
-  alias: "Umb.Kind.SectionSidebarAppMenuWithEntityActions",
-  matchKind: "menuWithEntityActions",
-  matchType: "sectionSidebarApp",
-  manifest: {
-    type: "sectionSidebarApp",
-    elementName: "umb-section-sidebar-menu-with-entity-actions"
-  }
-};
-T.register(et);
-let O = class extends w {
-  constructor() {
-    super(...arguments), this._unique = null, Ze(this, q, new Oe(this));
-  }
-  updated(e) {
-    if (e.has("manifest")) {
-      const t = this.manifest?.meta.entityType;
-      Qe(this, q).setParent(t ? { unique: this._unique, entityType: t } : void 0);
-    }
-  }
-  renderHeader() {
-    return a`
-			<div id="header">
-				<h3>${this.localize.string(this.manifest?.meta?.label ?? "")}</h3>
-				<umb-entity-actions-bundle
-					slot="actions"
-					.unique=${this._unique}
-					.entityType=${this.manifest?.meta.entityType}
-					.label=${this.localize.term("actions_viewActionsFor", [this.manifest?.meta.label])}>
-				</umb-entity-actions-bundle>
-			</div>
-		`;
-  }
-};
-q = /* @__PURE__ */ new WeakMap();
-O.styles = [
-  ...w.styles,
-  b`
-			#header {
-				display: flex;
-				flex-direction: row;
-				align-items: center;
-			}
-			#header > :first-child {
-				flex-grow: 1;
-			}
-		`
-];
-B([
-  h()
-], O.prototype, "_unique", 2);
-B([
-  h()
-], O.prototype, "_entityType", 2);
-O = B([
-  _("umb-section-sidebar-menu-with-entity-actions")
-], O);
+U([
+  d()
+], f.prototype, "_isOpen", 2);
+U([
+  d()
+], f.prototype, "_entityType", 2);
+U([
+  d()
+], f.prototype, "_unique", 2);
+U([
+  d()
+], f.prototype, "_headline", 2);
+f = U([
+  w("umb-section-sidebar-context-menu")
+], f);
 export {
-  St as UMB_SECTION_CONTEXT,
-  ae as UMB_SECTION_ITEM_REPOSITORY_ALIAS,
-  xt as UMB_SECTION_PATH_PATTERN,
-  $e as UMB_SECTION_PICKER_MODAL,
-  R as UMB_SECTION_SIDEBAR_CONTEXT,
-  Et as UMB_SECTION_USER_PERMISSION_CONDITION_ALIAS,
-  m as UmbInputSectionElement,
-  U as UmbRefSectionElement,
-  Ot as UmbSectionContext,
-  y as UmbSectionDefaultElement,
-  z as UmbSectionMainElement,
+  mt as UMB_SECTION_ALIAS_CONDITION_ALIAS,
+  re as UMB_SECTION_CONTEXT,
+  oe as UMB_SECTION_ITEM_REPOSITORY_ALIAS,
+  pt as UMB_SECTION_PATH_PATTERN,
+  Oe as UMB_SECTION_PICKER_MODAL,
+  N as UMB_SECTION_SIDEBAR_CONTEXT,
+  dt as UMB_SECTION_USER_PERMISSION_CONDITION_ALIAS,
+  _ as UmbDefaultSectionElement,
+  c as UmbInputSectionElement,
+  M as UmbRefSectionElement,
+  Te as UmbSectionContext,
+  _ as UmbSectionDefaultElement,
+  I as UmbSectionMainElement,
   Be as UmbSectionSidebarContext,
-  x as UmbSectionSidebarContextMenuElement,
-  D as UmbSectionSidebarElement,
-  w as UmbSectionSidebarMenuElement,
-  O as UmbSectionSidebarMenuWithEntityActionsElement
+  f as UmbSectionSidebarContextMenuElement,
+  T as UmbSectionSidebarElement,
+  _ as element
 };
 //# sourceMappingURL=index.js.map

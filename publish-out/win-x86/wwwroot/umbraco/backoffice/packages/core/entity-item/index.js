@@ -2,7 +2,7 @@ import { batchTryExecute as o, tryExecute as n, UmbError as l } from "@umbraco-c
 import { batchArray as u } from "@umbraco-cms/backoffice/utils";
 import { umbPeekError as h } from "@umbraco-cms/backoffice/notification";
 import { UmbControllerBase as c } from "@umbraco-cms/backoffice/class-api";
-import { U, U as g } from "../entity-item-ref.element-D7uqzGIJ.js";
+import { U, U as g } from "../entity-item-ref.element-vN4hOP7r.js";
 class E extends c {
   #e;
   #t;

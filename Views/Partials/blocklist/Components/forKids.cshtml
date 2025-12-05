@@ -1,0 +1,100 @@
+﻿@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<Umbraco.Cms.Core.Models.Blocks.BlockListItem>
+@using System.Globalization
+@using Umbraco.Cms.Core.Models
+@using Umbraco.Cms.Core.Models.Blocks
+@using Umbraco.Cms.Core.Strings
+@using Umbraco.Extensions
+
+@{
+    var culture = CultureInfo.CurrentUICulture?.Name ?? "";
+    var el = Model?.Content;
+
+    // Section title ABOVE the two columns
+    var sectionTitle = el?.Value<string>("yvirskrift", culture: culture, fallback: Fallback.ToLanguage) ?? "";
+
+    // Inner items
+    var items = el?.Value<IEnumerable<BlockListItem>>("boxes", culture: culture, fallback: Fallback.ToLanguage)
+             ?? Enumerable.Empty<BlockListItem>();
+
+    var list = items.ToList();
+    if (!list.Any()) { return; }
+}
+
+<section class="kids-material-section py-5">
+  <div class="container editor">
+
+    @* SECTION TITLE *@
+    @if (!string.IsNullOrWhiteSpace(sectionTitle))
+    {
+        <h2 class="kids-material-title text-center mb-5">@sectionTitle</h2>
+    }
+
+    <div class="row g-4">
+
+      @foreach (var b in list)
+      {
+          var c = b.Content;
+
+          // Fields
+          var title = c?.Value<string>("yvirskrift", culture: culture, fallback: Fallback.ToLanguage) ?? "";
+          IHtmlEncodedString? body = c?.Value<IHtmlEncodedString?>("tekstur", culture: culture, fallback: Fallback.ToLanguage);
+          MediaWithCrops? image = c?.Value<MediaWithCrops?>("mynd", culture: culture, fallback: Fallback.ToLanguage);
+
+          // Image URL
+          var imgUrl = image?.GetCropUrl(width: 1200, useCropDimensions: false) ?? "";
+
+          // ALT fallback
+          string alt = title;
+          try
+          {
+              var maybeNameProp = image?.GetType().GetProperty("Name");
+              if (maybeNameProp is not null)
+              {
+                  var maybeName = maybeNameProp.GetValue(image) as string;
+                  if (!string.IsNullOrWhiteSpace(maybeName)) alt = maybeName!;
+              }
+          }
+          catch { }
+
+          // Link (single or first in multi)
+          Link? link = c?.Value<Link>("leinki", culture: culture, fallback: Fallback.ToLanguage);
+          if (link == null)
+          {
+              var lst = c?.Value<IEnumerable<Link>>("leinki", culture: culture, fallback: Fallback.ToLanguage);
+              link = lst?.FirstOrDefault();
+          }
+          var href = link?.Url ?? "#";
+      <div class="col-12 col-md-6">
+
+        @* WHOLE COLUMN IS A CLICKABLE CARD *@
+        <a href="@href" class="kids-material-card d-block h-100 text-decoration-none">
+
+          @if (!string.IsNullOrWhiteSpace(imgUrl))
+          {
+            <div class="kids-material-image-wrapper">
+              <img src="@imgUrl"
+                   alt="@alt"
+                   class="kids-material-image img-fluid"
+                   loading="lazy"
+                   decoding="async" />
+            </div>
+          }
+
+          <div class="kids-material-body p-4">
+            @if (!string.IsNullOrWhiteSpace(title))
+            {
+                <h3 class="kids-material-heading mb-2">@title</h3>
+            }
+            @if (body is not null)
+            {
+                <p class="kids-material-text mb-0">@body</p>
+            }
+          </div>
+
+        </a>
+      </div>
+      }
+
+    </div>
+  </div>
+</section>

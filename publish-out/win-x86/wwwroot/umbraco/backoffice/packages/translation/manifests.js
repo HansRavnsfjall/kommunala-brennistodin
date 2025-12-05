@@ -1,9 +1,9 @@
-import { U as n, c as a } from "./constants-DOfoF1oN.js";
-import { UMB_SECTION_USER_PERMISSION_CONDITION_ALIAS as t } from "@umbraco-cms/backoffice/section";
-const i = [
+import { U as a, c as n } from "./constants-DOfoF1oN.js";
+import { UMB_SECTION_USER_PERMISSION_CONDITION_ALIAS as t, UMB_SECTION_ALIAS_CONDITION_ALIAS as i } from "@umbraco-cms/backoffice/section";
+const e = [
   {
     type: "section",
-    alias: n,
+    alias: a,
     name: "Translation Section",
     weight: 400,
     meta: {
@@ -13,14 +13,14 @@ const i = [
     conditions: [
       {
         alias: t,
-        match: n
+        match: a
       }
     ]
   }
-], e = [
+], s = [
   {
     type: "menu",
-    alias: a,
+    alias: n,
     name: "Translation Menu"
   },
   {
@@ -32,19 +32,19 @@ const i = [
     meta: {
       label: "#general_dictionary",
       // We are using dictionary here on purpose until dictionary has its own menu item.
-      menu: a,
+      menu: n,
       entityType: "dictionary-root"
       // hard-coded on purpose to avoid circular dependency. We need another way to add actions to a menu kind.
     },
     conditions: [
       {
-        alias: "Umb.Condition.SectionAlias",
-        match: n
+        alias: i,
+        match: a
       }
     ]
   }
-], m = [...i, ...e];
+], r = [...e, ...s];
 export {
-  m as manifests
+  r as manifests
 };
 //# sourceMappingURL=manifests.js.map

@@ -2,7 +2,7 @@ const i = {
   type: "propertyEditorUi",
   alias: "Umb.PropertyEditorUi.CodeEditor",
   name: "Code Editor Property Editor UI",
-  element: () => import("./property-editor-ui-code-editor.element-C-OfZjZP.js"),
+  element: () => import("./property-editor-ui-code-editor.element-DgcBJFj6.js"),
   meta: {
     label: "Code Editor",
     propertyEditorSchemaAlias: "Umbraco.Plain.String",

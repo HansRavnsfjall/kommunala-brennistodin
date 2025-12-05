@@ -1,0 +1,201 @@
+﻿@* Block: hagtol (fixed, no culture) *@
+@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<Umbraco.Cms.Core.Models.Blocks.BlockListItem>
+@using Umbraco.Cms.Core.Models
+@using Umbraco.Cms.Core.Models.Blocks
+@using Umbraco.Cms.Core.Models.PublishedContent
+@using Umbraco.Extensions
+
+@{
+    var el = Model?.Content;
+    if (el is null) { return; }
+
+    // Heading (no culture)
+    var heading = el.Value<string>("yvirskrift");
+    if (string.IsNullOrWhiteSpace(heading)) heading = "Hagtøl";
+
+    // List (no culture)
+    var list = el.Value<BlockListModel>("hagtolList")
+              ?? new BlockListModel(new List<BlockListItem>());
+
+    // Read-more link (no culture)
+    var readMoreLink = el.Value<Link>("leinkiLesMeira");
+
+    // Fallback URL
+    var linkUrl = readMoreLink?.Url ?? "/um-okkum/hagtoel-og-politikkir/hagtoel/";
+}
+
+<style>
+  .front-hagtol .stat img { max-width: 200px; height: auto; }
+</style>
+
+<section class="py-2 py-lg-4 front-hagtol">
+  <div class="container stats">
+    <div class="row">
+      <div class="col-12">
+        <h5>@heading</h5>
+      </div>
+    </div>
+
+    @if (list.Any())
+    {
+      <div class="row text-center gy-4 gy-md-0 haglis-row">
+        @foreach (var block in list)
+        {
+            var item = block?.Content;
+            if (item is null) { continue; }
+
+            var text = item.Value<string>("tekstur") ?? string.Empty;
+              var tal = item.Value<string>("tal") ?? string.Empty;
+                var eind = item.Value<string>("eind") ?? string.Empty;
+            var ikon = item.Value<MediaWithCrops?>("ikon");
+
+            var rawUrl = ikon?.Url();
+            var alt = string.IsNullOrWhiteSpace(text) ? heading : text;
+
+            var ext = !string.IsNullOrWhiteSpace(rawUrl)
+                ? (System.IO.Path.GetExtension(rawUrl) ?? string.Empty).ToLowerInvariant()
+                : string.Empty;
+
+            bool isSvg = ext == ".svg";
+            bool isGif = ext == ".gif";
+
+            var imgUrl = rawUrl;
+
+            if (!string.IsNullOrWhiteSpace(rawUrl) && !isSvg && !isGif)
+            {
+                imgUrl = ikon!.GetCropUrl(
+                    width: 200,
+                    preferFocalPoint: true,
+                    furtherOptions: "mode=max"
+                );
+            }
+
+            <div class="col-6 col-md-4 col-lg haglis-col stat">
+              @if (!string.IsNullOrWhiteSpace(imgUrl))
+              {
+                <img src="@imgUrl" alt="@alt" loading="lazy" decoding="async" />
+              }
+              <div class="haglis-head">@text</div>
+              <div class="number-wrap">
+                <span class="count-in-view">@tal</span>
+                <span class="count-unit">@eind</span>
+              </div>
+            </div>
+        }
+      </div>
+    }
+
+    <div class="row text-center front-more-hagtol">
+      <a class="link-more hagtol stretched-link" href="@linkUrl">
+        Les meira  
+        <svg xmlns="http://www.w3.org/2000/svg" width="25" height="23" viewBox="0 0 25 23" fill="none">
+          <path d="M24.0607 12.1066C24.6464 11.5208 24.6464 10.571 24.0607 9.98524L14.5147 0.439298C13.9289 -0.146489 12.9792 -0.146489 12.3934 0.439298C11.8076 1.02508 11.8076 1.97483 12.3934 2.56062L20.8787 11.0459L12.3934 19.5312C11.8076 20.117 11.8076 21.0667 12.3934 21.6525C12.9792 22.2383 13.9289 22.2383 14.5147 21.6525L24.0607 12.1066ZM0 11.0459L-1.31134e-07 12.5459L23 12.5459L23 11.0459L23 9.5459L1.31134e-07 9.5459L0 11.0459Z" fill="#4B7019"/>
+        </svg>
+      </a>
+    </div>
+  </div>
+</section>
+
+
+<script>
+  // Format number with . as thousands separator and , as decimal separator
+  function formatEuroNumber(value, decimals) {
+    const fixed = value.toFixed(decimals);
+    let [intPart, decPart] = fixed.split(".");
+
+    intPart = intPart.replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+
+    if (decimals > 0 && decPart) {
+      return intPart + "," + decPart;
+    }
+    return intPart;
+  }
+
+  // Read target from element text (like "33,3", "20916")
+  function getTargetFromElement(el) {
+    const raw = (el.dataset.target || el.textContent || "").trim();
+    if (!raw) return { target: 0, decimals: 0 };
+
+    // Remove thousands dots, turn comma into dot for JS parsing
+    const normalized = raw.replace(/\./g, "").replace(",", ".");
+    const parts = normalized.split(".");
+    const decimals = parts[1] ? parts[1].length : 0;
+    const target = parseFloat(normalized);
+
+    if (isNaN(target)) {
+      return { target: 0, decimals: 0 };
+    }
+    return { target, decimals };
+  }
+
+  function animateCounter(el, target, decimals, duration = 2000, delay = 0) {
+    const startTime = performance.now() + delay;
+
+    function update(now) {
+      if (now < startTime) {
+        requestAnimationFrame(update);
+        return;
+      }
+
+      const progress = Math.min((now - startTime) / duration, 1);
+      const currentValue = target * progress;
+
+      el.textContent = formatEuroNumber(currentValue, decimals);
+
+      if (progress < 1) {
+        requestAnimationFrame(update);
+      }
+    }
+
+    requestAnimationFrame(update);
+  }
+
+  document.addEventListener("DOMContentLoaded", function () {
+    const counters = Array.from(document.querySelectorAll(".count-in-view"));
+    if (!counters.length) return;
+
+    // Prepare counters: read original numbers and store them
+    counters.forEach((el) => {
+      const { target, decimals } = getTargetFromElement(el);
+      el.dataset.targetNumber = target;
+      el.dataset.decimals = decimals;
+      el.textContent = decimals > 0 ? formatEuroNumber(0, decimals) : "0";
+    });
+
+    function startAllAnimations() {
+      counters.forEach((el, idx) => {
+        if (el.classList.contains("counted")) return;
+        el.classList.add("counted");
+
+        const target = parseFloat(el.dataset.targetNumber || "0");
+        const decimals = parseInt(el.dataset.decimals || "0", 10);
+
+        // 200 ms stagger
+        animateCounter(el, target, decimals, 2000, idx * 200);
+      });
+    }
+
+    const row = document.querySelector(".haglis-row");
+
+    if (!("IntersectionObserver" in window) || !row) {
+      // Fallback: no IO or row not found, animate immediately
+      startAllAnimations();
+      return;
+    }
+
+    const observer = new IntersectionObserver(
+      (entries, obs) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            startAllAnimations();
+            obs.unobserve(entry.target);
+          }
+        });
+      },
+      { threshold: 0.3 } // 30% visible
+    );
+
+    observer.observe(row);
+  });
+</script>
+

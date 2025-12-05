@@ -1,0 +1,84 @@
+﻿@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<BlockListItem>
+@using Umbraco.Cms.Core.Models
+@using Umbraco.Cms.Core.Models.PublishedContent
+@using Umbraco.Cms.Core.Strings
+@using Umbraco.Extensions
+
+@{
+    var el = Model?.Content;
+    if (el is null) { return; }
+
+    // Settings
+    var parent = el.Value<IPublishedContent>("newsParent");
+    if (parent is null) { return; }
+
+    var takeCount = el.Value<int?>("itemsToShow") ?? 1;
+    if (takeCount < 1) takeCount = 1;
+
+    // newest tidindi
+    var items = parent
+        .ChildrenOfType("tidindi")
+        .Select(n => new {
+            Node = n,
+            Date = n.Value<DateTime?>("dagfesting") ?? n.CreateDate
+        })
+        .OrderByDescending(x => x.Date)
+        .Take(takeCount)
+        .Select(x => x.Node)
+        .ToList();
+
+    if (items.Count == 0) { return; }
+}
+
+@foreach (var n in items)
+{
+    var title   = n.Name ?? string.Empty;
+    var url     = n.Url() ?? "#";
+    var ingress = n.Value<IHtmlEncodedString?>("inngangstekstur");
+
+    // Media picker 'mynd'
+    var media  = n.Value<MediaWithCrops?>("mynd");
+
+    // Optimized image (1000px wide, WebP, no upscaling)
+    string? imgUrl = media?.GetCropUrl(
+        width: 1000,
+        quality: 85,
+        furtherOptions: "&format=webp&upscale=false"
+    );
+
+    var imgAlt = media?.Content?.Name ?? title;
+
+    <section class="py-3 py-lg-5">
+      <div class="container">
+        <div class="news-band row g-0">
+          <div class="col-lg-6 copy order-2 order-lg-1">
+            <small>TÍÐINDI</small>
+            <h3>@title</h3>
+
+            @if (ingress is not null)
+            {
+                <p class="fw-700 text-muted-600">@ingress</p>
+            }
+
+            <a class="link-more" href="@url">
+              Les meira
+              <svg class="news-after-arrow" xmlns="http://www.w3.org/2000/svg" width="25" height="23" viewBox="0 0 25 23" fill="none">
+                <path d="M24.0607 12.1066C24.6464 11.5208 24.6464 10.571 24.0607 9.98524L14.5147 0.439298C13.9289 -0.146489 12.9792 -0.146489 12.3934 0.439298C11.8076 1.02508 11.8076 1.97483 12.3934 2.56062L20.8787 11.0459L12.3934 19.5312C11.8076 20.117 11.8076 21.0667 12.3934 21.6525C12.9792 22.2383 13.9289 22.2383 14.5147 21.6525L24.0607 12.1066ZM0 11.0459L-1.31134e-07 12.5459L23 12.5459L23 11.0459L23 9.5459L1.31134e-07 9.5459L0 11.0459Z" fill="#4B7019"/>
+              </svg>
+            </a>
+          </div>
+
+          <div class="col-lg-6 news-img order-1 order-lg-2">
+            @if (!string.IsNullOrWhiteSpace(imgUrl))
+            {
+                <img src="@imgUrl" alt="@imgAlt" />
+            }
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div class="container text-center">
+        <a href="/tidindi/" class="btn mx-auto all-news-btn btn-link">Vís øll tíðindi</a>
+    </div>
+}

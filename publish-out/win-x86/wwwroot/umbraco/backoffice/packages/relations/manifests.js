@@ -1,7 +1,7 @@
 import { m as i, c as a, U as n } from "./bulk-trash-with-relation.action.kind-BwLG7kt9.js";
 import { UMB_ENTITY_ACTION_DELETE_KIND_MANIFEST as o } from "@umbraco-cms/backoffice/entity-action";
 import { UMB_ENTITY_ACTION_TRASH_KIND_MANIFEST as s } from "@umbraco-cms/backoffice/recycle-bin";
-import { m as l, e as m, a as t, U as c } from "./manifests-BTP3sv7U.js";
+import { m as l, e as m, a as t, U as c } from "./manifests-BGq4UYLP.js";
 import { UMB_COLLECTION_ALIAS_CONDITION as p } from "@umbraco-cms/backoffice/collection";
 import { UMB_RELATION_TYPE_COLLECTION_ALIAS as r } from "@umbraco-cms/backoffice/relation-type";
 import { UMB_WORKSPACE_CONDITION_ALIAS as f } from "@umbraco-cms/backoffice/workspace";
@@ -89,7 +89,7 @@ const R = [
   manifest: {
     type: "workspaceInfoApp",
     kind: "entityReferences",
-    element: () => import("./entity-references-workspace-view-info.element-CHC-fKyk.js"),
+    element: () => import("./entity-references-workspace-view-info.element-DQnUvFuy.js"),
     weight: 90
   }
 }, k = [U], N = [

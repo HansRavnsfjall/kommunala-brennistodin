@@ -1,0 +1,44 @@
+@model Kob.ViewModels.BlockListRenderModel
+@using System.Globalization
+@using Microsoft.AspNetCore.Html
+@using Microsoft.AspNetCore.Mvc.ViewEngines
+@using Umbraco.Cms.Core.Models.Blocks
+@using Umbraco.Extensions
+@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<Kob.ViewModels.BlockListRenderModel>
+@inject ICompositeViewEngine ViewEngine
+
+@{
+    var items = Model?.Blocks ?? Enumerable.Empty<BlockListItem>();
+    string ComponentPath(string alias) => $"~/Views/Partials/BlockList/Components/{alias}.cshtml";
+    const string FallbackPath = "~/Views/Partials/BlockList/Default.cshtml";
+
+    bool ViewExists(string path) =>
+        ViewEngine.GetView(executingFilePath: null, viewPath: path, isMainPage: false).Success;
+
+    async Task<IHtmlContent> RenderBlockAsync(BlockListItem it)
+    {
+        var alias = it.Content.ContentType.Alias;
+        var viewPath = ComponentPath(alias);
+
+        if (ViewExists(viewPath))
+        {
+            await Html.RenderPartialAsync(viewPath, it);
+            return HtmlString.Empty;
+        }
+
+        await Html.RenderPartialAsync(FallbackPath, it);
+        return HtmlString.Empty;
+    }
+}
+
+@if (!items.Any())
+{
+    <div class="alert alert-info my-3">No blocks to render.</div>
+}
+else
+{
+    foreach (var item in items)
+    {
+        @await RenderBlockAsync(item)
+    }
+}

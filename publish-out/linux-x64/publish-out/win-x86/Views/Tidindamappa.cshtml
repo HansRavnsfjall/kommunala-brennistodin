@@ -1,0 +1,152 @@
+@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage
+@using System.Globalization
+@using Umbraco.Cms.Core.Models
+@using Umbraco.Cms.Core.Models.PublishedContent
+@using Umbraco.Cms.Core.Strings
+@using Umbraco.Extensions
+
+@{
+    Layout = "master.cshtml";
+    var culture = CultureInfo.CurrentUICulture?.Name;
+
+    // ===== Query / paging =====
+    int pageSize = 2; // TESTING
+    int page = 1;
+    var q = Context?.Request?.Query;
+    if (q != null && int.TryParse(q["page"], out var parsed) && parsed > 0) page = parsed;
+
+    // ===== Fetch children =====
+    var all = Model
+        .ChildrenOfType("tidindi")
+        .Where(x => x.IsPublished())
+        .OrderByDescending(x => x.Value<DateTime?>("dagfesting") ?? x.CreateDate)
+        .ToList();
+
+    var total = all.Count;
+    var totalPages = Math.Max(1, (int)Math.Ceiling(total / (double)pageSize));
+    if (page > totalPages) page = totalPages;
+    var items = all.Skip((page - 1) * pageSize).Take(pageSize).ToList();
+
+    string BaseUrl() => Model.Url();
+    string PageUrl(int p) => p <= 1 ? BaseUrl() : $"{BaseUrl()}?page={p}";
+
+    string ImgUrl(IPublishedContent? m) => m?.Url() ?? "";
+    string ImgAlt(IPublishedContent? m) => m?.Value<string>("altText") ?? m?.Name ?? "";
+
+    string DateLabel(IPublishedContent c)
+    {
+        var d = c.Value<DateTime?>("dagfesting") ?? c.CreateDate;
+        var fo = CultureInfo.GetCultureInfo(culture ?? "fo-FO");
+        return d.ToString("dd. MMMM yyyy", fo).ToUpper(fo);
+    }
+}
+
+<section class="news-list">
+  <div class="container">
+    <!-- CENTERED 8-COL WRAPPER ON LG+ -->
+    <div class="row justify-content-center">
+      <div class="col-12 col-lg-8">
+
+        @if (!items.Any())
+        {
+            <p class="text-muted">Eingi tíðindi at vísa enn.</p>
+        }
+        else
+        {
+            @foreach (var n in items)
+            {
+                var img   = n.Value<IPublishedContent>("mynd", culture: culture);
+                var title = n.Value<string>("yvirskrift", culture: culture, fallback: Fallback.ToLanguage) ?? n.Name;
+                var intro = n.Value<IHtmlEncodedString>("inngangstekstur", culture: culture, fallback: Fallback.ToLanguage);
+
+                <article class="news-row py-4 py-lg-5 border-bottom">
+                  <div class="row g-4 align-items-start">
+                    <!-- Image -->
+                    <div class="col-12 col-md-4">
+                      @if (img != null)
+                      {
+                        <a href="@n.Url()" class="d-block ratio ratio-16x9">
+                          <img src="@ImgUrl(img)" alt="@ImgAlt(img)" class="w-100 h-100 object-fit-cover rounded" />
+                        </a>
+                      }
+                    </div>
+
+                    <!-- Copy -->
+                    <div class="col-12 col-md-8">
+                      <div class="small text-muted fw-semibold mb-1">@DateLabel(@n)</div>
+                      <h2 class="h3 fw-bold mb-2">
+                        <a class="news-title-link text-decoration-none" href="@n.Url()">@title</a>
+                      </h2>
+                      @if (intro != null && !string.IsNullOrWhiteSpace(intro.ToHtmlString()))
+                      {
+                        <div class="text-muted-600">@intro</div>
+                      }
+                    </div>
+                  </div>
+                </article>
+            }
+        }
+
+        <!-- Pagination (also constrained to 8 cols) -->
+        @if (totalPages > 1)
+        {
+          <nav class="news-pagination my-5" aria-label="pagination">
+            <ul class="list-unstyled d-flex gap-3 justify-content-center align-items-center m-0">
+              <!-- Prev -->
+              <li>
+                @if (page > 1)
+                { <a class="pagelink arrow" href="@PageUrl(page - 1)" aria-label="Fyrra síða">←</a> }
+                else { <span class="pagelink arrow disabled">←</span> }
+              </li>
+
+              <!-- Numbers -->
+              @for (int p = 1; p <= totalPages; p++)
+              {
+                var isCurrent = (p == page);
+                <li>
+                  @if (isCurrent)
+                  { <span class="page-dot current" aria-current="page">@p</span> }
+                  else
+                  { <a class="page-dot" href="@PageUrl(p)">@p</a> }
+                </li>
+              }
+
+              <!-- Next -->
+              <li>
+                @if (page < totalPages)
+                { <a class="pagelink arrow" href="@PageUrl(page + 1)" aria-label="Næsta síða">→</a> }
+                else { <span class="pagelink arrow disabled">→</span> }
+              </li>
+            </ul>
+          </nav>
+        }
+
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .object-fit-cover { object-fit: cover; }
+
+  /* Title color like your green */
+  .news-title-link { color: #2b7f31; }
+  .news-title-link:hover { text-decoration: underline; }
+
+  .page-dot,
+  .page-dot.current {
+    display: inline-grid;
+    place-items: center;
+    width: 2rem; height: 2rem;
+    border-radius: 50%;
+    font-weight: 600; text-decoration: none;
+  }
+  .page-dot { border: 2px solid #2b7f31; color: #2b7f31; }
+  .page-dot:hover { background: rgba(43,127,49,0.08); }
+  .page-dot.current { background: #2b7f31; color: #fff; border: 2px solid #2b7f31; }
+
+  .pagelink.arrow { padding: .25rem .5rem; font-weight: 700; color: #2b7f31; text-decoration: none; }
+  .pagelink.arrow.disabled { opacity: .4; pointer-events: none; }
+
+  .news-row + .news-row { margin-top: .25rem; }
+</style>

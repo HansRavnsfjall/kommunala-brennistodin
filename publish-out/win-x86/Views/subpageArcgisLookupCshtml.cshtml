@@ -1,0 +1,227 @@
+﻿@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage
+@using System.Globalization
+@using Umbraco.Cms.Core.Models.Blocks
+@using Umbraco.Cms.Core.Models.PublishedContent
+@using Kob.ViewModels
+
+@{
+    Layout = "master.cshtml";
+    ViewBag.Title = Model?.Name;
+
+    var culture = CultureInfo.CurrentUICulture?.Name;
+
+    // Only take local value; no inheritance - NO FALLBACK
+    var blocks = Model.Value<BlockListModel>(
+        "modul",
+        culture: culture,
+        fallback: Fallback.ToDefaultValue
+    );
+}
+
+@if (blocks != null && blocks.Any())
+{
+    @await Html.PartialAsync(
+        "~/Views/Partials/Helpers/RenderBlockList.cshtml",
+        new Kob.ViewModels.BlockListRenderModel
+        {
+            Blocks = blocks,
+            Scope = Model.ContentType.Alias,
+            FallbackView = "~/Views/Partials/BlockList/Default.cshtml"
+        }
+    )
+}
+
+<div class="container">
+    <div class="row">
+        <div class="col-12 col-lg-8 editor">
+            <h1>Nær verður burturkastið heintað?</h1>
+            <p>
+                Vilt tú vita, nær vit tøma ruskposan, kanst tú finna útav tí við at tøppa tín
+                bústað og títt húsanummar inn í leititeigin niðanfyri, ella finna títt øki á
+                kortinum niðanfyri og trýsta á tað.
+            </p>
+
+            <div class="autocomplete">
+                <div class="inputwrap">
+                <input id="streetInput" type="text" placeholder="Skriva bústað...">
+             <svg width="28" height="28" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+              <circle cx="11" cy="11" r="7" stroke="#4B7019" stroke-width="2"></circle>
+              <path d="M20 20L16.5 16.5" stroke="#4B7019" stroke-width="2" stroke-linecap="round"></path>
+            </svg>
+             </div>   <div id="autocomplete-list" class="autocomplete-items"></div>
+            </div>
+
+            <div id="result" class="result"></div>
+
+            <script>
+                const input = document.getElementById("streetInput");
+                const listContainer = document.getElementById("autocomplete-list");
+                const resultContainer = document.getElementById("result");
+
+                input.addEventListener("input", async function () {
+                    const rawValue = this.value.trim();
+
+                    listContainer.innerHTML = "";
+                    resultContainer.innerHTML = "";
+
+                    if (rawValue.length < 3) return;
+
+                    // Escape single quotes for the SQL-like WHERE clause
+                    const safeValue = rawValue.replace(/'/g, "''");
+
+                    // WHERE feature_type='adressueind' AND address_complete LIKE '%<user input>%'
+                    const where = `feature_type = 'adressueind' AND address_complete LIKE '%${safeValue}%'`;
+
+                    const params = new URLSearchParams({
+                        where: where,
+                        outFields: "address_id,address_complete,litter_collection_day",
+                        returnGeometry: "true",
+                        returnDistinctValues: "false",
+                        f: "json"
+                    });
+
+                    const url = "https://gis.torshavn.fo/arcgis/rest/services/fagdata/ognir_til_leitifunku/MapServer/0/query?" + params.toString();
+
+                    try {
+                        const response = await fetch(url);
+                        const data = await response.json();
+
+                        if (!data.features) return;
+
+                        // Natural sorting on full address
+                        const sorted = data.features.sort((a, b) =>
+                            a.attributes.address_complete.localeCompare(
+                                b.attributes.address_complete,
+                                'fo',
+                                { numeric: true, sensitivity: 'base' }
+                            )
+                        );
+
+                        // Only take top 10
+                        const top10 = sorted.slice(0, 10);
+
+                        top10.forEach(feature => {
+                            const attrs = feature.attributes;
+                            const geom = feature.geometry || {};
+
+                            const item = document.createElement("div");
+                            item.textContent = attrs.address_complete;
+
+                            item.addEventListener("click", () => {
+                                const x = geom.x;
+                                const y = geom.y;
+                                const wkid = 5316;
+                                const address = attrs.address_complete || "";
+                                const encodedAddress = encodeURIComponent(address);
+
+                                const mapUrl =
+                                    `https://www.arcgis.com/apps/webappviewer/index.html` +
+                                    `?id=4e671e551af747d488fdaacd43b8da39` +
+                                    `&&marker=${x},${y},${wkid},,,${encodedAddress}` +
+                                    `&level=12` +
+                                    `&showLayers=ruskinnsavning_alment_1630;ruskinnsavning_alment_1630_0;adressur_85;adressur_85_2`;
+
+                                resultContainer.innerHTML = `
+<p><strong>Innsavningardagur:</strong> ${attrs.litter_collection_day ?? ""}</p>
+<p><a href="${mapUrl}" target="_blank" rel="noopener noreferrer">Sí kort</a></p>
+`;
+                                listContainer.innerHTML = "";
+                                input.value = attrs.address_complete;
+                            });
+
+                            listContainer.appendChild(item);
+                        });
+                    } catch (err) {
+                        console.error(err);
+                    }
+                });
+            </script>
+        </div>
+    </div>
+</div>
+
+<div class="container kortembed">
+    <div class="row">
+        <div class="col-lg-8">
+            <div class="map-embed-wrapper" style="position: relative; width: 100%; padding-bottom: 56.25%; height: 0; overflow: hidden;">
+                <iframe
+                    src="https://umhvorvi.maps.arcgis.com/apps/View/index.html?appid=94df9bcfd1524c4ba19852b512a08c2f"
+                    style="position: absolute; top:0; left:0; width:100%; height:100%; border:0;"
+                    allowfullscreen
+                    loading="lazy">
+                </iframe>
+            </div>
+
+            <div class="text-end mt-2">
+                <a href="https://umhvorvi.maps.arcgis.com/apps/View/index.html?appid=94df9bcfd1524c4ba19852b512a08c2f"
+                   target="_blank"
+                   rel="noopener noreferrer">
+                    Sí kort í fullari stødd
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    #streetInput {
+        height: 50px;
+        width: 100%;
+        max-width: 600px;
+        padding-left: 25px;
+        margin-top: 30px;
+        margin-bottom: 10px;
+    }
+
+    #autocomplete-list div {
+        padding: 5px 25px;
+        width: 100%;
+        max-width: 600px;
+    }
+
+    #autocomplete-list div:hover {
+        background-color: #efefef;
+        cursor: pointer;
+    }
+
+    #result.result {
+        padding-left: 25px;
+        padding-top: 10px;
+    }
+
+    .kortembed {
+        margin-top: 120px;
+    }
+
+    .autocomplete, .autocomplete .inputwrap{
+        position:relative;
+    }
+    .autocomplete svg{
+        position:absolute;
+        top:40px;
+        right:20px;
+    }
+
+    .inputwrap{
+        width:100%;
+        max-width:600px;
+    }
+
+    .autocomplete *{
+        font-family:"Alexandria", sans-serif !important;
+        font-weight:300 !important;
+        color:#000 !important;
+    }
+
+    input:focus,
+textarea:focus,
+select:focus {
+    outline: none !important;
+    box-shadow: none !important;
+}
+
+.map-embed-wrapper a, .text-end a{
+    font-weight:300 !important;
+}
+
+</style>

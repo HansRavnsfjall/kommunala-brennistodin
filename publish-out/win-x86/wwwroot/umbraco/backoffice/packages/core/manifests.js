@@ -1,42 +1,39 @@
-import { a as y, b as h, c as U } from "./collection-action-button.element-TmHU9Eph.js";
+import { a as d, b as y, c as U } from "./collection-action-button.element-TmHU9Eph.js";
 import { U as u } from "./constants-BdzGok2s.js";
-import { m as A } from "./manifests-CdGHZqd2.js";
-import { U as s, m as T } from "./default.action.kind-Cyn-1n_n.js";
-import { a as b, m as k, c as I } from "./constants-BttLQSIM.js";
-import { m as _, U as l, c as r, d as $ } from "./constants-6ZrdBhnx.js";
-import { m as C, a as p } from "./switch.condition-BRc-UvRa.js";
+import { m as h } from "./manifests-CdGHZqd2.js";
+import { U as s, m as b } from "./default.action.kind-Cyn-1n_n.js";
+import { a as I, m as A, c as T } from "./constants-BttLQSIM.js";
+import { m as k, U as l, c as r, d as _ } from "./constants-C1sC3ASt.js";
+import { U as L, a as z } from "./constants-aX8eGL-y.js";
+import { m as C, a as $ } from "./switch.condition-BRc-UvRa.js";
 import { m as E } from "./manifest-BUE-nSaI.js";
-import { m as L } from "./manifests-h5Jtzv0M.js";
-import { UMB_WRITABLE_PROPERTY_CONDITION_ALIAS as B } from "@umbraco-cms/backoffice/property";
-import { U as O, a as g } from "./constants-mZK85u7C.js";
-import { a as w, U as M, m as z, e as R } from "./bulk-trash.action.kind-CdpI7m0a.js";
-import { UMB_TREE_ITEM_DEFAULT_KIND_MANIFEST as S } from "@umbraco-cms/backoffice/tree";
-import { c as N, a as K, m as D } from "./manifests-CG-Q4ypE.js";
-import { UMB_CURRENT_USER_CONTEXT as P } from "@umbraco-cms/backoffice/current-user";
+import { m as B } from "./manifests-h5Jtzv0M.js";
+import { UMB_WRITABLE_PROPERTY_CONDITION_ALIAS as S } from "@umbraco-cms/backoffice/property";
+import { U as O, a as R } from "./constants-mZK85u7C.js";
+import { a as N, U as M, m as K, e as D } from "./bulk-trash.action.kind-9Ooy_hJp.js";
+import { UMB_TREE_ITEM_DEFAULT_KIND_MANIFEST as g } from "@umbraco-cms/backoffice/tree";
+import { a as w, b as P, c as F, m as v } from "./manifests-DF6A9HCG.js";
 import { UmbConditionBase as c } from "@umbraco-cms/backoffice/extension-registry";
-import { m as F } from "./manifests-FzOUH899.js";
-import { U as v, a as j } from "./constants-CDwqkOdg.js";
-import { b as W, h as x, i as Y, c as H, e as V, m as G, k as X } from "./sort-children-of-modal.token-CXKQZTL5.js";
+import { UMB_CURRENT_USER_CONTEXT as j } from "@umbraco-cms/backoffice/current-user";
+import { m as W } from "./manifests-FzOUH899.js";
+import { U as x, a as H } from "./constants-CDwqkOdg.js";
+import { c as Y, e as G, m as V, b as J, f as Z, g as X, k as q } from "./update-folder.action-COxnl6zu.js";
 import { UMB_ENTITY_ACTION_DEFAULT_KIND_MANIFEST as o } from "@umbraco-cms/backoffice/entity-action";
-import { o as f, a as d, n as q, d as J } from "./workspace.element-CAJljmTw.js";
-import "@umbraco-cms/backoffice/action";
-import "@umbraco-cms/backoffice/observable-api";
-import "@umbraco-cms/backoffice/class-api";
-import "@umbraco-cms/backoffice/modal";
-import "@umbraco-cms/backoffice/entity";
-import "@umbraco-cms/backoffice/extension-api";
-import "@umbraco-cms/backoffice/utils";
-import "@umbraco-cms/backoffice/validation";
-import "@umbraco-cms/backoffice/id";
-import "@umbraco-cms/backoffice/variant";
-const Z = [
+import { U as p, e as f, c as Q, f as tt, g as it } from "./constants-CUqy5m1J.js";
+const et = [
   {
     type: "modal",
     alias: "Umb.Modal.AppAuth",
     name: "Umb App Auth Modal",
-    element: () => import("./umb-app-auth-modal.element-sdBR0D5d.js")
+    element: () => import("./umb-app-auth-modal.element-4WZo_fcs.js")
+  },
+  {
+    type: "modal",
+    alias: "Umb.Modal.AuthTimeout",
+    name: "Umb Auth Timeout Modal",
+    element: () => import("./umb-auth-timeout-modal.element-B_UqWRyP.js")
   }
-], Q = [
+], at = [
   {
     type: "authProvider",
     alias: "Umb.AuthProviders.Umbraco",
@@ -51,21 +48,21 @@ const Z = [
       }
     }
   }
-], tt = [...Z, ...Q], it = [
+], nt = [...et, ...at], ot = [
   {
     type: "condition",
     name: "Collection Alias Condition",
-    alias: y,
+    alias: d,
     api: () => import("./collection-alias.condition-pEdHH8TG.js")
   },
   /** @deprecated No longer used internally. This class will be removed in Umbraco 17. [LK] */
   {
     type: "condition",
     name: "Collection Bulk Action Permission Condition",
-    alias: h,
+    alias: y,
     api: () => import("./collection-bulk-action-permission.condition-HByQ2FvB.js")
   }
-], et = [
+], st = [
   {
     type: "kind",
     alias: "Umb.Kind.CollectionAction.Create",
@@ -74,14 +71,14 @@ const Z = [
     manifest: {
       type: "collectionAction",
       kind: "create",
-      element: () => import("./collection-create-action.element-CkPQzZuJ.js"),
+      element: () => import("./collection-create-action.element-C6F2mRL7.js"),
       weight: 1200,
       meta: {
-        label: "#actions_create"
+        label: "#actions_createFor"
       }
     }
   }
-], at = {
+], ct = {
   type: "kind",
   alias: "Umb.Kind.CollectionAction.Button",
   matchKind: "button",
@@ -91,7 +88,7 @@ const Z = [
     kind: "button",
     element: U
   }
-}, nt = [at, ...et], ot = [
+}, mt = [ct, ...st], lt = [
   {
     type: "kind",
     alias: "Umb.Kind.WorkspaceView.Collection",
@@ -108,18 +105,18 @@ const Z = [
       }
     }
   }
-], st = [
-  ...nt,
-  ...ot,
-  ...it
-], mt = [
+], rt = [
+  ...mt,
+  ...lt,
+  ...ot
+], pt = [
   {
     type: "repository",
     alias: u,
     name: "Cultures Repository",
     api: () => import("./culture.repository-DzCkYKoo.js")
   }
-], ct = [...mt], lt = {
+], ft = [...pt], dt = {
   type: "kind",
   alias: "Umb.Kind.EntityAction.Create",
   matchKind: "create",
@@ -128,23 +125,23 @@ const Z = [
     ...s.manifest,
     type: "entityAction",
     kind: "create",
-    api: () => import("./create.action-Cs49sHMB.js"),
+    api: () => import("./create.action-Bzx12CJb.js"),
     weight: 1200,
     forEntityTypes: [],
     meta: {
       icon: "icon-add",
-      label: "#actions_create",
+      label: "#actions_createFor",
       additionalOptions: !0
     }
   }
-}, rt = [
+}, yt = [
   {
     type: "modal",
-    alias: b,
+    alias: I,
     name: "Entity Create Option Action List Modal",
     element: () => import("./entity-create-option-action-list-modal.element-DfPr1KKo.js")
   }
-], pt = [lt, ...rt], ft = [T], dt = [k], yt = {
+], Ut = [dt, ...yt], ut = [b], ht = [A], bt = {
   type: "kind",
   alias: "Umb.Kind.EntityAction.Duplicate",
   matchKind: "duplicate",
@@ -164,18 +161,18 @@ const Z = [
       duplicateRepositoryAlias: ""
     }
   }
-}, ht = [yt], Ut = {
+}, It = [bt], At = {
   type: "condition",
   name: "Entity Has Children Condition",
-  alias: I,
+  alias: T,
   api: () => import("./entity-has-children.condition-rHchBCbk.js")
-}, ut = [Ut], At = [
-  ...pt,
-  ...ft,
-  ...dt,
+}, Tt = [At], kt = [
+  ...Ut,
+  ...ut,
   ...ht,
-  ...ut
-], Tt = [_], bt = {
+  ...It,
+  ...Tt
+], _t = [k], Lt = {
   type: "kind",
   alias: "Umb.Kind.EntityBulkAction.DuplicateTo",
   matchKind: "duplicateTo",
@@ -194,7 +191,7 @@ const Z = [
       treeAlias: ""
     }
   }
-}, kt = [bt], It = {
+}, zt = [Lt], Ct = {
   type: "kind",
   alias: "Umb.Kind.EntityBulkAction.MoveTo",
   matchKind: "moveTo",
@@ -213,7 +210,7 @@ const Z = [
       treeAlias: ""
     }
   }
-}, _t = [It], $t = {
+}, $t = [Ct], Et = {
   type: "kind",
   alias: "Umb.Kind.EntityBulkAction.Trash",
   matchKind: r,
@@ -231,305 +228,422 @@ const Z = [
       bulkTrashRepositoryAlias: ""
     }
   }
-}, Ct = [$t], Et = [$], Lt = [
-  ...Tt,
-  ...kt,
+}, Bt = [Et], St = [_], Ot = [
   ..._t,
-  ...Ct,
-  ...Et
-], Bt = [C], Ot = [...Bt], gt = [
+  ...zt,
+  ...$t,
+  ...Bt,
+  ...St
+], Rt = [
+  {
+    type: "condition",
+    name: "Umbraco Entity Type Condition",
+    alias: L,
+    api: () => import("./entity-type.condition-BGBIgS0c.js")
+  }
+], Nt = [
+  {
+    type: "condition",
+    name: "Umbraco Entity Unique Condition",
+    alias: z,
+    api: () => import("./entity-unique.condition-Co_kzpha.js")
+  }
+], Mt = [...Rt, ...Nt], Kt = [
+  {
+    type: "kind",
+    alias: "Umb.Kind.EntitySign.Icon",
+    matchKind: "icon",
+    matchType: "entitySign",
+    manifest: {
+      type: "entitySign",
+      kind: "icon",
+      element: () => import("./entity-sign-icon.element-DunMvZQz.js"),
+      api: () => import("./entity-sign-icon.api-Od5KX8PD.js")
+    }
+  }
+], Dt = [...Kt], gt = [...Dt], wt = [C], Pt = [...wt], Ft = [
   {
     type: "modal",
     alias: "Umb.Modal.IconPicker",
     name: "Icon Picker Modal",
-    element: () => import("./icon-picker-modal.element-D2NHsvG3.js")
+    element: () => import("./icon-picker-modal.element-HOn83zQK.js")
   }
-], wt = [
+], vt = [
   {
     type: "icons",
     alias: "Umb.Icons.Backoffice",
     name: "Backoffice Icons",
-    js: () => import("./icons-z0-WaqBi.js")
+    js: () => import("./icons-CRjZSiKg.js")
   },
   {
     type: "globalContext",
     alias: "Umb.GlobalContext.Icons",
     name: "Icons Context",
-    api: () => import("./icon-registry.context-NDQLtx6D.js").then((i) => i.i)
+    api: () => import("./icon-registry.context-NDQLtx6D.js").then((e) => e.i)
   },
-  ...gt
-], Mt = [
+  ...Ft
+], jt = [
   {
     type: "localization",
     alias: "Umb.Localization.AR",
-    weight: 100,
     name: "Arabic Backoffice UI Localization",
-    meta: {
-      culture: "ar"
-    },
-    js: () => import("./ar-CIx4AauS.js")
+    meta: { culture: "ar" },
+    js: () => import("./ar-_6ciCY7s.js")
   },
   {
     type: "localization",
     alias: "Umb.Localization.BS",
-    weight: 100,
     name: "Bosnian Backoffice UI Localization",
-    meta: {
-      culture: "bs"
-    },
-    js: () => import("./bs-CJe_99Pj.js")
+    meta: { culture: "bs" },
+    js: () => import("./bs-ajMOPRsK.js")
   },
   {
     type: "localization",
     alias: "Umb.Localization.CS",
-    weight: 100,
     name: "Czech Backoffice UI Localization",
-    meta: {
-      culture: "cs"
-    },
-    js: () => import("./cs-COV2ViI5.js")
+    meta: { culture: "cs" },
+    js: () => import("./cs-Cel_4GPG.js")
+  },
+  {
+    type: "localization",
+    alias: "Umb.Localization.CS_CZ",
+    name: "Czech (Czechia) Backoffice UI Localization",
+    meta: { culture: "cs-CZ" }
   },
   {
     type: "localization",
     alias: "Umb.Localization.CY",
-    weight: 100,
     name: "Welsh Backoffice UI Localization",
-    meta: {
-      culture: "cy"
-    },
-    js: () => import("./cy-Cs8l01tA.js")
+    meta: { culture: "cy" },
+    js: () => import("./cy-DtbuhyKy.js")
+  },
+  {
+    type: "localization",
+    alias: "Umb.Localization.CY_GB",
+    name: "Welsh (UK) Backoffice UI Localization",
+    meta: { culture: "cy-GB" }
   },
   {
     type: "localization",
     alias: "Umb.Localization.DA",
-    weight: 100,
     name: "Danish Backoffice UI Localization",
-    meta: {
-      culture: "da"
-    },
-    js: () => import("./da-BqkLwhF5.js")
+    meta: { culture: "da" },
+    js: () => import("./da-DDI7cSZn.js")
+  },
+  {
+    type: "localization",
+    alias: "Umb.Localization.DA-DK",
+    name: "Danish (Denmark) Backoffice UI Localization",
+    meta: { culture: "da-DK" }
   },
   {
     type: "localization",
     alias: "Umb.Localization.DE",
-    weight: 100,
     name: "German Backoffice UI Localization",
-    meta: {
-      culture: "de"
-    },
-    js: () => import("./de-Dduj7P9y.js")
+    meta: { culture: "de" },
+    js: () => import("./de-DBVJuArv.js")
+  },
+  {
+    type: "localization",
+    alias: "Umb.Localization.DE_DE",
+    name: "German (Germany) Backoffice UI Localization",
+    meta: { culture: "de-DE" }
+  },
+  {
+    type: "localization",
+    alias: "Umb.Localization.DE_CH",
+    name: "German (Switzerland) Backoffice UI Localization",
+    meta: { culture: "de-CH" }
   },
   {
     type: "localization",
     alias: "Umb.Localization.EN",
-    weight: 100,
     name: "English (United Kingdom) Backoffice UI Localization",
-    meta: {
-      culture: "en"
-    },
-    js: () => import("./en-BHMrCyzc.js")
+    meta: { culture: "en" },
+    js: () => import("./en-DrfHY0ik.js")
   },
   {
     type: "localization",
     alias: "Umb.Localization.EN_US",
-    weight: 100,
     name: "English (United States) Backoffice UI Localization",
-    meta: {
-      culture: "en-US"
-    },
+    meta: { culture: "en-US" },
     js: () => import("./en-us-Cc2eY9cU.js")
   },
   {
     type: "localization",
     alias: "Umb.Localization.ES",
-    weight: 100,
     name: "Spanish Backoffice UI Localization",
-    meta: {
-      culture: "es"
-    },
-    js: () => import("./es-Dwcyx_Da.js")
+    meta: { culture: "es" },
+    js: () => import("./es-Dx9gjrGh.js")
+  },
+  {
+    type: "localization",
+    alias: "Umb.Localization.ES_ES",
+    name: "Spanish (Spain) Backoffice UI Localization",
+    meta: { culture: "es-ES" }
   },
   {
     type: "localization",
     alias: "Umb.Localization.FR",
-    weight: 100,
     name: "French Backoffice UI Localization",
-    meta: {
-      culture: "fr"
-    },
-    js: () => import("./fr-COapObbz.js")
+    meta: { culture: "fr" },
+    js: () => import("./fr-DpaOQ0Ro.js")
+  },
+  {
+    type: "localization",
+    alias: "Umb.Localization.FR_FR",
+    name: "French (France) Backoffice UI Localization",
+    meta: { culture: "fr-FR" }
+  },
+  {
+    type: "localization",
+    alias: "Umb.Localization.FR_CH",
+    name: "French (Switzerland) Backoffice UI Localization",
+    meta: { culture: "fr-CH" }
   },
   {
     type: "localization",
     alias: "Umb.Localization.HE",
-    weight: 100,
     name: "Hebrew Backoffice UI Localization",
-    meta: {
-      culture: "he"
-    },
+    meta: { culture: "he" },
     js: () => import("./he-M9L8MNO_.js")
   },
   {
     type: "localization",
+    alias: "Umb.Localization.HE_IL",
+    name: "Hebrew (Israel) Backoffice UI Localization",
+    meta: { culture: "he-IL" }
+  },
+  {
+    type: "localization",
     alias: "Umb.Localization.HR",
-    weight: 100,
     name: "Croatian Backoffice UI Localization",
-    meta: {
-      culture: "hr"
-    },
-    js: () => import("./hr-CzC46O19.js")
+    meta: { culture: "hr" },
+    js: () => import("./hr-BDgNejur.js")
+  },
+  {
+    type: "localization",
+    alias: "Umb.Localization.HR_HR",
+    name: "Croatian (Croatia) Backoffice UI Localization",
+    meta: { culture: "hr-HR" }
   },
   {
     type: "localization",
     alias: "Umb.Localization.IT",
-    weight: 100,
     name: "Italian Backoffice UI Localization",
-    meta: {
-      culture: "it"
-    },
-    js: () => import("./it-BnDDqO8o.js")
+    meta: { culture: "it" },
+    js: () => import("./it-DDE5rECg.js")
+  },
+  {
+    type: "localization",
+    alias: "Umb.Localization.IT_IT",
+    name: "Italian (Italy) Backoffice UI Localization",
+    meta: { culture: "it-IT" }
+  },
+  {
+    type: "localization",
+    alias: "Umb.Localization.IT_CH",
+    name: "Italian (Switzerland) Backoffice UI Localization",
+    meta: { culture: "it-CH" }
   },
   {
     type: "localization",
     alias: "Umb.Localization.JA",
-    weight: 100,
     name: "Japanese Backoffice UI Localization",
-    meta: {
-      culture: "ja"
-    },
+    meta: { culture: "ja" },
     js: () => import("./ja-Rf0d4bVw.js")
   },
   {
     type: "localization",
+    alias: "Umb.Localization.JA_JP",
+    name: "Japanese (Japan) Backoffice UI Localization",
+    meta: { culture: "ja-JP" }
+  },
+  {
+    type: "localization",
     alias: "Umb.Localization.KO",
-    weight: 100,
     name: "Korean Backoffice UI Localization",
-    meta: {
-      culture: "ko"
-    },
+    meta: { culture: "ko" },
     js: () => import("./ko-BGR85Q3P.js")
   },
   {
     type: "localization",
+    alias: "Umb.Localization.KO_KR",
+    name: "Korean (Korea) Backoffice UI Localization",
+    meta: { culture: "ko-KR" }
+  },
+  {
+    type: "localization",
     alias: "Umb.Localization.NB",
-    weight: 100,
     name: "Norwegian Backoffice UI Localization",
-    meta: {
-      culture: "nb"
-    },
-    js: () => import("./nb-Bd5g8gsE.js")
+    meta: { culture: "nb" },
+    js: () => import("./nb-BrjvaFw-.js")
+  },
+  {
+    type: "localization",
+    alias: "Umb.Localization.NB_NO",
+    name: "Norwegian (Norway) Backoffice UI Localization",
+    meta: { culture: "nb-NO" }
   },
   {
     type: "localization",
     alias: "Umb.Localization.NL",
-    weight: 100,
     name: "Dutch Backoffice UI Localization",
-    meta: {
-      culture: "nl"
-    },
-    js: () => import("./nl-Zy0wnjrR.js")
+    meta: { culture: "nl" },
+    js: () => import("./nl-CeVhUGqI.js")
+  },
+  {
+    type: "localization",
+    alias: "Umb.Localization.NL_NL",
+    name: "Dutch (Netherlands) Backoffice UI Localization",
+    meta: { culture: "nl-NL" }
   },
   {
     type: "localization",
     alias: "Umb.Localization.PL",
-    weight: 100,
     name: "Polish Backoffice UI Localization",
-    meta: {
-      culture: "pl"
-    },
+    meta: { culture: "pl" },
     js: () => import("./pl-DMfLuzzH.js")
   },
   {
     type: "localization",
+    alias: "Umb.Localization.PL_PL",
+    name: "Polish (Poland) Backoffice UI Localization",
+    meta: { culture: "pl-PL" }
+  },
+  {
+    type: "localization",
     alias: "Umb.Localization.PT",
-    weight: 100,
     name: "Portuguese Backoffice UI Localization",
-    meta: {
-      culture: "pt"
-    },
-    js: () => import("./pt-BDMct_Gn.js")
+    meta: { culture: "pt" },
+    js: () => import("./pt-zDg4UyMF.js")
   },
   {
     type: "localization",
     alias: "Umb.Localization.PT_BR",
-    weight: 100,
     name: "Portuguese (Brazil) Backoffice UI Localization",
-    meta: {
-      culture: "pt-BR"
-    },
-    js: () => import("./pt-br-CvTXYFkz.js")
+    meta: { culture: "pt-BR" },
+    js: () => import("./pt-br-DvdAZVEf.js")
   },
   {
     type: "localization",
     alias: "Umb.Localization.RO",
-    weight: 100,
     name: "Romanian Backoffice UI Localization",
-    meta: {
-      culture: "ro"
-    },
+    meta: { culture: "ro" },
     js: () => import("./ro-DsjSztAV.js")
   },
   {
     type: "localization",
+    alias: "Umb.Localization.RO_RO",
+    name: "Romanian (Romania) Backoffice UI Localization",
+    meta: { culture: "ro-RO" }
+  },
+  {
+    type: "localization",
     alias: "Umb.Localization.RU",
-    weight: 100,
     name: "Russian Backoffice UI Localization",
-    meta: {
-      culture: "ru"
-    },
+    meta: { culture: "ru" },
     js: () => import("./ru-DO_XQGMt.js")
   },
   {
     type: "localization",
+    alias: "Umb.Localization.RU_RU",
+    name: "Russian (Russia) Backoffice UI Localization",
+    meta: { culture: "ru-RU" }
+  },
+  {
+    type: "localization",
     alias: "Umb.Localization.SV",
-    weight: 100,
     name: "Swedish Backoffice UI Localization",
-    meta: {
-      culture: "sv"
-    },
-    js: () => import("./sv-DPtiqhJn.js")
+    meta: { culture: "sv" },
+    js: () => import("./sv-DpbG0d70.js")
+  },
+  {
+    type: "localization",
+    alias: "Umb.Localization.SV_SE",
+    name: "Swedish (Sweden) Backoffice UI Localization",
+    meta: { culture: "sv-SE" }
   },
   {
     type: "localization",
     alias: "Umb.Localization.TR",
-    weight: 100,
     name: "Turkish Backoffice UI Localization",
-    meta: {
-      culture: "tr"
-    },
-    js: () => import("./tr-DcwBJHOZ.js")
+    meta: { culture: "tr" },
+    js: () => import("./tr-CIHK60bY.js")
+  },
+  {
+    type: "localization",
+    alias: "Umb.Localization.TR_TR",
+    name: "Turkish (Türkiye) Backoffice UI Localization",
+    meta: { culture: "tr-TR" }
   },
   {
     type: "localization",
     alias: "Umb.Localization.UK",
-    weight: 100,
     name: "Ukrainian Backoffice UI Localization",
-    meta: {
-      culture: "uk"
-    },
+    meta: { culture: "uk" },
     js: () => import("./uk-CDMubcHB.js")
   },
   {
     type: "localization",
+    alias: "Umb.Localization.UK_UA",
+    name: "Ukrainian (Ukraine) Backoffice UI Localization",
+    meta: { culture: "uk-UA" }
+  },
+  {
+    type: "localization",
     alias: "Umb.Localization.ZH",
-    weight: 100,
     name: "Chinese Backoffice UI Localization",
-    meta: {
-      culture: "zh"
-    },
+    meta: { culture: "zh" },
     js: () => import("./zh-AGuZst2W.js")
   },
   {
     type: "localization",
+    alias: "Umb.Localization.ZH_CN",
+    name: "Chinese (Simplified, China) Backoffice UI Localization",
+    meta: { culture: "zh-CN" }
+  },
+  {
+    type: "localization",
     alias: "Umb.Localization.ZH_TW",
-    weight: 100,
     name: "Chinese (Taiwan) Backoffice UI Localization",
-    meta: {
-      culture: "zh-TW"
-    },
+    meta: { culture: "zh-TW" },
     js: () => import("./zh-tw-D-Y9C-lH.js")
+  },
+  {
+    type: "localization",
+    alias: "Umb.Localization.VI",
+    name: "Vietnamese Backoffice UI Localization",
+    meta: { culture: "vi" },
+    js: () => import("./vi-BtQ3u6V7.js")
   }
-], zt = [
+];
+class Wt extends $ {
+  constructor(a, n) {
+    super(a, n), console.error(
+      "Condition of alias `Umb.Condition.MenuAlias` is not implemented. Please report this issue if you where expecting this condition to work."
+    );
+  }
+}
+const xt = {
+  type: "condition",
+  name: "Menu Alias Condition",
+  alias: "Umb.Condition.MenuAlias",
+  api: Wt
+}, Ht = [
+  {
+    type: "kind",
+    alias: "Umb.Kind.MenuItem.Action",
+    matchKind: "action",
+    matchType: "menuItem",
+    manifest: {
+      type: "menuItem",
+      kind: "action",
+      api: () => import("./action-menu-item.api-DxPTl7SU.js"),
+      element: () => import("./action-menu-item.element-C9yUJwpT.js")
+    }
+  }
+], Yt = [
   {
     type: "kind",
     alias: "Umb.Kind.MenuItem.Link",
@@ -540,49 +654,76 @@ const Z = [
       element: () => import("./link-menu-item.element-spes6dfY.js")
     }
   }
-], Rt = [...zt];
-class St extends p {
-  constructor(a, n) {
-    super(a, n), console.error(
-      "Condition of alias `Umb.Condition.MenuAlias` is not implemented. Please report this issue if you where expecting this condition to work."
-    );
+], Gt = [...Ht, ...Yt], Vt = [
+  {
+    type: "sectionContext",
+    alias: "Umb.SectionContext.SectionSidebarMenu",
+    name: "Section Sidebar Menu Section Context",
+    api: () => import("./section-sidebar-menu.section-context-DfLlL1GU.js")
   }
-}
-const Nt = {
-  type: "condition",
-  name: "Menu Alias Condition",
-  alias: "Umb.Condition.MenuAlias",
-  api: St
-}, Kt = [
-  ...Rt,
-  Nt
-], Dt = [
+], Jt = [
+  {
+    type: "globalContext",
+    alias: "Umb.GlobalContext.SectionSidebarMenu",
+    name: "Section Sidebar Menu Global Context",
+    api: () => import("./section-sidebar-menu.global-context-CqW3tc6X.js")
+  }
+], Zt = [
+  {
+    type: "kind",
+    alias: "Umb.Kind.SectionSidebarAppMenu",
+    matchKind: "menu",
+    matchType: "sectionSidebarApp",
+    manifest: {
+      type: "sectionSidebarApp",
+      element: () => import("./section-sidebar-menu.element-BXQpqNZq.js")
+    }
+  },
+  ...Vt,
+  ...Jt
+], Xt = [
+  {
+    type: "kind",
+    alias: "Umb.Kind.SectionSidebarAppMenuWithEntityActions",
+    matchKind: "menuWithEntityActions",
+    matchType: "sectionSidebarApp",
+    manifest: {
+      type: "sectionSidebarApp",
+      element: () => import("./section-sidebar-menu-with-entity-actions.element-KQpKXCCk.js")
+    }
+  }
+], qt = [
+  ...Gt,
+  ...Zt,
+  ...Xt,
+  xt
+], Qt = [
   {
     type: "modal",
     alias: "Umb.Modal.Confirm",
     name: "Confirm Modal",
     element: () => import("./confirm-modal.element-COhIMOef.js")
   }
-], Pt = [
+], ti = [
   {
     type: "modal",
     alias: "Umb.Modal.DiscardChanges",
     name: "Discard Changes Modal",
     element: () => import("./discard-changes-modal.element-DU89FGO1.js")
   }
-], Ft = [
+], ii = [
   {
     type: "modal",
     alias: "Umb.Modal.ItemPicker",
     name: "Item Picker Modal",
     element: () => import("./item-picker-modal.element-C7YdTiZH.js")
   }
-], vt = [
-  ...Dt,
-  ...Pt,
+], ei = [
+  ...Qt,
+  ...ti,
   ...E,
-  ...Ft
-], jt = [...vt], Wt = [
+  ...ii
+], ai = [...ei], ni = [
   {
     type: "kind",
     alias: "Umb.Kind.PickerSearchResultItem.Default",
@@ -590,11 +731,11 @@ const Nt = {
     matchType: "pickerSearchResultItem",
     manifest: {
       type: "pickerSearchResultItem",
-      api: () => import("./default-picker-search-result-item.context-7tVujM-8.js").then((i) => i.d),
+      api: () => import("./default-picker-search-result-item.context-7tVujM-8.js").then((e) => e.d),
       element: () => import("./default-picker-search-result-item.element-BpS1umDH.js")
     }
   }
-], xt = [...Wt], Yt = [...xt], Ht = [...Yt], Vt = [...L], Gt = [
+], oi = [...ni], si = [...oi], ci = [...si], mi = [...B], li = [
   {
     type: "propertyAction",
     kind: "default",
@@ -608,43 +749,43 @@ const Nt = {
     },
     conditions: [
       {
-        alias: B
+        alias: S
       }
     ]
   },
-  ...Vt
-], Xt = [
+  ...mi
+], ri = [
   {
     type: "modal",
     alias: "Umb.Modal.PropertyEditorUiPicker",
     name: "Property Editor UI Picker Modal",
     element: () => import("./property-editor-ui-picker-modal.element-CkxgVfXw.js")
   }
-], qt = [...Xt], Jt = [
+], pi = [...ri], fi = [
   {
     type: "condition",
     name: "Property Has Value Condition",
     alias: O,
-    api: () => import("./has-value.condition-Dat_d7Pb.js")
+    api: () => import("./has-value.condition-C8-GjoPR.js")
   }
-], Zt = [
+], di = [
   {
     type: "condition",
     name: "Writable Property Condition",
-    alias: g,
-    api: () => import("./writable-property.condition-HRFJFx1i.js")
+    alias: R,
+    api: () => import("./writable-property.condition-CXlPtloZ.js")
   }
-], Qt = [...Jt, ...Zt], ti = [...Qt], ii = {
+], yi = [...fi, ...di], Ui = [...yi], ui = {
   type: "condition",
   name: "Entity Is trashed Condition",
-  alias: w,
-  api: () => import("./entity-is-trashed.condition-DeWO4zXA.js")
-}, ei = {
+  alias: N,
+  api: () => import("./entity-is-trashed.condition-CWMW8E9N.js")
+}, hi = {
   type: "condition",
   name: "Entity Is not trashed Condition",
   alias: M,
-  api: () => import("./entity-is-not-trashed.condition-48W1keBU.js")
-}, ai = [ii, ei], ni = {
+  api: () => import("./entity-is-not-trashed.condition-BcoFHHDN.js")
+}, bi = [ui, hi], Ii = {
   type: "kind",
   alias: "Umb.Kind.EntityAction.RecycleBin.Empty",
   matchKind: "emptyRecycleBin",
@@ -662,7 +803,7 @@ const Nt = {
       additionalOptions: !0
     }
   }
-}, oi = [ni], si = {
+}, Ai = [Ii], Ti = {
   type: "kind",
   alias: "Umb.Kind.EntityAction.RecycleBin.Restore",
   matchKind: "restoreFromRecycleBin",
@@ -671,7 +812,7 @@ const Nt = {
     ...s.manifest,
     type: "entityAction",
     kind: "restoreFromRecycleBin",
-    api: () => import("./restore-from-recycle-bin.action-BcDOWexc.js"),
+    api: () => import("./restore-from-recycle-bin.action-wPNxL7Dj.js"),
     weight: 100,
     forEntityTypes: [],
     meta: {
@@ -681,88 +822,89 @@ const Nt = {
       additionalOptions: !0
     }
   }
-}, mi = [
-  si,
+}, ki = [
+  Ti,
   {
     type: "modal",
     alias: "Umb.Modal.RecycleBin.Restore",
     name: "Restore From Recycle Bin Modal",
-    element: () => import("./restore-from-recycle-bin-modal.element-DOgZ0gFw.js")
+    element: () => import("./restore-from-recycle-bin-modal.element-CTv-1SeJ.js")
   }
-], ci = [z], li = [R], ri = [
+], _i = [K], Li = [D], zi = [
   {
     type: "kind",
     alias: "Umb.Kind.TreeItem.RecycleBin",
     matchType: "treeItem",
     matchKind: "recycleBin",
     manifest: {
-      ...S.manifest,
+      ...g.manifest,
       type: "treeItem",
       kind: "recycleBin",
       api: () => import("./recycle-bin-tree-item.context-Az32iBqG.js")
     }
   }
-], pi = [...ri], fi = [
-  ...ai,
-  ...oi,
-  ...mi,
-  ...ci,
-  ...li,
-  ...pi
+], Ci = [...zi], $i = [
+  ...bi,
+  ...Ai,
+  ...ki,
+  ..._i,
+  ...Li,
+  ...Ci
 ];
-class di extends p {
+class Ei extends c {
   constructor(a, n) {
     super(a, n);
-    let e;
-    this.config.match ? e = (t) => t === this.config.match : this.config.oneOf && (e = (t) => this.config.oneOf.indexOf(t) !== -1), e !== void 0 && this.consumeContext(N, (t) => {
+    let i;
+    this.config.match ? i = (t) => t === this.config.match : this.config.oneOf && (i = (t) => this.config.oneOf.indexOf(t) !== -1), i !== void 0 && this.consumeContext(w, (t) => {
       this.observe(
         t?.alias,
         (m) => {
-          this.permitted = m ? e(m) : !1;
+          this.permitted = m ? i(m) : !1;
         },
         "observeAlias"
       );
     });
   }
 }
-const yi = Symbol();
-class hi extends c {
+const Bi = [
+  {
+    type: "condition",
+    name: "Section Alias Condition",
+    alias: P,
+    api: Ei
+  }
+], Si = Symbol();
+class Oi extends c {
   constructor(a, n) {
-    super(a, n), this.consumeContext(P, (e) => {
+    super(a, n), this.consumeContext(j, (i) => {
       this.observe(
-        e?.currentUser,
+        i?.currentUser,
         (t) => {
           const m = t?.allowedSections ?? [];
           this.permitted = m.includes(this.config.match);
         },
-        yi
+        Si
       );
     });
   }
 }
-const Ui = [
+const Ri = [
   {
     type: "condition",
     name: "Section User Permission Condition",
-    alias: K,
-    api: hi
-  },
-  {
-    type: "condition",
-    name: "Section Alias Condition",
-    alias: "Umb.Condition.SectionAlias",
-    api: di
+    alias: F,
+    api: Oi
   }
-], ui = [...D], Ai = [
+], Ni = [...Bi, ...Ri], Mi = [...v], Ki = [
   {
     type: "modal",
     alias: "Umb.Modal.SectionPicker",
     name: "Section Picker Modal",
     element: () => import("./section-picker-modal.element-CWp9mISy.js")
   },
-  ...Ui,
-  ...ui
-], Ti = {
+  ...Ni,
+  ...Mi
+], Di = {
   type: "kind",
   alias: "Umb.Kind.EntityAction.ServerFile.Rename",
   matchKind: "renameServerFile",
@@ -771,7 +913,7 @@ const Ui = [
     ...s.manifest,
     type: "entityAction",
     kind: "renameServerFile",
-    api: () => import("./rename-server-file.action-bL_Mh3mK.js").then((i) => i.r),
+    api: () => import("./rename-server-file.action-bL_Mh3mK.js").then((e) => e.r),
     weight: 200,
     forEntityTypes: [],
     meta: {
@@ -782,23 +924,23 @@ const Ui = [
       itemRepositoryAlias: ""
     }
   }
-}, bi = [
-  ...F,
-  Ti
-], ki = [...bi], Ii = [
+}, gi = [
+  ...W,
+  Di
+], wi = [...gi], Pi = [
   {
     type: "store",
-    alias: v,
+    alias: x,
     name: "Temporary File Config Store",
     api: () => import("./config.store-CVJDS2rs.js")
   },
   {
     type: "repository",
-    alias: j,
+    alias: H,
     name: "Temporary File Config Repository",
-    api: () => import("./config.repository-BoHBgUwb.js")
+    api: () => import("./config.repository-eH2FsqDW.js")
   }
-], _i = [...Ii], $i = [
+], Fi = [...Pi], vi = [
   {
     type: "globalContext",
     alias: "Umb.GlobalContext.Theme",
@@ -825,101 +967,7 @@ const Ui = [
     css: "/umbraco/backoffice/css/high-contrast.theme.css",
     weight: 100
   }
-], Ci = $i, Ei = {
-  type: "kind",
-  alias: "Umb.Kind.EntityAction.Folder.Create",
-  matchKind: "folderCreate",
-  matchType: "entityAction",
-  manifest: {
-    ...o.manifest,
-    type: "entityAction",
-    kind: "folderCreate",
-    api: W,
-    weight: 900,
-    forEntityTypes: [],
-    meta: {
-      icon: "icon-add",
-      label: "#actions_folderCreate",
-      additionalOptions: !0
-    }
-  }
-}, Li = {
-  type: "kind",
-  alias: "Umb.Kind.EntityAction.Folder.Delete",
-  matchKind: "folderDelete",
-  matchType: "entityAction",
-  manifest: {
-    ...o.manifest,
-    type: "entityAction",
-    kind: "folderDelete",
-    api: x,
-    weight: 700,
-    forEntityTypes: [],
-    meta: {
-      icon: "icon-trash",
-      label: "#actions_folderDelete",
-      additionalOptions: !0
-    }
-  }
-}, Bi = {
-  type: "kind",
-  alias: "Umb.Kind.EntityAction.Folder.Update",
-  matchKind: "folderUpdate",
-  matchType: "entityAction",
-  manifest: {
-    ...o.manifest,
-    type: "entityAction",
-    kind: "folderUpdate",
-    api: Y,
-    weight: 700,
-    forEntityTypes: [],
-    meta: {
-      icon: "icon-edit",
-      label: "#actions_folderRename",
-      additionalOptions: !0
-    }
-  }
-}, Oi = [
-  Ei,
-  Li,
-  Bi
-], gi = [
-  {
-    type: "kind",
-    alias: "Umb.Kind.EntityCreateOptionAction.Folder.Create",
-    matchKind: "folder",
-    matchType: "entityCreateOptionAction",
-    manifest: {
-      type: "entityCreateOptionAction",
-      kind: "folder",
-      api: () => import("./folder-entity-create-option-action-DDPINnPV.js"),
-      weight: 1,
-      forEntityTypes: [],
-      meta: {
-        icon: "icon-folder",
-        label: "#create_folder",
-        description: "#create_folderDescription"
-      }
-    }
-  }
-], wi = [
-  {
-    type: "modal",
-    alias: "Umb.Modal.Folder.Update",
-    name: "Update Folder Modal",
-    element: () => import("./folder-update-modal.element-lb_DUsFa.js")
-  },
-  {
-    type: "modal",
-    alias: "Umb.Modal.Folder.Create",
-    name: "Create Folder Modal",
-    element: () => import("./folder-create-modal.element-5mizfH9T.js")
-  }
-], Mi = [
-  ...Oi,
-  ...gi,
-  ...wi
-], zi = [
+], ji = vi, Wi = [
   {
     type: "kind",
     alias: "Umb.Kind.Tree.Default",
@@ -927,25 +975,18 @@ const Ui = [
     matchType: "tree",
     manifest: {
       type: "tree",
-      api: () => import("./default-tree.context-tDNpHXIy.js"),
-      element: () => import("./default-tree.element-Bpzs0ILI.js")
+      api: () => import("./default-tree.context-Be9CM-3y.js"),
+      element: () => import("./default-tree.element-fgMsmaPG.js")
     }
   }
-], Ri = [
+], xi = [
   {
     type: "modal",
-    alias: "Umb.Modal.TreePicker",
-    name: "Tree Picker Modal",
-    element: () => import("./tree-picker-modal.element-C9k43EY_.js")
-  }
-], Si = [
-  {
-    type: "modal",
-    alias: H,
+    alias: Y,
     name: "Duplicate To Modal",
     element: () => import("./duplicate-to-modal.element-DrZPo4JI.js")
   }
-], Ni = {
+], Hi = {
   type: "kind",
   alias: "Umb.Kind.EntityAction.DuplicateTo",
   matchKind: "duplicateTo",
@@ -954,7 +995,7 @@ const Ui = [
     ...o.manifest,
     type: "entityAction",
     kind: "duplicateTo",
-    api: () => import("./duplicate-to.action-BktSnwKo.js"),
+    api: () => import("./duplicate-to.action-DRm4yyqh.js"),
     weight: 600,
     forEntityTypes: [],
     meta: {
@@ -966,7 +1007,7 @@ const Ui = [
       treeAlias: ""
     }
   }
-}, Ki = [Ni, ...Si], Di = {
+}, Yi = [Hi, ...xi], Gi = {
   type: "kind",
   alias: "Umb.Kind.EntityAction.MoveTo",
   matchKind: "moveTo",
@@ -987,7 +1028,7 @@ const Ui = [
       treeAlias: ""
     }
   }
-}, Pi = [Di], Fi = {
+}, Vi = [Gi], Ji = {
   type: "kind",
   alias: "Umb.Kind.EntityAction.Tree.ReloadChildrenOf",
   matchKind: "reloadTreeItemChildren",
@@ -1004,25 +1045,138 @@ const Ui = [
       label: "#actions_refreshNode"
     }
   }
-}, vi = [Fi], ji = [
+}, Zi = [Ji], Xi = [
   {
     type: "modal",
-    alias: V,
+    alias: G,
     name: "Sort Children Of Modal",
     element: () => import("./sort-children-of-modal.element-Cs83_Yer.js")
   }
-], Wi = [G, ...ji], xi = [
-  ...Ki,
-  ...Pi,
-  ...vi,
-  ...Wi
-], Yi = [
-  ...X,
-  ...zi,
-  ...xi,
-  ...Mi,
-  ...Ri
-], Hi = {
+], qi = [V, ...Xi], Qi = [
+  ...Yi,
+  ...Vi,
+  ...Zi,
+  ...qi
+], te = {
+  type: "kind",
+  alias: "Umb.Kind.EntityAction.Folder.Create",
+  matchKind: "folderCreate",
+  matchType: "entityAction",
+  manifest: {
+    ...o.manifest,
+    type: "entityAction",
+    kind: "folderCreate",
+    api: J,
+    weight: 900,
+    forEntityTypes: [],
+    meta: {
+      icon: "icon-add",
+      label: "#actions_folderCreate",
+      additionalOptions: !0
+    }
+  }
+}, ie = {
+  type: "kind",
+  alias: "Umb.Kind.EntityAction.Folder.Delete",
+  matchKind: "folderDelete",
+  matchType: "entityAction",
+  manifest: {
+    ...o.manifest,
+    type: "entityAction",
+    kind: "folderDelete",
+    api: Z,
+    weight: 700,
+    forEntityTypes: [],
+    meta: {
+      icon: "icon-trash",
+      label: "#actions_folderDelete",
+      additionalOptions: !0
+    }
+  }
+}, ee = {
+  type: "kind",
+  alias: "Umb.Kind.EntityAction.Folder.Update",
+  matchKind: "folderUpdate",
+  matchType: "entityAction",
+  manifest: {
+    ...o.manifest,
+    type: "entityAction",
+    kind: "folderUpdate",
+    api: X,
+    weight: 700,
+    forEntityTypes: [],
+    meta: {
+      icon: "icon-edit",
+      label: "#actions_folderRename",
+      additionalOptions: !0
+    }
+  }
+}, ae = [
+  te,
+  ie,
+  ee
+], ne = [
+  {
+    type: "kind",
+    alias: "Umb.Kind.EntityCreateOptionAction.Folder.Create",
+    matchKind: "folder",
+    matchType: "entityCreateOptionAction",
+    manifest: {
+      type: "entityCreateOptionAction",
+      kind: "folder",
+      api: () => import("./folder-entity-create-option-action-BJ_gmSUz.js"),
+      weight: 1,
+      forEntityTypes: [],
+      meta: {
+        icon: "icon-folder",
+        label: "#create_folder",
+        description: "#create_folderDescription"
+      }
+    }
+  }
+], oe = [
+  {
+    type: "modal",
+    alias: "Umb.Modal.Folder.Update",
+    name: "Update Folder Modal",
+    element: () => import("./folder-update-modal.element-lb_DUsFa.js")
+  },
+  {
+    type: "modal",
+    alias: "Umb.Modal.Folder.Create",
+    name: "Create Folder Modal",
+    element: () => import("./folder-create-modal.element-5mizfH9T.js")
+  }
+], se = [
+  ...ae,
+  ...ne,
+  ...oe
+], ce = [
+  {
+    type: "kind",
+    alias: "Umb.Kind.Tree",
+    matchKind: "tree",
+    matchType: "menuItem",
+    manifest: {
+      type: "menuItem",
+      element: () => import("./tree-menu-item.element-D3-R3-95.js")
+    }
+  }
+], me = [
+  {
+    type: "modal",
+    alias: "Umb.Modal.TreePicker",
+    name: "Tree Picker Modal",
+    element: () => import("./tree-picker-modal.element-DnTD7GuE.js")
+  }
+], le = [
+  ...q,
+  ...Wi,
+  ...Qi,
+  ...se,
+  ...ce,
+  ...me
+], re = {
   type: "kind",
   alias: "Umb.Kind.WorkspaceAction.Default",
   matchKind: "default",
@@ -1031,12 +1185,12 @@ const Ui = [
     type: "workspaceAction",
     kind: "default",
     weight: 1e3,
-    element: () => import("./workspace-action-default-kind.element-DydonX5N.js"),
+    element: () => import("./workspace-action-default-kind.element-Cup7qCdo.js"),
     meta: {
       label: "(Missing label in manifest)"
     }
   }
-}, Vi = [Hi], Gi = [...Vi], Xi = {
+}, pe = [re], fe = [...pe], de = {
   type: "kind",
   alias: "Umb.Kind.WorkspaceActionMenuItem.Default",
   matchKind: "default",
@@ -1051,7 +1205,7 @@ const Ui = [
       label: "(Missing label in manifest)"
     }
   }
-}, qi = [Xi], Ji = [...qi], Zi = {
+}, ye = [de], Ue = [...ye], ue = {
   type: "kind",
   alias: "Umb.Kind.WorkspaceFooterApp.MenuBreadcrumb",
   matchKind: "menuBreadcrumb",
@@ -1059,10 +1213,10 @@ const Ui = [
   manifest: {
     type: "workspaceFooterApp",
     kind: "menuBreadcrumb",
-    element: () => import("./workspace-menu-breadcrumb.element-BmWPCUKF.js"),
+    element: () => import("./workspace-menu-breadcrumb.element-C7EVdFUf.js"),
     weight: 1e3
   }
-}, Qi = {
+}, he = {
   type: "kind",
   alias: "Umb.Kind.WorkspaceFooterApp.VariantMenuBreadcrumb",
   matchKind: "variantMenuBreadcrumb",
@@ -1070,32 +1224,32 @@ const Ui = [
   manifest: {
     type: "workspaceFooterApp",
     kind: "variantMenuBreadcrumb",
-    element: () => import("./workspace-variant-menu-breadcrumb.element-BQXJ0YZU.js"),
+    element: () => import("./workspace-variant-menu-breadcrumb.element-Dj0D0IIu.js"),
     weight: 1e3
   }
-}, te = [
-  Zi,
-  Qi
-], ie = [
-  ...Gi,
-  ...Ji,
-  ...te
-], ee = [
+}, be = [
+  ue,
+  he
+], Ie = [
+  ...fe,
+  ...Ue,
+  ...be
+], Ae = [
   {
     type: "sectionRoute",
     alias: "Umb.SectionRoute.Workspace",
     name: "Workspace Section Route",
-    element: () => import("./workspace.element-CAJljmTw.js").then((i) => i.E),
-    api: () => import("./workspace-section-route.route-entry-CXFbsSuP.js")
+    element: () => import("./workspace.element-tg2OuAH5.js"),
+    api: () => import("./workspace-section-route.route-entry-BFO7sjDs.js")
   }
 ];
-class ae extends c {
+class Te extends c {
   constructor(a, n) {
     super(a, n);
-    let e;
-    if (this.config.match ? e = (t) => t.workspaceAlias === this.config.match : this.config.oneOf && (e = (t) => this.config.oneOf.indexOf(t.workspaceAlias) !== -1), e !== void 0)
-      this.consumeContext(d, (t) => {
-        t ? this.permitted = e(t) : this.permitted = !1;
+    let i;
+    if (this.config.match ? i = (t) => t.workspaceAlias === this.config.match : this.config.oneOf && (i = (t) => this.config.oneOf.indexOf(t.workspaceAlias) !== -1), i !== void 0)
+      this.consumeContext(p, (t) => {
+        t ? this.permitted = i(t) : this.permitted = !1;
       });
     else
       throw new Error(
@@ -1103,48 +1257,54 @@ class ae extends c {
       );
   }
 }
-const ne = {
-  type: "condition",
-  name: "Workspace Alias Condition",
-  alias: f,
-  api: ae
-};
-class oe extends c {
-  constructor(a, n) {
-    super(a, n), this.consumeContext(d, (e) => {
-      this.permitted = e?.getEntityType().toLowerCase() === this.config.match.toLowerCase();
-    });
+const ke = [
+  {
+    type: "condition",
+    name: "Workspace Alias Condition",
+    alias: f,
+    api: Te
   }
-}
-const se = {
-  type: "condition",
-  name: "Workspace Entity Type Condition",
-  alias: "Umb.Condition.WorkspaceEntityType",
-  api: oe
-}, me = Symbol();
-class ce extends c {
+], _e = Symbol();
+class Le extends c {
   constructor(a, n) {
-    super(a, n), this.consumeContext(J, (e) => {
+    super(a, n), this.consumeContext(Q, (i) => {
       this.observe(
-        e?.isNew,
+        i?.isNew,
         (t) => {
           t !== void 0 && (this.permitted = t === (this.config.match !== void 0 ? this.config.match : !0));
         },
-        me
+        _e
       );
     });
   }
 }
-const le = {
-  type: "condition",
-  name: "Workspace Entity Is New Condition",
-  alias: q,
-  api: ce
-}, re = [
-  le,
-  ne,
-  se
-], pe = {
+const ze = [
+  {
+    type: "condition",
+    name: "Workspace Entity Is New Condition",
+    alias: tt,
+    api: Le
+  }
+];
+class Ce extends c {
+  constructor(a, n) {
+    super(a, n), this.consumeContext(p, (i) => {
+      this.permitted = i?.getEntityType().toLowerCase() === this.config.match.toLowerCase();
+    });
+  }
+}
+const $e = [
+  {
+    type: "condition",
+    name: "Workspace Entity Type Condition",
+    alias: it,
+    api: Ce
+  }
+], Ee = [
+  ...ke,
+  ...ze,
+  ...$e
+], Be = {
   type: "kind",
   alias: "Umb.Kind.Workspace.Routable",
   matchKind: "routable",
@@ -1154,7 +1314,7 @@ const le = {
     kind: "routable",
     element: () => import("./routable-workspace.element-DlGr4KOt.js")
   }
-}, fe = [
+}, Se = [
   {
     type: "kind",
     alias: "Umb.Kind.Workspace.Default",
@@ -1164,50 +1324,52 @@ const le = {
       type: "workspace",
       kind: "default",
       element: () => import("./default-workspace.element-DAs2xd_c.js"),
-      api: () => import("./default-workspace.context-BlDeWTfK.js")
+      api: () => import("./default-workspace.context-DCkjRn1m.js")
     }
   }
-], de = [
-  pe,
-  ...fe
-], ye = [
+], Oe = [
+  Be,
+  ...Se
+], Re = [
   {
     type: "modal",
     alias: "Umb.Modal.Workspace",
     name: "Workspace Modal",
-    element: () => import("./workspace.element-CAJljmTw.js").then((i) => i.D)
+    element: () => import("./workspace-modal.element-Hou9-as0.js")
   }
-], he = [
-  ...ie,
-  ...ee,
-  ...re,
-  ...de,
-  ...ye
-], Ve = [
-  ...tt,
-  ...st,
-  ...ct,
-  ...A,
-  ...At,
-  ...Lt,
+], Ne = [
+  ...Ie,
+  ...Ae,
+  ...Ee,
+  ...Oe,
+  ...Re
+], ea = [
+  ...nt,
+  ...rt,
+  ...ft,
+  ...h,
+  ...kt,
   ...Ot,
-  ...wt,
   ...Mt,
-  ...Kt,
+  ...gt,
+  ...Pt,
+  ...vt,
   ...jt,
-  ...Ht,
-  ...Gt,
   ...qt,
-  ...ti,
-  ...fi,
-  ...Ai,
-  ...ki,
-  ..._i,
-  ...Ci,
-  ...Yi,
-  ...he
+  ...ai,
+  ...ci,
+  ...li,
+  ...pi,
+  ...Ui,
+  ...$i,
+  ...Ki,
+  ...wi,
+  ...Fi,
+  ...ji,
+  ...le,
+  ...Ne
 ];
 export {
-  Ve as manifests
+  ea as manifests
 };
 //# sourceMappingURL=manifests.js.map

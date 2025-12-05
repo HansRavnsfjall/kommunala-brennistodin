@@ -1,38 +1,38 @@
-import { a as N, b as W } from "../index-Z0CAdsE6.js";
-import { c as kt, U as wt, d as Ct } from "../index-Z0CAdsE6.js";
+import { a as F, b as z } from "../index-Z0CAdsE6.js";
+import { c as Ct, U as Pt, d as Bt } from "../index-Z0CAdsE6.js";
 import { UmbContextToken as w } from "@umbraco-cms/backoffice/context-api";
-import { UmbBlockEntryContext as F, UMB_BLOCK_ENTRY_CONTEXT as z, UmbDataPathBlockElementDataQuery as O, UmbBlockEntriesContext as H, UMB_BLOCK_CATALOGUE_MODAL as Y, UmbBlockManagerContext as G } from "@umbraco-cms/backoffice/block";
-import { mergeObservables as X, observeMultiple as j, UmbBooleanState as q } from "@umbraco-cms/backoffice/observable-api";
-import { UmbLitElement as M } from "@umbraco-cms/backoffice/lit-element";
-import { css as C, property as m, state as b, customElement as P, html as _, nothing as v } from "@umbraco-cms/backoffice/external/lit";
-import { UmbTextStyles as Q } from "@umbraco-cms/backoffice/style";
-import { stringOrStringArrayContains as S } from "@umbraco-cms/backoffice/utils";
+import { UmbBlockEntryContext as H, UMB_BLOCK_ENTRY_CONTEXT as Y, UmbDataPathBlockElementDataQuery as x, UmbBlockEntriesContext as G, UMB_BLOCK_CATALOGUE_MODAL as X, UmbBlockManagerContext as j } from "@umbraco-cms/backoffice/block";
+import { mergeObservables as q, observeMultiple as Q, UmbBooleanState as J } from "@umbraco-cms/backoffice/observable-api";
+import { UmbLitElement as A } from "@umbraco-cms/backoffice/lit-element";
+import { css as C, property as m, state as b, customElement as P, html as _, nothing as f } from "@umbraco-cms/backoffice/external/lit";
+import { UmbTextStyles as Z } from "@umbraco-cms/backoffice/style";
+import { stringOrStringArrayContains as $ } from "@umbraco-cms/backoffice/utils";
 import { UmbObserveValidationStateController as R } from "@umbraco-cms/backoffice/validation";
-import { UmbModalRouteRegistrationController as $ } from "@umbraco-cms/backoffice/router";
-const U = new w(
+import { UmbModalRouteRegistrationController as S } from "@umbraco-cms/backoffice/router";
+const M = new w(
   "UmbBlockManagerContext"
-), J = new w("UmbBlockEntriesContext");
-class Z extends F {
+), tt = new w("UmbBlockEntriesContext");
+class et extends H {
   constructor(e) {
-    super(e, U, J), this.displayInline = this._layout.asObservablePart((o) => o ? o.displayInline ?? !1 : void 0), this.displayInlineConfig = this._blockType.asObservablePart((o) => o ? o.displayInline ?? !1 : void 0), this.forceHideContentEditorInOverlay = this._blockType.asObservablePart(
-      (o) => o ? o.forceHideContentEditorInOverlay ?? !1 : void 0
-    ), this.showContentEdit = X(
+    super(e, M, tt), this.displayInline = this._layout.asObservablePart((i) => i ? i.displayInline ?? !1 : void 0), this.displayInlineConfig = this._blockType.asObservablePart((i) => i ? i.displayInline ?? !1 : void 0), this.forceHideContentEditorInOverlay = this._blockType.asObservablePart(
+      (i) => i ? i.forceHideContentEditorInOverlay ?? !1 : void 0
+    ), this.showContentEdit = q(
       [this._contentStructureHasProperties, this.forceHideContentEditorInOverlay],
-      ([o, i]) => o === !0 && i === !1
+      ([i, o]) => i === !0 && o === !1
     );
   }
   _gotManager() {
   }
   _gotEntries() {
     this.observe(
-      j([this.displayInline, this.displayInlineConfig]),
-      ([e, o]) => {
-        if (o !== void 0 && e !== void 0 && o !== e) {
-          const i = this._layout.getValue();
-          if (!i) return;
+      Q([this.displayInline, this.displayInlineConfig]),
+      ([e, i]) => {
+        if (i !== void 0 && e !== void 0 && i !== e) {
+          const o = this._layout.getValue();
+          if (!o) return;
           this._layout.setValue({
-            ...i,
-            displayInline: o
+            ...o,
+            displayInline: i
           });
         }
       },
@@ -42,14 +42,14 @@ class Z extends F {
   _gotContentType() {
   }
 }
-var tt = Object.defineProperty, et = Object.getOwnPropertyDescriptor, f = (t, e, o, i) => {
-  for (var s = i > 1 ? void 0 : i ? et(e, o) : e, h = t.length - 1, p; h >= 0; h--)
-    (p = t[h]) && (s = (i ? p(e, o, s) : p(s)) || s);
-  return i && s && tt(e, o, s), s;
+var it = Object.defineProperty, ot = Object.getOwnPropertyDescriptor, v = (t, e, i, o) => {
+  for (var s = o > 1 ? void 0 : o ? ot(e, i) : e, u = t.length - 1, d; u >= 0; u--)
+    (d = t[u]) && (s = (o ? d(e, i, s) : d(s)) || s);
+  return o && s && it(e, i, s), s;
 };
-let y = class extends M {
+let y = class extends A {
   constructor() {
-    super(), this.consumeContext(z, (t) => {
+    super(), this.consumeContext(Y, (t) => {
       this.observe(
         t?.workspaceEditContentPath,
         (e) => {
@@ -60,10 +60,12 @@ let y = class extends M {
     });
   }
   render() {
+    const t = { ...this.content, $settings: this.settings, $index: this.index };
     return _`
-			<uui-ref-node standalone href=${this._workspaceEditPath ?? "#"}>
+			<uui-ref-node standalone href=${(this.config?.showContentEdit ? this._workspaceEditPath : void 0) ?? ""}>
+				<div class="selection-background" aria-hidden="true">&emsp;</div>
 				<umb-icon slot="icon" .name=${this.icon}></umb-icon>
-				<umb-ufm-render slot="name" inline .markdown=${this.label} .value=${this.content}></umb-ufm-render>
+				<umb-ufm-render slot="name" inline .markdown=${this.label} .value=${t}></umb-ufm-render>
 			</uui-ref-node>
 		`;
   }
@@ -73,65 +75,91 @@ y.styles = [
 			:host {
 				display: block;
 			}
+
 			uui-ref-node {
 				min-height: var(--uui-size-16);
 			}
+
 			:host([unpublished]) umb-icon,
 			:host([unpublished]) umb-ufm-render {
 				opacity: 0.6;
 			}
+
+			/* HACK: Stretches a space character (&emsp;) to be full-width to make the RTE block appear text-selectable. [LK,NL] */
+			.selection-background {
+				position: absolute;
+				pointer-events: none;
+				font-size: 100vw;
+				inset: 0;
+				overflow: hidden;
+				z-index: 0;
+			}
+
+			umb-icon,
+			umb-ufm-render {
+				z-index: 1;
+			}
 		`
 ];
-f([
+v([
   m({ type: String })
 ], y.prototype, "label", 2);
-f([
+v([
   m({ type: String })
 ], y.prototype, "icon", 2);
-f([
+v([
+  m({ type: Number, attribute: !1 })
+], y.prototype, "index", 2);
+v([
   m({ type: Boolean, reflect: !0 })
 ], y.prototype, "unpublished", 2);
-f([
+v([
   m({ attribute: !1 })
 ], y.prototype, "content", 2);
-f([
+v([
+  m({ attribute: !1 })
+], y.prototype, "settings", 2);
+v([
   b()
 ], y.prototype, "_workspaceEditPath", 2);
-y = f([
+v([
+  m({ attribute: !1 })
+], y.prototype, "config", 2);
+y = v([
   P("umb-ref-rte-block")
 ], y);
-var ot = Object.defineProperty, it = Object.getOwnPropertyDescriptor, x = (t) => {
+var st = Object.defineProperty, nt = Object.getOwnPropertyDescriptor, U = (t) => {
   throw TypeError(t);
-}, u = (t, e, o, i) => {
-  for (var s = i > 1 ? void 0 : i ? it(e, o) : e, h = t.length - 1, p; h >= 0; h--)
-    (p = t[h]) && (s = (i ? p(e, o, s) : p(s)) || s);
-  return i && s && ot(e, o, s), s;
-}, A = (t, e, o) => e.has(t) || x("Cannot " + o), n = (t, e, o) => (A(t, e, "read from private field"), o ? o.call(t) : e.get(t)), E = (t, e, o) => e.has(t) ? x("Cannot add the same private member more than once") : e instanceof WeakSet ? e.add(t) : e.set(t, o), c = (t, e, o) => (A(t, e, "access private method"), o), r, a, d, I, B, g, T, V, L, K, D;
-let l = class extends M {
+}, h = (t, e, i, o) => {
+  for (var s = o > 1 ? void 0 : o ? nt(e, i) : e, u = t.length - 1, d; u >= 0; u--)
+    (d = t[u]) && (s = (o ? d(e, i, s) : d(s)) || s);
+  return o && s && st(e, i, s), s;
+}, V = (t, e, i) => e.has(t) || U("Cannot " + i), n = (t, e, i) => (V(t, e, "read from private field"), i ? i.call(t) : e.get(t)), g = (t, e, i) => e.has(t) ? U("Cannot add the same private member more than once") : e instanceof WeakSet ? e.add(t) : e.set(t, i), c = (t, e, i) => (V(t, e, "access private method"), i), r, a, p, I, B, k, T, L, K, O, D, N, W;
+let l = class extends A {
   constructor() {
-    super(), E(this, a), E(this, r, new Z(this)), this._showContentEdit = !1, this._hasSettings = !1, this._label = "", this._blockViewProps = {
+    super(), g(this, a), g(this, r, new et(this)), this._showContentEdit = !1, this._hasSettings = !1, this._label = "", this._blockViewProps = {
       contentKey: void 0,
       config: { showContentEdit: !1, showSettingsEdit: !1 }
-    }, E(this, B, (t) => {
-      const e = this._contentTypeAlias ?? "", o = !t.forBlockEditor || S(t.forBlockEditor, N), i = !t.forContentTypeAlias || S(t.forContentTypeAlias, e);
-      return o && i;
-    }), E(this, g, () => {
+    }, g(this, B, (t) => {
+      const e = this._contentTypeAlias ?? "", i = !t.forBlockEditor || $(t.forBlockEditor, F), o = !t.forContentTypeAlias || $(t.forContentTypeAlias, e);
+      return i && o;
+    }), g(this, k, () => {
       n(this, r).expose();
-    }), E(this, T, (t) => (t.component?.setAttribute("part", "component"), this._exposed ? t.component : _`<div>
+    }), g(this, T, (t) => (t.component?.setAttribute("part", "component"), this._exposed ? t.component : _`<div>
 				${t.component}
 				<umb-block-overlay-expose-button
 					.contentTypeName=${this._contentTypeName}
-					@click=${n(this, g)}></umb-block-overlay-expose-button>
-			</div>`)), n(this, r).setIndex(0), this.observe(
+					@click=${n(this, k)}></umb-block-overlay-expose-button>
+			</div>`)), g(this, O, () => c(this, a, D).call(this)), n(this, r).setIndex(0), this.observe(
       n(this, r).showContentEdit,
       (t) => {
-        this._showContentEdit = t, c(this, a, d).call(this, { config: { ...this._blockViewProps.config, showContentEdit: t } });
+        this._showContentEdit = t, c(this, a, p).call(this, { config: { ...this._blockViewProps.config, showContentEdit: t } });
       },
       null
     ), this.observe(
       n(this, r).settingsElementTypeKey,
       (t) => {
-        this._hasSettings = !!t, c(this, a, d).call(this, { config: { ...this._blockViewProps.config, showSettingsEdit: !!t } });
+        this._hasSettings = !!t, c(this, a, p).call(this, { config: { ...this._blockViewProps.config, showSettingsEdit: !!t } });
       },
       null
     ), this.observe(
@@ -149,31 +177,37 @@ let l = class extends M {
     ), this.observe(
       n(this, r).blockType,
       (t) => {
-        c(this, a, d).call(this, { blockType: t });
+        c(this, a, p).call(this, { blockType: t });
       },
       null
-    ), this.observe(
+    ), this.observe(n(this, r).index, (t) => c(this, a, p).call(this, { index: t }), null), this.observe(
       n(this, r).label,
       (t) => {
-        c(this, a, d).call(this, { label: t }), this._label = t;
+        c(this, a, p).call(this, { label: t }), this._label = t;
       },
       null
     ), this.observe(
       n(this, r).contentElementTypeIcon,
       (t) => {
-        c(this, a, d).call(this, { icon: t }), this._icon = t;
+        c(this, a, p).call(this, { icon: t }), this._icon = t;
       },
       null
     ), this.observe(
       n(this, r).hasExpose,
       (t) => {
-        c(this, a, d).call(this, { unpublished: !t }), this._exposed = t;
+        c(this, a, p).call(this, { unpublished: !t }), this._exposed = t;
+      },
+      null
+    ), this.observe(
+      n(this, r).actionsVisibility,
+      (t) => {
+        this._showActions = t;
       },
       null
     ), this.observe(
       n(this, r).layout,
       (t) => {
-        c(this, a, d).call(this, { layout: t });
+        c(this, a, p).call(this, { layout: t });
       },
       null
     ), c(this, a, I).call(this), this.observe(
@@ -181,7 +215,7 @@ let l = class extends M {
       (t) => {
         this.removeUmbControllerByAlias("observeMessagesForSettings"), t && new R(
           this,
-          `$.settingsData[${O({ key: t })}]`,
+          `$.settingsData[${x({ key: t })}]`,
           (e) => {
             this._settingsInvalid = e, this._blockViewProps.settingsInvalid = e;
           },
@@ -192,101 +226,106 @@ let l = class extends M {
     ), this.observe(
       n(this, r).workspaceEditContentPath,
       (t) => {
-        this._workspaceEditContentPath = t, c(this, a, d).call(this, { config: { ...this._blockViewProps.config, editContentPath: t } });
+        this._workspaceEditContentPath = t, c(this, a, p).call(this, { config: { ...this._blockViewProps.config, editContentPath: t } });
       },
       null
     ), this.observe(
       n(this, r).workspaceEditSettingsPath,
       (t) => {
-        this._workspaceEditSettingsPath = t, c(this, a, d).call(this, { config: { ...this._blockViewProps.config, editSettingsPath: t } });
+        this._workspaceEditSettingsPath = t, c(this, a, p).call(this, { config: { ...this._blockViewProps.config, editSettingsPath: t } });
       },
       null
     );
   }
-  get contentKey() {
-    return this._contentKey;
-  }
   set contentKey(t) {
     t && (this._contentKey = t, n(this, r).setContentKey(t), new R(
       this,
-      `$.contentData[${O({ key: t })}]`,
+      `$.contentData[${x({ key: t })}]`,
       (e) => {
         this._contentInvalid = e, this._blockViewProps.contentInvalid = e;
       },
       "observeMessagesForContent"
     ));
   }
+  get contentKey() {
+    return this._contentKey;
+  }
   connectedCallback() {
     super.connectedCallback(), this.setAttribute("contenteditable", "false");
   }
   render() {
-    return c(this, a, V).call(this);
+    return c(this, a, L).call(this);
   }
 };
 r = /* @__PURE__ */ new WeakMap();
 a = /* @__PURE__ */ new WeakSet();
-d = function(t) {
+p = function(t) {
   this._blockViewProps = { ...this._blockViewProps, ...t }, this.requestUpdate("_blockViewProps");
 };
 I = async function() {
   this.observe(
     await n(this, r).contentValues(),
     (t) => {
-      c(this, a, d).call(this, { content: t });
+      c(this, a, p).call(this, { content: t });
     },
     null
   ), this.observe(
     await n(this, r).settingsValues(),
     (t) => {
-      c(this, a, d).call(this, { settings: t });
+      c(this, a, p).call(this, { settings: t });
     },
     null
   );
 };
 B = /* @__PURE__ */ new WeakMap();
-g = /* @__PURE__ */ new WeakMap();
+k = /* @__PURE__ */ new WeakMap();
 T = /* @__PURE__ */ new WeakMap();
-V = function() {
+L = function() {
   return this.contentKey && this._contentTypeAlias ? _`
 					<div class="uui-text uui-font">
 						<umb-extension-slot
 							type="blockEditorCustomView"
 							default-element="umb-ref-rte-block"
 							.renderMethod=${n(this, T)}
+							.fallbackRenderMethod=${n(this, O)}
 							.props=${this._blockViewProps}
 							.filter=${n(this, B)}
-							single>
-							${c(this, a, L).call(this)}
-						</umb-extension-slot>
-						<uui-action-bar> ${c(this, a, K).call(this)} ${c(this, a, D).call(this)} </uui-action-bar>
-						${!this._showContentEdit && this._contentInvalid ? _`<uui-badge attention color="invalid" label="Invalid content">!</uui-badge>` : v}
+							single></umb-extension-slot>
+						${c(this, a, K).call(this)}
+						${!this._showContentEdit && this._contentInvalid ? _`<uui-badge attention color="invalid" label="Invalid content">!</uui-badge>` : f}
 					</div>
-				` : v;
+				` : f;
 };
-L = function() {
+K = function() {
+  return this._showActions ? _`<uui-action-bar>${c(this, a, N).call(this)}${c(this, a, W).call(this)}</uui-action-bar>` : f;
+};
+O = /* @__PURE__ */ new WeakMap();
+D = function() {
   return _`<umb-ref-rte-block
 			.label=${this._label}
 			.icon=${this._icon}
+			.index=${this._blockViewProps.index}
 			.unpublished=${!this._exposed}
 			.content=${this._blockViewProps.content}
-			.settings=${this._blockViewProps.settings}></umb-ref-rte-block>`;
+			.settings=${this._blockViewProps.settings}
+			.config=${this._blockViewProps.config}></umb-ref-rte-block>`;
 };
-K = function() {
+N = function() {
   return this._showContentEdit && this._workspaceEditContentPath ? _`<uui-button
 					label="edit"
 					look="secondary"
 					color=${this._contentInvalid ? "invalid" : ""}
 					href=${this._workspaceEditContentPath}>
 					<uui-icon name=${this._exposed === !1 ? "icon-add" : "icon-edit"}></uui-icon>
-					${this._contentInvalid ? _`<uui-badge attention color="invalid" label="Invalid content">!</uui-badge>` : v}
+					${this._contentInvalid ? _`<uui-badge attention color="invalid" label="Invalid content">!</uui-badge>` : f}
 				</uui-button>` : this._showContentEdit === !1 && this._exposed === !1 ? _`<uui-button
-						@click=${n(this, g)}
+						@click=${n(this, k)}
 						label=${this.localize.term("blockEditor_createThisFor", this._contentTypeName)}
 						look="secondary">
 						<uui-icon name="icon-add"></uui-icon>
-					</uui-button>` : v;
+					</uui-button>` : f;
 };
-D = function() {
+W = function() {
   return _`
 			${this._hasSettings && this._workspaceEditSettingsPath ? _`<uui-button
 						label="Edit settings"
@@ -294,23 +333,24 @@ D = function() {
 						color=${this._settingsInvalid ? "invalid" : ""}
 						href=${this._workspaceEditSettingsPath}>
 						<uui-icon name="icon-settings"></uui-icon>
-						${this._settingsInvalid ? _`<uui-badge attention color="invalid" label="Invalid settings">!</uui-badge>` : v}
-					</uui-button>` : v}
+						${this._settingsInvalid ? _`<uui-badge attention color="invalid" label="Invalid settings">!</uui-badge>` : f}
+					</uui-button>` : f}
 		`;
 };
 l.styles = [
-  Q,
+  Z,
   C`
 			:host {
 				position: relative;
 				display: block;
-				user-select: none;
+				user-select: all;
 				user-drag: auto;
 				white-space: nowrap;
 			}
+
 			:host(.ProseMirror-selectednode) {
 				umb-ref-rte-block {
-					cursor: not-allowed;
+					--uui-color-default-contrast: initial;
 					outline: 3px solid var(--uui-color-focus);
 				}
 			}
@@ -331,56 +371,59 @@ l.styles = [
 			}
 		`
 ];
-u([
+h([
   m({ type: String, attribute: "data-content-key", reflect: !0 })
 ], l.prototype, "contentKey", 1);
-u([
+h([
   b()
 ], l.prototype, "_showContentEdit", 2);
-u([
+h([
   b()
 ], l.prototype, "_hasSettings", 2);
-u([
+h([
   b()
 ], l.prototype, "_label", 2);
-u([
+h([
   b()
 ], l.prototype, "_icon", 2);
-u([
+h([
   b()
 ], l.prototype, "_exposed", 2);
-u([
+h([
+  b()
+], l.prototype, "_showActions", 2);
+h([
   b()
 ], l.prototype, "_workspaceEditContentPath", 2);
-u([
+h([
   b()
 ], l.prototype, "_workspaceEditSettingsPath", 2);
-u([
+h([
   b()
 ], l.prototype, "_contentTypeAlias", 2);
-u([
+h([
   b()
 ], l.prototype, "_contentTypeName", 2);
-u([
+h([
   b()
 ], l.prototype, "_blockViewProps", 2);
-u([
+h([
   m({ type: Boolean, attribute: "content-invalid", reflect: !0 })
 ], l.prototype, "_contentInvalid", 2);
-u([
+h([
   m({ type: Boolean, attribute: "settings-invalid", reflect: !0 })
 ], l.prototype, "_settingsInvalid", 2);
-l = u([
+l = h([
   P("umb-rte-block")
 ], l);
-var st = Object.getOwnPropertyDescriptor, nt = (t, e, o, i) => {
-  for (var s = i > 1 ? void 0 : i ? st(e, o) : e, h = t.length - 1, p; h >= 0; h--)
-    (p = t[h]) && (s = p(s) || s);
+var rt = Object.getOwnPropertyDescriptor, at = (t, e, i, o) => {
+  for (var s = o > 1 ? void 0 : o ? rt(e, i) : e, u = t.length - 1, d; u >= 0; u--)
+    (d = t[u]) && (s = d(s) || s);
   return s;
 };
-let k = class extends l {
+let E = class extends l {
 };
-k.styles = [
+E.styles = [
   ...l.styles,
   C`
 			:host {
@@ -388,24 +431,24 @@ k.styles = [
 			}
 		`
 ];
-k = nt([
+E = at([
   P("umb-rte-block-inline")
-], k);
-const rt = "Umbraco.RichText";
-class mt extends H {
+], E);
+const lt = "Umbraco.RichText";
+class ft extends G {
   constructor(e) {
-    super(e, U), this.canCreate = new q(!0).asObservable(), new $(this, Y).addAdditionalPath("_catalogue/:view").onSetup((o) => ({
+    super(e, M), this.canCreate = new J(!0).asObservable(), new S(this, X).addAdditionalPath("_catalogue/:view").onSetup((i) => ({
       data: {
         blocks: this._manager?.getBlockTypes() ?? [],
         blockGroups: [],
-        openClipboard: o.view === "clipboard",
+        openClipboard: i.view === "clipboard",
         originData: {},
         createBlockInWorkspace: !0
       }
-    })).onSubmit(async (o, i) => {
-      if (o?.create && i) {
+    })).onSubmit(async (i, o) => {
+      if (i?.create && o) {
         const s = await this.create(
-          o.create.contentElementTypeKey,
+          i.create.contentElementTypeKey,
           // We can parse an empty object, cause the rest will be filled in by others.
           {}
         );
@@ -414,16 +457,16 @@ class mt extends H {
             s.layout,
             s.content,
             s.settings,
-            i.originData
+            o.originData
           );
         else
           throw new Error("Failed to create block");
       }
-    }).observeRouteBuilder((o) => {
-      this._catalogueRouteBuilderState.setValue(o);
-    }), new $(this, W).addAdditionalPath("block").onSetup(() => ({ data: { entityType: "block", preset: {}, baseDataPath: this._dataPath }, modal: { size: "medium" } })).observeRouteBuilder((o) => {
-      const i = o({});
-      this._workspacePath.setValue(i);
+    }).observeRouteBuilder((i) => {
+      this._catalogueRouteBuilderState.setValue(i);
+    }), new S(this, z).addAdditionalPath("block").onSetup(() => ({ data: { entityType: "block", preset: {}, baseDataPath: this._dataPath }, modal: { size: "medium" } })).observeRouteBuilder((i) => {
+      const o = i({});
+      this._workspacePath.setValue(o);
     });
   }
   _gotBlockManager() {
@@ -450,30 +493,30 @@ class mt extends H {
   async setLayouts(e) {
     await this._retrieveManager, this._manager?.setLayouts(e);
   }
-  async create(e, o, i) {
-    return await this._retrieveManager, await this._manager?.createWithPresets(e, o, i);
+  async create(e, i, o) {
+    return await this._retrieveManager, await this._manager?.createWithPresets(e, i, o);
   }
   // insert Block?
-  async insert(e, o, i, s) {
-    return await this._retrieveManager, this._manager?.insert(e, o, i, s) ?? !1;
+  async insert(e, i, o, s) {
+    return await this._retrieveManager, this._manager?.insert(e, i, o, s) ?? !1;
   }
   // create Block?
   async delete(e) {
     await super.delete(e), this._manager?.deleteLayoutElement(e);
   }
-  async _insertFromPropertyValue(e, o) {
-    const i = e.layout[rt];
-    if (!i)
+  async _insertFromPropertyValue(e, i) {
+    const o = e.layout[lt];
+    if (!o)
       throw new Error("No layout entries found");
     return await Promise.all(
-      i.map(async (s) => {
-        this._insertBlockFromPropertyValue(s, e, o);
+      o.map(async (s) => {
+        this._insertBlockFromPropertyValue(s, e, i);
       })
-    ), o;
+    ), i;
   }
 }
-const vt = new w("UmbBlockEntryContext");
-class ft extends G {
+const gt = new w("UmbBlockEntryContext");
+class kt extends j {
   removeOneLayout(e) {
     this._layouts.removeOne(e);
   }
@@ -486,17 +529,17 @@ class ft extends G {
    * @param _originData
    * @deprecated Use createWithPresets instead. Will be removed in v.17.
    */
-  create(e, o, i) {
+  create(e, i, o) {
     throw new Error("Method deparecated use createWithPresets");
   }
-  async createWithPresets(e, o, i) {
-    const s = await super._createBlockData(e, o), h = this.getBlockTypes().find((p) => p.contentElementTypeKey === e);
-    if (!h)
+  async createWithPresets(e, i, o) {
+    const s = await super._createBlockData(e, i), u = this.getBlockTypes().find((d) => d.contentElementTypeKey === e);
+    if (!u)
       throw new Error(`Cannot create block, missing block type for ${e}`);
-    return h.displayInline && (s.layout.displayInline = !0), s;
+    return u.displayInline && (s.layout.displayInline = !0), s;
   }
-  insert(e, o, i, s) {
-    return this._layouts.appendOne(e), this.insertBlockData(e, o, i, s), !0;
+  insert(e, i, o, s) {
+    return this._layouts.appendOne(e), this.insertBlockData(e, i, o, s), !0;
   }
   /**
    * @param contentKey
@@ -507,17 +550,17 @@ class ft extends G {
   }
 }
 export {
-  N as UMB_BLOCK_RTE,
-  J as UMB_BLOCK_RTE_ENTRIES_CONTEXT,
-  vt as UMB_BLOCK_RTE_ENTRY_CONTEXT,
-  U as UMB_BLOCK_RTE_MANAGER_CONTEXT,
-  kt as UMB_BLOCK_RTE_PROPERTY_EDITOR_SCHEMA_ALIAS,
-  wt as UMB_BLOCK_RTE_TYPE,
-  Ct as UMB_BLOCK_RTE_TYPE_WORKSPACE_ALIAS,
-  W as UMB_BLOCK_RTE_WORKSPACE_MODAL,
-  mt as UmbBlockRteEntriesContext,
+  F as UMB_BLOCK_RTE,
+  tt as UMB_BLOCK_RTE_ENTRIES_CONTEXT,
+  gt as UMB_BLOCK_RTE_ENTRY_CONTEXT,
+  M as UMB_BLOCK_RTE_MANAGER_CONTEXT,
+  Ct as UMB_BLOCK_RTE_PROPERTY_EDITOR_SCHEMA_ALIAS,
+  Pt as UMB_BLOCK_RTE_TYPE,
+  Bt as UMB_BLOCK_RTE_TYPE_WORKSPACE_ALIAS,
+  z as UMB_BLOCK_RTE_WORKSPACE_MODAL,
+  ft as UmbBlockRteEntriesContext,
   l as UmbBlockRteEntryElement,
-  k as UmbBlockRteEntryInlineElement,
-  ft as UmbBlockRteManagerContext
+  E as UmbBlockRteEntryInlineElement,
+  kt as UmbBlockRteManagerContext
 };
 //# sourceMappingURL=index.js.map

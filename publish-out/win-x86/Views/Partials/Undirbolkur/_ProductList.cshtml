@@ -1,0 +1,169 @@
+﻿@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage
+@using Microsoft.AspNetCore.Html                   
+@using System.Text.Encodings.Web                
+@using Umbraco.Cms.Core.Models                     
+@using Umbraco.Cms.Core.Models.PublishedContent
+@using Umbraco.Cms.Core.Strings
+@using Umbraco.Extensions
+
+@{
+    // Source: children of alias "luturSkiljing"
+    var items = Model?
+        .ChildrenOfType("luturSkiljing")
+        .Where(x => x.IsVisible())
+        .ToList() ?? new List<IPublishedContent>();
+
+    // Helper: render one picker cell (to a dropdownItem with optional "ikon" image)
+    IHtmlContent RenderPicker(IPublishedContent? picked)
+    {
+        if (picked == null)
+        {
+            return new HtmlString(@"<div class=""icon-tile muted"">—</div>");
+        }
+
+        // Try to get image from alias "ikon"
+        var media = picked.Value<MediaWithCrops>("ikon");
+
+        if (media != null)
+        {
+            var alt = HtmlEncoder.Default.Encode(picked.Name());
+            var url = media.GetCropUrl(width: 80, height: 80, quality: 85) ?? media.MediaUrl();
+            return new HtmlString($@"
+                <div class=""icon-tile"">
+                    <img src=""{url}"" alt=""{alt}"" class=""img-fluid"" />
+                </div>");
+        }
+
+        // Fallback: show name if no icon
+        var safeName = HtmlEncoder.Default.Encode(picked.Name());
+        return new HtmlString($@"<div class=""icon-tile text""><span>{safeName}</span></div>");
+    }
+}
+
+<style>
+/* --- Light table styling to match the screenshot feel --- */
+.lutur-grid .table {
+  --bs-table-bg: transparent;
+  border-collapse: separate;
+}
+.lutur-grid thead th {
+  font-weight: 600;
+  color: #2e5e32;          /* tweak to your brand if needed */
+  letter-spacing: .02em;
+  white-space: nowrap;
+  border-bottom: 1px solid rgba(0,0,0,.06);
+}
+.lutur-grid tbody tr {
+  background: #fff;
+  box-shadow: 0 1px 0 rgba(0,0,0,.06);
+}
+.lutur-grid .title-cell a {
+  text-decoration: none;
+  color: inherit;
+}
+.lutur-grid .item-title {
+  font-weight: 700;
+  line-height: 1.25;
+  margin: 0 0 .25rem 0;
+}
+.lutur-grid .item-desc {
+  margin: 0;
+  color: #555;
+}
+.lutur-grid .icon-cols {
+  width: 12rem; /* keeps icon columns tight */
+}
+  /*
+.lutur-grid .icon-tile {
+  width: 44px;
+  height: 44px;
+  border-radius: .5rem;
+  border: 1px solid rgba(0,0,0,.08);
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+  margin-inline: auto;
+  background: #fafafa;
+}*/
+.lutur-grid .icon-tile img {
+  max-width: 32px;
+  max-height: 32px;
+}
+
+
+.lutur-grid td{
+  padding:15px 0px;
+}
+.lutur-grid .icon-tile.text span {
+  font-size: .7rem;
+  text-align: center;
+  color: #333;
+}
+
+.lutur-grid .title-cell{
+  padding-left:10px;
+}
+.lutur-grid .icon-tile.muted { color: #999; background:#f3f3f3; }
+
+.lutur-grid tbody tr:hover {
+  background: #fff;
+  box-shadow: 0 1px 0 rgba(0,0,0,.2);}
+
+
+/* Razor escape of @@media -> @@media */
+@@media (max-width: 992px){
+  .lutur-grid .icon-cols { width:auto; }
+}
+</style>
+
+<section class="lutur-grid my-4">
+  <div class="container">
+    <div class="table-responsive">
+      <table class="table align-middle">
+        <thead>
+          <tr>
+            <th scope="col">Heiti</th>
+            <th scope="col" class="text-center">Heima</th>
+            <th scope="col" class="text-center">Endurnýtslan</th>
+            <th scope="col" class="text-center">Viðgerð</th>
+          </tr>
+        </thead>
+        <tbody>
+        @foreach (var it in items)
+        {
+            var url = it.Url();
+            var lysing = it.Value<IHtmlEncodedString>("lysing");
+
+            var heimaPick   = it.Value<IPublishedContent>("myndatekinHeima");
+            var endurPick   = it.Value<IPublishedContent>("myndatekinEndurnytslan");
+            var vidgerdPick = it.Value<IPublishedContent>("vidgerd");
+        <tr>
+          <td class="title-cell">
+            <div class="position-relative">
+              <a href="@url" class="stretched-link" aria-label="@it.Name()"></a>
+              <h3 class="item-title h6 mb-1">@it.Name()</h3>
+              @if (lysing != null && !string.IsNullOrWhiteSpace(lysing.ToString()))
+              {
+                  <div class="item-desc small">@lysing</div>
+              }
+            </div>
+          </td>
+
+          <td class="text-center icon-cols">
+            @RenderPicker(heimaPick)
+          </td>
+
+          <td class="text-center icon-cols">
+            @RenderPicker(endurPick)
+          </td>
+
+          <td class="text-center icon-cols">
+            @RenderPicker(vidgerdPick)
+          </td>
+        </tr>
+        }
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>

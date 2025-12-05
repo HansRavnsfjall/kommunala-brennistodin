@@ -1,0 +1,91 @@
+﻿<!-- Search Hero -->
+<section class="search-hero d-flex align-items-center">
+  <div class="container text-center">
+    <h1 class="display-5 fw-bold mb-4">Leita í skiljivegleiðingini</h1>
+
+    <div class="d-flex justify-content-center" role="search" >
+      <div class="search-box shadow-sm">
+        <div class="input-group">
+          <input
+            type="search"
+            class="form-control sort-search form-control-lg search-input"
+            name="q"
+            placeholder="Skriva leitiorð"
+            aria-label="Leit"
+          />
+          <button class="btn search-btn" type="submit" aria-label="Leita">
+            <!-- magnifying glass icon (stroke like in screenshot) -->
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+              <circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="2"></circle>
+              <path d="M20 20L16.5 16.5" stroke="currentColor" stroke-width="2" stroke-linecap="round"></path>
+            </svg>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="sort-search-result">
+</section>
+
+<!-- Hidden template used when no results -->
+<template id="sort-noresult-template">
+  @await Html.PartialAsync("~/Views/Partials/Shared/_SearchSuggestForm.cshtml")
+</template>
+<style>
+  /* Background + vertical rhythm */
+  .search-hero{
+    background: #DEE4D6; /* soft green */
+    min-height: 38vh;
+    padding: 6rem 0;
+  }
+
+  /* Centered large search box */
+  .search-box{
+    max-width: 920px;
+    width: 100%;
+       
+    overflow: hidden;                 /* keep button flush with input */
+    background: #fff;
+  }
+
+  /* Input sizing/feel */
+  .search-input{
+    border: none;
+    height: 78px;                     /* tall field like the image */
+    padding-left: 1.5rem;
+    font-size: 1.25rem;
+    box-shadow: none !important;
+  }
+  .search-input::placeholder{ color:#9AA0A6; }
+
+  /* Button: icon-only, olive color to match */
+  .search-btn{
+    border: none;
+    background: transparent;
+    color: #40601A;                   /* olive/green icon */
+    padding: 0 1.25rem;
+  }
+  .search-btn:focus{
+    outline: none;
+    box-shadow: none;
+  }
+
+  /* Improve focus visibility for a11y */a
+ 
+  
+  .search-hero h1{
+    font-family: Alexandria;
+font-size: 40px;
+font-style: normal;
+font-weight: 400 !important;
+    margin-bottom:60px !important;
+  }
+
+  /* Small screens: tighten spacing a bit */
+  @@media (max-width: 576px){
+    .search-hero{ padding: 4rem 0; }
+    .search-input{ height: 64px; font-size: 1.1rem; }
+  }
+</style>
